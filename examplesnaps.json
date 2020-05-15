@@ -1,0 +1,4024 @@
+[
+  {
+    "id": 19246,
+    "itemId": 43027,
+    "icon": "item_43027",
+    "name": "Staunch Cape <Arcane 4>",
+    "category": "Equipment - Garment",
+    "description": "Simplicity and angled design make cloak users believe that their will grows stronger.",
+    "equipType": "Robe",
+    "equipEffect": {
+      "Def": 22
+    },
+    "equipUniqueEffect": [
+      "Neutral Dmg Taken -10%"
+    ],
+    "blueprintProduct": "Staunch Cape",
+    "blueprintProductPrice": 270692,
+    "blueprintCraftingFee": 30000,
+    "blueprintMaterials": [
+      {
+        "name": "Topaz",
+        "quantity": 30,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 308,
+        "unitPrice": 499
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 25,
+        "unitPrice": 480
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0,
+    "priceChange3d": 0,
+    "priceChange7d": 0,
+    "lastRecord": {
+      "timestamp": 1562974014,
+      "price": 11108707,
+      "stock": 1,
+      "snapBuyers": 99,
+      "snapEnd": 1562975811
+    }
+  },
+  {
+    "id": 4305,
+    "itemId": 44008,
+    "icon": "item_44008",
+    "name": "+4 Eye of Dullahan (broken)",
+    "category": "Equipment - Accessory",
+    "description": "A strange ring made into a spectacle.",
+    "equipType": "Accessory",
+    "equipEffect": {
+      "MAtk": 66
+    },
+    "equipUniqueEffect": [
+      "Dex ＋5\nINT ＋5",
+      "[Wizardry Staff VIII] ＋ [Robe of Cast VIII] ＋ [Eye of Dullahan VIII] ＋ [Crystal Pumps IV]: －5% CT Variable, ＋3% M.Dmg, ＋3% Ignore MDef"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.9622149395089049,
+    "priceChange3d": 3.7605878743872996,
+    "priceChange7d": 3.755002725005643,
+    "lastRecord": {
+      "timestamp": 1562974320,
+      "price": 1696248,
+      "stock": 1,
+      "snapBuyers": 55,
+      "snapEnd": 1562977263
+    }
+  },
+  {
+    "id": 3710,
+    "itemId": 48548,
+    "icon": "item_48548",
+    "name": "Spiked Scarf",
+    "category": "Headwear - Mouth",
+    "description": "The masks with iron nails are mostly loved by the frenzied ones.",
+    "depositReward": [
+      "Max HP ＋19"
+    ],
+    "unlockReward": [
+      "M.Atk ＋14"
+    ],
+    "equipUniqueEffect": [
+      "Def ＋5\nVIT ＋2\nDmg to demi-human race ＋5%\nDmg Reduc. of demi-human race ＋5%"
+    ],
+    "blueprintProduct": "Spiked Scarf",
+    "blueprintProductPrice": 714513,
+    "blueprintCraftingFee": 102000,
+    "blueprintMaterials": [
+      {
+        "name": "Spiked Scarf Blueprint",
+        "quantity": 1,
+        "unitPrice": 0
+      },
+      {
+        "name": "Glass Bead",
+        "quantity": 1283,
+        "unitPrice": 339
+      },
+      {
+        "name": "Bloody Rune",
+        "quantity": 1,
+        "unitPrice": 65181
+      },
+      {
+        "name": "Parts",
+        "quantity": 1,
+        "unitPrice": 141476
+      },
+      {
+        "name": "Amethyst",
+        "quantity": 20,
+        "unitPrice": 10037
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": -0.9295399304231597,
+    "priceChange3d": -3.1158304090078266,
+    "priceChange7d": -2.5752658849195527,
+    "lastRecord": {
+      "timestamp": 1562974654,
+      "price": 714513,
+      "stock": 1,
+      "snapBuyers": 49,
+      "snapEnd": 1562978458
+    }
+  },
+  {
+    "id": 4487,
+    "itemId": 41217,
+    "icon": "item_41217",
+    "name": "+4 Mystery Bow [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "Because the unknown enchantment was used, even the craftsman who made it did not know what energy was contained in the bow.",
+    "equipEffect": {
+      "Atk": 192
+    },
+    "equipUniqueEffect": [
+      "Dex ＋5\nAtk ＋75",
+      "When Dexterity reaches 95, Atk ＋10%",
+      "When Dexterity reaches 120, Atk ＋3%",
+      "When Dexterity reaches 150, Atk ＋3%"
+    ],
+    "blueprintProduct": "Mystery Bow [1]",
+    "blueprintProductPrice": 837189,
+    "blueprintCraftingFee": 40000,
+    "blueprintMaterials": [
+      {
+        "name": "Cross Bow [1]",
+        "quantity": 1,
+        "unitPrice": 24480
+      },
+      {
+        "name": "Steel",
+        "quantity": 30,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 15,
+        "unitPrice": 896
+      },
+      {
+        "name": "Garlet",
+        "quantity": 150,
+        "unitPrice": 120
+      },
+      {
+        "name": "Coal",
+        "quantity": 15,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 180,
+        "unitPrice": 499
+      },
+      {
+        "name": "Orcish Voucher",
+        "quantity": 33,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 20,
+        "unitPrice": 480
+      },
+      {
+        "name": "Mercury",
+        "quantity": 25,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Zargon",
+        "quantity": 200,
+        "unitPrice": 393
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 25,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Bell",
+        "quantity": 2,
+        "unitPrice": 129412
+      }
+    ],
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.5129680000259977,
+    "priceChange3d": 0.14748641700286877,
+    "priceChange7d": 2.0857950082184185,
+    "lastRecord": {
+      "timestamp": 1562973121,
+      "price": 618595,
+      "stock": 1,
+      "snapBuyers": 45,
+      "snapEnd": 1562973633
+    }
+  },
+  {
+    "id": 3373,
+    "itemId": 145050,
+    "icon": "item_45050",
+    "name": "+3 Helmet of Orc Hero [1] (broken)",
+    "category": "Headwear - Head",
+    "description": "Helmet given to the real Orc Brave. It shows who is the greatest and boldest Orc.",
+    "depositReward": [
+      "Refine Atk ＋10"
+    ],
+    "unlockReward": [
+      "Max HP ＋64"
+    ],
+    "equipUniqueEffect": [
+      "Str ＋2\nVIT ＋2\nWhen Refining ＋10, Melee Dmg ＋10%"
+    ],
+    "blueprintProduct": "Helmet of Orc Hero [1]",
+    "blueprintProductPrice": 5353007,
+    "blueprintCraftingFee": 203000,
+    "blueprintMaterials": [
+      {
+        "name": "Helmet of Orc Hero [1] Blueprint",
+        "quantity": 1,
+        "unitPrice": 1151795
+      },
+      {
+        "name": "Brigan",
+        "quantity": 1680,
+        "unitPrice": 731
+      },
+      {
+        "name": "Heroic Emblem",
+        "quantity": 23,
+        "unitPrice": 66570
+      },
+      {
+        "name": "Orc Claw",
+        "quantity": 27,
+        "unitPrice": 112710
+      },
+      {
+        "name": "Steel",
+        "quantity": 210,
+        "unitPrice": 1670
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Mithril",
+        "quantity": 3,
+        "unitPrice": 37975
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.3566276960562805,
+    "priceChange3d": 4.552772234984136,
+    "priceChange7d": 6.2362826828558156,
+    "lastRecord": {
+      "timestamp": 1562974428,
+      "price": 2820517,
+      "stock": 1,
+      "snapBuyers": 36,
+      "snapEnd": 1562976122
+    }
+  },
+  {
+    "id": 7603,
+    "itemId": 42016,
+    "icon": "item_42016",
+    "name": "+6 Tights <Arch 3>",
+    "category": "Equipment - Armor",
+    "description": "The suitable clothes to make you easier to move.",
+    "equipEffect": {
+      "Def": 28
+    },
+    "equipUniqueEffect": [
+      "Dex ＋2\nAtk ＋4%"
+    ],
+    "blueprintProduct": "Tights",
+    "blueprintProductPrice": 68615,
+    "blueprintCraftingFee": 20000,
+    "blueprintMaterials": [
+      {
+        "name": "Coal",
+        "quantity": 15,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Sticky Mucus",
+        "quantity": 150,
+        "unitPrice": 120
+      }
+    ],
+    "refineLv": 6,
+    "safeRefineCost": 420000,
+    "safeRefineMaterials": [
+      {
+        "name": "Tights",
+        "quantity": 3,
+        "unitPrice": 68615
+      },
+      {
+        "name": "Elunium",
+        "quantity": 19,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 2,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -21.13309881431721,
+    "priceChange3d": -21.13309881431721,
+    "priceChange7d": -21.13309881431721,
+    "lastRecord": {
+      "timestamp": 1562973805,
+      "price": 5457573,
+      "stock": 1,
+      "snapBuyers": 34,
+      "snapEnd": 1562977269
+    }
+  },
+  {
+    "id": 786,
+    "itemId": 41205,
+    "icon": "item_41205",
+    "name": "+3 Malang Snow Crab [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "Arthropod Crustacea with long feet living in the sand of deep sea. ",
+    "equipType": "Bow",
+    "equipEffect": {
+      "Atk": 210
+    },
+    "equipUniqueEffect": [
+      "Luk ＋5\nCrit.Dmg ＋15%",
+      "When LUK reaches 90, Crit.Dmg ＋10%\nWhen Refining ＋5, ＋10, ＋15, Extra Crit.Dmg ＋5%, 5%, 15% respectively",
+      "[Sniping Suit IV] ＋[Malang Snow Crab IV]: Agi ＋5, Crit.Dmg ＋10%"
+    ],
+    "blueprintProduct": "Malang Snow Crab [1]",
+    "blueprintProductPrice": 2749600,
+    "blueprintCraftingFee": 80000,
+    "blueprintMaterials": [
+      {
+        "name": "Gakkung Bow [1]",
+        "quantity": 1,
+        "unitPrice": 79415
+      },
+      {
+        "name": "Coal",
+        "quantity": 40,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Steel",
+        "quantity": 60,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Garlet",
+        "quantity": 385,
+        "unitPrice": 120
+      },
+      {
+        "name": "Scarlet Dyestuffs",
+        "quantity": 25,
+        "unitPrice": 1000
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 60,
+        "unitPrice": 480
+      },
+      {
+        "name": "Mercury",
+        "quantity": 50,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 485,
+        "unitPrice": 499
+      },
+      {
+        "name": "Agi Meal B",
+        "quantity": 6,
+        "unitPrice": 0
+      },
+      {
+        "name": "Broken Blade",
+        "quantity": 55,
+        "unitPrice": 2591
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 100,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Heroic Emblem",
+        "quantity": 2,
+        "unitPrice": 66570
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 680,
+        "unitPrice": 225
+      },
+      {
+        "name": "Armor Shard",
+        "quantity": 140,
+        "unitPrice": 1106
+      },
+      {
+        "name": "Biotite",
+        "quantity": 3,
+        "unitPrice": 185300
+      },
+      {
+        "name": "Necklace of Oblivion",
+        "quantity": 541,
+        "unitPrice": 763
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 1.4093238883508912,
+    "priceChange3d": 2.432791376976267,
+    "priceChange7d": -1.9472440608829817,
+    "lastRecord": {
+      "timestamp": 1562975547,
+      "price": 1516329,
+      "stock": 1,
+      "snapBuyers": 32,
+      "snapEnd": 1562980094
+    }
+  },
+  {
+    "id": 5230,
+    "itemId": 44038,
+    "icon": "item_44038",
+    "name": "+4 Fairy in Bottle (broken)",
+    "category": "Equipment - Accessory",
+    "description": "Hem, how many times have I said it? I am the lovely Fairy in Bottle, not little black guy in bottle!",
+    "equipEffect": {
+      "Atk": 94
+    },
+    "equipUniqueEffect": [
+      "Hit ＋20",
+      "auto attack has a 5% chance to trigger [Fury Burst], [Fury Burst]: Crit.Dmg ＋100%; the effect lasts 3 seconds"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -8.3649536479748,
+    "priceChange3d": -5.046506454537243,
+    "priceChange7d": -1.5164959649159329,
+    "lastRecord": {
+      "timestamp": 1562974286,
+      "price": 2270809,
+      "stock": 1,
+      "snapBuyers": 32,
+      "snapEnd": 1562976109
+    }
+  },
+  {
+    "id": 9053,
+    "itemId": 43544,
+    "icon": "item_43544",
+    "name": "+2 Rune Boots (broken)",
+    "category": "Equipment - Footgear",
+    "description": "With bronzed light and carved with sacred spell, the boots have great defensive power.",
+    "equipEffect": {
+      "Def": 28
+    },
+    "equipUniqueEffect": [
+      "Move Spd ＋10%\nHealing Received ＋30%\nAtk ＋3%\nM.Atk ＋3%"
+    ],
+    "blueprintProduct": "Rune Boots",
+    "blueprintProductPrice": 5427510,
+    "blueprintCraftingFee": 120000,
+    "blueprintMaterials": [
+      {
+        "name": "Rune Shoes [1]",
+        "quantity": 1,
+        "unitPrice": 3430270
+      },
+      {
+        "name": "Orcish Voucher",
+        "quantity": 30,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Dragon Scale",
+        "quantity": 2,
+        "unitPrice": 108172
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 25,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Broken Blade",
+        "quantity": 30,
+        "unitPrice": 2591
+      },
+      {
+        "name": "Wrapping Lace",
+        "quantity": 2,
+        "unitPrice": 104452
+      },
+      {
+        "name": "Armor Shard",
+        "quantity": 30,
+        "unitPrice": 1106
+      },
+      {
+        "name": "Cyfar",
+        "quantity": 400,
+        "unitPrice": 926
+      },
+      {
+        "name": "Memory Gem",
+        "quantity": 45,
+        "unitPrice": 11991
+      },
+      {
+        "name": "Key of Clock Tower",
+        "quantity": 2,
+        "unitPrice": 592002
+      },
+      {
+        "name": "Glitter Shell",
+        "quantity": 145,
+        "unitPrice": 559
+      },
+      {
+        "name": "Crystal Bone",
+        "quantity": 500,
+        "unitPrice": 353
+      },
+      {
+        "name": "Rough Oridecon",
+        "quantity": 3,
+        "unitPrice": 5000
+      },
+      {
+        "name": "Time Twister",
+        "quantity": 2,
+        "unitPrice": 905304
+      },
+      {
+        "name": "Witch Star Dust",
+        "quantity": 650,
+        "unitPrice": 200
+      }
+    ],
+    "refineLv": 2,
+    "safeRefineCost": 30000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 2,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -10.427547037037868,
+    "priceChange3d": -10.427547037037868,
+    "priceChange7d": -10.427547037037868,
+    "lastRecord": {
+      "timestamp": 1562974153,
+      "price": 2792698,
+      "stock": 1,
+      "snapBuyers": 25,
+      "snapEnd": 1562974737
+    }
+  },
+  {
+    "id": 4339,
+    "itemId": 145050,
+    "icon": "item_45050",
+    "name": "+4 Helmet of Orc Hero [1] (broken)",
+    "category": "Headwear - Head",
+    "description": "Helmet given to the real Orc Brave. It shows who is the greatest and boldest Orc.",
+    "depositReward": [
+      "Refine Atk ＋10"
+    ],
+    "unlockReward": [
+      "Max HP ＋64"
+    ],
+    "equipUniqueEffect": [
+      "Str ＋2\nVIT ＋2\nWhen Refining ＋10, Melee Dmg ＋10%"
+    ],
+    "blueprintProduct": "Helmet of Orc Hero [1]",
+    "blueprintProductPrice": 5353007,
+    "blueprintCraftingFee": 203000,
+    "blueprintMaterials": [
+      {
+        "name": "Helmet of Orc Hero [1] Blueprint",
+        "quantity": 1,
+        "unitPrice": 1151795
+      },
+      {
+        "name": "Brigan",
+        "quantity": 1680,
+        "unitPrice": 731
+      },
+      {
+        "name": "Heroic Emblem",
+        "quantity": 23,
+        "unitPrice": 66570
+      },
+      {
+        "name": "Orc Claw",
+        "quantity": 27,
+        "unitPrice": 112710
+      },
+      {
+        "name": "Steel",
+        "quantity": 210,
+        "unitPrice": 1670
+      }
+    ],
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Mithril",
+        "quantity": 4,
+        "unitPrice": 37975
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 6.361912509137678,
+    "priceChange3d": 4.862718209083336,
+    "priceChange7d": 4.226987137457782,
+    "lastRecord": {
+      "timestamp": 1562974427,
+      "price": 2902707,
+      "stock": 2,
+      "snapBuyers": 46,
+      "snapEnd": 1562975110
+    }
+  },
+  {
+    "id": 16282,
+    "itemId": 220032,
+    "icon": "item_12004",
+    "name": "Transformation Scroll (Firelord Kaho)",
+    "category": "Item - Scroll/Album",
+    "description": "Use to transform into Firelord Kaho for a while. Attention! Transformation expired upon death or mounting This item cannot be canceled after opened.",
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.40173607374726494,
+    "priceChange3d": 1.2149701681431928,
+    "priceChange7d": 2.7569750367107195,
+    "lastRecord": {
+      "timestamp": 1562974868,
+      "price": 55982,
+      "stock": 1,
+      "snapBuyers": 23,
+      "snapEnd": 1562975645
+    }
+  },
+  {
+    "id": 4726,
+    "itemId": 48525,
+    "icon": "item_48525",
+    "name": "+3 Monocle (broken)",
+    "category": "Headwear - Face",
+    "description": "The glass, which can only cover one eye, is mostly regarded as a fashionable accessory in terms of its practicality.",
+    "depositReward": [
+      "Refining M.Atk ＋10"
+    ],
+    "unlockReward": [
+      "M.Atk ＋4.5"
+    ],
+    "equipUniqueEffect": [
+      "M.Atk ＋5%\nFor Refining ＋1, M.Atk ＋1% (upper limit of increases is 15%)"
+    ],
+    "blueprintProduct": "Monocle",
+    "blueprintProductPrice": 13004088,
+    "blueprintCraftingFee": 203000,
+    "blueprintMaterials": [
+      {
+        "name": "Monocle Blueprint",
+        "quantity": 1,
+        "unitPrice": 13851968
+      },
+      {
+        "name": "Cyfar",
+        "quantity": 1050,
+        "unitPrice": 926
+      },
+      {
+        "name": "Crystal Mirror",
+        "quantity": 10,
+        "unitPrice": 113410
+      },
+      {
+        "name": "Parts",
+        "quantity": 10,
+        "unitPrice": 141476
+      },
+      {
+        "name": "Mercury",
+        "quantity": 200,
+        "unitPrice": 3728
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Mithril",
+        "quantity": 3,
+        "unitPrice": 37975
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -3.129336249538521,
+    "priceChange3d": -0.88301861918065,
+    "priceChange7d": -3.8206072005672014,
+    "lastRecord": {
+      "timestamp": 1562974602,
+      "price": 6586033,
+      "stock": 1,
+      "snapBuyers": 22,
+      "snapEnd": 1562979788
+    }
+  },
+  {
+    "id": 19007,
+    "itemId": 200149,
+    "icon": "item_200149",
+    "name": "Ultraman Orb Summon Scroll",
+    "category": "Item - Scroll/Album",
+    "description": "Use it to summon Ultraman Orb for a while, which is highly effective against monsters! Attention! The effect will vanish when you’re mounted or dead. This item can’t be canceled once unsealed.",
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 46.588089330024815,
+    "priceChange3d": 0,
+    "priceChange7d": 0,
+    "lastRecord": {
+      "timestamp": 1562974862,
+      "price": 2363,
+      "stock": 1,
+      "snapBuyers": 22,
+      "snapEnd": 1562976014
+    }
+  },
+  {
+    "id": 5960,
+    "itemId": 43544,
+    "icon": "item_43544",
+    "name": "+3 Rune Boots (broken)",
+    "category": "Equipment - Footgear",
+    "description": "With bronzed light and carved with sacred spell, the boots have great defensive power.",
+    "equipEffect": {
+      "Def": 28
+    },
+    "equipUniqueEffect": [
+      "Move Spd ＋10%\nHealing Received ＋30%\nAtk ＋3%\nM.Atk ＋3%"
+    ],
+    "blueprintProduct": "Rune Boots",
+    "blueprintProductPrice": 5427510,
+    "blueprintCraftingFee": 120000,
+    "blueprintMaterials": [
+      {
+        "name": "Rune Shoes [1]",
+        "quantity": 1,
+        "unitPrice": 3430270
+      },
+      {
+        "name": "Orcish Voucher",
+        "quantity": 30,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Dragon Scale",
+        "quantity": 2,
+        "unitPrice": 108172
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 25,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Broken Blade",
+        "quantity": 30,
+        "unitPrice": 2591
+      },
+      {
+        "name": "Wrapping Lace",
+        "quantity": 2,
+        "unitPrice": 104452
+      },
+      {
+        "name": "Armor Shard",
+        "quantity": 30,
+        "unitPrice": 1106
+      },
+      {
+        "name": "Cyfar",
+        "quantity": 400,
+        "unitPrice": 926
+      },
+      {
+        "name": "Memory Gem",
+        "quantity": 45,
+        "unitPrice": 11991
+      },
+      {
+        "name": "Key of Clock Tower",
+        "quantity": 2,
+        "unitPrice": 592002
+      },
+      {
+        "name": "Glitter Shell",
+        "quantity": 145,
+        "unitPrice": 559
+      },
+      {
+        "name": "Crystal Bone",
+        "quantity": 500,
+        "unitPrice": 353
+      },
+      {
+        "name": "Rough Oridecon",
+        "quantity": 3,
+        "unitPrice": 5000
+      },
+      {
+        "name": "Time Twister",
+        "quantity": 2,
+        "unitPrice": 905304
+      },
+      {
+        "name": "Witch Star Dust",
+        "quantity": 650,
+        "unitPrice": 200
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.8151904647311128,
+    "priceChange3d": -1.9291901594398777,
+    "priceChange7d": -6.245371927535822,
+    "lastRecord": {
+      "timestamp": 1562974154,
+      "price": 2848755,
+      "stock": 1,
+      "snapBuyers": 21,
+      "snapEnd": 1562975773
+    }
+  },
+  {
+    "id": 3356,
+    "itemId": 145029,
+    "icon": "item_45029",
+    "name": "Feather Bonnet [1]",
+    "category": "Headwear - Head",
+    "description": "A very modern-looking hat with a valuable feather on it.",
+    "depositReward": [
+      "Atk ＋6"
+    ],
+    "unlockReward": [
+      "Max HP ＋64"
+    ],
+    "equipUniqueEffect": [
+      "Def ＋8\nAgi ＋1"
+    ],
+    "blueprintProduct": "Feather Bonnet [1]",
+    "blueprintProductPrice": 188202,
+    "blueprintCraftingFee": 51000,
+    "blueprintMaterials": [
+      {
+        "name": "Feather Bonnet [1] Blueprint",
+        "quantity": 1,
+        "unitPrice": 0
+      },
+      {
+        "name": "Sticky Mucus",
+        "quantity": 483,
+        "unitPrice": 120
+      },
+      {
+        "name": "Feather",
+        "quantity": 604,
+        "unitPrice": 200
+      },
+      {
+        "name": "Green Dyestuffs",
+        "quantity": 8,
+        "unitPrice": 1000
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": -2.411175409122021,
+    "priceChange3d": -1.329572502595183,
+    "priceChange7d": 1.366439555112703,
+    "lastRecord": {
+      "timestamp": 1562974399,
+      "price": 188202,
+      "stock": 1,
+      "snapBuyers": 13,
+      "snapEnd": 1562976102
+    }
+  },
+  {
+    "id": 3864,
+    "itemId": 41834,
+    "icon": "item_41834",
+    "name": "+3 Doom Axe [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "The buster, which devours enough souls, becomes the Doom Axe, gives the bearer more seductive power, and requires more cost. Once it is grasped, it seems to hear a voice whispering in my mind, \"to split the shackle of reason, embrace the abyss of power.\"",
+    "equipType": "Axe",
+    "equipEffect": {
+      "Atk": 160
+    },
+    "equipUniqueEffect": [
+      "Str ＋5\nFor each level of [Skin Tempering] is learned, Extra Fire Dmg ＋10%",
+      "When Strength reaches 50, Atk ＋10%"
+    ],
+    "blueprintProduct": "Doom Axe [1]",
+    "blueprintProductPrice": 1691245,
+    "blueprintCraftingFee": 40000,
+    "blueprintMaterials": [
+      {
+        "name": "Buster [1]",
+        "quantity": 1,
+        "unitPrice": 34960
+      },
+      {
+        "name": "Steel",
+        "quantity": 65,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 30,
+        "unitPrice": 896
+      },
+      {
+        "name": "Sleepless Stone",
+        "quantity": 10,
+        "unitPrice": 12567
+      },
+      {
+        "name": "Memento",
+        "quantity": 150,
+        "unitPrice": 123
+      },
+      {
+        "name": "Coal",
+        "quantity": 35,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Normal Precision Stone",
+        "quantity": 10,
+        "unitPrice": 9600
+      },
+      {
+        "name": "Scell",
+        "quantity": 150,
+        "unitPrice": 438
+      },
+      {
+        "name": "Star Crumb",
+        "quantity": 2,
+        "unitPrice": 128703
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 50,
+        "unitPrice": 480
+      },
+      {
+        "name": "Elunium",
+        "quantity": 6,
+        "unitPrice": 25000
+      },
+      {
+        "name": "Zargon",
+        "quantity": 180,
+        "unitPrice": 393
+      },
+      {
+        "name": "Pearl",
+        "quantity": 2,
+        "unitPrice": 96557
+      },
+      {
+        "name": "Mercury",
+        "quantity": 55,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Oridecon",
+        "quantity": 6,
+        "unitPrice": 25000
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 250,
+        "unitPrice": 225
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 1.514524795354051,
+    "priceChange3d": 2.6938136748363637,
+    "priceChange7d": 4.553602143723634,
+    "lastRecord": {
+      "timestamp": 1562975423,
+      "price": 981682,
+      "stock": 2,
+      "snapBuyers": 27,
+      "snapEnd": 1562976571
+    }
+  },
+  {
+    "id": 4280,
+    "itemId": 44038,
+    "icon": "item_44038",
+    "name": "+3 Fairy in Bottle (broken)",
+    "category": "Equipment - Accessory",
+    "description": "Hem, how many times have I said it? I am the lovely Fairy in Bottle, not little black guy in bottle!",
+    "equipEffect": {
+      "Atk": 94
+    },
+    "equipUniqueEffect": [
+      "Hit ＋20",
+      "auto attack has a 5% chance to trigger [Fury Burst], [Fury Burst]: Crit.Dmg ＋100%; the effect lasts 3 seconds"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -8.59027450570863,
+    "priceChange3d": -5.187500859661912,
+    "priceChange7d": -1.5604861887131958,
+    "lastRecord": {
+      "timestamp": 1562974287,
+      "price": 2205809,
+      "stock": 2,
+      "snapBuyers": 27,
+      "snapEnd": 1562976331
+    }
+  },
+  {
+    "id": 3130,
+    "itemId": 44005,
+    "icon": "item_44005",
+    "name": "+3 Orleans's Gloves (broken)",
+    "category": "Equipment - Accessory",
+    "description": "Gloves used by the best royal chef. User can imitate the chef's action when you wear it.",
+    "equipType": "Accessory",
+    "equipEffect": {
+      "MAtk": 60
+    },
+    "equipUniqueEffect": [
+      "Dex ＋2\nM.Atk ＋10%"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 1.9136735216393412,
+    "priceChange3d": 6.425919482641627,
+    "priceChange7d": 7.76540674731472,
+    "lastRecord": {
+      "timestamp": 1562974280,
+      "price": 1783261,
+      "stock": 2,
+      "snapBuyers": 24,
+      "snapEnd": 1562976703
+    }
+  },
+  {
+    "id": 9195,
+    "itemId": 144022,
+    "icon": "item_44022",
+    "name": "+4 Brooch [1] <Sharp Blade 2>",
+    "category": "Equipment - Accessory",
+    "description": "Ornaments that can be decorated on clothes and cloth. User will feel confident after wearing it, and always feels energetic!",
+    "equipUniqueEffect": [
+      "Agi ＋2"
+    ],
+    "blueprintProduct": "Brooch [1]",
+    "blueprintProductPrice": 2981120,
+    "blueprintCraftingFee": 100000,
+    "blueprintMaterials": [
+      {
+        "name": "Brooch",
+        "quantity": 11,
+        "unitPrice": 303359
+      }
+    ],
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 30.879042912518468,
+    "priceChange3d": 30.879042912518468,
+    "priceChange7d": 30.879042912518468,
+    "lastRecord": {
+      "timestamp": 1562974240,
+      "price": 10420575,
+      "stock": 1,
+      "snapBuyers": 12,
+      "snapEnd": 1562975489
+    }
+  },
+  {
+    "id": 4499,
+    "itemId": 61506,
+    "icon": "item_61506",
+    "name": "+3 Nile's Bracelet (broken)",
+    "category": "Equipment - Off-Hand",
+    "description": "The bracelet sealed by Heilion stone, which can erase the power of evil.",
+    "equipType": "Bracelet",
+    "equipEffect": {
+      "Def": 42
+    },
+    "equipUniqueEffect": [
+      "Ranged Dmg ＋15%"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -0.309644597237297,
+    "priceChange3d": 6.946823942664979,
+    "priceChange7d": 9.598173218346455,
+    "lastRecord": {
+      "timestamp": 1562973634,
+      "price": 1042477,
+      "stock": 1,
+      "snapBuyers": 10,
+      "snapEnd": 1562979635
+    }
+  },
+  {
+    "id": 3162,
+    "itemId": 44016,
+    "icon": "item_44016",
+    "name": "+4 Strength Ring (broken)",
+    "category": "Equipment - Accessory",
+    "description": "A magic ring that enhances the power of users.",
+    "equipEffect": {
+      "Atk": 42
+    },
+    "equipUniqueEffect": [
+      "Str ＋2"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 2.2104327888386104,
+    "priceChange3d": 2.67158564514959,
+    "priceChange7d": 14.218684251482854,
+    "lastRecord": {
+      "timestamp": 1562974314,
+      "price": 792600,
+      "stock": 1,
+      "snapBuyers": 9,
+      "snapEnd": 1562979352
+    }
+  },
+  {
+    "id": 3849,
+    "itemId": 40011,
+    "icon": "item_40011",
+    "name": "+3 Bill Guisarme [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "A spear with a curved blade at the top cannot only be used for stabbing, but also for chopping.",
+    "equipType": "Spear",
+    "equipEffect": {
+      "Atk": 185
+    },
+    "equipUniqueEffect": [
+      "Hit ＋25\nDamage Dealt to Boss ＋10%"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -0.6081212056753404,
+    "priceChange3d": -1.1672673866208607,
+    "priceChange7d": 3.1842256169882353,
+    "lastRecord": {
+      "timestamp": 1562973064,
+      "price": 1158796,
+      "stock": 1,
+      "snapBuyers": 8,
+      "snapEnd": 1562974623
+    }
+  },
+  {
+    "id": 4656,
+    "itemId": 41545,
+    "icon": "item_41545",
+    "name": "+4 Elder's Hammer [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "The top of the hammer is decorated with orb made from the teeth of seven venomous snakes, and ordinary armor is corroded whenever it is touched.",
+    "equipType": "Mace",
+    "equipEffect": {
+      "Atk": 340
+    },
+    "equipUniqueEffect": [
+      "STR ＋4\nIncrease the basic rate of equipment destruction causes by alchemy using [Acid Terror], [Acid Demonstration], [Improved Acid Demonstration]\nFor Each Refining ＋1, the damage of [Acid Demonstration] ＋5%, Damage of [Acid Terror] ＋2%, skill multiplier of [Improved Acid Demonstration] ＋30%"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -2.0684941092244,
+    "priceChange3d": -6.911675865780341,
+    "priceChange7d": 0.5554879297906009,
+    "lastRecord": {
+      "timestamp": 1562975500,
+      "price": 1693460,
+      "stock": 1,
+      "snapBuyers": 8,
+      "snapEnd": 1562980247
+    }
+  },
+  {
+    "id": 4852,
+    "itemId": 43545,
+    "icon": "item_43524",
+    "name": "+3 Crystal Pumps (broken)",
+    "category": "Equipment - Footgear",
+    "description": "The boots made from rare crystals, Exquisite and mysterious. The user will show extraordinary elegance.",
+    "equipType": "Shoes",
+    "equipEffect": {
+      "Def": 22
+    },
+    "equipUniqueEffect": [
+      "INT ＋5\nM.Atk ＋3%",
+      "[Cat's Blessing VI] ＋ [Crystal Pumps]: Fire/Water/Earth/Wind/Element atk ＋7%",
+      "[Wizardry Staff VIII] ＋ [Robe of Cast VIII] ＋ [Eye of Dullahan VIII] ＋ [Crystal Pumps IV]: －5% CT Variable, ＋3% M.Dmg, ＋3% Ignore MDef"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 4.690207580180339,
+    "priceChange3d": 6.97757350779322,
+    "priceChange7d": -1.7311106813101031,
+    "lastRecord": {
+      "timestamp": 1562974160,
+      "price": 1127948,
+      "stock": 1,
+      "snapBuyers": 8,
+      "snapEnd": 1562977671
+    }
+  },
+  {
+    "id": 10065,
+    "itemId": 142055,
+    "icon": "item_42055",
+    "name": "+6 Sniping Suit [1] <Arch 2>",
+    "category": "Equipment - Armor",
+    "description": "Cuffs specially designed for archery, and equipped with a device to help stretch muscles, Causing each arrow to inflict deadly damage on the enemy.",
+    "equipType": "Armour",
+    "equipEffect": {
+      "Def": 72
+    },
+    "equipUniqueEffect": [
+      "Attack Spd ＋6%\nFlee ＋25",
+      "When Luck reaches 60, Crit.Dmg ＋3%",
+      "When Luck reaches 90, Crit.Dmg ＋4%",
+      "When Luck reaches 120, Crit.Dmg ＋5%",
+      "[Sniping Suit IV] ＋[Malang Snow Crab IV]: Agi ＋5, Crit.Dmg ＋10%"
+    ],
+    "blueprintProduct": "Sniping Suit [1]",
+    "blueprintProductPrice": 24185390,
+    "blueprintCraftingFee": 150000,
+    "blueprintMaterials": [
+      {
+        "name": "Sniping Suit",
+        "quantity": 11,
+        "unitPrice": 2438946
+      }
+    ],
+    "refineLv": 6,
+    "safeRefineCost": 420000,
+    "safeRefineMaterials": [
+      {
+        "name": "Sniping Suit",
+        "quantity": 3,
+        "unitPrice": 2438946
+      },
+      {
+        "name": "Elunium",
+        "quantity": 19,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -0.21881551164140642,
+    "priceChange3d": -0.21881551164140642,
+    "priceChange7d": -0.21881551164140642,
+    "lastRecord": {
+      "timestamp": 1562973739,
+      "price": 32266528,
+      "stock": 1,
+      "snapBuyers": 8,
+      "snapEnd": 1562977048
+    }
+  },
+  {
+    "id": 708,
+    "itemId": 40620,
+    "icon": "item_40620",
+    "name": "+3 Wizardry Staff [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "It is said that the cane was made by a Archmage. Its power is similar to the power of God.",
+    "equipType": "Staff",
+    "equipEffect": {
+      "MAtk": 97
+    },
+    "equipUniqueEffect": [
+      "Int ＋3\nM.Atk ＋10%\nFor Refining ＋1, ignore M.Def ＋2%",
+      "[Wizardry Staff VIII] ＋ [Robe of Cast VIII] ＋ [Eye of Dullahan VIII] ＋ [Crystal Pumps IV]: －5% CT Variable, ＋3% M.Dmg, ＋3% Ignore MDef"
+    ],
+    "blueprintProduct": "Wizardry Staff [1]",
+    "blueprintProductPrice": 1109849,
+    "blueprintCraftingFee": 40000,
+    "blueprintMaterials": [
+      {
+        "name": "Piercing Staff [1]",
+        "quantity": 1,
+        "unitPrice": 24480
+      },
+      {
+        "name": "Steel",
+        "quantity": 40,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 20,
+        "unitPrice": 896
+      },
+      {
+        "name": "Jellopy",
+        "quantity": 180,
+        "unitPrice": 100
+      },
+      {
+        "name": "Coal",
+        "quantity": 50,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Garlet",
+        "quantity": 200,
+        "unitPrice": 120
+      },
+      {
+        "name": "Amethyst",
+        "quantity": 35,
+        "unitPrice": 10037
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 25,
+        "unitPrice": 480
+      },
+      {
+        "name": "Glass Bead",
+        "quantity": 220,
+        "unitPrice": 339
+      },
+      {
+        "name": "Mercury",
+        "quantity": 25,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Light Granule",
+        "quantity": 2,
+        "unitPrice": 142622
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -0.020577712019267693,
+    "priceChange3d": -1.4955739577384353,
+    "priceChange7d": -1.5419633810454811,
+    "lastRecord": {
+      "timestamp": 1562975449,
+      "price": 689925,
+      "stock": 4,
+      "snapBuyers": 25,
+      "snapEnd": 1562980286
+    }
+  },
+  {
+    "id": 3734,
+    "itemId": 220030,
+    "icon": "item_12004",
+    "name": "Transformation Scroll (Garm)",
+    "category": "Item - Scroll/Album",
+    "description": "Use it to transform into Garm for a while. Attention! The effect will vanish when mounted or dead. This item can’t be canceled once unsealed.",
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.40519037385783885,
+    "priceChange3d": 1.215458649600635,
+    "priceChange7d": 2.8603119118042484,
+    "lastRecord": {
+      "timestamp": 1562974871,
+      "price": 61206,
+      "stock": 2,
+      "snapBuyers": 13,
+      "snapEnd": 1562975948
+    }
+  },
+  {
+    "id": 706,
+    "itemId": 40620,
+    "icon": "item_40620",
+    "name": "+4 Wizardry Staff [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "It is said that the cane was made by a Archmage. Its power is similar to the power of God.",
+    "equipType": "Staff",
+    "equipEffect": {
+      "MAtk": 97
+    },
+    "equipUniqueEffect": [
+      "Int ＋3\nM.Atk ＋10%\nFor Refining ＋1, ignore M.Def ＋2%",
+      "[Wizardry Staff VIII] ＋ [Robe of Cast VIII] ＋ [Eye of Dullahan VIII] ＋ [Crystal Pumps IV]: －5% CT Variable, ＋3% M.Dmg, ＋3% Ignore MDef"
+    ],
+    "blueprintProduct": "Wizardry Staff [1]",
+    "blueprintProductPrice": 1109849,
+    "blueprintCraftingFee": 40000,
+    "blueprintMaterials": [
+      {
+        "name": "Piercing Staff [1]",
+        "quantity": 1,
+        "unitPrice": 24480
+      },
+      {
+        "name": "Steel",
+        "quantity": 40,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 20,
+        "unitPrice": 896
+      },
+      {
+        "name": "Jellopy",
+        "quantity": 180,
+        "unitPrice": 100
+      },
+      {
+        "name": "Coal",
+        "quantity": 50,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Garlet",
+        "quantity": 200,
+        "unitPrice": 120
+      },
+      {
+        "name": "Amethyst",
+        "quantity": 35,
+        "unitPrice": 10037
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 25,
+        "unitPrice": 480
+      },
+      {
+        "name": "Glass Bead",
+        "quantity": 220,
+        "unitPrice": 339
+      },
+      {
+        "name": "Mercury",
+        "quantity": 25,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Light Granule",
+        "quantity": 2,
+        "unitPrice": 142622
+      }
+    ],
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": -0.03734767908013461,
+    "priceChange3d": -1.4029587537964143,
+    "priceChange7d": -1.356827986570252,
+    "lastRecord": {
+      "timestamp": 1562975450,
+      "price": 754785,
+      "stock": 1,
+      "snapBuyers": 5,
+      "snapEnd": 1562981702
+    }
+  },
+  {
+    "id": 4333,
+    "itemId": 45204,
+    "icon": "item_45204",
+    "name": "Little Tree Hat",
+    "category": "Headwear - Head",
+    "description": "Cute headdress made according to young Willow by an institute that is keen on protecting forest resources.",
+    "depositReward": [
+      "Max HP ＋10"
+    ],
+    "unlockReward": [
+      "INT ＋1"
+    ],
+    "equipUniqueEffect": [
+      "INT ＋6"
+    ],
+    "blueprintProduct": "Little Tree Hat",
+    "blueprintProductPrice": 586450,
+    "blueprintCraftingFee": 51000,
+    "blueprintMaterials": [
+      {
+        "name": "Little Tree Hat Blueprint",
+        "quantity": 1,
+        "unitPrice": 0
+      },
+      {
+        "name": "Abyss Flower",
+        "quantity": 503,
+        "unitPrice": 518
+      },
+      {
+        "name": "Honey",
+        "quantity": 32,
+        "unitPrice": 8516
+      },
+      {
+        "name": "Royal Jelly",
+        "quantity": 20,
+        "unitPrice": 7006
+      },
+      {
+        "name": "Leaf of Yggdrasil",
+        "quantity": 18,
+        "unitPrice": 0
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 4.13374291954472,
+    "priceChange3d": -1.6803778209575286,
+    "priceChange7d": -11.5626767200754,
+    "lastRecord": {
+      "timestamp": 1562974398,
+      "price": 586450,
+      "stock": 1,
+      "snapBuyers": 5,
+      "snapEnd": 1562979684
+    }
+  },
+  {
+    "id": 5790,
+    "itemId": 48571,
+    "icon": "item_48571",
+    "name": "Blow Gun",
+    "category": "Headwear - Mouth",
+    "description": "A secret weapon. If you want to use it without others noticing, You need a lot of exercise and skills.",
+    "depositReward": [
+      "Max HP ＋35"
+    ],
+    "unlockReward": [
+      "Max HP ＋14"
+    ],
+    "equipUniqueEffect": [
+      "Dex ＋4\nWhen Refining ＋5, ＋10, ＋15, Dex ＋1, ＋2, ＋3 respectively"
+    ],
+    "blueprintProduct": "Blow Gun",
+    "blueprintProductPrice": 1957433,
+    "blueprintCraftingFee": 102000,
+    "blueprintMaterials": [
+      {
+        "name": "Blow Gun Blueprint",
+        "quantity": 1,
+        "unitPrice": 100000
+      },
+      {
+        "name": "Brigan",
+        "quantity": 893,
+        "unitPrice": 731
+      },
+      {
+        "name": "Heroic Emblem",
+        "quantity": 5,
+        "unitPrice": 66570
+      },
+      {
+        "name": "Cat Grass",
+        "quantity": 35,
+        "unitPrice": 45862
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": -1.9974185511843823,
+    "priceChange3d": 9.348789608520727,
+    "priceChange7d": -4.430663110340346,
+    "lastRecord": {
+      "timestamp": 1562974656,
+      "price": 1957433,
+      "stock": 1,
+      "snapBuyers": 5,
+      "snapEnd": 1562975693
+    }
+  },
+  {
+    "id": 8783,
+    "itemId": 142016,
+    "icon": "item_42016",
+    "name": "+6 Tights [1] <Arch 4>",
+    "category": "Equipment - Armor",
+    "description": "The suitable clothes to make you easier to move.",
+    "equipEffect": {
+      "Def": 28
+    },
+    "equipUniqueEffect": [
+      "Dex ＋2\nAtk ＋4%"
+    ],
+    "blueprintProduct": "Tights [1]",
+    "blueprintProductPrice": 686150,
+    "blueprintCraftingFee": 50000,
+    "blueprintMaterials": [
+      {
+        "name": "Tights",
+        "quantity": 11,
+        "unitPrice": 68615
+      }
+    ],
+    "refineLv": 6,
+    "safeRefineCost": 420000,
+    "safeRefineMaterials": [
+      {
+        "name": "Tights",
+        "quantity": 3,
+        "unitPrice": 68615
+      },
+      {
+        "name": "Elunium",
+        "quantity": 19,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 2,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 130.56430422736616,
+    "priceChange3d": 130.56430422736616,
+    "priceChange7d": 130.56430422736616,
+    "lastRecord": {
+      "timestamp": 1562973814,
+      "price": 11609028,
+      "stock": 1,
+      "snapBuyers": 5,
+      "snapEnd": 1562980657
+    }
+  },
+  {
+    "id": 10664,
+    "itemId": 16169,
+    "icon": "item_47169",
+    "name": "Bunny Egg Backpack Blueprints",
+    "category": "Blueprint",
+    "description": "A pack full of Easter spirit, with colors overflowing with the joy of early spring. \"Don't break the eggs, or the rabbit will slip away!\"",
+    "depositReward": [
+      "Max HP ＋30"
+    ],
+    "unlockReward": [
+      "M.Def ＋3"
+    ],
+    "equipType": "Wing",
+    "equipUniqueEffect": [
+      "INT +2\nHoly Attack +3%"
+    ],
+    "blueprintProduct": "Bunny Egg Backpack",
+    "blueprintProductPrice": 1520586,
+    "blueprintCraftingFee": 51000,
+    "blueprintMaterials": [
+      {
+        "name": "Bunny Egg Backpack Blueprints",
+        "quantity": 1,
+        "unitPrice": 386011
+      },
+      {
+        "name": "Rotten Bandage",
+        "quantity": 222,
+        "unitPrice": 100
+      },
+      {
+        "name": "Feather",
+        "quantity": 477,
+        "unitPrice": 200
+      },
+      {
+        "name": "Mastela Fruit",
+        "quantity": 1,
+        "unitPrice": 1555156
+      },
+      {
+        "name": "Topaz",
+        "quantity": 25,
+        "unitPrice": 2500
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 1,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 45.91781961140092,
+    "priceChange3d": -33.6968451934159,
+    "priceChange7d": -15.971309155818712,
+    "lastRecord": {
+      "timestamp": 1562974686,
+      "price": 386011,
+      "stock": 2,
+      "snapBuyers": 10,
+      "snapEnd": 1562981812
+    }
+  },
+  {
+    "id": 908,
+    "itemId": 41835,
+    "icon": "item_41835",
+    "name": "+3 Vecer Axe [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "The axe in mass production. Made by Blacksmith Guild, it is the counterfeit of the famous Vecer Battle Axe.",
+    "equipType": "Axe",
+    "equipEffect": {
+      "Atk": 196
+    },
+    "equipUniqueEffect": [
+      "Agi ＋10\nDamage to middle-size monsters ＋10%",
+      "auto attack has chance to release Lv.10 [Cart Attack]\nDamage of [Cart Attack] ＋15%"
+    ],
+    "blueprintProduct": "Vecer Axe [1]",
+    "blueprintProductPrice": 1942700,
+    "blueprintCraftingFee": 60000,
+    "blueprintMaterials": [
+      {
+        "name": "Orcish Axe [1]",
+        "quantity": 1,
+        "unitPrice": 86680
+      },
+      {
+        "name": "Coal",
+        "quantity": 95,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Steel",
+        "quantity": 45,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Activity Stone",
+        "quantity": 10,
+        "unitPrice": 7300
+      },
+      {
+        "name": "Sticky Mucus",
+        "quantity": 180,
+        "unitPrice": 120
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 50,
+        "unitPrice": 480
+      },
+      {
+        "name": "Awakening Potion",
+        "quantity": 15,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Immortal Heart",
+        "quantity": 200,
+        "unitPrice": 399
+      },
+      {
+        "name": "Orc Claw",
+        "quantity": 2,
+        "unitPrice": 112710
+      },
+      {
+        "name": "Mercury",
+        "quantity": 60,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Slow Atk Alloy",
+        "quantity": 10,
+        "unitPrice": 10122
+      },
+      {
+        "name": "Glass Bead",
+        "quantity": 250,
+        "unitPrice": 339
+      },
+      {
+        "name": "Heroic Emblem",
+        "quantity": 2,
+        "unitPrice": 66570
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 70,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Earth Mastery Alloy",
+        "quantity": 10,
+        "unitPrice": 18857
+      },
+      {
+        "name": "Hand of God",
+        "quantity": 300,
+        "unitPrice": 674
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 1.4421926389402098,
+    "priceChange3d": 3.1227833718752827,
+    "priceChange7d": 1.327545071964025,
+    "lastRecord": {
+      "timestamp": 1562975506,
+      "price": 1106360,
+      "stock": 1,
+      "snapBuyers": 4,
+      "snapEnd": 1562977927
+    }
+  },
+  {
+    "id": 2028,
+    "itemId": 42519,
+    "icon": "item_42519",
+    "name": "Magic Bible Vol1",
+    "category": "Equipment - Off-Hand",
+    "description": "A heavy book full of small words. The book seems to come out in series.",
+    "equipEffect": {
+      "Def": 28
+    },
+    "equipUniqueEffect": [
+      "Ignore M.Def15%"
+    ],
+    "blueprintProduct": "Magic Bible Vol1",
+    "blueprintProductPrice": 85251,
+    "blueprintCraftingFee": 20000,
+    "blueprintMaterials": [
+      {
+        "name": "Aquamarine",
+        "quantity": 10,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Steel",
+        "quantity": 13,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Memento",
+        "quantity": 150,
+        "unitPrice": 123
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.30945545253447543,
+    "priceChange3d": 5.819048446557352,
+    "priceChange7d": 10.285899094437257,
+    "lastRecord": {
+      "timestamp": 1562973572,
+      "price": 85251,
+      "stock": 1,
+      "snapBuyers": 4,
+      "snapEnd": 1562976788
+    }
+  },
+  {
+    "id": 3865,
+    "itemId": 41834,
+    "icon": "item_41834",
+    "name": "+4 Doom Axe [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "The buster, which devours enough souls, becomes the Doom Axe, gives the bearer more seductive power, and requires more cost. Once it is grasped, it seems to hear a voice whispering in my mind, \"to split the shackle of reason, embrace the abyss of power.\"",
+    "equipType": "Axe",
+    "equipEffect": {
+      "Atk": 160
+    },
+    "equipUniqueEffect": [
+      "Str ＋5\nFor each level of [Skin Tempering] is learned, Extra Fire Dmg ＋10%",
+      "When Strength reaches 50, Atk ＋10%"
+    ],
+    "blueprintProduct": "Doom Axe [1]",
+    "blueprintProductPrice": 1691245,
+    "blueprintCraftingFee": 40000,
+    "blueprintMaterials": [
+      {
+        "name": "Buster [1]",
+        "quantity": 1,
+        "unitPrice": 34960
+      },
+      {
+        "name": "Steel",
+        "quantity": 65,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 30,
+        "unitPrice": 896
+      },
+      {
+        "name": "Sleepless Stone",
+        "quantity": 10,
+        "unitPrice": 12567
+      },
+      {
+        "name": "Memento",
+        "quantity": 150,
+        "unitPrice": 123
+      },
+      {
+        "name": "Coal",
+        "quantity": 35,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Normal Precision Stone",
+        "quantity": 10,
+        "unitPrice": 9600
+      },
+      {
+        "name": "Scell",
+        "quantity": 150,
+        "unitPrice": 438
+      },
+      {
+        "name": "Star Crumb",
+        "quantity": 2,
+        "unitPrice": 128703
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 50,
+        "unitPrice": 480
+      },
+      {
+        "name": "Elunium",
+        "quantity": 6,
+        "unitPrice": 25000
+      },
+      {
+        "name": "Zargon",
+        "quantity": 180,
+        "unitPrice": 393
+      },
+      {
+        "name": "Pearl",
+        "quantity": 2,
+        "unitPrice": 96557
+      },
+      {
+        "name": "Mercury",
+        "quantity": 55,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Oridecon",
+        "quantity": 6,
+        "unitPrice": 25000
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 250,
+        "unitPrice": 225
+      }
+    ],
+    "refineLv": 4,
+    "safeRefineCost": 100000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 4,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 1.958316175189275,
+    "priceChange3d": 2.817624560191003,
+    "priceChange7d": 4.322824269095263,
+    "lastRecord": {
+      "timestamp": 1562975423,
+      "price": 1047325,
+      "stock": 1,
+      "snapBuyers": 4,
+      "snapEnd": 1562980701
+    }
+  },
+  {
+    "id": 6268,
+    "itemId": 161511,
+    "icon": "item_61511",
+    "name": "+6 Rosa Bracelet [1]",
+    "category": "Equipment - Off-Hand",
+    "description": "Simple bracelet, engraved with \"P.L.K\" on the inside.",
+    "equipType": "Bracelet",
+    "equipEffect": {
+      "Def": 31
+    },
+    "equipUniqueEffect": [
+      "Ignore Def ＋25%"
+    ],
+    "blueprintProduct": "Rosa Bracelet [1]",
+    "blueprintProductPrice": 5538930,
+    "blueprintCraftingFee": 150000,
+    "blueprintMaterials": [
+      {
+        "name": "Rosa Bracelet",
+        "quantity": 11,
+        "unitPrice": 560383
+      }
+    ],
+    "refineLv": 6,
+    "safeRefineCost": 420000,
+    "safeRefineMaterials": [
+      {
+        "name": "Rosa Bracelet",
+        "quantity": 3,
+        "unitPrice": 560383
+      },
+      {
+        "name": "Elunium",
+        "quantity": 19,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.692328819127722,
+    "priceChange3d": 1.674336207632545,
+    "priceChange7d": 0.8943210886213361,
+    "lastRecord": {
+      "timestamp": 1562973574,
+      "price": 7145469,
+      "stock": 1,
+      "snapBuyers": 4,
+      "snapEnd": 1562978787
+    }
+  },
+  {
+    "id": 6844,
+    "itemId": 61511,
+    "icon": "item_61511",
+    "name": "+1 Rosa Bracelet (broken)",
+    "category": "Equipment - Off-Hand",
+    "description": "Simple bracelet, engraved with \"P.L.K\" on the inside.",
+    "equipType": "Bracelet",
+    "equipEffect": {
+      "Def": 31
+    },
+    "equipUniqueEffect": [
+      "Ignore Def ＋25%"
+    ],
+    "blueprintProduct": "Rosa Bracelet",
+    "blueprintProductPrice": 560383,
+    "blueprintCraftingFee": 80000,
+    "blueprintMaterials": [
+      {
+        "name": "Floral Bracelet",
+        "quantity": 1,
+        "unitPrice": 97751
+      },
+      {
+        "name": "Aquamarine",
+        "quantity": 30,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Coal",
+        "quantity": 10,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Garlet",
+        "quantity": 120,
+        "unitPrice": 120
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 10,
+        "unitPrice": 480
+      },
+      {
+        "name": "Scell",
+        "quantity": 140,
+        "unitPrice": 438
+      },
+      {
+        "name": "Mercury",
+        "quantity": 10,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Glass Bead",
+        "quantity": 160,
+        "unitPrice": 339
+      },
+      {
+        "name": "Bloody Rune",
+        "quantity": 1,
+        "unitPrice": 65181
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 15,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 100,
+        "unitPrice": 225
+      }
+    ],
+    "refineLv": 1,
+    "safeRefineCost": 10000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 1,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.8169192484598801,
+    "priceChange3d": 2.1645695171045722,
+    "priceChange7d": 1.2096010275347195,
+    "lastRecord": {
+      "timestamp": 1562973597,
+      "price": 315192,
+      "stock": 1,
+      "snapBuyers": 4,
+      "snapEnd": 1562977733
+    }
+  },
+  {
+    "id": 18998,
+    "itemId": 200148,
+    "icon": "item_200148",
+    "name": "Ultraman Zero Summon Scroll",
+    "category": "Item - Scroll/Album",
+    "description": "Use it to summon Ultraman Zero for a while, which is highly effective against monsters! Attention! The effect will vanish when you’re mounted or dead. This item can’t be canceled once unsealed.",
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 61.27049180327869,
+    "priceChange3d": 0,
+    "priceChange7d": 0,
+    "lastRecord": {
+      "timestamp": 1562974874,
+      "price": 3148,
+      "stock": 9,
+      "snapBuyers": 40,
+      "snapEnd": 1562975331
+    }
+  },
+  {
+    "id": 19212,
+    "itemId": 48513,
+    "icon": "item_48513",
+    "name": "+3 Angry Snarl <Armor 2> (broken)",
+    "category": "Headwear - Mouth",
+    "description": "Items imitating Angry Snarl can be used to perform angry cats, angry rabbits, and other various shows.",
+    "depositReward": [
+      "Refining M.Atk ＋10"
+    ],
+    "unlockReward": [
+      "M.Def ＋5"
+    ],
+    "equipUniqueEffect": [
+      "CT Variable -10%\nDamage reduction of Human race ＋5%\nFor Refining ＋1, damage reduction of Demi-Human race ＋1%, (upper limit of increases is 15%)"
+    ],
+    "blueprintProduct": "Angry Snarl",
+    "blueprintProductPrice": 7742604,
+    "blueprintCraftingFee": 203000,
+    "blueprintMaterials": [
+      {
+        "name": "Angry Snarl Blueprint",
+        "quantity": 1,
+        "unitPrice": 5959665
+      },
+      {
+        "name": "Immortal Heart",
+        "quantity": 1723,
+        "unitPrice": 399
+      },
+      {
+        "name": "Light Granule",
+        "quantity": 15,
+        "unitPrice": 142622
+      },
+      {
+        "name": "Orc Claw",
+        "quantity": 18,
+        "unitPrice": 112710
+      },
+      {
+        "name": "Iron",
+        "quantity": 140,
+        "unitPrice": 896
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Mithril",
+        "quantity": 3,
+        "unitPrice": 37975
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0,
+    "priceChange3d": 0,
+    "priceChange7d": 0,
+    "lastRecord": {
+      "timestamp": 1562974656,
+      "price": 10292110,
+      "stock": 1,
+      "snapBuyers": 4,
+      "snapEnd": 1562977193
+    }
+  },
+  {
+    "id": 72,
+    "itemId": 17520,
+    "icon": "item_48520",
+    "name": "Pipe Blueprint",
+    "category": "Blueprint",
+    "description": "Cigarettes can be put into the pipe, because there is a filter on it, which can reduce the harm to the body. Smoking is harmful to the health of the human body, and the juveniles are prohibited from smoking.",
+    "depositReward": [
+      "Refine Atk ＋10"
+    ],
+    "unlockReward": [
+      "Atk ＋12"
+    ],
+    "equipUniqueEffect": [
+      "Str ＋3\nDamage reduction of Insect race ＋10%\nWhen Refining ＋10, Max HP ＋10%"
+    ],
+    "blueprintProduct": "Pipe",
+    "blueprintProductPrice": 3895117,
+    "blueprintCraftingFee": 203000,
+    "blueprintMaterials": [
+      {
+        "name": "Pipe Blueprint",
+        "quantity": 1,
+        "unitPrice": 449609
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 1750,
+        "unitPrice": 225
+      },
+      {
+        "name": "Heroic Emblem",
+        "quantity": 20,
+        "unitPrice": 66570
+      },
+      {
+        "name": "Parts",
+        "quantity": 20,
+        "unitPrice": 141476
+      },
+      {
+        "name": "Coal",
+        "quantity": 175,
+        "unitPrice": 2041
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 4,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 46.41047517324024,
+    "priceChange3d": 21.693882135771492,
+    "priceChange7d": 30.98472555228942,
+    "lastRecord": {
+      "timestamp": 1562974690,
+      "price": 449609,
+      "stock": 2,
+      "snapBuyers": 7,
+      "snapEnd": 1562980029
+    }
+  },
+  {
+    "id": 207,
+    "itemId": 220031,
+    "icon": "item_12004",
+    "name": "Transformation Scroll (Stormy Knight)",
+    "category": "Item - Scroll/Album",
+    "description": "Use it to transform into Stormy Knight for a while. Attention! The effect will vanish when mounted or dead. This item can’t be canceled once unsealed.",
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.3020453724679077,
+    "priceChange3d": 1.0100676133639714,
+    "priceChange7d": 2.5493848916637294,
+    "lastRecord": {
+      "timestamp": 1562974867,
+      "price": 61102,
+      "stock": 2,
+      "snapBuyers": 6,
+      "snapEnd": 1562977158
+    }
+  },
+  {
+    "id": 968,
+    "itemId": 41217,
+    "icon": "item_41217",
+    "name": "Mystery Bow [1]",
+    "category": "Equipment - Weapon",
+    "description": "Because the unknown enchantment was used, even the craftsman who made it did not know what energy was contained in the bow.",
+    "equipEffect": {
+      "Atk": 192
+    },
+    "equipUniqueEffect": [
+      "Dex ＋5\nAtk ＋75",
+      "When Dexterity reaches 95, Atk ＋10%",
+      "When Dexterity reaches 120, Atk ＋3%",
+      "When Dexterity reaches 150, Atk ＋3%"
+    ],
+    "blueprintProduct": "Mystery Bow [1]",
+    "blueprintProductPrice": 837189,
+    "blueprintCraftingFee": 40000,
+    "blueprintMaterials": [
+      {
+        "name": "Cross Bow [1]",
+        "quantity": 1,
+        "unitPrice": 24480
+      },
+      {
+        "name": "Steel",
+        "quantity": 30,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 15,
+        "unitPrice": 896
+      },
+      {
+        "name": "Garlet",
+        "quantity": 150,
+        "unitPrice": 120
+      },
+      {
+        "name": "Coal",
+        "quantity": 15,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 180,
+        "unitPrice": 499
+      },
+      {
+        "name": "Orcish Voucher",
+        "quantity": 33,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 20,
+        "unitPrice": 480
+      },
+      {
+        "name": "Mercury",
+        "quantity": 25,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Zargon",
+        "quantity": 200,
+        "unitPrice": 393
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 25,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Bell",
+        "quantity": 2,
+        "unitPrice": 129412
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.6593684058650603,
+    "priceChange3d": 0.2181077298959619,
+    "priceChange7d": 3.4113086915061293,
+    "lastRecord": {
+      "timestamp": 1562975486,
+      "price": 837189,
+      "stock": 6,
+      "snapBuyers": 18,
+      "snapEnd": 1562976831
+    }
+  },
+  {
+    "id": 969,
+    "itemId": 41217,
+    "icon": "item_41217",
+    "name": "+3 Mystery Bow [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "Because the unknown enchantment was used, even the craftsman who made it did not know what energy was contained in the bow.",
+    "equipEffect": {
+      "Atk": 192
+    },
+    "equipUniqueEffect": [
+      "Dex ＋5\nAtk ＋75",
+      "When Dexterity reaches 95, Atk ＋10%",
+      "When Dexterity reaches 120, Atk ＋3%",
+      "When Dexterity reaches 150, Atk ＋3%"
+    ],
+    "blueprintProduct": "Mystery Bow [1]",
+    "blueprintProductPrice": 837189,
+    "blueprintCraftingFee": 40000,
+    "blueprintMaterials": [
+      {
+        "name": "Cross Bow [1]",
+        "quantity": 1,
+        "unitPrice": 24480
+      },
+      {
+        "name": "Steel",
+        "quantity": 30,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 15,
+        "unitPrice": 896
+      },
+      {
+        "name": "Garlet",
+        "quantity": 150,
+        "unitPrice": 120
+      },
+      {
+        "name": "Coal",
+        "quantity": 15,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 180,
+        "unitPrice": 499
+      },
+      {
+        "name": "Orcish Voucher",
+        "quantity": 33,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 20,
+        "unitPrice": 480
+      },
+      {
+        "name": "Mercury",
+        "quantity": 25,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Zargon",
+        "quantity": 200,
+        "unitPrice": 393
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 25,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Bell",
+        "quantity": 2,
+        "unitPrice": 129412
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.46055844299658893,
+    "priceChange3d": 0.12774026387592186,
+    "priceChange7d": 2.2204817786020254,
+    "lastRecord": {
+      "timestamp": 1562975486,
+      "price": 553390,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562981896
+    }
+  },
+  {
+    "id": 2068,
+    "itemId": 61507,
+    "icon": "item_61507",
+    "name": "Floral Bracelet",
+    "category": "Equipment - Off-Hand",
+    "description": "The rings were decorated with roses.",
+    "equipEffect": {
+      "Def": 28
+    },
+    "equipUniqueEffect": [
+      "Ignore Def ＋10%"
+    ],
+    "blueprintProduct": "Floral Bracelet",
+    "blueprintProductPrice": 97751,
+    "blueprintCraftingFee": 20000,
+    "blueprintMaterials": [
+      {
+        "name": "Aquamarine",
+        "quantity": 15,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Steel",
+        "quantity": 13,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Memento",
+        "quantity": 150,
+        "unitPrice": 123
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": -0.30189602945526123,
+    "priceChange3d": 5.037447750448621,
+    "priceChange7d": 8.85412026726058,
+    "lastRecord": {
+      "timestamp": 1562973576,
+      "price": 97751,
+      "stock": 2,
+      "snapBuyers": 7,
+      "snapEnd": 1562974230
+    }
+  },
+  {
+    "id": 2176,
+    "itemId": 42046,
+    "icon": "item_42046",
+    "name": "Thief Clothes",
+    "category": "Equipment - Armor",
+    "description": "Unlike ordinary thieves, the thieves in this outfit focused on the treasure and helped the poor.",
+    "equipType": "Armour",
+    "equipEffect": {
+      "Def": 31
+    },
+    "equipUniqueEffect": [
+      "M.Def ＋20\nAgi ＋5\nStr ＋10",
+      "[Thief Clothes VIII] ＋ [Holy Dagger VIII]: ＋15% damage against S-sized targets, ＋5% to M-sized targets and ＋10% to L-sized targets"
+    ],
+    "blueprintProduct": "Thief Clothes",
+    "blueprintProductPrice": 526680,
+    "blueprintCraftingFee": 80000,
+    "blueprintMaterials": [
+      {
+        "name": "Rogue Clothes [1]",
+        "quantity": 1,
+        "unitPrice": 645800
+      },
+      {
+        "name": "Disguising Scroll",
+        "quantity": 5,
+        "unitPrice": 0
+      },
+      {
+        "name": "Memento",
+        "quantity": 65,
+        "unitPrice": 123
+      },
+      {
+        "name": "A Bag of Zeny",
+        "quantity": 8,
+        "unitPrice": 0
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 75,
+        "unitPrice": 499
+      },
+      {
+        "name": "Mercury",
+        "quantity": 10,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Necklace of Wisdom",
+        "quantity": 80,
+        "unitPrice": 200
+      },
+      {
+        "name": "Fabric",
+        "quantity": 1,
+        "unitPrice": 156911
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 15,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Hand of God",
+        "quantity": 100,
+        "unitPrice": 674
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.15822062649282684,
+    "priceChange3d": -2.8570374605750963,
+    "priceChange7d": -2.060762939739141,
+    "lastRecord": {
+      "timestamp": 1562973761,
+      "price": 526680,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562978048
+    }
+  },
+  {
+    "id": 2959,
+    "itemId": 43516,
+    "icon": "item_43516",
+    "name": "Greaves",
+    "category": "Equipment - Footgear",
+    "description": "Made of steel, the boots focus on defense but not usability or comfort.",
+    "equipEffect": {
+      "Def": 45
+    },
+    "equipUniqueEffect": [
+      "Move Spd ＋8%\nDef ＋12\nHP Regen ＋5",
+      "Green Steel Pike IV ＋ Greaves  VII ＋ Stone Buckler IV: Ignores 5% Def, ＋5% Atk"
+    ],
+    "blueprintProduct": "Greaves",
+    "blueprintProductPrice": 443990,
+    "blueprintCraftingFee": 60000,
+    "blueprintMaterials": [
+      {
+        "name": "Safety Boots [1]",
+        "quantity": 1,
+        "unitPrice": 615200
+      },
+      {
+        "name": "Iron",
+        "quantity": 10,
+        "unitPrice": 896
+      },
+      {
+        "name": "Garlet",
+        "quantity": 60,
+        "unitPrice": 120
+      },
+      {
+        "name": "Coal",
+        "quantity": 10,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 80,
+        "unitPrice": 499
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 10,
+        "unitPrice": 480
+      },
+      {
+        "name": "Scell",
+        "quantity": 100,
+        "unitPrice": 438
+      },
+      {
+        "name": "Orc Claw",
+        "quantity": 1,
+        "unitPrice": 112710
+      },
+      {
+        "name": "Mercury",
+        "quantity": 15,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 100,
+        "unitPrice": 225
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 1.1973004328333374,
+    "priceChange3d": 3.111769637544677,
+    "priceChange7d": 1.0544955469014947,
+    "lastRecord": {
+      "timestamp": 1562974117,
+      "price": 443990,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562978230
+    }
+  },
+  {
+    "id": 3655,
+    "itemId": 48552,
+    "icon": "item_48552",
+    "name": "Hockey Mask",
+    "category": "Headwear - Face",
+    "description": "Hockey masks. Wear it and you will be motivated to hold weapons.",
+    "depositReward": [
+      "Max HP ＋10"
+    ],
+    "unlockReward": [
+      "Atk ＋3"
+    ],
+    "equipUniqueEffect": [
+      "Dmg to Demi-Human ＋10%\nDmg reduction of Demi-Human race -10%"
+    ],
+    "blueprintProduct": "Hockey Mask",
+    "blueprintProductPrice": 1382741,
+    "blueprintCraftingFee": 102000,
+    "blueprintMaterials": [
+      {
+        "name": "Hockey Mask Blueprint",
+        "quantity": 1,
+        "unitPrice": 327614
+      },
+      {
+        "name": "Brigan",
+        "quantity": 345,
+        "unitPrice": 731
+      },
+      {
+        "name": "Crystal Mirror",
+        "quantity": 5,
+        "unitPrice": 113410
+      },
+      {
+        "name": "Bloody Rune",
+        "quantity": 6,
+        "unitPrice": 65181
+      },
+      {
+        "name": "Steel",
+        "quantity": 200,
+        "unitPrice": 1670
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 2.9848867624364694,
+    "priceChange3d": 2.889404796452143,
+    "priceChange7d": 0.19107255685078806,
+    "lastRecord": {
+      "timestamp": 1562974605,
+      "price": 1382741,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562980584
+    }
+  },
+  {
+    "id": 3943,
+    "itemId": 40919,
+    "icon": "item_40919",
+    "name": "+3 Loki's Nail [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "The Katars consisting of two blades. It will cause the wounds that can not be healed and slowly bring the enemy to death.",
+    "equipEffect": {
+      "Atk": 144
+    },
+    "equipUniqueEffect": [
+      "Doubles Critical",
+      "Agi ＋2",
+      "Auto attacks have a chance to get an Attack Speed Buff: Attack Spd ＋30%; last for 7 seconds",
+      "[Loki's Nail V] ＋[Noble Bracer]: Every 2% Attack Spd will provide 1 Atk",
+      "[Loki's Nail IX] ＋ [Windrunner Cape]: ＋5% [Cross Ripper Slasher] damage"
+    ],
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 4,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 3.4584320123316545,
+    "priceChange3d": -0.3003554478193623,
+    "priceChange7d": -1.74613787521554,
+    "lastRecord": {
+      "timestamp": 1562975526,
+      "price": 977228,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562982331
+    }
+  },
+  {
+    "id": 4056,
+    "itemId": 61511,
+    "icon": "item_61511",
+    "name": "+3 Rosa Bracelet (broken)",
+    "category": "Equipment - Off-Hand",
+    "description": "Simple bracelet, engraved with \"P.L.K\" on the inside.",
+    "equipType": "Bracelet",
+    "equipEffect": {
+      "Def": 31
+    },
+    "equipUniqueEffect": [
+      "Ignore Def ＋25%"
+    ],
+    "blueprintProduct": "Rosa Bracelet",
+    "blueprintProductPrice": 560383,
+    "blueprintCraftingFee": 80000,
+    "blueprintMaterials": [
+      {
+        "name": "Floral Bracelet",
+        "quantity": 1,
+        "unitPrice": 97751
+      },
+      {
+        "name": "Aquamarine",
+        "quantity": 30,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Coal",
+        "quantity": 10,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Garlet",
+        "quantity": 120,
+        "unitPrice": 120
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 10,
+        "unitPrice": 480
+      },
+      {
+        "name": "Scell",
+        "quantity": 140,
+        "unitPrice": 438
+      },
+      {
+        "name": "Mercury",
+        "quantity": 10,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Glass Bead",
+        "quantity": 160,
+        "unitPrice": 339
+      },
+      {
+        "name": "Bloody Rune",
+        "quantity": 1,
+        "unitPrice": 65181
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 15,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 100,
+        "unitPrice": 225
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.8033834851159188,
+    "priceChange3d": 1.1215649789204236,
+    "priceChange7d": 0.8403524622812898,
+    "lastRecord": {
+      "timestamp": 1562973596,
+      "price": 415192,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562974992
+    }
+  },
+  {
+    "id": 4466,
+    "itemId": 220025,
+    "icon": "item_12004",
+    "name": "Transformation Scroll (Dark Lord)",
+    "category": "Item - Scroll/Album",
+    "description": "Use it to transform into Dark Lord for a while. Attention! The effect will vanish when mounted or dead. This item can’t be canceled once unsealed.",
+    "blueprintProductPrice": 0,
+    "blueprintCraftingFee": 0,
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.2749199331122637,
+    "priceChange3d": 0.9962604550255488,
+    "priceChange7d": 1.792444687401099,
+    "lastRecord": {
+      "timestamp": 1562974866,
+      "price": 35380,
+      "stock": 2,
+      "snapBuyers": 6,
+      "snapEnd": 1562974998
+    }
+  },
+  {
+    "id": 4699,
+    "itemId": 43539,
+    "icon": "item_43539",
+    "name": "+3 Rune Shoes (broken)",
+    "category": "Equipment - Footgear",
+    "description": "One of the first modern boots made by wizards who studied ancient runes. The boost are inlaid with magic runes.",
+    "equipType": "Shoes",
+    "equipEffect": {
+      "Def": 19
+    },
+    "equipUniqueEffect": [
+      "Move Spd ＋5%\nHealing Received ＋20%"
+    ],
+    "blueprintProduct": "Rune Shoes",
+    "blueprintProductPrice": 352258,
+    "blueprintCraftingFee": 30000,
+    "blueprintMaterials": [
+      {
+        "name": "Orcish Voucher",
+        "quantity": 30,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Soft Feather",
+        "quantity": 2,
+        "unitPrice": 99829
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 25,
+        "unitPrice": 1904
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0.09973650259475772,
+    "priceChange3d": 0.7271361648261639,
+    "priceChange7d": -0.8040784183694616,
+    "lastRecord": {
+      "timestamp": 1562974136,
+      "price": 311129,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562975001
+    }
+  },
+  {
+    "id": 19244,
+    "itemId": 142055,
+    "icon": "item_42055",
+    "name": "+3 Sniping Suit [1] <Arch 1> (broken)",
+    "category": "Equipment - Armor",
+    "description": "Cuffs specially designed for archery, and equipped with a device to help stretch muscles, Causing each arrow to inflict deadly damage on the enemy.",
+    "equipType": "Armour",
+    "equipEffect": {
+      "Def": 72
+    },
+    "equipUniqueEffect": [
+      "Attack Spd ＋6%\nFlee ＋25",
+      "When Luck reaches 60, Crit.Dmg ＋3%",
+      "When Luck reaches 90, Crit.Dmg ＋4%",
+      "When Luck reaches 120, Crit.Dmg ＋5%",
+      "[Sniping Suit IV] ＋[Malang Snow Crab IV]: Agi ＋5, Crit.Dmg ＋10%"
+    ],
+    "blueprintProduct": "Sniping Suit [1]",
+    "blueprintProductPrice": 24185390,
+    "blueprintCraftingFee": 150000,
+    "blueprintMaterials": [
+      {
+        "name": "Sniping Suit",
+        "quantity": 11,
+        "unitPrice": 2438946
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 0,
+    "priceChange3d": 0,
+    "priceChange7d": 0,
+    "lastRecord": {
+      "timestamp": 1562973738,
+      "price": 25754426,
+      "stock": 1,
+      "snapBuyers": 3,
+      "snapEnd": 1562974181
+    }
+  },
+  {
+    "id": 1613,
+    "itemId": 41507,
+    "icon": "item_41507",
+    "name": "Noble Cross [1]",
+    "category": "Equipment - Weapon",
+    "description": "The most dreadful weapon of the Undead Series.",
+    "equipType": "Mace",
+    "equipEffect": {
+      "Atk": 162
+    },
+    "equipUniqueEffect": [
+      "Agi ＋3\nAttack Spd ＋10%\nDmg to undead monsters ＋20%\nDmg to dark monsters ＋20%",
+      "Auto attack has a 5% chance to cause Atk ＋50; the effect lasts 10 seconds\nWhen Refining ＋10, Atk ＋50"
+    ],
+    "blueprintProduct": "Noble Cross [1]",
+    "blueprintProductPrice": 953904,
+    "blueprintCraftingFee": 60000,
+    "blueprintMaterials": [
+      {
+        "name": "Sword Mace [2]",
+        "quantity": 1,
+        "unitPrice": 415400
+      },
+      {
+        "name": "Steel",
+        "quantity": 40,
+        "unitPrice": 1670
+      },
+      {
+        "name": "Iron",
+        "quantity": 20,
+        "unitPrice": 896
+      },
+      {
+        "name": "Jellopy",
+        "quantity": 160,
+        "unitPrice": 100
+      },
+      {
+        "name": "Coal",
+        "quantity": 50,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Immortal Heart",
+        "quantity": 150,
+        "unitPrice": 399
+      },
+      {
+        "name": "Amethyst",
+        "quantity": 30,
+        "unitPrice": 10037
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 25,
+        "unitPrice": 480
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 200,
+        "unitPrice": 225
+      },
+      {
+        "name": "Mercury",
+        "quantity": 25,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Bloody Rune",
+        "quantity": 2,
+        "unitPrice": 65181
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 1.830029217698004,
+    "priceChange3d": 2.466533897922749,
+    "priceChange7d": -0.11811122559244089,
+    "lastRecord": {
+      "timestamp": 1562973053,
+      "price": 953904,
+      "stock": 1,
+      "snapBuyers": 2,
+      "snapEnd": 1562973365
+    }
+  },
+  {
+    "id": 2125,
+    "itemId": 42021,
+    "icon": "item_42021",
+    "name": "Holy Robe",
+    "category": "Equipment - Armor",
+    "description": "The armor of Odin's servant, \"War Girl\", it gives off white light after player wears it.",
+    "equipType": "Armour",
+    "equipEffect": {
+      "Def": 37
+    },
+    "equipUniqueEffect": [
+      "INT ＋3",
+      "Max SP ＋5%",
+      "[Croce Staff IV] ＋ [Holy Robe IV]: Healing increase ＋ 5%. And when [Holy Robe] Refining is ＋10 or above, the healing increases by 10%",
+      "SP cost of [Kyrie Eleison], [Magnificat] , [Assumptio] -40%"
+    ],
+    "blueprintProduct": "Holy Robe",
+    "blueprintProductPrice": 453549,
+    "blueprintCraftingFee": 60000,
+    "blueprintMaterials": [
+      {
+        "name": "Scapulare [1]",
+        "quantity": 1,
+        "unitPrice": 402800
+      },
+      {
+        "name": "Belief Token",
+        "quantity": 10,
+        "unitPrice": 0
+      },
+      {
+        "name": "Sticky Mucus",
+        "quantity": 80,
+        "unitPrice": 120
+      },
+      {
+        "name": "Blue Gemstone",
+        "quantity": 15,
+        "unitPrice": 0
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 100,
+        "unitPrice": 499
+      },
+      {
+        "name": "Leaf of Yggdrasil",
+        "quantity": 5,
+        "unitPrice": 0
+      },
+      {
+        "name": "Immortal Heart",
+        "quantity": 100,
+        "unitPrice": 399
+      },
+      {
+        "name": "Soft Feather",
+        "quantity": 1,
+        "unitPrice": 99829
+      },
+      {
+        "name": "Mercury",
+        "quantity": 15,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Glass Bead",
+        "quantity": 100,
+        "unitPrice": 339
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.5596142120725015,
+    "priceChange3d": 0.04301274500721291,
+    "priceChange7d": -0.8508201057622732,
+    "lastRecord": {
+      "timestamp": 1562973757,
+      "price": 453549,
+      "stock": 3,
+      "snapBuyers": 7,
+      "snapEnd": 1562974481
+    }
+  },
+  {
+    "id": 2151,
+    "itemId": 42043,
+    "icon": "item_42043",
+    "name": "Robe of Cast",
+    "category": "Equipment - Armor",
+    "description": "College Mages usually wear this when they make magic scrolls so as to improve their affinity.",
+    "equipType": "Armour",
+    "equipEffect": {
+      "Def": 31
+    },
+    "equipUniqueEffect": [
+      "INT ＋4\nM.Atk ＋5%\nCT Variable -10%",
+      "[Wizardry Staff VIII] ＋ [Robe of Cast VIII] ＋ [Eye of Dullahan VIII] ＋ [Crystal Pumps IV]: －5% CT Variable, ＋3% M.Dmg, ＋3% Ignore MDef"
+    ],
+    "blueprintProduct": "Robe of Cast",
+    "blueprintProductPrice": 404395,
+    "blueprintCraftingFee": 60000,
+    "blueprintMaterials": [
+      {
+        "name": "Mage Coat [1]",
+        "quantity": 1,
+        "unitPrice": 433200
+      },
+      {
+        "name": "Coal",
+        "quantity": 10,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Garlet",
+        "quantity": 50,
+        "unitPrice": 120
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 10,
+        "unitPrice": 480
+      },
+      {
+        "name": "Blue Gemstone",
+        "quantity": 15,
+        "unitPrice": 0
+      },
+      {
+        "name": "Flame Heart",
+        "quantity": 5,
+        "unitPrice": 8244
+      },
+      {
+        "name": "Rough Wind",
+        "quantity": 5,
+        "unitPrice": 3000
+      },
+      {
+        "name": "Fabric",
+        "quantity": 1,
+        "unitPrice": 156911
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 15,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Necklace of Wisdom",
+        "quantity": 100,
+        "unitPrice": 200
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 3,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 0.2280190842059607,
+    "priceChange3d": -1.7862780813600485,
+    "priceChange7d": -1.1892137554915923,
+    "lastRecord": {
+      "timestamp": 1562973775,
+      "price": 404395,
+      "stock": 3,
+      "snapBuyers": 7,
+      "snapEnd": 1562974771
+    }
+  },
+  {
+    "id": 3534,
+    "itemId": 145406,
+    "icon": "item_45406",
+    "name": "Rudolph's Horn [1]",
+    "category": "Headwear - Head",
+    "description": "",
+    "depositReward": [
+      "Max HP ＋90"
+    ],
+    "unlockReward": [
+      "Atk ＋10"
+    ],
+    "equipUniqueEffect": [
+      "Melee Dmg ＋5%",
+      "When strength reaches 200, ignore Def ＋5%"
+    ],
+    "blueprintProduct": "Rudolph's Horn [1]",
+    "blueprintProductPrice": 11339939,
+    "blueprintCraftingFee": 203000,
+    "blueprintMaterials": [
+      {
+        "name": "Rudolph's Horn [1] Blueprint",
+        "quantity": 1,
+        "unitPrice": 4616914
+      },
+      {
+        "name": "Box Wrapper",
+        "quantity": 2958,
+        "unitPrice": 393
+      },
+      {
+        "name": "Ice Powder",
+        "quantity": 20,
+        "unitPrice": 161988
+      },
+      {
+        "name": "Fang of Garm",
+        "quantity": 15,
+        "unitPrice": 458122
+      },
+      {
+        "name": "Christmas Socks",
+        "quantity": 25,
+        "unitPrice": 4000
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 4,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 2.471741954885805,
+    "priceChange3d": 1.099007396760553,
+    "priceChange7d": 5.409879784683825,
+    "lastRecord": {
+      "timestamp": 1562974411,
+      "price": 11339939,
+      "stock": 1,
+      "snapBuyers": 2,
+      "snapEnd": 1562975634
+    }
+  },
+  {
+    "id": 3654,
+    "itemId": 48551,
+    "icon": "item_48551",
+    "name": "Nut on Head",
+    "category": "Headwear - Face",
+    "description": "Put on it, and you're a scientific monster, too!",
+    "depositReward": [
+      "Atk ＋6"
+    ],
+    "unlockReward": [
+      "Atk ＋3"
+    ],
+    "equipUniqueEffect": [
+      "Hit ＋5\nIgnore Def ＋5%"
+    ],
+    "blueprintProduct": "Nut on Head",
+    "blueprintProductPrice": 1231713,
+    "blueprintCraftingFee": 102000,
+    "blueprintMaterials": [
+      {
+        "name": "Nut on Head Blueprint",
+        "quantity": 1,
+        "unitPrice": 642265
+      },
+      {
+        "name": "Necklace of Wisdom",
+        "quantity": 781,
+        "unitPrice": 200
+      },
+      {
+        "name": "Parts",
+        "quantity": 3,
+        "unitPrice": 141476
+      },
+      {
+        "name": "Zargon",
+        "quantity": 976,
+        "unitPrice": 393
+      },
+      {
+        "name": "Broken Blade",
+        "quantity": 20,
+        "unitPrice": 2591
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": 3.1397115099588184,
+    "priceChange3d": 2.1242143018821933,
+    "priceChange7d": 0.9505661351593907,
+    "lastRecord": {
+      "timestamp": 1562974601,
+      "price": 1231713,
+      "stock": 2,
+      "snapBuyers": 4,
+      "snapEnd": 1562978907
+    }
+  },
+  {
+    "id": 3698,
+    "itemId": 47020,
+    "icon": "item_47020",
+    "name": "Quiver",
+    "category": "Headwear - Back",
+    "description": "Quiver carried on the back. It is recommended to be used with the bow and arrow.",
+    "depositReward": [
+      "Atk ＋6"
+    ],
+    "unlockReward": [
+      "Max HP ＋24"
+    ],
+    "equipUniqueEffect": [
+      "Ranged Atk ＋7%"
+    ],
+    "blueprintProduct": "Quiver",
+    "blueprintProductPrice": 619999,
+    "blueprintCraftingFee": 51000,
+    "blueprintMaterials": [
+      {
+        "name": "Quiver Blueprint",
+        "quantity": 1,
+        "unitPrice": 243239
+      },
+      {
+        "name": "Zircon",
+        "quantity": 15,
+        "unitPrice": 3741
+      },
+      {
+        "name": "Sticky Mucus",
+        "quantity": 270,
+        "unitPrice": 120
+      },
+      {
+        "name": "Coal",
+        "quantity": 17,
+        "unitPrice": 2041
+      },
+      {
+        "name": "Fabric",
+        "quantity": 3,
+        "unitPrice": 156911
+      }
+    ],
+    "refineLv": 0,
+    "safeRefineCost": 0,
+    "rarity": 2,
+    "modified": false,
+    "inStock": true,
+    "priceChange1d": -0.007741348639699894,
+    "priceChange3d": -3.5072074006978617,
+    "priceChange7d": -9.29918881159802,
+    "lastRecord": {
+      "timestamp": 1562974644,
+      "price": 619999,
+      "stock": 6,
+      "snapBuyers": 13,
+      "snapEnd": 1562974844
+    }
+  },
+  {
+    "id": 4908,
+    "itemId": 40723,
+    "icon": "item_40723",
+    "name": "+3 Sandstorm [1] (broken)",
+    "category": "Equipment - Weapon",
+    "description": "Knives made by the Assassin Union. ",
+    "equipEffect": {
+      "Atk": 210
+    },
+    "equipUniqueEffect": [
+      "Hit ＋40\nDamage to L-size monsters ＋30%\nDamage to middle-size monsters ＋10%",
+      "auto attack has a chance to cause the target loses Attack Spd for a while"
+    ],
+    "blueprintProduct": "Sandstorm [1]",
+    "blueprintProductPrice": 2569801,
+    "blueprintCraftingFee": 80000,
+    "blueprintMaterials": [
+      {
+        "name": "Desert Twilight [1]",
+        "quantity": 1,
+        "unitPrice": 134870
+      },
+      {
+        "name": "Mercury",
+        "quantity": 120,
+        "unitPrice": 3728
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 80,
+        "unitPrice": 480
+      },
+      {
+        "name": "Scell",
+        "quantity": 358,
+        "unitPrice": 438
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 140,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Hand of God",
+        "quantity": 298,
+        "unitPrice": 674
+      },
+      {
+        "name": "Evil Horn",
+        "quantity": 340,
+        "unitPrice": 225
+      },
+      {
+        "name": "Orc Claw",
+        "quantity": 2,
+        "unitPrice": 112710
+      },
+      {
+        "name": "Armor Shard",
+        "quantity": 140,
+        "unitPrice": 1106
+      },
+      {
+        "name": "Cyfar",
+        "quantity": 288,
+        "unitPrice": 926
+      },
+      {
+        "name": "Rose Quartz",
+        "quantity": 2,
+        "unitPrice": 113504
+      },
+      {
+        "name": "Necklace of Oblivion",
+        "quantity": 325,
+        "unitPrice": 763
+      },
+      {
+        "name": "Necklace of Wisdom",
+        "quantity": 300,
+        "unitPrice": 200
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Oridecon",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 1.769963495935833,
+    "priceChange3d": 0.826951374549347,
+    "priceChange7d": -1.6221101768869557,
+    "lastRecord": {
+      "timestamp": 1562975479,
+      "price": 1420439,
+      "stock": 1,
+      "snapBuyers": 2,
+      "snapEnd": 1562975812
+    }
+  },
+  {
+    "id": 5644,
+    "itemId": 42535,
+    "icon": "item_42535",
+    "name": "+3 Sacrifice Book (broken)",
+    "category": "Equipment - Off-Hand",
+    "description": "A code used by a priest who sacrificed himself to seal monsters.",
+    "equipType": "Shield",
+    "equipEffect": {
+      "Def": 46
+    },
+    "equipUniqueEffect": [
+      "Ignore M.Def ＋30%"
+    ],
+    "blueprintProduct": "Sacrifice Book",
+    "blueprintProductPrice": 2482579,
+    "blueprintCraftingFee": 80000,
+    "blueprintMaterials": [
+      {
+        "name": "Magic Bible Vol1 [1]",
+        "quantity": 1,
+        "unitPrice": 831500
+      },
+      {
+        "name": "Aquamarine",
+        "quantity": 55,
+        "unitPrice": 2500
+      },
+      {
+        "name": "Hard Skin",
+        "quantity": 250,
+        "unitPrice": 499
+      },
+      {
+        "name": "Sticky Mucus",
+        "quantity": 250,
+        "unitPrice": 120
+      },
+      {
+        "name": "Gold Sand",
+        "quantity": 80,
+        "unitPrice": 480
+      },
+      {
+        "name": "Immortal Heart",
+        "quantity": 967,
+        "unitPrice": 399
+      },
+      {
+        "name": "Feather",
+        "quantity": 499,
+        "unitPrice": 200
+      },
+      {
+        "name": "Fabric",
+        "quantity": 2,
+        "unitPrice": 156911
+      },
+      {
+        "name": "Skel-Bone",
+        "quantity": 100,
+        "unitPrice": 1904
+      },
+      {
+        "name": "Abyss Flower",
+        "quantity": 397,
+        "unitPrice": 518
+      },
+      {
+        "name": "Necklace of Wisdom",
+        "quantity": 485,
+        "unitPrice": 200
+      },
+      {
+        "name": "Bloody Rune",
+        "quantity": 2,
+        "unitPrice": 65181
+      },
+      {
+        "name": "Armor Shard",
+        "quantity": 120,
+        "unitPrice": 1106
+      },
+      {
+        "name": "Necklace of Oblivion",
+        "quantity": 565,
+        "unitPrice": 763
+      }
+    ],
+    "refineLv": 3,
+    "safeRefineCost": 60000,
+    "safeRefineMaterials": [
+      {
+        "name": "Elunium",
+        "quantity": 3,
+        "unitPrice": 25000
+      }
+    ],
+    "rarity": 3,
+    "modified": true,
+    "inStock": true,
+    "priceChange1d": 2.8740542271835006,
+    "priceChange3d": 2.8740542271835006,
+    "priceChange7d": -0.26405045101649605,
+    "lastRecord": {
+      "timestamp": 1562973586,
+      "price": 1371485,
+      "stock": 2,
+      "snapBuyers": 5,
+      "snapEnd": 1562974632
+    }
+  }
+]

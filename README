@@ -1,0 +1,51 @@
+CONSTRAINT RULES
+
+each constraint has to be split by underscore and begins with a modifier (letter)
+
+
+-name, -na
+exact string match; case-insensitive
+
+-slots, -sl
+string find match
+default: "012"
+
+-refine, -re
+string find match, comma separated list of numbers, or prefixed with <, <=, >, >=
+default behavior (exclude the option): all
+examples:
+-re 3,4
+-re >=10,4
+
+-stock, -st
+-buyers, -bu
+-price, -pr
+
+-enchant, -en
+exact string match; case-insensitive
+enum: sharp, sharp blade, arch, zeal, 
+
+-enchantlevel, -el
+string find match
+default: "1234"
+
+-category, -ca
+enum: weapon, armor, garment, offhand, footgear, accessory, headwear, blueprint, card, item, scroll, album
+
+-subcategory, -sc
+enum: bow, staff, spear, mace, sword, knife, head, tail, face, mouth, back
+
+b - broken
+d - not broken
+
+===========================================================================
+
+developer guide?
+
+to be organized
+
+database
+refine
+fedcba9876543210 | 16
+2^x 
+bitwise and. if not 0 then match is found

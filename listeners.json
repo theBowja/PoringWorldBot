@@ -1,0 +1,47 @@
+{
+	"defaultConstraints": [
+		{
+			"buyers": "100+",
+			"message": "{{snap}} has reached over 50 buyers!",
+		},
+	],
+	"channels": [
+	  {
+	    "channelID": 12341234,
+	    "channelConstraints": [
+	    	{
+	    		"itemname": "mystery bow",
+	    		"enchant": "arch 3+",
+	    	},
+	    	{
+	    		"itemname": "mystery bow",
+	    		"enchant": "sharp 3+",
+	    	},
+	    	{
+	    		"itemname": "malang snow crab",
+	    		"enchant": "arch 3+",
+	    	},
+	    	{
+	    		"itemname": "tights",
+	    		"enchant": "morale",
+	    	}
+	    ],
+	    "userSpecific": [
+	      {
+	        "userID": 123,
+	        "userConstraints": [
+	        	{
+	        		"itemname": "bill guisarme",
+	        		"broken": true,
+	        		"refine": "4-",
+	        	},
+	        	{
+	        		"itemname": "bill guisarme",
+	        		"enchant": "morale 2+"
+	        	}
+	        ],
+	      },
+   		],
+		},
+	]
+}

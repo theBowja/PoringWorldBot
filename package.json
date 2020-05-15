@@ -1,0 +1,24 @@
+{
+  "name": "poring-world-bot",
+  "version": "1.0.0",
+  "description": "Poring World Bot",
+  "scripts": {
+    "start": "node bot.js",
+    "test": "mocha"
+  },
+  "main": "bot.js",
+  "author": "Lovyrn",
+  "dependencies": {
+    "better-sqlite3": "^5.4.0",
+    "cron": "^1.7.1",
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "https": "^1.0.0",
+    "npm": "^6.10.0",
+    "pngjs": "^3.4.0",
+    "promise.allsettled": "^1.0.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  }
+}
