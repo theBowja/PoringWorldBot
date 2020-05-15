@@ -1,3 +1,6 @@
+extra/
+auth.json
+
 # Logs
 logs
 *.log

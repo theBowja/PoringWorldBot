@@ -9,16 +9,16 @@
   "main": "bot.js",
   "author": "Lovyrn",
   "dependencies": {
-    "better-sqlite3": "^5.4.0",
-    "cron": "^1.7.1",
+    "better-sqlite3": "^7.0.1",
+    "cron": "^1.8.2",
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "discord.js": "^12.2.0",
     "https": "^1.0.0",
-    "npm": "^6.10.0",
-    "pngjs": "^3.4.0",
-    "promise.allsettled": "^1.0.1",
+    "npm": "^6.14.5",
+    "promise.allsettled": "^1.0.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "mocha": "^6.2.0"
+    "mocha": "^7.1.2"
   }
 }

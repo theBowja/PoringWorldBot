@@ -2,6 +2,13 @@ var schema = {};
 
 schema.defs = {};
 
+// schema.defs.channels = `
+// channel (
+// 	chID INTEGER PRIMARY KEY AUTOINCREMENT,
+// 	channelid
+
+// )`;
+
 schema.defs.listener = `
 listener (
 	lisID INTEGER PRIMARY KEY AUTOINCREMENT,

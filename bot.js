@@ -1,4 +1,6 @@
-var Discord = require('discord.io');
+//var Discord = require('discord.io');
+const Discord = require('discord.js');
+const bot = new Discord.client();
 var logger = require('winston');
 var auth = require('./auth.json');
 var https = require('https');
@@ -14,20 +16,25 @@ logger.add(new logger.transports.Console, {
 });
 logger.level = 'debug';
 // Initialize Discord Bot
-var bot = new Discord.Client({
-  token: auth.token,
-  autorun: true
+// var bot = new Discord.Client({
+//   token: auth.token,
+//   autorun: true
+// });
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
 });
-bot.on('ready', function (evt) {
-  logger.info('Connected');
-  logger.info('Logged in as: ');
-  logger.info(bot.username + ' - (' + bot.id + ')');
-  new CronJob('* 0,20,40 * * * *', function() {    })
-  // new CronJob('* * * * *', function() {
-  //     console.log(new Date());
-  // }, null, true)
-  // TODO: load list of watching channels into a global variable or cache
-});
+
+// bot.on('ready', function (evt) {
+//   logger.info('Connected');
+//   logger.info('Logged in as: ');
+//   logger.info(bot.username + ' - (' + bot.id + ')');
+//   new CronJob('* 0,20,40 * * * *', function() {    })
+//   // new CronJob('* * * * *', function() {
+//   //     console.log(new Date());
+//   // }, null, true)
+//   // TODO: load list of watching channels into a global variable or cache
+// });
 bot.on('message', function (user, userID, channelID, message, evt) {
   console.log("channel: " + channelID);
   console.log("userid: " + userID);
