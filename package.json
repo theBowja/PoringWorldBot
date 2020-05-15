@@ -13,7 +13,7 @@
     "cron": "^1.7.1",
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
     "https": "^1.0.0",
-    "npm": "^6.10.0",
+    "npm": "^6.13.4",
     "pngjs": "^3.4.0",
     "promise.allsettled": "^1.0.1",
     "winston": "^3.2.1"
