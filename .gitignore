@@ -1,6 +1,6 @@
-extra/
-auth.json
-zzz.js
+/extra/
+/auth.json
+/zzz.js
 
 # Logs
 logs
