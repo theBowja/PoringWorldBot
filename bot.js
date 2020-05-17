@@ -22,11 +22,10 @@ logger.level = 'debug';
 bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
 
-//   new CronJob('* 0,20,40 * * * *', function() {    })
-//   // new CronJob('* * * * *', function() {
-//   //     console.log(new Date());
-//   // }, null, true)
-//   // TODO: load list of watching channels into a global variable or cache
+  const job = new CronJob('* 0,10,20,30,40,50 * * * *', function() {
+    updateSnaps();
+  });
+  job.start();
 });
 
 bot.on('message', message => {
@@ -46,12 +45,15 @@ bot.on('message', message => {
 
   logger.info(`user ${userID} to channel ${channelID}: ${content.slice(1).join(' ')}`);
 
+  content[1] = content[1].toLowerCase();
   // COMMANDS WITH NO PERMISSION LEVEL REQUIRED
   if(content[1] === 'help') {
     // TODO: dm them the ENTIRE GUIDE based on their access level
-    message.author.send('urbad');
+    message.author.send('urbad\nhttps://github.com/theBowja/PoringWorldBot/blob/master/WIKI');
 
-  } else if(content[1] === 'pingmewhen') {
+  } else if(content[1] === 'pingmewhen' ||
+            content[1] === 'tagmewhen' ||
+            content[1] === 'tellmewhen') {
     // check if channel is on watch
     let channelobj = dbfuncs.getChannel(channelID);
     if(channelobj === undefined) return; // straight up ignore
@@ -117,6 +119,17 @@ bot.on('message', message => {
 
   } else if(content[1] === 'debug') {
     dbfuncs.listDiscokids();
+  
+  } else if(content[1] === 'permit' ||
+            content[1] === 'nwordpass') {
+    if(content.length < 4) return message.react('❎'); // not enough parameters provided
+    let targetID = parsefuncs.parseDiscordID(content[2]);
+    if(targetID === -1) return message.react('❎'); // no valid discord id provided
+    let perm = parseInt(content[3]);
+    if(isNaN(perm)) return message.react('❎'); // no number provided
+    if(userObj.permission < perm) return message.react('❎'); // cannot assign higher than your own
+    let res = dbfuncs.updateDiscokid(targetID, perm);
+    message.react(res ? '✅' : '❎');
   }
 
 });

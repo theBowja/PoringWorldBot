@@ -33,6 +33,13 @@ parsefuncs.buildItemFullName = function(item) {
 	return fullname;
 };
 
+parsefuncs.parseDiscordID = function(discordtag) {
+	let id = /<@\D?(\d+)>/.exec(discordtag);
+	if(id === null) return -1;
+	if(id[1] === undefined) return -1;
+	return id[1];
+};
+
 /**
  * @param reqsstr {string} - straight from inside 
  *   example: "-na eye of dullahan -re 12"

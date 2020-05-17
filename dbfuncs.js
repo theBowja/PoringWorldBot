@@ -1,21 +1,31 @@
 const db = require('better-sqlite3')('ohsnap.db');
 var schema = require('./schemas.js');
 var parsefuncs = require('./parse.js');
+var config = require('./config.js');
 
 // delete tables. tables is an array of strings. will be deleted in order
 function deleteTables(tables) {
   for(let t of tables)
   	db.exec('DROP TABLE IF EXISTS ' + t);
 }
-deleteTables(['requirements', 'channels', 'discokids', 'currentsnap']);
+//deleteTables(['requirements', 'channels', 'discokids', 'currentsnap']);
 
-// init tables
-// create all tables that don't exist
-for (var key in schema.defs) {
-	if (!schema.defs.hasOwnProperty(key)) continue;
-	var sqlxd = 'CREATE TABLE IF NOT EXISTS ' + schema.defs[key];
-	db.exec(sqlxd);
+function init() {
+	// create all tables that don't exist
+	for (var key in schema.defs) {
+		if (!schema.defs.hasOwnProperty(key)) continue;
+		var sqlxd = 'CREATE TABLE IF NOT EXISTS ' + schema.defs[key];
+		db.exec(sqlxd);
+	}
+	// add the owner if he doesn't exist
+	let res = dbfuncs.getDiscokid(config.owner);
+	if(res === undefined) {
+		if(dbfuncs.addDiscokid(config.owner, 666) === -1)
+			console.log("ERROR: FAILED TO ADD OWNER");
+	} else if(res.permission !== 666 && dbfuncs.updateDiscokid(config.owner, 666))
+		console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
 }
+
 
 // TODO: populate with general listeners if they don't exist
 /*
@@ -145,6 +155,16 @@ dbfuncs.listDiscokids = function() {
 };
 
 /**
+ * Updates the permission for a discordkid :)
+ * @returns true/false if there was a change or not
+ */
+dbfuncs.updateDiscokid = function(discordid, permission) {
+	let query = db.prepare('UPDATE discokids SET permission=? WHERE discordid=?');
+	let res = query.run(permission, discordid);
+	return res.changes !== 0;
+};
+
+/**
  * Removes listener to database
  * Warning: this will also remove all related 'requirements' rows
  * @param type - enum('channel', 'user')
@@ -258,5 +278,7 @@ dbfuncs.findRequirements = function(snap) {
 	var result = query.all(snap);
 	return result;
 };
+
+init();
 
 module.exports = dbfuncs;
