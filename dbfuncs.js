@@ -167,12 +167,12 @@ dbfuncs.getChannel = function(channelid) {
  * Adds channel to database
  * @returns the id of the inserted row. otherwise -1 for no row
  */
- dbfuncs.addChannel = function(channelid) {
+ dbfuncs.addChannel = function(channelid, limitedto) {
  	try {
-	 	let zzz = db.prepare('INSERT INTO channels (discordchid) VALUES (?)');
-		var info = zzz.run(channelid);
+	 	let zzz = db.prepare('INSERT INTO channels (discordchid, limitedto) VALUES (?, ?)');
+		var info = zzz.run(channelid, limitedto);
 		return info.changes === 0 ? -1 : info.lastInsertRowid;
-	} catch(e) { return 0; }
+	} catch(e) { return -1; }
 };
 
 /**
@@ -212,9 +212,8 @@ dbfuncs.removeRequirement = function(userid, reqid) {
 };
 
 /**
- * @param type - enum('general', channel', 'user')
- * @param typeid - id of the channel of user to delete
- * @return array of requirement objects of given type:typeid
+ * @param userid - discordid of the user
+ * @return array of requirement objects of given type
  */
 dbfuncs.listUserRequirements = function(userid) {
 	var query = db.prepare(`SELECT * FROM requirements R

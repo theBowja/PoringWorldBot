@@ -4,10 +4,10 @@ each constraint has to be split by underscore and begins with a modifier (letter
 
 
 -name, -na
-exact string match (copy from poring.world); case-insensitive
+exact string match (copy from poring.world); case-insensitive; whitespace-insensitive
 default: anything
 examples:
--na stAuNcH RiNg
+-na s t A u N c H R i N g
 -na Anubis ★ card
 -na Lernaean Hydra
 
@@ -52,8 +52,8 @@ examples:
 -pl 2,000,000
 
 -enchant, -en
-exact string match; case-insensitive
-one of following: none, sharp, sharp blade, arch, zeal, morale, blasphemy, tenacity, divine blessing, armor breaking, anti-mage, arcane, armor, magic, insight
+exact string match; case-insensitive; whitespace-insensitive; NO DASHES
+one of following: none, sharp, sharp blade, arch, zeal, morale, blasphemy, tenacity, divine blessing, armor breaking, anti mage, arcane, armor, magic, insight
 default: any
 example:
 -en morale
@@ -90,10 +90,10 @@ example:
 final examples:
 @PoringWorldBot pingmewhen -name eye of dullahan -refine 12
 @PoringWorldBot pingmewhen -name static shield -en tenacity -el 3,4
-@PoringWorldBot pingmewhen -ca headwear -enchant morale -el 2,3,4
-@PoringWorldBot pingmewhen -sc tail -enchant arch
+@PoringWorldBot pingmewhen -ca headwearface -enchant morale -el 2,3,4
+@PoringWorldBot pingmewhen -ca headweartail -enchant arch
 @PoringWorldBot pingmewhen -name monocle -refine 3,4 -broken yes -enchant none
-@PoringWorldBot pingmewhen -name rune boots -refine <=4 -broken true -enchant none -slot 0
+@PoringWorldBot pingmewhen -name rune boots -refine 1,2,3,4 -broken true -enchant none -slot 0
 
 ===========================================================================
 

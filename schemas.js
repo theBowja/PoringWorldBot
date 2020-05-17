@@ -6,7 +6,7 @@ schema.defs.channels = `
 channels (
 	chID INTEGER PRIMARY KEY AUTOINCREMENT,
 	discordchid TEXT UNIQUE NOT NULL,
-	private INTEGER NOT NULL DEFAULT 0
+	limitedto INTEGER NOT NULL DEFAULT 0
 )`;
 
 schema.defs.discokids = `

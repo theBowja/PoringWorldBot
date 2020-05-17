@@ -1,8 +1,8 @@
 var lists = {};
 
-lists.enchant = ['none', 'sharp', 'sharp blade', 'arch', 'zeal', 'morale',
-                 'blasphemy', 'tenacity', 'divine blessing', 'armor breaking',
-                 'anti-mage', 'arcane', 'armor', 'magic', 'insight'];
+lists.enchant = ['none', 'sharp', 'sharpblade', 'arch', 'zeal', 'morale',
+                 'blasphemy', 'tenacity', 'divineblessing', 'armorbreaking',
+                 'antimage', 'arcane', 'armor', 'magic', 'insight'];
 
 lists.broken = ['yes', 'no', 'y', 'n', 'true', 'false', 't', 'f', '1', '0'];
 

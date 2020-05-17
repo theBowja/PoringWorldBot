@@ -51,6 +51,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 		switch(constraint) {
 			case "name":
 			case "na":
+				value = value.replace(/\s+/g, ''); // remove whitespace
 				myreqs.name = value;
 				myreqs.message += `-${constraint} ${value} `;
 				break;
@@ -128,7 +129,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
 			case "enchant":
 			case "en":
-				value = value;
+				value = value.replace(/[\s-]+/g, '');
 				if(lists.enchant.includes(value)) {
 					myreqs.enchant = value;
 					myreqs.message += `-${constraint} ${value} `;					
