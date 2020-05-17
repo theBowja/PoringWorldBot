@@ -1,11 +1,13 @@
 //var Discord = require('discord.io');
 const Discord = require('discord.js');
-const bot = new Discord.client();
+const bot = new Discord.Client();
 var logger = require('winston');
 var auth = require('./auth.json');
+var parsefuncs = require('./parse.js');
 var https = require('https');
 var CronJob = require('cron').CronJob;
 var fs = require("fs");
+
 
 var dbfuncs = require("./dbfuncs.js");
 
@@ -15,134 +17,123 @@ logger.add(new logger.transports.Console, {
     colorize: true
 });
 logger.level = 'debug';
-// Initialize Discord Bot
-// var bot = new Discord.Client({
-//   token: auth.token,
-//   autorun: true
-// });
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
+bot.on('ready', () => {
+  console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
 
-// bot.on('ready', function (evt) {
-//   logger.info('Connected');
-//   logger.info('Logged in as: ');
-//   logger.info(bot.username + ' - (' + bot.id + ')');
 //   new CronJob('* 0,20,40 * * * *', function() {    })
 //   // new CronJob('* * * * *', function() {
 //   //     console.log(new Date());
 //   // }, null, true)
 //   // TODO: load list of watching channels into a global variable or cache
-// });
-bot.on('message', function (user, userID, channelID, message, evt) {
-  console.log("channel: " + channelID);
-  console.log("userid: " + userID);
-  console.log(evt);
+});
 
-  // TOOD: check if right channel here using cache
-  if(userID === "597932863597576204") return; // if self, return
-  logger.info("bot id: " + bot.id);
-  if (!message.startsWith("<@597932863597576204> ")) return;
-  message = message.substring(message.indexOf(' ')+1).trim();
-  if(message === '') return; // TODO 
+bot.on('message', message => {
+  let userID = message.author.id;
+  let channelID = message.channel.id;
+  // message.channel.type = 'text' or 'dm'
+  let content = message.content.trim().split(/\s+/);
+  // // console.log(message);
+  // console.log(content[0]);
+  // console.log(bot.user.id);
 
-  logger.info(message);
+  if(content[0] !== `<@!${bot.user.id}>`) return; // if not mention bot, ignore
+  if(userID === bot.user.id) return; // if from self, ignore
+  if(message.author.bot === true) return; // if from bot, ignore
+  if(content.length === 1) return; // if nothing else, ignore
 
-  if(message === 'test') {
-    var snap = {
-      snapid: 111,
-      name: "tights",
-      slots: 1,
-      refine: 1,
-      broken: 1,
-      price: 53333,
-      buyers: 3,
-      enchant: "Morale",
-      enchantlevel: 1,
-      category: "Armor",
-      snapend: 1341341341,
-      stock: 3
-    };
-    try{
-      dbfuncs.findRequirements(snap).then(function(freqs) {
-        bot.sendMessage({
-          to: channelID,
-          message: "test returned"
-        });
-      });
-    } catch (e) {
-      logger.error(e);
-    }
-  } else if(message === 'debug') {
-    dbfuncs.listListeners();
-  }
-  else if(message === 'watch') {
-    var requirement = {
-      discordid: userID,
-      channelid: channelID
-    };
-    dbfuncs.addRequirement(requirement);
-  }
-  else if(message === 'ping') {
+  logger.info(`user ${userID} to channel ${channelID}: ${content}`);
+
+
+  if(content[1] === 'help') {
+    // TODO: dm them the ENTIRE GUIDE based on their access level
+    message.author.send('urbad');
+
+  } else if(content[1] === 'debug') {
+    dbfuncs.listDiscokids();
+
+  } else if(content[1] === 'pingmewhen') {
+    if(content.length <= 2) return message.react('❎'); // no reqs found
+
+    let pars = parsefuncs.parseReqs(content.slice(2).join(' '));
+    if(pars.message === '') return message.react('❎'); // no coherent parameters given by user
+
+    // check if channel is on watch
+    let channelobj = dbfuncs.getChannel(channelID);
+    if(channelobj === undefined) return; // straight up ignore
+    pars.channelID = channelobj.chID;
+
+    // check if user already exists, otherwise adds to database with base permissions
+    let userobj = dbfuncs.getDiscokid(userID);
+    if(userobj === undefined)
+      userobj = { dkidID: dbfuncs.addDiscokid(userID), permission: 0 };
+    pars.discordkidID = userobj.dkidID;
+
+    // TODO: admin can raise level of permission required to make requests
+    if(userobj.permission < 0) return message.react('🔒');
+
+    let res = dbfuncs.addRequirement(pars);
+    message.react(res ? '✅' : '❎');
+    //message.channel.send(res ? 'success' : 'failed');
+
+  } else if(content[1] === 'watch') { // add this channel to channels table
+    let res = dbfuncs.addChannel(channelID);
+
+  } else if(content[1] === 'unwatch') { // remove this channel from channels table
+    dbfuncs.deleteChannel(channelID);
+
+  } else if(content[1] === 'ping') {
     updateSnaps();
+
+  } else if(content[1] === 'showme') {
+    let res = dbfuncs.listUserRequirements(userID);
+    let msg = '';
+    for(let r of res)
+      msg += r.reqID+': '+r.message+'\n';
+    message.channel.send(msg === '' ? 'u have nothing' : '```'+msg+'```');
+
+  } else if(content[1] === 'showhere') {
+    // TODO: showhere for channel. only admins can run this
+
+  } else if(content[1] === 'showall') {
+    // TODO: limit this to owner
+    let res = dbfuncs.listAllRequirements();
+    console.log(res);
+
+  } else if(content[1] === 'clearsnaps') {
+    dbfuncs.deleteAllSnaps();
   }
 });
 
+bot.login(auth.token);
+
 async function updateSnaps() {
   try {
-    var snapsCurrent = await pingPoringWorld();
-    await dbfuncs.clearExpiredSnaps();
-    var snapsNew = await dbfuncs.addSnaps(snapsCurrent);
+    let snapsCurrent = await pingPoringWorld();
+    let gon = dbfuncs.clearExpiredSnaps();
+    logger.info(`cleared ${gon} expired snaps from database`);
+    let snapsNew = dbfuncs.addSnaps(snapsCurrent);
 
-    var promises = snapsNew.map(function(snap) {
-      return dbfuncs.findRequirements(snap).then(function(foundreqs) {
-        snap.reqs = foundreqs;
-        return snap;
-      });
-    });
-    var snapreqs = await Promise.allSettled(promises);
+    // find all matching requirements in database
+    for(let s of snapsNew)
+      s.reqs = dbfuncs.findRequirements(s);
 
-    for(let sr of snapreqs) {
-      // TODO check if promise status fulfilled.
-      sr = sr.value;
-      var itemmsg = "```";
-      itemmsg += getItemFullName(sr) + '\n';
-      itemmsg += "price: " + sr.price.toLocaleString() + '\n';
-      itemmsg += "stock: " + sr.stock + '\n';
-      itemmsg += "buyers: " + sr.buyers + '\n';
-      itemmsg += "snapend: " + sr.snapend;
-      itemmsg += "```";
+    // construct message and send
+    for(let sr of snapsNew) {
+      let itemmsg = `\`\`\`${parsefuncs.buildItemFullName(sr)}\nprice: ${sr.price.toLocaleString()}\nstock: ${sr.stock}\nbuyers: ${sr.buyers}\nsnapend: ${sr.snapend}\`\`\``;
 
-      // sort all messages types by channel
-      var channels = [];
-      // channels is an array of objects that contains
-      //   channelid (string), discordids (string), messages (\n delimited string)
+      let channels = {}; // map with key: channelid and value: discordid pings
       for(let req of sr.reqs) {
-        var chobj = channels.find(x => x.channelid === req.channelid);
-        if(chobj === undefined) {
-          chobj = {
-            channelid: req.channelid,
-            discordids: "",
-            messages: ""
-          };
-          channels.push(chobj);
-        }
-        // console.log(req.message);
-        // console.log(typeof req.message);
-        if(req.message === null || req.message === "")
-          chobj.discordids += " <@" + req.discordid + ">";
-        else {
-          console.log("MESSAGES SHOULD NOT BE HAPPENING")
-          chobj.messages += '\n' + req.message;
-        }
+        if(channels[req.discordchid] === undefined)
+          channels[req.discordchid] = `<@${req.discordid}>`;
+        else
+          channels[req.discordchid] +=`<@${req.discordid}>`;
       }
-
+      
       // send bot message to each channel
-      for(let chan of channels) {
-        bot.sendMessage({
-          to: chan.channelid,
-          message: itemmsg + chan.discordids + chan.messages
+      for(let [chid, pings] of Object.entries(channels)) {
+        bot.channels.fetch(chid).then((chan) => {
+          chan.send(itemmsg+pings);
         });
       }
     }
@@ -156,9 +147,9 @@ async function updateSnaps() {
 /**
  * pings poring.world for all snapping information
  * irrelevant snaps are discarded
- * @returns the array of unexpired snaps
+ * @returns the array of currently active snaps
  */
-var pingPoringWorld = function() {
+function pingPoringWorld() {
   return new Promise(function(resolve, reject) {
     https.get('https://poring.world/api/search?order=popularity&inStock=1', (resp) => {
       let data = '';
@@ -171,6 +162,7 @@ var pingPoringWorld = function() {
         data = JSON.parse(data);
         // remove expired snaps
         data = data.filter(snap => snap.lastRecord.snapEnd > new Date()/1000);
+
         resolve(data);
       });
 
@@ -179,20 +171,4 @@ var pingPoringWorld = function() {
       reject(err.message);
     });
   });
-};
-
-/**
- * builds the full name of an item with refine level, item name, slots, enchant, broken
- * example: "+13 Sniping Suit [1] <Arch 1> (broken)"
- */
-var getItemFullName = function(item) {
-  var fullname = "";
-  if(item.refine!==0) fullname += ("+"+item.refine+" ");
-  fullname += item.name;
-  if(item.slots!==0) fullname += (" ["+item.slots+"]");
-  if(item.enchant!=="none") fullname += (" <"+item.enchant+" "+item.enchantlevel+">");
-  if(item.broken!==0) fullname += " (broken)";
-  return fullname;
-};
-
-// TODO: allow user to change message
+}

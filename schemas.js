@@ -2,43 +2,52 @@ var schema = {};
 
 schema.defs = {};
 
-// schema.defs.channels = `
-// channel (
-// 	chID INTEGER PRIMARY KEY AUTOINCREMENT,
-// 	channelid
-
-// )`;
-
-schema.defs.listener = `
-listener (
-	lisID INTEGER PRIMARY KEY AUTOINCREMENT,
-	permission INTEGER NOT NULL DEFAULT 0,
-	channelid TEXT NOT NULL,
-	discordid TEXT UNIQUE
+schema.defs.channels = `
+channels (
+	chID INTEGER PRIMARY KEY AUTOINCREMENT,
+	discordchid TEXT UNIQUE NOT NULL,
+	private INTEGER NOT NULL DEFAULT 0
 )`;
 
+schema.defs.discokids = `
+discokids (
+	dkidID INTEGER PRIMARY KEY AUTOINCREMENT,
+	permission INTEGER NOT NULL DEFAULT 0,
+	discordid TEXT UNIQUE NOT NULL
+)`;
+
+// store as lowercase
+// discordkidID and channelID are internal ID, not discord IDs
 schema.defs.requirements = `
 requirements (
-	reqID INTEGER PRIMARY KEY AUTOINCREMENT ,
-	name TEXT,
-	slots BLOB NOT NULL DEFAULT 7,
-	refine BLOB NOT NULL DEFAULT 65535,
-	broken BLOB NOT NULL DEFAULT 3,
-	price INTEGER,
-	buyers INTEGER,
-	enchant TEXT NOT NULL DEFAULT 'none',
-	enchantlevel BLOB NOT NULL DEFAULT 31,
-	category TEXT,
+	reqID INTEGER PRIMARY KEY AUTOINCREMENT,
 
-	listenerID INTEGER NOT NULL,
 	message TEXT,
 
-	FOREIGN KEY (listenerID) REFERENCES listener(lisID)
+	name TEXT,
+	slots INTEGER,
+	refine BLOB NOT NULL DEFAULT 65535,
+	broken INTEGER,
+	pricehigher INTEGER,
+	pricelower INTEGER,
+	buyers INTEGER,
+	enchant TEXT,
+	enchantlevel BLOB NOT NULL DEFAULT 31,
+	category TEXT,
+	stock INTEGER,
+
+	discordkidID INTEGER NOT NULL,
+	channelID INTEGER NOT NULL,
+
+	FOREIGN KEY (discordkidID) REFERENCES discokids(dkidID),
+	FOREIGN KEY (channelID) REFERENCES channels(chID)
 )`;
 
+// make sure everything lowercase
 schema.defs.currentsnap = `
 currentsnap (
 	currID INTEGER PRIMARY KEY AUTOINCREMENT,
+
 	snapid INTEGER UNIQUE NOT NULL,
 
 	name TEXT NOT NULL,
@@ -50,9 +59,9 @@ currentsnap (
 	enchant TEXT NOT NULL,
 	enchantlevel TEXT NOT NULL,
 	category TEXT NOT NULL,
+	stock INTEGER NOT NULL,
 
-	snapend INTEGER NOT NULL,
-	stock INTEGER NOT NULL
+	snapend INTEGER NOT NULL
 )`;
 
 

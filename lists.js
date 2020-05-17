@@ -1,0 +1,70 @@
+var lists = {};
+
+lists.enchant = ['none', 'sharp', 'sharp blade', 'arch', 'zeal', 'morale',
+                 'blasphemy', 'tenacity', 'divine blessing', 'armor breaking',
+                 'anti-mage', 'arcane', 'armor', 'magic', 'insight'];
+
+lists.broken = ['yes', 'no', 'y', 'n', 'true', 'false', 't', 'f', '1', '0'];
+
+// my favorite way of programming
+lists.category = {
+	'equipmentweapon': 'Equipment - Weapon',
+	'equipmentoffhand': 'Equipment - Off-Hand',
+	'equipmentarmor': 'Equipment - Armor',
+	'equipmentgarment': 'Equipment - Garment',
+	'equipmentfootgear': 'Equipment - Footgear',
+	'equipmentaccessory': 'Equipment - Accessory',
+
+	'headwearhead': 'Headwear - Head',
+	'headwearface': 'Headwear - Face',
+	'headwearmouth': 'Headwear - Mouth',
+	'headwearback': 'Headwear - Back',
+	'headweartail': 'Headwear - Tail',
+
+	'cardweapon': 'Card - Weapon',
+	'cardoffhand': 'Card - Off-Hand',
+	'cardarmor': 'Card - Armor',
+	'cardgarment': 'Card - Garment',
+	'cardshoe': 'Card - Shoe',
+	'cardaccessory': 'Card - Accessory',
+	'cardheadwear': 'Card - Headwear',
+	'cardhead': 'Card - Headwear',
+
+	'itempotion/effect': 'Item - Potion/Effect',
+	'itempotion': 'Item - Potion/Effect',
+	'itemeffect': 'Item - Potion/Effect',
+	'itemrefine': 'Item - Refine',
+	'itemscroll/album': 'Item - Scroll/Album',
+	'itemscroll': 'Item - Scroll/Album',
+	'itemalbum': 'Item - Scroll/Album',
+	'itemmaterial': 'Item - Material',
+	'itemholidaymaterial': 'Item - Holiday Material',
+	'itempetmaterial': 'Item - Pet Material',
+
+	'potion/effect': 'Item - Potion/Effect',
+	'potion': 'Item - Potion/Effect',
+	'effect': 'Item - Potion/Effect',
+	'refine': 'Item - Refine',
+	'scroll/album': 'Item - Scroll/Album',
+	'scroll': 'Item - Scroll/Album',
+	'album': 'Item - Scroll/Album',
+	'material': 'Item - Material',
+	'holidaymaterial': 'Item - Holiday Material',
+	'petmaterial': 'Item - Pet Material',
+
+	'card': 'Card',
+	'blueprint': 'Blueprint',
+	'bp': 'Blueprint',
+	'mount': 'Mount',
+	'costume': 'Costume',
+	'premium': 'Premium',
+};
+
+
+
+//lists.subcategory = [];
+
+
+
+
+module.exports = lists;

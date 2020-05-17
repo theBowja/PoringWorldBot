@@ -4,39 +4,96 @@ each constraint has to be split by underscore and begins with a modifier (letter
 
 
 -name, -na
-exact string match; case-insensitive
+exact string match (copy from poring.world); case-insensitive
+default: anything
+examples:
+-na stAuNcH RiNg
+-na Anubis ★ card
+-na Lernaean Hydra
 
--slots, -sl
-string find match
-default: "012"
+-slot, -slots, -sl
+match only one number between 0 and 2
+default: any slot level
+example:
+-sl 0
 
 -refine, -re
-string find match, comma separated list of numbers, or prefixed with <, <=, >, >=
+string find match, comma-separated list of numbers between 0 and 15
 default behavior (exclude the option): all
 examples:
+-re 15
 -re 3,4
--re >=10,4
+-re 10,11,12,13,14,15
 
 -stock, -st
--buyers, -bu
--price, -pr
+notifies when number of stock matches this number or higher; allows commas
+default: 1
+example:
+-st 2
+
+-buyer, -buyers, -bu
+notifies when number of buyers matches this number or higher; allows commas
+default: 0
+example:
+-bu 100
+
+-pricehigher, -ph
+notifies when price matches this number or higher; allows commas
+default: 0
+examples:
+-ph 1000000
+-ph 1,000,000
+
+-pricelower, -pl
+notifies when price matches this number or lower; allows commas
+default: inf
+examples:
+-pl 2000000
+-pl 2,000,000
 
 -enchant, -en
 exact string match; case-insensitive
-enum: sharp, sharp blade, arch, zeal, 
+one of following: none, sharp, sharp blade, arch, zeal, morale, blasphemy, tenacity, divine blessing, armor breaking, anti-mage, arcane, armor, magic, insight
+default: any
+example:
+-en morale
 
 -enchantlevel, -el
-string find match
-default: "1234"
+comma-separated list of numbers between 0 and 4
+default: any enchant level
+example:
+-el 4
+-el 3,4
 
 -category, -ca
-enum: weapon, armor, garment, offhand, footgear, accessory, headwear, blueprint, card, item, scroll, album
+exact string match; case-insensitive; whitespace-insensitive; NO DASHES
+one of the follow:
+Equipment Weapon, Equipment OffHand, Equipment Armor, Equipment Garment, Equipment Footgear, Equipment Accessory
+Headwear Head, Headwear Face, Headwear Mouth, Headwear Back, Headwear Tail
+Card Weapon, Card OffHand, Card Armor, Card Garment, Card Shoe, Card Accessory, Card Headwear
+Item Potion/Effect, Item Refine, Item Scroll/Album, Item Material, Item Holiday Material, Item Pet Material
+Card, Blueprint, Mount, Costume, Premium
 
+NOT IMPLEMENTED
 -subcategory, -sc
-enum: bow, staff, spear, mace, sword, knife, head, tail, face, mouth, back
+one of the following:
+bow, staff, spear, mace, sword, knife,
+bracelet, 
+head, face, mouth, back, tail
 
-b - broken
-d - not broken
+-broken, -br
+yes/no, y/n, true/false, t/f, 1/0; case-insensitive
+default: any
+example:
+-br true
+
+final examples:
+@PoringWorldBot pingmewhen -name eye of dullahan -refine 12
+@PoringWorldBot pingmewhen -name static shield -en tenacity -el 3,4
+@PoringWorldBot pingmewhen -ca headwear -enchant morale -el 2,3,4
+@PoringWorldBot pingmewhen -sc tail -enchant arch
+@PoringWorldBot pingmewhen -name monocle -refine 3,4 -broken yes -enchant none
+@PoringWorldBot pingmewhen -name rune boots -refine <=4 -broken true -enchant none -slot 0
 
 ===========================================================================
 
