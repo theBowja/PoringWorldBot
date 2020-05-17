@@ -1,8 +1,5 @@
 CONSTRAINT RULES
 
-each constraint has to be split by underscore and begins with a modifier (letter)
-
-
 -name, -na
 exact string match (copy from poring.world); case-insensitive; whitespace-insensitive
 default: anything
