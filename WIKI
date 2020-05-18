@@ -11,6 +11,12 @@ examples:
 -na Anubis ★ card
 -na Lernaean Hydra
 
+-slotted, -sl
+yes/no, y/n, true/false, t/f, 1/0; case-insensitive
+default: any
+example:
+-sl no
+
 -slot, -slots, -sl
 match only one number between 0 and 2
 default: any slot level

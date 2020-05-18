@@ -25,7 +25,7 @@ requirements (
 	message TEXT,
 
 	name TEXT,
-	slots INTEGER,
+	slotted INTEGER,
 	refine BLOB NOT NULL DEFAULT 65535,
 	broken INTEGER,
 	pricehigher INTEGER,

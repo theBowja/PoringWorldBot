@@ -22,18 +22,17 @@ logger.level = 'debug';
 bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
 
-  const job = new CronJob('* 0,10,20,30,40,50 * * * *', function() {
+  new CronJob('0 0,10,20,30,40,50 * * * *', function() {
     updateSnaps();
-  });
-  job.start();
+  }, null, true);
 });
 
 bot.on('message', message => {
   let userID = message.author.id;
   let channelID = message.channel.id;
-  // message.channel.type = 'text' or 'dm'
   let content = message.content.trim().split(/\s+/);
 
+  // checking if bot should read this message or not
   if(content[0] !== `<@!${bot.user.id}>`) return; // if not mention bot, ignore
   if(userID === bot.user.id) return; // if from self, ignore
   if(message.author.bot === true) return; // if from bot, ignore
@@ -44,22 +43,33 @@ bot.on('message', message => {
   if(userObj === undefined) userObj = { permission: 0 };
 
   logger.info(`user ${userID} to channel ${channelID}: ${content.slice(1).join(' ')}`);
-
   content[1] = content[1].toLowerCase();
+
+  // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
+  if(content[1] === 'watch' ||  // allow commands to be read on this channel
+     content[1] === 'listenhereyoulittleshi') {
+    if(userObj.permission === 0) return message.react('❎'); // no peasants allowed
+    let limitedto = parseInt(content[2]);
+    if(isNaN(limitedto)) limitedto = 0;
+    if(userObj.permission < limitedto) return message.react('❎'); // user asks for too much
+    let res = dbfuncs.addChannel(channelID, limitedto);
+    return message.react(res !== -1 ? '✅' : '❎');
+  }
+
+  // retrieve channel info if exists in database
+  let channelObj = dbfuncs.getChannel(channelID);
+  if(channelObj === undefined) return; // channel isn't on watch
+  // COMMANDS THAT REQUIRE CHANNEL WATCH
+
   // COMMANDS WITH NO PERMISSION LEVEL REQUIRED
   if(content[1] === 'help') {
-    // TODO: dm them the ENTIRE GUIDE based on their access level
-    message.author.send('urbad\nhttps://github.com/theBowja/PoringWorldBot/blob/master/WIKI');
+    message.channel.send('https://github.com/theBowja/PoringWorldBot/blob/master/WIKI');
 
   } else if(content[1] === 'pingmewhen' ||
             content[1] === 'tagmewhen' ||
             content[1] === 'tellmewhen') {
-    // check if channel is on watch
-    let channelobj = dbfuncs.getChannel(channelID);
-    if(channelobj === undefined) return; // straight up ignore
     // restricts user if they have higher or equal permission level to channel permission requirements
-    if(userObj.permission < channelobj.limitedto) return message.react('🔒');
-
+    if(userObj.permission < channelObj.limitedto) return message.react('🔒');
     if(content.length <= 2) return message.react('❎'); // no reqs found
 
     let pars = parsefuncs.parseReqs(content.slice(2).join(' '));
@@ -72,21 +82,33 @@ bot.on('message', message => {
       return message.react('❎'); // user has reached the limit for reqs to make
 
     pars.discordkidID = userObj.dkidID;
-    pars.channelID = channelobj.chID;
+    pars.channelID = channelObj.chID;
 
     let res = dbfuncs.addRequirement(pars);
-    message.react(res ? '✅' : '❎');
+    return message.react(res ? '✅' : '❎');
 
   } else if(content[1] === 'showme') {
     let res = dbfuncs.listUserRequirements(userID);
     let msg = '';
     for(let r of res)
       msg += r.reqID+': '+r.message+'\n';
-    message.channel.send(msg === '' ? 'u have nothing' : '```'+msg+'```');
+    return message.channel.send(msg === '' ? 'you have nothing' : '```'+msg+'```');
 
-  } 
+  } else if(content[1] === 'delete' || 
+            content[1] === 'remove') {
+    let reqID = parseInt(content[2]);
+    if(isNaN(reqID)) {
+      // do the same thing as showme
+    } else {
+      // check if this reqID is under user's control
+    }
 
-  // no peasants allowed past this
+  } else if(content[1] === 'thanks' ||
+            content[1] === 'thank' && content[2] === 'you') {
+    return message.channel.send('no problem');
+  }
+
+  // no peasants allowed past here
   if(userObj.permission === 0) return;
 
   // COMMANDS THAT REQUIRES HIGHER PERMISSION LEVEL
@@ -94,42 +116,43 @@ bot.on('message', message => {
     // TODO: showhere for channel. only admins can run this
     // NOT IMPLEMENTED
 
-  } else if(content[1] === 'watch' ||  // add this channel to channels table
-            content[1] === 'listenhereyoulittleshi') {
-    let limitedto = parseInt(content[2]);
-    if(isNaN(limitedto)) limitedto = 0;
-    if(userObj.permission < limitedto) return message.react('❎');
-    let res = dbfuncs.addChannel(channelID, limitedto);
-    message.react(res !== -1 ? '✅' : '❎');
-
   } else if(content[1] === 'unwatch') { // remove this channel from channels table
     let res = dbfuncs.deleteChannel(channelID);
-    message.react(res ? '✅' : '❎');
+    return message.react(res ? '✅' : '❎');
 
   } else if(content[1] === 'showall') {
     // TODO: limit this to owner
     let res = dbfuncs.listAllRequirements();
     console.log(res);
+    return;
 
   } else if(content[1] === 'clearsnaps') {
-    dbfuncs.deleteAllSnaps();
+    return dbfuncs.deleteAllSnaps();
 
   } else if(content[1] === 'ping') {
-    updateSnaps();
+    return updateSnaps();
 
   } else if(content[1] === 'debug') {
-    dbfuncs.listDiscokids();
+    return dbfuncs.listDiscokids(); // this is a debug function zzz
   
   } else if(content[1] === 'permit' ||
             content[1] === 'nwordpass') {
     if(content.length < 4) return message.react('❎'); // not enough parameters provided
     let targetID = parsefuncs.parseDiscordID(content[2]);
     if(targetID === -1) return message.react('❎'); // no valid discord id provided
+    // TODO check if this targetID exists in server
     let perm = parseInt(content[3]);
     if(isNaN(perm)) return message.react('❎'); // no number provided
     if(userObj.permission < perm) return message.react('❎'); // cannot assign higher than your own
-    let res = dbfuncs.updateDiscokid(targetID, perm);
-    message.react(res ? '✅' : '❎');
+    let targetObj = dbfuncs.getDiscokid(targetID);
+    let res;
+    if(targetObj === undefined)
+      res = dbfuncs.addDiscokid(targetID, perm) !== -1;
+    else if(targetObj.permission <= userObj.permission)
+      res = dbfuncs.updateDiscokid(targetID, perm);
+    else
+      res = false; // the target's permission level is higher than yours
+    return message.react(res ? '✅' : '❎');
   }
 
 });
@@ -155,10 +178,9 @@ async function updateSnaps() {
       let itemmsg = `\`\`\`${parsefuncs.buildItemFullName(sr)}\nprice: ${sr.price.toLocaleString()}\nstock: ${sr.stock}\nbuyers: ${sr.buyers}\nsnapend: ${Math.floor((new Date(sr.snapend*1000) - new Date())/60000)} minutes\`\`\``;
       sr.name = sr.name.replace(/\s+/g, ''); // remove whitespace from name
       sr.enchant = sr.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
-      //sr.reqs = dbfuncs.findRequirements(sr);
+      sr.slotted = sr.slots - (sr.category === 'Equipment - Weapon');
 
       let channels = {}; // map with key: channelid and value: discordid pings
-      //for(let req of sr.reqs) {
       for(let req of dbfuncs.findRequirements(sr)) {
         if(channels[req.discordchid] === undefined)
           channels[req.discordchid] = `<@${req.discordid}>`;

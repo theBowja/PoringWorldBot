@@ -82,7 +82,7 @@ dbfuncs.addSnap = function(snap) {
     } else { // existing item
   	    if(resget.stock !== s.stock) { // change in stock
   			var queryupd = db.prepare('UPDATE currentsnap SET stock=@stock WHERE snapid=@snapid');
-  			queryupd.runs(s);
+  			queryupd.run(s);
   			return s;
 	  	} else { // no change in stock
   			return false;
@@ -263,7 +263,7 @@ dbfuncs.findRequirements = function(snap) {
 		INNER JOIN channels C ON R.channelID=C.chID
 		INNER JOIN discokids U ON R.discordkidID=U.dkidID
 		WHERE (R.name IS NULL OR LOWER(R.name)=LOWER(@name)) AND
-		      (R.slots IS NULL OR R.slots=@slots) AND
+			  (R.slotted IS NULL OR R.slotted=@slotted) AND
 		      ((R.refine & @refinecode) != 0) AND
 		      (R.broken IS NULL OR R.broken=@broken) AND
 		      (R.pricehigher IS NULL OR R.pricehigher<=@price) AND
