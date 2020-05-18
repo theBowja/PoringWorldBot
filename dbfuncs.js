@@ -20,20 +20,11 @@ function init() {
 	// add the owner if he doesn't exist
 	let res = dbfuncs.getDiscokid(config.owner);
 	if(res === undefined) {
-		if(dbfuncs.addDiscokid(config.owner, 666) === -1)
+		if(dbfuncs.addDiscokid(config.owner, config.ownerperm) === -1)
 			console.log("ERROR: FAILED TO ADD OWNER");
-	} else if(res.permission !== 666 && dbfuncs.updateDiscokid(config.owner, 666))
+	} else if(res.permission !== config.ownerperm && !dbfuncs.updateDiscokid(config.owner, config.ownerperm))
 		console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
 }
-
-
-// TODO: populate with general listeners if they don't exist
-/*
-var zzz = db.prepare('INSERT INTO listener (channelid) VALUES ("1234")');
-zzz.run();
-zzz = db.prepare('INSERT INTO requirements (name, listenerID) VALUES ("tights", 1)');
-zzz.run();
-*/
 
 var dbfuncs = {};
 
@@ -225,10 +216,25 @@ dbfuncs.addRequirement = function(reqs) {
 
 /**
  * removes requirement using its id
- * verification: needs matching listenerid or higher access level
+ * @return {bool} for if row is deleted
  */
-dbfuncs.removeRequirement = function(userid, reqid) {
+dbfuncs.deleteRequirement = function(reqid) {
+	let query = db.prepare('DELETE FROM requirements WHERE reqID=?');
+	let res = query.run(reqid);
+	return res.changes > 0;
+};
 
+/**
+ * Gets the requirement row object based on reqID
+ * @return {object} or undefined
+ */
+dbfuncs.getRequirement = function(reqid) {
+	let query = db.prepare(`SELECT * FROM requirements R 
+							INNER JOIN channels C ON R.channelID=C.chID
+							INNER JOIN discokids U ON R.discordkidID=U.dkidID
+							WHERE R.reqID=?`);
+	let res = query.get(reqid);
+	return res;
 };
 
 /**

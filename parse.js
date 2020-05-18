@@ -33,8 +33,9 @@ parsefuncs.buildItemFullName = function(item) {
 	return fullname;
 };
 
+// @returns string discord id or integer -1 if not valid
 parsefuncs.parseDiscordID = function(discordtag) {
-	let id = /<@!?(\d+)>/.exec(discordtag);
+	let id = /<@!?(&?\d+)>/.exec(discordtag);
 	if(id === null) return -1;
 	if(id[1] === undefined) return -1;
 	return id[1];

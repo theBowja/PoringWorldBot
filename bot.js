@@ -87,20 +87,38 @@ bot.on('message', message => {
     let res = dbfuncs.addRequirement(pars);
     return message.react(res ? '✅' : '❎');
 
-  } else if(content[1] === 'showme') {
-    let res = dbfuncs.listUserRequirements(userID);
-    let msg = '';
-    for(let r of res)
-      msg += r.reqID+': '+r.message+'\n';
-    return message.channel.send(msg === '' ? 'you have nothing' : '```'+msg+'```');
+  } else if(content[1] === 'show' ||
+            content[1] === 'showme') {
+    let targetID = userID;
+    if(content[2] !== undefined) {
+      targetID = parsefuncs.parseDiscordID(content[2]);
+      if(targetID === -1) return message.react('❎'); // not valid id provided
+      if(userObj.permission === 0)
+        return message.react('🔒'); // no peasants allowed past here
+      let targetObj = dbfuncs.getDiscokid(targetID);
+      if(targetObj !== undefined && userObj.permission < targetObj.permission)
+        return message.react('🔒'); // user's permission level isn't high enough
+    }
+    let res = dbfuncs.listUserRequirements(targetID);
+    let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
+    return message.channel.send(msg === '' ? '0 reqs' : '```'+msg+'```');
 
-  } else if(content[1] === 'delete' || 
+  } else if(content[1] === 'delete' ||
             content[1] === 'remove') {
     let reqID = parseInt(content[2]);
-    if(isNaN(reqID)) {
-      // do the same thing as showme
+    if(isNaN(reqID)) { // if no reqID provided, then show 
+      let res = dbfuncs.listUserRequirements(userID);
+      let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
+      return message.channel.send(msg === '' ? '0 reqs' : '```'+msg+'```');
     } else {
-      // check if this reqID is under user's control
+      let reqObj = dbfuncs.getRequirement(reqID);
+      if(reqObj === undefined) return message.react('❎'); // not valid reqID
+      if(userObj.permission === 0 && userObj.discordid !== reqObj.discordid)
+        return message.react('🔒'); // peasants not allowed to delete someone else's
+      if(userObj.permission < reqObj.permission)
+        return message.react('🔒'); // permission level is lower than target's permission level
+      let res = dbfuncs.deleteRequirement(reqID);
+      return message.react(res ? '✅' : '❎');
     }
 
   } else if(content[1] === 'thanks' ||
@@ -151,7 +169,7 @@ bot.on('message', message => {
     else if(targetObj.permission <= userObj.permission)
       res = dbfuncs.updateDiscokid(targetID, perm);
     else
-      res = false; // the target's permission level is higher than yours
+      return message.react('🔒'); // the target's permission level is higher than yours
     return message.react(res ? '✅' : '❎');
   }
 
@@ -163,22 +181,17 @@ async function updateSnaps() {
   try {
     let snapsCurrent = await pingPoringWorld();
     let gon = dbfuncs.clearExpiredSnaps();
-    logger.info(`cleared ${gon} expired snaps from database`);
+    logger.info(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
     let snapsNew = dbfuncs.addSnaps(snapsCurrent);
+    logger.info(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
 
-    // find all matching requirements in database
-    // for(let s of snapsNew) {
-      // s.name = s.name.replace(/\s+/g, ''); // remove whitespace from name
-      // s.enchant = s.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
-      // s.reqs = dbfuncs.findRequirements(s);
-    // }
 
     // construct message and send
     for(let sr of snapsNew) {
       let itemmsg = `\`\`\`${parsefuncs.buildItemFullName(sr)}\nprice: ${sr.price.toLocaleString()}\nstock: ${sr.stock}\nbuyers: ${sr.buyers}\nsnapend: ${Math.floor((new Date(sr.snapend*1000) - new Date())/60000)} minutes\`\`\``;
       sr.name = sr.name.replace(/\s+/g, ''); // remove whitespace from name
       sr.enchant = sr.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
-      sr.slotted = sr.slots - (sr.category === 'Equipment - Weapon');
+      sr.slotted = sr.slots - (sr.category === 'Equipment - Weapon'); // calculated slotted bool
 
       let channels = {}; // map with key: channelid and value: discordid pings
       for(let req of dbfuncs.findRequirements(sr)) {
