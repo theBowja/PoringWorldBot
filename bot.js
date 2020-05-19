@@ -40,7 +40,7 @@ bot.on('message', message => {
 
   // retrieve user info if he exists in database
   let userObj = dbfuncs.getDiscokid(userID);
-  if(userObj === undefined) userObj = { permission: 0 };
+  if(userObj === undefined) userObj = { permission: 0, discordid: userID };
 
   logger.info(`user ${userID} to channel ${channelID}: ${content.slice(1).join(' ')}`);
   content[1] = content[1].toLowerCase();
@@ -75,13 +75,23 @@ bot.on('message', message => {
     let pars = parsefuncs.parseReqs(content.slice(2).join(' '));
     if(pars.message === '') return message.react('❎'); // no coherent parameters given by user
 
+    let targetObj = userObj;
+    if(pars.assign !== undefined) {
+      targetObj = dbfuncs.getDiscokid(pars.assign);
+      if(targetObj === undefined)
+        targetObj = { permission: 0, discordid: pars.assign };
+      delete pars.assign;
+      if(userObj.permission <= targetObj.permission)
+        return message.react('🔒'); // user isn't good enough to assign on the other person
+    }
+
     // if user doesn't exist in database, then add him
-    if(userObj.dkidID === undefined)
-      userObj.dkidID = dbfuncs.addDiscokid(userID);
-    else if(userObj.permission === 0 && dbfuncs.listUserRequirements(userID) >= config.limitreqs)
+    if(targetObj.dkidID === undefined)
+      targetObj.dkidID = dbfuncs.addDiscokid(targetObj.discordid);
+    else if(targetObj.permission === 0 && dbfuncs.listUserRequirements(targetObj.discordid).length >= config.limitreqs)
       return message.react('❎'); // user has reached the limit for reqs to make
 
-    pars.discordkidID = userObj.dkidID;
+    pars.discordkidID = targetObj.dkidID;
     pars.channelID = channelObj.chID;
 
     let res = dbfuncs.addRequirement(pars);
@@ -188,7 +198,7 @@ async function updateSnaps() {
 
     // construct message and send
     for(let sr of snapsNew) {
-      let itemmsg = `\`\`\`${parsefuncs.buildItemFullName(sr)}\nprice: ${sr.price.toLocaleString()}\nstock: ${sr.stock}\nbuyers: ${sr.buyers}\nsnapend: ${Math.floor((new Date(sr.snapend*1000) - new Date())/60000)} minutes\`\`\``;
+      let itemmsg = `\`\`\`${parsefuncs.buildItemFullName(sr)}\nprice: ${sr.price.toLocaleString()}\nstock: ${sr.stock}\nsnapend: ${Math.floor((new Date(sr.snapend*1000) - new Date())/60000)} minutes\`\`\``;
       sr.name = sr.name.replace(/\s+/g, ''); // remove whitespace from name
       sr.enchant = sr.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
       sr.slotted = sr.slots - (sr.category === 'Equipment - Weapon'); // calculated slotted bool

@@ -8,7 +8,9 @@ function deleteTables(tables) {
   for(let t of tables)
   	db.exec('DROP TABLE IF EXISTS ' + t);
 }
-//deleteTables(['requirements', 'channels', 'discokids', 'currentsnap']);
+
+if(config.dropdbonstart)
+	deleteTables(['requirements', 'channels', 'discokids', 'currentsnap']);
 
 function init() {
 	// create all tables that don't exist
@@ -209,9 +211,6 @@ dbfuncs.addRequirement = function(reqs) {
 							VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
 	let info = query.run(reqs);
 	return info.changes === 1;
-	// var zzz = db.prepare('INSERT INTO requirements (name, slots) VALUES ("Monocle", @listenerID)');
-	// //var zzz = db.prepare('INSERT INTO requirements (name, listenerID) VALUES ("Monocle", @listenerID)');
-	// zzz.run(requirement);
 };
 
 /**

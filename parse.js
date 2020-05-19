@@ -64,14 +64,12 @@ parsefuncs.parseReqs = function(reqsstr) {
 				myreqs.message += `-${constraint} ${value} `;
 				break;
 
-			case "slot":
-			case "slots":
+			case "slotted":
 			case "sl":
-				value = parseInt(value, 10);
-				if(value >= 0 && value <= 2) {
-					myreqs.slots = value;
-					myreqs.message += `-${constraint} ${value} `;
-				}
+				ref = lists.bool.indexOf(value); // affirmative?
+				if(ref === -1) break;
+				myreqs.slotted = (ref+1)%2;
+				myreqs.message += `-${constraint} ${value} `;
 				break;
 
 			case "refine":
@@ -144,6 +142,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 				}
 
 				break;
+
 			case "enchantlevel":
 			case "el":
 				value = value.replace(/\s+/g, '').split(','); // remove whitespace; split by comma
@@ -161,6 +160,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 					myreqs.message += `-${constraint} ${cat} `;
 				}
 				break;
+
 			case "category":
 			case "ca":
 				value = value.replace(/\s+/g, ''); // remove all whitespace
@@ -171,20 +171,22 @@ parsefuncs.parseReqs = function(reqsstr) {
 				}
 				break;
 
-			case "subcategory":
-			case "sc":
-				break;
-
 			case "broken":
 			case "br":
-				ref = lists.broken.indexOf(value);
+				ref = lists.bool.indexOf(value); // affirmative?
 				if(ref === -1) break;
 				myreqs.broken = (ref+1)%2;
 				myreqs.message += `-${constraint} ${value} `;
 
 				break;
-			default:
-				console.log("noob");
+
+			case "assign":
+			case "as":
+			case "for":
+				value = parsefuncs.parseDiscordID(value);
+				if(value !== -1)
+					myreqs.assign = value;
+				break;
 		}
 
 	}

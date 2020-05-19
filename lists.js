@@ -4,7 +4,7 @@ lists.enchant = ['none', 'sharp', 'sharpblade', 'arch', 'zeal', 'morale',
                  'blasphemy', 'tenacity', 'divineblessing', 'armorbreaking',
                  'antimage', 'arcane', 'armor', 'magic', 'insight'];
 
-lists.broken = ['yes', 'no', 'y', 'n', 'true', 'false', 't', 'f', '1', '0'];
+lists.bool = ['yes', 'no', 'y', 'n', 'true', 'false', 't', 'f', '1', '0'];
 
 // my favorite way of programming
 lists.category = {
@@ -59,12 +59,6 @@ lists.category = {
 	'costume': 'Costume',
 	'premium': 'Premium',
 };
-
-
-
-//lists.subcategory = [];
-
-
 
 
 module.exports = lists;

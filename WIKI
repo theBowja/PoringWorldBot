@@ -77,18 +77,18 @@ Card Weapon, Card OffHand, Card Armor, Card Garment, Card Shoe, Card Accessory, 
 Item Potion/Effect, Item Refine, Item Scroll/Album, Item Material, Item Holiday Material, Item Pet Material
 Card, Blueprint, Mount, Costume, Premium
 
-NOT IMPLEMENTED
--subcategory, -sc
-one of the following:
-bow, staff, spear, mace, sword, knife,
-bracelet, 
-head, face, mouth, back, tail
-
 -broken, -br
 yes/no, y/n, true/false, t/f, 1/0; case-insensitive
 default: any
 example:
 -br true
+
+-assign, -as, -for
+tag someone in discord
+cannot assign to someone who's permission level is equal to or higher than yours
+default: you
+example:
+-assign @Lovyrn
 
 final examples:
 @PoringWorldBot pingmewhen -name eye of dullahan -refine 12
