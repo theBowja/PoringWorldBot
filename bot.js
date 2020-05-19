@@ -124,7 +124,15 @@ bot.on('message', message => {
   } else if(content[1] === 'thanks' ||
             content[1] === 'thank' && content[2] === 'you') {
     return message.channel.send('no problem');
-  }
+  }    // quick price check for clean/unmodified equip
+    else if (content[1] === 'pc' || content[1] === 'pricecheck') {
+      let message
+      let jsonMessage = pcPoringWorld(content[2])
+      message += 'Item name : ' jsonMessage[0].name + '\n';
+      message += 'Price : ' jsonMessage[0].price + '\n';
+      message += 'Stock : 'jsonMessage[0].stock;
+      return message.channel.send('```' + msg + '```');
+          }
 
   // no peasants allowed past here
   if(userObj.permission === 0) return;
@@ -243,3 +251,26 @@ function pingPoringWorld() {
     });
   });
 }
+
+// quick price check for clean/unmodified equip
+function pcPoringWorld(itemName) {
+    return new Promise(function (resolve, reject) {
+        https.get('https://poring.world/api/search?order=popularity&rarity=&inStock=&modified=0&category=&endCategory=&q=' + itemName, (resp) => {
+            let data = '';
+
+            // A chunk of data has been recieved.
+            resp.on('data', (chunk) => {
+                data += chunk;
+            });
+            resp.on('end', () => {
+                data = JSON.parse(data);
+
+                resolve(data);
+            });
+
+        }).on("error", (err) => {
+            console.log("Error: " + err.message);
+            reject(err.message);
+        });
+    });
+};
