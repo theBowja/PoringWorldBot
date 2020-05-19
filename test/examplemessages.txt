@@ -1,0 +1,172 @@
+
+Message {
+  channel: DMChannel {
+    type: 'dm',
+    deleted: false,
+    id: '616341103301623832',
+    recipient: User {
+      id: '161248916384251904',
+      bot: false,
+      username: 'secretlyrice',
+      discriminator: '5536',
+      avatar: '3995ce1247580fc1c1c492115f6044ee',
+      lastMessageID: '710963857400660069',
+      lastMessageChannelID: '616341103301623832',
+      flags: [UserFlags]
+    },
+    lastMessageID: '710963857400660069',
+    lastPinTimestamp: null,
+    messages: MessageManager {
+      cacheType: [Function: LimitedCollection],
+      cache: [LimitedCollection [Map]],
+      channel: [Circular]
+    },
+    _typing: Map {}
+  },
+  deleted: false,
+  id: '710963857400660069',
+  type: 'DEFAULT',
+  content: 'y',
+  author: User {
+    id: '161248916384251904',
+    bot: false,
+    username: 'secretlyrice',
+    discriminator: '5536',
+    avatar: '3995ce1247580fc1c1c492115f6044ee',
+    lastMessageID: '710963857400660069',
+    lastMessageChannelID: '616341103301623832',
+    flags: UserFlags { bitfield: 0 }
+  },
+  pinned: false,
+  tts: false,
+  nonce: '710963846583418880',
+  system: false,
+  embeds: [],
+  attachments: Collection [Map] {},
+  createdTimestamp: 1589577392674,
+  editedTimestamp: null,
+  reactions: ReactionManager {
+    cacheType: [Function: Collection],
+    cache: Collection [Map] {},
+    message: [Circular]
+  },
+  mentions: MessageMentions {
+    everyone: false,
+    users: Collection [Map] {},
+    roles: Collection [Map] {},
+    _members: null,
+    _channels: null,
+    crosspostedChannels: Collection [Map] {}
+  },
+  webhookID: null,
+  application: null,
+  activity: null,
+  _edits: [],
+  flags: MessageFlags { bitfield: 0 },
+  reference: null
+}
+
+=========================================================================
+=========================================================================
+
+Message {
+  channel: TextChannel {
+    type: 'text',
+    deleted: false,
+    id: '171259045557043202',
+    name: 'general',
+    rawPosition: 0,
+    parentID: undefined,
+    permissionOverwrites: Collection [Map] {},
+    topic: null,
+    nsfw: undefined,
+    lastMessageID: '710964325447106570',
+    rateLimitPerUser: 0,
+    lastPinTimestamp: null,
+    guild: Guild {
+      members: [GuildMemberManager],
+      channels: [GuildChannelManager],
+      roles: [RoleManager],
+      presences: [PresenceManager],
+      voiceStates: [VoiceStateManager],
+      deleted: false,
+      available: true,
+      id: '171259045557043202',
+      shardID: 0,
+      name: 'bottest',
+      icon: null,
+      splash: null,
+      region: 'us-east',
+      memberCount: 4,
+      large: false,
+      features: [],
+      applicationID: null,
+      afkTimeout: 300,
+      afkChannelID: null,
+      systemChannelID: null,
+      embedEnabled: undefined,
+      premiumTier: 0,
+      premiumSubscriptionCount: 0,
+      verificationLevel: 'NONE',
+      explicitContentFilter: 'DISABLED',
+      mfaLevel: 0,
+      joinedTimestamp: 1562629173155,
+      defaultMessageNotifications: 'ALL',
+      systemChannelFlags: [SystemChannelFlags],
+      vanityURLCode: null,
+      description: null,
+      banner: null,
+      rulesChannelID: null,
+      publicUpdatesChannelID: null,
+      ownerID: '161248916384251904',
+      emojis: [GuildEmojiManager]
+    },
+    messages: MessageManager {
+      cacheType: [Function: LimitedCollection],
+      cache: [LimitedCollection [Map]],
+      channel: [Circular]
+    },
+    _typing: Map {}
+  },
+  deleted: false,
+  id: '710964325447106570',
+  type: 'DEFAULT',
+  content: 'a',
+  author: User {
+    id: '161248916384251904',
+    bot: false,
+    username: 'secretlyrice',
+    discriminator: '5536',
+    avatar: '3995ce1247580fc1c1c492115f6044ee',
+    lastMessageID: '710964325447106570',
+    lastMessageChannelID: '171259045557043202',
+    flags: UserFlags { bitfield: 0 }
+  },
+  pinned: false,
+  tts: false,
+  nonce: '710964327049330688',
+  system: false,
+  embeds: [],
+  attachments: Collection [Map] {},
+  createdTimestamp: 1589577504265,
+  editedTimestamp: null,
+  reactions: ReactionManager {
+    cacheType: [Function: Collection],
+    cache: Collection [Map] {},
+    message: [Circular]
+  },
+  mentions: MessageMentions {
+    everyone: false,
+    users: Collection [Map] {},
+    roles: Collection [Map] {},
+    _members: null,
+    _channels: null,
+    crosspostedChannels: Collection [Map] {}
+  },
+  webhookID: null,
+  application: null,
+  activity: null,
+  _edits: [],
+  flags: MessageFlags { bitfield: 0 },
+  reference: null
+}

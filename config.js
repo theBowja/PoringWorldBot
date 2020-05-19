@@ -1,8 +1,18 @@
 
-var config = {};
+const config = {};
 
 // whether or not to drop database when app starts up
 config.dropdbonstart = false;
+
+/**
+ * Strings that will summon the bot so it'll listen to your commands
+ * default is pinging the bot @PoringWorldBot (added in bot.js in on-ready function)
+ * for example in "@PoringWorldBot help", "@PoringWorldBot " is the default summon string
+ * you could put "!" in the array below so that "!help" would be accepted too
+ * (be mindful that all long sequences of whitespace will have been replaced by a single space " ")
+ * first string that matches will be used 
+ */ 
+config.summonstrings = [];
 
 // the limited amount of reqs that a peasant can make
 config.limitreqs = 6;

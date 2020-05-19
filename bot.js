@@ -5,10 +5,9 @@ var logger = require('winston');
 var auth = require('./auth.json');
 var parsefuncs = require('./parse.js');
 var config = require('./config.js');
+var commands = require('./commands.js');
 var https = require('https');
 var CronJob = require('cron').CronJob;
-var fs = require("fs");
-
 
 var dbfuncs = require("./dbfuncs.js");
 
@@ -21,6 +20,8 @@ logger.level = 'debug';
 
 bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
+  config.summonstring.push(`<@${bot.user.id} `);
+  config.summonstring.push(`<@!${bot.user.id} `);
 
   new CronJob('0 0,10,20,30,40,50 * * * *', function() {
     updateSnaps();
@@ -30,24 +31,28 @@ bot.on('ready', () => {
 bot.on('message', message => {
   let userID = message.author.id;
   let channelID = message.channel.id;
-  let content = message.content.trim().split(/\s+/);
+  message.content = message.content.toLowerCase().split(/\s+/).join(' ');
+  let content = message.content;
 
-  // checking if bot should read this message or not
-  if(parsefuncs.parseDiscordID(content[0]) !== bot.user.id) return;
-  if(userID === bot.user.id) return; // if from self, ignore
-  if(message.author.bot === true) return; // if from bot, ignore
-  if(content.length === 1) return; // if nothing else, ignore
+  if(message.author.id === bot.user.id) return; // if from self, ignore
+  if(message.author.bot) return; // if from bot, ignore
+
+  message.contentObj = parsefuncs.parseContent(message.content);
+  if(message.contentObj.summon === undefined) return; // not summoned with summonstring
+
+  const cmd = message.contentObj.command; // type less words
+  if(cmd === '') return; // if no command, ignore
+
 
   // retrieve user info if he exists in database
   let userObj = dbfuncs.getDiscokid(userID);
   if(userObj === undefined) userObj = { permission: 0, discordid: userID };
 
   logger.info(`user ${userID} to channel ${channelID}: ${content.slice(1).join(' ')}`);
-  content[1] = content[1].toLowerCase();
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
-  if(content[1] === 'watch' ||  // allow commands to be read on this channel
-     content[1] === 'listenhereyoulittleshi') {
+  if(cmd === 'watch' ||  // allow commands to be read on this channel
+     cmd === 'listenhereyoulittleshi') {
     if(userObj.permission === 0) return message.react('❎'); // no peasants allowed
     let limitedto = parseInt(content[2]);
     if(isNaN(limitedto)) limitedto = 0;
@@ -62,12 +67,12 @@ bot.on('message', message => {
   // COMMANDS THAT REQUIRE CHANNEL WATCH
 
   // COMMANDS WITH NO PERMISSION LEVEL REQUIRED
-  if(content[1] === 'help') {
+  if(cmd === 'help') {
     message.channel.send('https://github.com/theBowja/PoringWorldBot/blob/master/WIKI');
 
-  } else if(content[1] === 'pingmewhen' ||
-            content[1] === 'tagmewhen' ||
-            content[1] === 'tellmewhen') {
+  } else if(cmd === 'pingmewhen' ||
+            cmd === 'tagmewhen' ||
+            cmd === 'tellmewhen') {
     // restricts user if they have higher or equal permission level to channel permission requirements
     if(userObj.permission < channelObj.limitedto) return message.react('🔒');
     if(content.length <= 2) return message.react('❎'); // no reqs found
@@ -97,8 +102,8 @@ bot.on('message', message => {
     let res = dbfuncs.addRequirement(pars);
     return message.react(res ? '✅' : '❎');
 
-  } else if(content[1] === 'show' ||
-            content[1] === 'showme') {
+  } else if(cmd === 'show' ||
+            cmd === 'showme') {
     let targetID = userID;
     if(content[2] !== undefined) {
       targetID = parsefuncs.parseDiscordID(content[2]);
@@ -113,8 +118,8 @@ bot.on('message', message => {
     let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
     return message.channel.send(msg === '' ? '0 reqs' : '```'+msg+'```');
 
-  } else if(content[1] === 'delete' ||
-            content[1] === 'remove') {
+  } else if(cmd === 'delete' ||
+            cmd === 'remove') {
     let reqID = parseInt(content[2]);
     if(isNaN(reqID)) { // if no reqID provided, then show 
       let res = dbfuncs.listUserRequirements(userID);
@@ -131,11 +136,11 @@ bot.on('message', message => {
       return message.react(res ? '✅' : '❎');
     }
 
-  } else if(content[1] === 'thanks' ||
-            content[1] === 'thank' && content[2] === 'you') {
+  } else if(cmd === 'thanks' ||
+            cmd === 'thank' && content[2] === 'you') {
     return message.channel.send('no problem');
   }    // quick price check for clean/unmodified equip
-    else if (content[1] === 'pc' || content[1] === 'pricecheck') {
+    else if (cmd === 'pc' || cmd === 'pricecheck') {
       handlepricecheck(message, content.slice(2).join(' '));
   }
 
@@ -143,31 +148,31 @@ bot.on('message', message => {
   if(userObj.permission === 0) return;
 
   // COMMANDS THAT REQUIRES HIGHER PERMISSION LEVEL
-  if(content[1] === 'showhere') {
+  if(cmd === 'showhere') {
     // TODO: showhere for channel. only admins can run this
     // NOT IMPLEMENTED
 
-  } else if(content[1] === 'unwatch') { // remove this channel from channels table
+  } else if(cmd === 'unwatch') { // remove this channel from channels table
     let res = dbfuncs.deleteChannel(channelID);
     return message.react(res ? '✅' : '❎');
 
-  } else if(content[1] === 'showall') {
+  } else if(cmd === 'showall') {
     // TODO: limit this to owner
     let res = dbfuncs.listAllRequirements();
     console.log(res);
     return;
 
-  } else if(content[1] === 'clearsnaps') {
+  } else if(cmd === 'clearsnaps') {
     return dbfuncs.deleteAllSnaps();
 
-  } else if(content[1] === 'ping') {
+  } else if(cmd === 'ping') {
     return updateSnaps();
 
-  } else if(content[1] === 'debug') {
+  } else if(cmd === 'debug') {
     return dbfuncs.listDiscokids(); // this is a debug function zzz
   
-  } else if(content[1] === 'permit' ||
-            content[1] === 'nwordpass') {
+  } else if(cmd === 'permit' ||
+            cmd === 'nwordpass') {
     if(content.length < 4) return message.react('❎'); // not enough parameters provided
     let targetID = parsefuncs.parseDiscordID(content[2]);
     if(targetID === -1) return message.react('❎'); // no valid discord id provided
