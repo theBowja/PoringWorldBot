@@ -136,13 +136,8 @@ bot.on('message', message => {
     return message.channel.send('no problem');
   }    // quick price check for clean/unmodified equip
     else if (content[1] === 'pc' || content[1] === 'pricecheck') {
-      let message
-      let jsonMessage = pcPoringWorld(content[2])
-      message += 'Item name : ' jsonMessage[0].name + '\n';
-      message += 'Price : ' jsonMessage[0].price + '\n';
-      message += 'Stock : 'jsonMessage[0].stock;
-      return message.channel.send('```' + msg + '```');
-          }
+      handlepricecheck(message, content.slice(2).join(' '));
+  }
 
   // no peasants allowed past here
   if(userObj.permission === 0) return;
@@ -260,6 +255,25 @@ function pingPoringWorld() {
       reject(err.message);
     });
   });
+}
+
+async function handlepricecheck(message, itemName) {
+  try {
+    console.log("handlepricecheck");
+    let words = '';
+    let jsonMessage = await pcPoringWorld(itemName);
+    console.log(jsonMessage[0]);
+    console.log(jsonMessage[0].name);
+
+    words += 'Item name : ' + jsonMessage[0].name + '\n';
+    words += 'Price : ' + jsonMessage[0].lastRecord.price + '\n';
+    words += 'Stock : ' + jsonMessage[0].lastRecord.stock;
+    return message.channel.send('```' + words + '```');
+
+  } catch(e) {
+    logger.error('pricecheck failed: ' + e);
+    console.error("ERROR: " + e);
+  }
 }
 
 // quick price check for clean/unmodified equip
