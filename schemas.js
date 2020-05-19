@@ -39,8 +39,8 @@ requirements (
 	discordkidID INTEGER NOT NULL,
 	channelID INTEGER NOT NULL,
 
-	FOREIGN KEY (discordkidID) REFERENCES discokids(dkidID),
-	FOREIGN KEY (channelID) REFERENCES channels(chID)
+	FOREIGN KEY (discordkidID) REFERENCES discokids(dkidID) ON DELETE CASCADE,
+	FOREIGN KEY (channelID) REFERENCES channels(chID) ON DELETE CASCADE
 )`;
 
 // make sure everything lowercase

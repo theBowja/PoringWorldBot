@@ -33,7 +33,7 @@ bot.on('message', message => {
   let content = message.content.trim().split(/\s+/);
 
   // checking if bot should read this message or not
-  if(content[0] !== `<@!${bot.user.id}>`) return; // if not mention bot, ignore
+  if(parsefuncs.parseDiscordID(content[0]) !== bot.user.id) return;
   if(userID === bot.user.id) return; // if from self, ignore
   if(message.author.bot === true) return; // if from bot, ignore
   if(content.length === 1) return; // if nothing else, ignore
@@ -262,8 +262,6 @@ async function handlepricecheck(message, itemName) {
     console.log("handlepricecheck");
     let words = '';
     let jsonMessage = await pcPoringWorld(itemName);
-    console.log(jsonMessage[0]);
-    console.log(jsonMessage[0].name);
 
     words += 'Item name : ' + jsonMessage[0].name + '\n';
     words += 'Price : ' + jsonMessage[0].lastRecord.price + '\n';
@@ -279,7 +277,7 @@ async function handlepricecheck(message, itemName) {
 // quick price check for clean/unmodified equip
 function pcPoringWorld(itemName) {
     return new Promise(function (resolve, reject) {
-        https.get('https://poring.world/api/search?order=popularity&rarity=&inStock=&modified=0&category=&endCategory=&q=' + itemName, (resp) => {
+        https.get('https://poring.world/api/search?order=price&rarity=&inStock=&modified=0&category=&endCategory=&q=' + itemName, (resp) => {
             let data = '';
 
             // A chunk of data has been recieved.
