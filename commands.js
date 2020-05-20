@@ -9,7 +9,7 @@ const commands = {};
 // lol
 
 commands.handleHelp = function(message) {
-    message.channel.send('https://github.com/theBowja/PoringWorldBot/blob/master/WIKI');
+    message.channel.send('https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request');
 };
 
 commands.handleTagMe = function(message) {
@@ -25,9 +25,9 @@ commands.handleTagMe = function(message) {
 
     let targetObj = message.userObj;
     if(pars.assign !== undefined) {
-        targetObj = dbfuncs.getDiscokid(pars.assign);
+        targetObj = dbfuncs.getDiscokid(pars.assign, message.guild.id);
         if(targetObj === undefined)
-            targetObj = { permission: 0, discordid: pars.assign };
+            targetObj = { permission: 0, discordid: pars.assign, guildid: message.guild.id };
         delete pars.assign;
         if(userObj.permission <= targetObj.permission)
             return message.react('🔒'); // user isn't good enough to assign on the other person
@@ -35,9 +35,9 @@ commands.handleTagMe = function(message) {
 
     // if user doesn't exist in database, then add him
     if(targetObj.dkidID === undefined)
-        targetObj.dkidID = dbfuncs.addDiscokid(targetObj.discordid);
+        targetObj.dkidID = dbfuncs.addDiscokid(targetObj.discordid, targetObj.guildid);
     else if(targetObj.permission === 0 &&
-            dbfuncs.listUserRequirements(targetObj.discordid).length >= config.limitreqs)
+            dbfuncs.listUserRequirements(targetObj.discordid, targetObj.guildid, message.channel.id).length >= config.limitreqs)
         return message.react('❎'); // user has reached the limit for reqs to make
 
     pars.discordkidID = targetObj.dkidID;
@@ -77,7 +77,7 @@ commands.handleShowUser = function(message) {
             return message.react('🔒'); // user's permission level isn't high enough
     }
 
-    let res = dbfuncs.listUserRequirements(targetID);
+    let res = dbfuncs.listUserRequirements(targetID, message.guild.id, message.channel.id);
     let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
     return message.channel.send(msg === '' ? '0 reqs' : 'use "delete [id]" to delete\n```'+msg+'```');
 };
@@ -131,19 +131,19 @@ commands.handlePermit = function(message) {
     let targetID = parsefuncs.parseDiscordID(content[0]);
     if(targetID === -1)
         return message.react('❎'); // no valid discord id provided
-    // TODO check if this targetID exists in server
+    // TODO: check if this targetID exists in server
 
     let perm = parseInt(content[1]);
     if(isNaN(perm))
         return message.react('❎'); // no number provided
     if(message.userObj.permission < perm)
         return message.react('❎'); // cannot assign higher than your own
-    let targetObj = dbfuncs.getDiscokid(targetID);
+    let targetObj = dbfuncs.getDiscokid(targetID, message.guild.id);
     let res;
     if(targetObj === undefined)
-      res = dbfuncs.addDiscokid(targetID, perm) !== -1;
+      res = dbfuncs.addDiscokid(targetID, message.guild.id, perm) !== -1;
     else if(targetObj.permission <= message.userObj.permission)
-      res = dbfuncs.updateDiscokid(targetID, perm);
+      res = dbfuncs.updateDiscokid(targetObj.dkidID, perm);
     else
       return message.react('🔒'); // the target's permission level is higher than yours
     return message.react(res ? '✅' : '❎');

@@ -28,18 +28,40 @@ bot.on('ready', () => {
   }, null, true);
 });
 
+bot.on('guildCreate', guild => {
+  console.log(guild);
+});
+
+bot.on('guildDelete', () => {
+  // TODO: check if this guild contains any channels we're keeping watch of
+});
+
+bot.on('channelDelete', () => {
+  // TODO: if channel is deleted, check if it is one we're keeping watch of
+});
+
+bot.on('guildMemberRemove', () => {
+  // TODO: if member leaves, remove any requ he has in the channel in this guild
+});
+
+bot.on('roleDelete', () => {
+
+});
+
 bot.on('message', message => {
   message.content = message.content.toLowerCase().replace(/\s+/g, ' ');
 
+  if(message.channel.type !== 'text') return; // if not from text channel, ignore
   if(message.author.id === bot.user.id) return; // if from self, ignore
   if(message.author.bot) return; // if from bot, ignore
 
   // attach contentObj to message
+  // contentObj is just message.content parsed into three properties: summon, command, body
   message.contentObj = parsefuncs.parseContent(message.content);
   if(message.contentObj.summon === undefined) return; // not summoned with summonstring
   if(message.contentObj.command === '') return; // no command provided
 
-  const cmd = message.contentObj.command; // type less words
+  const cmd = message.contentObj.command; // save letters
 
   // retrieve user info if he exists in database
   // attach userObj to message
@@ -53,6 +75,21 @@ bot.on('message', message => {
   if(cmd === 'watch' ||  // allow commands to be read on this channel
      cmd === 'listenhereyoulittleshi') {
     return commands.handleWatch(message);
+  }
+  if(cmd === 'test') {
+    message.guild.fetchAuditLogs({type:28})
+      .then(audit => {
+        let tm = audit.entries//.first();
+        console.log(tm);
+        // console.log(tm.target)
+        // console.log(tm.executor)
+      });
+    // const exampleEmbed = new Discord.MessageEmbed()
+    //   .setColor('#0099ff')
+    //   .setTitle('Some title');
+    // message.channel.send(exampleEmbed);
+
+    return;
   }
 
   // retrieve channel info if exists in database

@@ -123,21 +123,21 @@ dbfuncs.deleteAllSnaps = function() {
  * Adds user to database
  * @returns the id of the inserted row, or -1 if failed
  */
-dbfuncs.addDiscokid = function(discordid, permission=0) {
+dbfuncs.addDiscokid = function(discordid, guildid, permission=0) {
 	try {
-		let zzz = db.prepare('INSERT INTO discokids (discordid, permission) VALUES (?, ?)');
-		var info = zzz.run(discordid, permission);
+		let zzz = db.prepare('INSERT INTO discokids (discordid, guildid, permission) VALUES (?, ?, ?)');
+		var info = zzz.run(discordid, guildid, permission);
 		return info.lastInsertRowid;
 	} catch(e) { return -1; }
 };
 
 /**
- * Gets the listener record using their discordid
+ * Gets the user record using discordid and guildid
  * @returns the object or undefined
  */
-dbfuncs.getDiscokid = function(discordid) {
-	let query = db.prepare('SELECT * FROM discokids WHERE discordid=?');
-	return query.get(discordid);
+dbfuncs.getDiscokid = function(discordid, guildid) {
+	let query = db.prepare('SELECT * FROM discokids WHERE discordid=? AND guildid=?');
+	return query.get(discordid, guildid);
 };
 
 // TODO
@@ -151,20 +151,21 @@ dbfuncs.listDiscokids = function() {
  * Updates the permission for a discordkid :)
  * @returns true/false if there was a change or not
  */
-dbfuncs.updateDiscokid = function(discordid, permission) {
-	let query = db.prepare('UPDATE discokids SET permission=? WHERE discordid=?');
-	let res = query.run(permission, discordid);
+dbfuncs.updateDiscokid = function(dkidID, permission) {
+	let query = db.prepare('UPDATE discokids SET permission=? WHERE dkidID=?');
+	let res = query.run(permission, dkidID);
 	return res.changes !== 0;
 };
 
 /**
- * Removes listener to database
+ * Removes user to database
  * Warning: this will also remove all related 'requirements' rows
  * @param type - enum('channel', 'user')
- * @param typeid - id of the channel of user to delete
  */
-dbfuncs.deleteDiscokid = function(type, typeid) {
- // TODO: cascade delete
+dbfuncs.deleteDiscokid = function(dkidID) {
+ 	let query = db.prepare('DELETE FROM discokids WHERE dkidID=?');
+	var info = query.run(dkidID);
+	return info.changes === 0 ? false : true;
 };
 
 /**
@@ -240,11 +241,14 @@ dbfuncs.getRequirement = function(reqid) {
  * @param userid - discordid of the user
  * @return array of requirement objects of given type
  */
-dbfuncs.listUserRequirements = function(userid) {
+dbfuncs.listUserRequirements = function(userid, guildid, channelid) {
 	var query = db.prepare(`SELECT * FROM requirements R
 							INNER JOIN discokids U ON R.discordkidID=U.dkidID
-							WHERE U.discordid=?`);
-	var res = query.all(userid);
+							INNER JOIN channels C ON R.channelID=C.chID
+							WHERE U.discordid=? AND
+								  U.guildid=? AND
+								  C.discordchid=?`);
+	var res = query.all(userid, guildid, channelid);
 	return res;
 };
 

@@ -9,15 +9,18 @@ channels (
 	limitedto INTEGER NOT NULL DEFAULT 0
 )`;
 
+// a kid in different guilds may have different permission levels
 schema.defs.discokids = `
 discokids (
 	dkidID INTEGER PRIMARY KEY AUTOINCREMENT,
 	permission INTEGER NOT NULL DEFAULT 0,
-	discordid TEXT UNIQUE NOT NULL
+	discordid TEXT NOT NULL,
+	guildid TEXT NOT NULL,
+	UNIQUE(discordid, guildid)
 )`;
 
 // store as lowercase
-// discordkidID and channelID are internal ID, not discord IDs
+// discordkidID and channelID are schema internal ID, not discord IDs
 schema.defs.requirements = `
 requirements (
 	reqID INTEGER PRIMARY KEY AUTOINCREMENT,
