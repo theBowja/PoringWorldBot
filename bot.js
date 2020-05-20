@@ -20,8 +20,8 @@ logger.level = 'debug';
 
 bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
-  config.summonstring.push(`<@${bot.user.id} `);
-  config.summonstring.push(`<@!${bot.user.id} `);
+  config.summonstrings.push(`<@${bot.user.id}> `);
+  config.summonstrings.push(`<@!${bot.user.id}> `);
 
   new CronJob('0 0,10,20,30,40,50 * * * *', function() {
     updateSnaps();
@@ -29,123 +29,66 @@ bot.on('ready', () => {
 });
 
 bot.on('message', message => {
-  let userID = message.author.id;
-  let channelID = message.channel.id;
-  message.content = message.content.toLowerCase().split(/\s+/).join(' ');
-  let content = message.content;
+  message.content = message.content.toLowerCase().replace(/\s+/g, ' ');
 
   if(message.author.id === bot.user.id) return; // if from self, ignore
   if(message.author.bot) return; // if from bot, ignore
 
+  // attach contentObj to message
   message.contentObj = parsefuncs.parseContent(message.content);
   if(message.contentObj.summon === undefined) return; // not summoned with summonstring
+  if(message.contentObj.command === '') return; // no command provided
 
   const cmd = message.contentObj.command; // type less words
-  if(cmd === '') return; // if no command, ignore
-
 
   // retrieve user info if he exists in database
-  let userObj = dbfuncs.getDiscokid(userID);
-  if(userObj === undefined) userObj = { permission: 0, discordid: userID };
+  // attach userObj to message
+  message.userObj = dbfuncs.getDiscokid(message.author.id);
+  if(message.userObj === undefined)
+    message.userObj = { permission: 0, discordid: message.author.id };
 
-  logger.info(`user ${userID} to channel ${channelID}: ${content.slice(1).join(' ')}`);
+  logger.info(`user ${message.author.id} to channel ${message.channel.id}: ${message.contentObj.command} => ${message.contentObj.body}`);
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
   if(cmd === 'watch' ||  // allow commands to be read on this channel
      cmd === 'listenhereyoulittleshi') {
-    if(userObj.permission === 0) return message.react('❎'); // no peasants allowed
-    let limitedto = parseInt(content[2]);
-    if(isNaN(limitedto)) limitedto = 0;
-    if(userObj.permission < limitedto) return message.react('❎'); // user asks for too much
-    let res = dbfuncs.addChannel(channelID, limitedto);
-    return message.react(res !== -1 ? '✅' : '❎');
+    return commands.handleWatch(message);
   }
 
   // retrieve channel info if exists in database
-  let channelObj = dbfuncs.getChannel(channelID);
-  if(channelObj === undefined) return; // channel isn't on watch
+  // attach channelObj to message
+  message.channelObj = dbfuncs.getChannel(message.channel.id);
+  if(message.channelObj === undefined) return; // channel isn't on watch
   // COMMANDS THAT REQUIRE CHANNEL WATCH
 
   // COMMANDS WITH NO PERMISSION LEVEL REQUIRED
   if(cmd === 'help') {
-    message.channel.send('https://github.com/theBowja/PoringWorldBot/blob/master/WIKI');
+    return commands.handleHelp(message);
 
   } else if(cmd === 'pingmewhen' ||
             cmd === 'tagmewhen' ||
             cmd === 'tellmewhen') {
-    // restricts user if they have higher or equal permission level to channel permission requirements
-    if(userObj.permission < channelObj.limitedto) return message.react('🔒');
-    if(content.length <= 2) return message.react('❎'); // no reqs found
-
-    let pars = parsefuncs.parseReqs(content.slice(2).join(' '));
-    if(pars.message === '') return message.react('❎'); // no coherent parameters given by user
-
-    let targetObj = userObj;
-    if(pars.assign !== undefined) {
-      targetObj = dbfuncs.getDiscokid(pars.assign);
-      if(targetObj === undefined)
-        targetObj = { permission: 0, discordid: pars.assign };
-      delete pars.assign;
-      if(userObj.permission <= targetObj.permission)
-        return message.react('🔒'); // user isn't good enough to assign on the other person
-    }
-
-    // if user doesn't exist in database, then add him
-    if(targetObj.dkidID === undefined)
-      targetObj.dkidID = dbfuncs.addDiscokid(targetObj.discordid);
-    else if(targetObj.permission === 0 && dbfuncs.listUserRequirements(targetObj.discordid).length >= config.limitreqs)
-      return message.react('❎'); // user has reached the limit for reqs to make
-
-    pars.discordkidID = targetObj.dkidID;
-    pars.channelID = channelObj.chID;
-
-    let res = dbfuncs.addRequirement(pars);
-    return message.react(res ? '✅' : '❎');
+    return commands.handleTagMe(message);
 
   } else if(cmd === 'show' ||
             cmd === 'showme') {
-    let targetID = userID;
-    if(content[2] !== undefined) {
-      targetID = parsefuncs.parseDiscordID(content[2]);
-      if(targetID === -1) return message.react('❎'); // not valid id provided
-      if(userObj.permission === 0)
-        return message.react('🔒'); // no peasants allowed past here
-      let targetObj = dbfuncs.getDiscokid(targetID);
-      if(targetObj !== undefined && userObj.permission < targetObj.permission)
-        return message.react('🔒'); // user's permission level isn't high enough
-    }
-    let res = dbfuncs.listUserRequirements(targetID);
-    let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
-    return message.channel.send(msg === '' ? '0 reqs' : '```'+msg+'```');
+    return commands.handleShowUser(message);
 
   } else if(cmd === 'delete' ||
             cmd === 'remove') {
-    let reqID = parseInt(content[2]);
-    if(isNaN(reqID)) { // if no reqID provided, then show 
-      let res = dbfuncs.listUserRequirements(userID);
-      let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
-      return message.channel.send(msg === '' ? '0 reqs' : '```'+msg+'```');
-    } else {
-      let reqObj = dbfuncs.getRequirement(reqID);
-      if(reqObj === undefined) return message.react('❎'); // not valid reqID
-      if(userObj.permission === 0 && userObj.discordid !== reqObj.discordid)
-        return message.react('🔒'); // peasants not allowed to delete someone else's
-      if(userObj.permission < reqObj.permission)
-        return message.react('🔒'); // permission level is lower than target's permission level
-      let res = dbfuncs.deleteRequirement(reqID);
-      return message.react(res ? '✅' : '❎');
-    }
+    return commands.handleDelete(message);
 
   } else if(cmd === 'thanks' ||
-            cmd === 'thank' && content[2] === 'you') {
-    return message.channel.send('no problem');
+            cmd === 'thank') {
+    return commands.handleThanks(message);
+
   }    // quick price check for clean/unmodified equip
     else if (cmd === 'pc' || cmd === 'pricecheck') {
-      handlepricecheck(message, content.slice(2).join(' '));
+      handlepricecheck(message, message.content.body);
   }
 
   // no peasants allowed past here
-  if(userObj.permission === 0) return;
+  if(message.userObj.permission === 0) return message.react('🔒');
 
   // COMMANDS THAT REQUIRES HIGHER PERMISSION LEVEL
   if(cmd === 'showhere') {
@@ -153,8 +96,7 @@ bot.on('message', message => {
     // NOT IMPLEMENTED
 
   } else if(cmd === 'unwatch') { // remove this channel from channels table
-    let res = dbfuncs.deleteChannel(channelID);
-    return message.react(res ? '✅' : '❎');
+    return commands.handleUnwatch(message);
 
   } else if(cmd === 'showall') {
     // TODO: limit this to owner
@@ -173,22 +115,7 @@ bot.on('message', message => {
   
   } else if(cmd === 'permit' ||
             cmd === 'nwordpass') {
-    if(content.length < 4) return message.react('❎'); // not enough parameters provided
-    let targetID = parsefuncs.parseDiscordID(content[2]);
-    if(targetID === -1) return message.react('❎'); // no valid discord id provided
-    // TODO check if this targetID exists in server
-    let perm = parseInt(content[3]);
-    if(isNaN(perm)) return message.react('❎'); // no number provided
-    if(userObj.permission < perm) return message.react('❎'); // cannot assign higher than your own
-    let targetObj = dbfuncs.getDiscokid(targetID);
-    let res;
-    if(targetObj === undefined)
-      res = dbfuncs.addDiscokid(targetID, perm) !== -1;
-    else if(targetObj.permission <= userObj.permission)
-      res = dbfuncs.updateDiscokid(targetID, perm);
-    else
-      return message.react('🔒'); // the target's permission level is higher than yours
-    return message.react(res ? '✅' : '❎');
+    return commands.handlePermit(message);
   }
 
 });

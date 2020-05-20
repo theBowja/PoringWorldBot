@@ -50,7 +50,7 @@ parsefuncs.parseDiscordID = function(discordtag) {
  */
 parsefuncs.parseContent = function(content) {
     let contentObj = {};
-
+    
     // get the summonstring if there is one
     for(let sum of config.summonstrings) {
         if(content.startsWith(sum)) {
