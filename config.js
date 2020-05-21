@@ -2,7 +2,7 @@
 const config = {};
 
 // whether or not to drop database when app starts up
-config.dropdbonstart = true;
+config.dropdbonstart = false;
 
 /**
  * Strings that will summon the bot so it'll listen to your commands

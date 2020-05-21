@@ -46,17 +46,19 @@ requirements (
 	FOREIGN KEY (channelID) REFERENCES channels(chID) ON DELETE CASCADE
 )`;
 
+// icon is for image purposes
 // make sure everything lowercase
 schema.defs.currentsnap = `
 currentsnap (
 	currID INTEGER PRIMARY KEY AUTOINCREMENT,
 
 	snapid INTEGER UNIQUE NOT NULL,
+	icon TEXT,
 
 	name TEXT NOT NULL,
 	slots TEXT NOT NULL,
 	refine TEXT NOT NULL,
-	broken TEXT NOT NULL,
+	broken INTEGER NOT NULL,
 	price INTEGER NOT NULL,
 	buyers INTEGER NOT NULL,
 	enchant TEXT NOT NULL,

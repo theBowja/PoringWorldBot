@@ -1,51 +1,74 @@
 //var Discord = require('discord.io');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-var logger = require('winston');
 var auth = require('./auth.json');
 var parsefuncs = require('./parse.js');
 var config = require('./config.js');
 var commands = require('./commands.js');
-var https = require('https');
 var CronJob = require('cron').CronJob;
-
 var dbfuncs = require("./dbfuncs.js");
-
-// Configure logger settings
-logger.remove(logger.transports.Console);
-logger.add(new logger.transports.Console, {
-    colorize: true
-});
-logger.level = 'debug';
 
 bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
   config.summonstrings.push(`<@${bot.user.id}> `);
   config.summonstrings.push(`<@!${bot.user.id}> `);
 
+  // pretend owner has is in each guild
+  for(let [guildid, guild] of bot.guilds.cache) {
+    if(config.dropdbonstart) // if db was dropped, re-add owner to each guild this bot is in
+      dbfuncs.addDiscokid(config.owner, guildid, config.ownerperm);
+    else { // check if owner is properly lurking in the guild
+      let res = dbfuncs.getDiscokid(config.owner, guildid);
+      if(res === undefined) {
+        if(dbfuncs.addDiscokid(config.owner, guildid, config.ownerperm) === -1)
+          console.log("ERROR: FAILED TO ADD OWNER");
+      } else if(res.permission !== config.ownerperm && !dbfuncs.updateDiscokid(config.owner, config.ownerperm)) {
+        console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
+      }
+    }
+  }
+
   new CronJob('0 0,10,20,30,40,50 * * * *', function() {
-    updateSnaps();
+    commands.handleSearch(bot);
   }, null, true);
 });
 
-bot.on('guildCreate', guild => {
-  console.log(guild);
+// on joining the guild, give basic permission to inviter. add owner in as well lol
+bot.on('guildCreate', (guild) => {
+  console.log('event guildCreate: '+guild.id);
+  dbfuncs.addDiscokid(config.owner, guild.id, config.ownerperm);
+  message.guild.fetchAuditLogs({ limit:1, type:28 }) // type 28 is "add bot"
+    .then(audit => {
+      let userID = audit.entries.first().executor.id;
+      if(userID !== config.owner)
+        dbfuncs.addDiscokid(userID, guild.id, 1);
+    })
+    .catch(console.error);
 });
 
-bot.on('guildDelete', () => {
-  // TODO: check if this guild contains any channels we're keeping watch of
+// when kicked from guild or guild is deleted
+bot.on('guildDelete', (guild) => {
+  console.log('event guildDelete: '+guild.id);
+  dbfuncs.deleteGuild(guild.id);
+  dbfuncs.deleteMultipleChannels(message.guild.channels.cache.map(x => x.id));
 });
 
-bot.on('channelDelete', () => {
-  // TODO: if channel is deleted, check if it is one we're keeping watch of
+// when channel is deleted
+bot.on('channelDelete', (channel) => {
+  if(dbfuncs.deleteChannel(channel.id))
+    console.log('event channelDelete: '+channel.id);
 });
 
-bot.on('guildMemberRemove', () => {
-  // TODO: if member leaves, remove any requ he has in the channel in this guild
+// when member leaves, remove any requests he has in the channel in this guild
+bot.on('guildMemberRemove', (member) => {
+  if(dbfuncs.deleteMember(member.id, member.guild.id))
+    console.log('event guildMemberRemove: '+member.id+' in '+member.guild.id);
 });
 
-bot.on('roleDelete', () => {
-
+// when role is deleted, remove any requests assigned to the role
+bot.on('roleDelete', (role) => {
+  if(dbfuncs.deleteMember(role.id, role.guild.id))
+    console.log('event roleDelete: '+role.id+' in '+role.guild.id);
 });
 
 bot.on('message', message => {
@@ -61,15 +84,16 @@ bot.on('message', message => {
   if(message.contentObj.summon === undefined) return; // not summoned with summonstring
   if(message.contentObj.command === '') return; // no command provided
 
-  const cmd = message.contentObj.command; // save letters
+  const cmd = message.contentObj.command; // save letters xd
 
-  // retrieve user info if he exists in database
+  // retrieve user info of this guild if he exists in database
   // attach userObj to message
-  message.userObj = dbfuncs.getDiscokid(message.author.id);
+  // userObj 
+  message.userObj = dbfuncs.getDiscokid(message.author.id, message.guild.id);
   if(message.userObj === undefined)
     message.userObj = { permission: 0, discordid: message.author.id };
 
-  logger.info(`user ${message.author.id} to channel ${message.channel.id}: ${message.contentObj.command} => ${message.contentObj.body}`);
+  console.log(`user ${message.author.id} to channel ${message.channel.id}: ${message.contentObj.command} => ${message.contentObj.body}`);
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
   if(cmd === 'watch' ||  // allow commands to be read on this channel
@@ -77,19 +101,23 @@ bot.on('message', message => {
     return commands.handleWatch(message);
   }
   if(cmd === 'test') {
-    message.guild.fetchAuditLogs({type:28})
-      .then(audit => {
-        let tm = audit.entries//.first();
-        console.log(tm);
-        // console.log(tm.target)
-        // console.log(tm.executor)
-      });
-    // const exampleEmbed = new Discord.MessageEmbed()
-    //   .setColor('#0099ff')
-    //   .setTitle('Some title');
-    // message.channel.send(exampleEmbed);
+    let tempa = parsefuncs.buildSnappingInfoEmbed({
+      snapid: 4305,
+      icon: 'item_44008',
+      name: 'Eye of Dullahan',
+      slots: 0,
+      refine: '4',
+      broken: 1,
+      price: 1184564,
+      buyers: 21,
+      enchant: 'none',
+      enchantlevel: 0,
+      category: 'Equipment - Accessory',
+      stock: 1,
+      snapend: 1590087482
+    });
+    message.channel.send('<@161248916384251904>', tempa);
 
-    return;
   }
 
   // retrieve channel info if exists in database
@@ -119,149 +147,50 @@ bot.on('message', message => {
             cmd === 'thank') {
     return commands.handleThanks(message);
 
-  }    // quick price check for clean/unmodified equip
-    else if (cmd === 'pc' || cmd === 'pricecheck') {
-      handlepricecheck(message, message.content.body);
+  } else if (cmd === 'pc' || // quick price check for clean/unmodified equip
+             cmd === 'pricecheck') {
+    return commands.handlePriceCheck(message);
   }
 
   // no peasants allowed past here
   if(message.userObj.permission === 0) return message.react('🔒');
-
   // COMMANDS THAT REQUIRES HIGHER PERMISSION LEVEL
+
   if(cmd === 'showhere') {
-    // TODO: showhere for channel. only admins can run this
+    // TODO: showhere for channel
     // NOT IMPLEMENTED
 
   } else if(cmd === 'unwatch') { // remove this channel from channels table
     return commands.handleUnwatch(message);
+
+  } else if(cmd === 'force' ||
+            cmd === 'search' ||
+            cmd === 'query') {
+    return commands.handleSearch(bot, message.contentObj.body);
+
+  } else if(cmd === 'permit' ||
+            cmd === 'nwordpass') {
+    return commands.handlePermit(message);
+  }
+
+  if(message.author.id !== config.owner) return message.react('🔒');
+  // FOLLOWING COMMANDS ARE RESTRICTED TO OWNER OVERLORD
+
+  if(cmd === 'clearsnaps') {
+    let num = dbfuncs.deleteAllCurrentSnaps();
+    console.log(num + ' snap records deleted');
+    return message.channel.send(num + ' snap records deleted');
+
+  } else if(cmd === 'debug') {
+    return dbfuncs.listDiscokids(); // this is a debug function zzz
 
   } else if(cmd === 'showall') {
     // TODO: limit this to owner
     let res = dbfuncs.listAllRequirements();
     console.log(res);
     return;
-
-  } else if(cmd === 'clearsnaps') {
-    return dbfuncs.deleteAllSnaps();
-
-  } else if(cmd === 'ping') {
-    return updateSnaps();
-
-  } else if(cmd === 'debug') {
-    return dbfuncs.listDiscokids(); // this is a debug function zzz
-  
-  } else if(cmd === 'permit' ||
-            cmd === 'nwordpass') {
-    return commands.handlePermit(message);
   }
 
 });
 
 bot.login(auth.token);
-
-async function updateSnaps() {
-  try {
-    let snapsCurrent = await pingPoringWorld();
-    let gon = dbfuncs.clearExpiredSnaps();
-    logger.info(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
-    let snapsNew = dbfuncs.addSnaps(snapsCurrent);
-    logger.info(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
-
-
-    // construct message and send
-    for(let sr of snapsNew) {
-      let itemmsg = `\`\`\`${parsefuncs.buildItemFullName(sr)}\nprice: ${sr.price.toLocaleString()}\nstock: ${sr.stock}\nsnapend: ${Math.floor((new Date(sr.snapend*1000) - new Date())/60000)} minutes\`\`\``;
-      sr.name = sr.name.replace(/\s+/g, ''); // remove whitespace from name
-      sr.enchant = sr.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
-      sr.slotted = sr.slots - (sr.category === 'Equipment - Weapon'); // calculated slotted bool
-
-      let channels = {}; // map with key: channelid and value: discordid pings
-      for(let req of dbfuncs.findRequirements(sr)) {
-        if(channels[req.discordchid] === undefined)
-          channels[req.discordchid] = `<@${req.discordid}>`;
-        else
-          channels[req.discordchid] +=`<@${req.discordid}>`;
-      }
-
-      // send bot message to each channel
-      for(let [chid, pings] of Object.entries(channels)) {
-        bot.channels.fetch(chid).then((chan) => {
-          chan.send(itemmsg+pings);
-        });
-      }
-    }
-
-  } catch(e) {
-    logger.error('update failed: ' + e);
-    console.error("ERROR: " + e);
-  }
-}
-
-/**
- * pings poring.world for all snapping information
- * irrelevant snaps are discarded
- * @returns the array of currently active snaps
- */
-function pingPoringWorld() {
-  return new Promise(function(resolve, reject) {
-    https.get('https://poring.world/api/search?order=popularity&inStock=1', (resp) => {
-      let data = '';
-
-      // A chunk of data has been recieved.
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
-      resp.on('end', () => {
-        data = JSON.parse(data);
-        // remove expired snaps
-        data = data.filter(snap => snap.lastRecord.snapEnd > new Date()/1000);
-
-        resolve(data);
-      });
-
-    }).on("error", (err) => {
-      console.log("Error: " + err.message);
-      reject(err.message);
-    });
-  });
-}
-
-async function handlepricecheck(message, itemName) {
-  try {
-    console.log("handlepricecheck");
-    let words = '';
-    let jsonMessage = await pcPoringWorld(itemName);
-
-    words += 'Item name : ' + jsonMessage[0].name + '\n';
-    words += 'Price : ' + jsonMessage[0].lastRecord.price + '\n';
-    words += 'Stock : ' + jsonMessage[0].lastRecord.stock;
-    return message.channel.send('```' + words + '```');
-
-  } catch(e) {
-    logger.error('pricecheck failed: ' + e);
-    console.error("ERROR: " + e);
-  }
-}
-
-// quick price check for clean/unmodified equip
-function pcPoringWorld(itemName) {
-    return new Promise(function (resolve, reject) {
-        https.get('https://poring.world/api/search?order=price&rarity=&inStock=&modified=0&category=&endCategory=&q=' + itemName, (resp) => {
-            let data = '';
-
-            // A chunk of data has been recieved.
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
-            resp.on('end', () => {
-                data = JSON.parse(data);
-
-                resolve(data);
-            });
-
-        }).on("error", (err) => {
-            console.log("Error: " + err.message);
-            reject(err.message);
-        });
-    });
-};

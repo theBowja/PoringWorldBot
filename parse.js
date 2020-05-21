@@ -1,10 +1,15 @@
+const Discord = require('discord.js');
+const canvas = require('canvas');
 var lists = require('./lists.js');
 var config = require('./config.js');
+
+// This module contains most of the functions that handle data processing
 
 var parsefuncs = {};
 
 /**
- * @param itemstring {string} - the "name" part of the snap taken from poringworld
+ * example: "+3 Angry Snarl <Armor 2> (broken)" gets parsed into properties
+ * @param itemstring {string} - the "full name" part of the snap taken from poring.world
  * @returns object with properties: name, refine, broken, enchant, enchantlevel, slots
  */
 parsefuncs.parseItem = function(itemstring) {
@@ -20,7 +25,7 @@ parsefuncs.parseItem = function(itemstring) {
 };
 
 /**
- * builds the full name of an item with refine level, item name, slots, enchant, broken
+ * Builds the full name of an item with refine level, item name, slots, enchant, broken
  * example: "+13 Sniping Suit [1] <Arch 1> (broken)"
  */
 parsefuncs.buildItemFullName = function(item) {
@@ -31,6 +36,28 @@ parsefuncs.buildItemFullName = function(item) {
     if(item.enchant!=="none") fullname += (" <"+item.enchant+" "+item.enchantlevel+">");
     if(item.broken!==0) fullname += " (broken)";
     return fullname;
+};
+
+/**
+ * Builds an embed for showing snaps
+ * @param snaprecord {object} a record from the currentsnaps table
+ */
+parsefuncs.buildSnappingInfoEmbed = async function(snaprecord) {
+    let embed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(parsefuncs.buildItemFullName(snaprecord))
+        // .setDescription(`💰 ${snaprecord.price.toLocaleString()} zeny\n\
+        //                  📊 ${snaprecord.stock} stock\n\n\
+        //                  ⌛ ${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)} minutes left\n`);
+        .setDescription(`Price: **${snaprecord.price.toLocaleString()}** z\n\
+                         Stock: **${snaprecord.stock}**\n\n\
+                         Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes\n`);
+    if(snaprecord.broken) {
+        embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+    } else {
+        const myimg = await canvas.loadImage(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+    }
+    return embed;
 };
 
 // @returns string discord id or integer -1 if not valid

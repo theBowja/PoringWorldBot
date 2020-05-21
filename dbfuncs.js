@@ -12,6 +12,7 @@ function deleteTables(tables) {
 if(config.dropdbonstart)
 	deleteTables(['requirements', 'channels', 'discokids', 'currentsnap']);
 
+// init is called at the bottom of this file
 function init() {
 	// create all tables that don't exist
 	for (var key in schema.defs) {
@@ -19,13 +20,14 @@ function init() {
 		var sqlxd = 'CREATE TABLE IF NOT EXISTS ' + schema.defs[key];
 		db.exec(sqlxd);
 	}
+	// TODO: add the following code to bot.onready
 	// add the owner if he doesn't exist
-	let res = dbfuncs.getDiscokid(config.owner);
-	if(res === undefined) {
-		if(dbfuncs.addDiscokid(config.owner, config.ownerperm) === -1)
-			console.log("ERROR: FAILED TO ADD OWNER");
-	} else if(res.permission !== config.ownerperm && !dbfuncs.updateDiscokid(config.owner, config.ownerperm))
-		console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
+	// let res = dbfuncs.getDiscokid(config.owner);
+	// if(res === undefined) {
+	// 	if(dbfuncs.addDiscokid(config.owner, config.ownerperm) === -1)
+	// 		console.log("ERROR: FAILED TO ADD OWNER");
+	// } else if(res.permission !== config.ownerperm && !dbfuncs.updateDiscokid(config.owner, config.ownerperm))
+	// 	console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
 }
 
 var dbfuncs = {};
@@ -54,6 +56,7 @@ dbfuncs.addSnap = function(snap) {
 	var item = parsefuncs.parseItem(snap.name);
 	var s = {
 		snapid: snap.id,
+		icon: snap.icon,
 		name: item.name,
 		slots: item.slots,
 		refine: item.refine,
@@ -113,7 +116,7 @@ dbfuncs.getSnaps = function() {
  * Delete everything inside the table currentsnap
  * @returns the number of rows deleted
  */
-dbfuncs.deleteAllSnaps = function() {
+dbfuncs.deleteAllCurrentSnaps = function() {
 	var query = db.prepare('DELETE FROM currentsnap');
 	var info = query.run();
 	return info.changes;
@@ -169,6 +172,25 @@ dbfuncs.deleteDiscokid = function(dkidID) {
 };
 
 /**
+ * Removes users with matching discordid and guildid in database
+ * @returns number of rows removed
+ */
+dbfuncs.deleteMember = function(discordid, guildid) {
+ 	let query = db.prepare('DELETE FROM discokids WHERE discordid=? AND guildid=?');
+	var info = query.run(discordid, guildid);
+	return info.changes;
+};
+
+/**
+ * Removes all users with matching guildid in database
+ * @returns number of rows removed
+ */
+dbfuncs.deleteGuild = function(guildid) {
+	let query = db.prepare('DELETE FROM discokids WHERE guildid=?');
+	return query.run(guildid).changes;
+};
+
+/**
  * Gets the listener record using their discordid
  * @returns the object or undefined
  */
@@ -197,6 +219,14 @@ dbfuncs.getChannel = function(channelid) {
  	let query = db.prepare('DELETE FROM channels WHERE discordchid=?');
 	var info = query.run(channelid);
 	return info.changes === 0 ? false : true;
+};
+
+/**
+ * Deletes all channels provided in array
+ * @returns number of channels deleted
+ */
+dbfuncs.deleteMultipleChannels = function(chanids) {
+	return chanids.reduce((acc, cid) => { return dbfuncs.deleteChannel(cid) + acc; });
 };
 
 /**
@@ -263,6 +293,9 @@ dbfuncs.listAllRequirements = function() {
  * @param snap - an object record of currentsnap
  */
 dbfuncs.findRequirements = function(snap) {
+	snap.namespec = snap.name.replace(/\s+/g, ''); // remove whitespace from name
+	snap.enchantspec = snap.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
+	snap.slotted = snap.slots - (snap.category === 'Equipment - Weapon'); // calculated slotted bool
 	snap.refinecode = Math.pow(2, snap.refine);
 	snap.enchantlevelcode = Math.pow(2, snap.enchantlevel);
 
@@ -271,14 +304,14 @@ dbfuncs.findRequirements = function(snap) {
 		FROM requirements R 
 		INNER JOIN channels C ON R.channelID=C.chID
 		INNER JOIN discokids U ON R.discordkidID=U.dkidID
-		WHERE (R.name IS NULL OR LOWER(R.name)=LOWER(@name)) AND
+		WHERE (R.name IS NULL OR LOWER(R.name)=LOWER(@namespec)) AND
 			  (R.slotted IS NULL OR R.slotted=@slotted) AND
 		      ((R.refine & @refinecode) != 0) AND
 		      (R.broken IS NULL OR R.broken=@broken) AND
 		      (R.pricehigher IS NULL OR R.pricehigher<=@price) AND
 		      (R.pricelower IS NULL OR R.pricelower>=@price) AND
 		      (R.buyers IS NULL OR R.buyers<=@buyers) AND
-		      (R.enchant IS NULL OR LOWER(R.enchant)=LOWER(@enchant)) AND
+		      (R.enchant IS NULL OR LOWER(R.enchant)=LOWER(@enchantspec)) AND
 		      ((R.enchantlevel & @enchantlevelcode) != 0) AND
 		      (R.category IS NULL OR R.category=@category) AND
 		      (R.stock IS NULL OR R.stock>=@stock)
