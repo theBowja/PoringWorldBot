@@ -99,6 +99,9 @@ bot.on('message', message => {
   if(cmd === 'watch' ||  // allow commands to be read on this channel
      cmd === 'listenhereyoulittleshi') {
     return commands.handleWatch(message);
+  } else if(cmd === 'alive' ||
+            cmd === 'awake') {
+    return message.react('✅');
   }
 
   // retrieve channel info if exists in database
@@ -139,7 +142,7 @@ bot.on('message', message => {
 
   if(cmd === 'showhere') {
     // TODO: showhere for channel
-    // NOT IMPLEMENTED
+    // NOT IMPLEMENTED due to worries over message being too long and spammy
 
   } else if(cmd === 'unwatch') { // remove this channel from channels table
     return commands.handleUnwatch(message);

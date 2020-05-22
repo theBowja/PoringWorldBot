@@ -1,6 +1,8 @@
 # PoringWorldBot
  snappening bot
 
+ disclaimer. I am not the one who made poring.world
+
  read WIKI
 
 

@@ -12,7 +12,7 @@ config.dropdbonstart = false;
  * (be mindful that all long sequences of whitespace will have been replaced by a single space " ")
  * first string that matches will be used 
  */ 
-config.summonstrings = [];
+config.summonstrings = ["!pwb "];
 
 // the limited amount of reqs that a peasant can make
 config.limitreqs = 6;

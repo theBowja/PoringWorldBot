@@ -81,7 +81,7 @@ commands.handleShowUser = function(message) {
 
     let res = dbfuncs.listUserRequirements(targetID, message.guild.id, message.channel.id);
     let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
-    return message.channel.send(msg === '' ? '0 reqs' : 'use "delete [id]" to delete\n```'+msg+'```');
+    return message.channel.send(msg === '' ? '0 reqs' : 'use "delete [id]" (without square brackets) to delete\n```'+msg+'```');
 };
 
 commands.handleShowChannel = function(message) {
