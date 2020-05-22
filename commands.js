@@ -214,7 +214,7 @@ function existsInGuild(guild, idstring) {
         let tmp = guild.roles.cache.get(idstring.substring(1));
         if(tmp === undefined || tmp.deleted) return;
     } else { // idstring is a member
-        let tmp = guild.members.cache.get(targetID);
+        let tmp = guild.members.cache.get(idstring);
         if(tmp === undefined || tmp.deleted || tmp.user.bot) return;
     }
     return true;
