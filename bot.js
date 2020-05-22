@@ -171,6 +171,9 @@ bot.on('message', message => {
   } else if(cmd === 'showall') {
     let res = dbfuncs.listAllRequirements();
     return console.log(res);
+  } else if(cmd === 'showcurrent') {
+    let res = dbfuncs.getSnaps();
+    return console.log(res);
   }
 
 });
