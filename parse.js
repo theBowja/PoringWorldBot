@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const canvas = require('canvas');
 var lists = require('./lists.js');
 var config = require('./config.js');
 
