@@ -151,43 +151,50 @@ commands.handlePermit = function(message) {
     return message.react(res ? '✅' : '❎');
 };
 
-commands.handleSearch = async function(bot, querystring) {
-  try {
-    let snapsCurrent = await pingPoringWorld(querystring);
-    let gon = dbfuncs.clearExpiredSnaps();
-    console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
-    let snapsNew = dbfuncs.addSnaps(snapsCurrent);
-    console.log(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
+/**
+ * @param bot - must be provided
+ * @param message - optional. used only for responding to "force"/"search"/"query"
+ *                  message.contentObj.body must contain the querystring
+ */
+commands.handleSearch = async function(bot, message) {
+    try {
+        let querystring = (message !== undefined) ? message.contentObj.body : '';
+        let snapsCurrent = await pingPoringWorld(querystring);
+        if(message !== undefined) message.react('✅');
+        let gon = dbfuncs.clearExpiredSnaps();
+        console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
+        let snapsNew = dbfuncs.addSnaps(snapsCurrent);
+        console.log(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
 
-    for(let sr of snapsNew) {
-        let fullname = parsefuncs.buildItemFullName(sr);
-        let foundreqs = dbfuncs.findRequirements(sr);
-        if(foundreqs.length === 0) // if nobody cares about this, go next
-            continue;
+        for(let sr of snapsNew) {
+            let fullname = parsefuncs.buildItemFullName(sr);
+            let foundreqs = dbfuncs.findRequirements(sr);
+            if(foundreqs.length === 0) // if nobody cares about this, go next
+                continue;
 
-        let itemembed = parsefuncs.buildSnappingInfoEmbed(sr);
-        let channels = {}; // map with key: channelid and value: discordid pings
-        for(let req of foundreqs) {
-            if(channels[req.discordchid] === undefined)
-                channels[req.discordchid] = `<@${req.discordid}>`;
-            else
-                channels[req.discordchid] +=`<@${req.discordid}>`;
+            let itemembed = parsefuncs.buildSnappingInfoEmbed(sr);
+            let channels = {}; // map with key: channelid and value: discordid pings
+            for(let req of foundreqs) {
+                if(channels[req.discordchid] === undefined)
+                    channels[req.discordchid] = `<@${req.discordid}>`;
+                else
+                    channels[req.discordchid] +=`<@${req.discordid}>`;
+            }
+
+            console.log(channels);
+
+            // send bot message to each channel
+            for(let [chid, pings] of Object.entries(channels)) {
+                bot.channels.fetch(chid).then((chan) => {
+                    chan.send(fullname+' '+pings, itemembed);
+                });
+            }
+            console.log("done notifying users of pings");
         }
 
-        console.log(channels);
-
-        // send bot message to each channel
-        for(let [chid, pings] of Object.entries(channels)) {
-            bot.channels.fetch(chid).then((chan) => {
-                chan.send(fullname+' '+pings, itemembed);
-            });
-        }
-        console.log("done notifying users of pings");
+    } catch(e) {
+        console.error("ERROR pingPoringWorld: " + e);
     }
-
-  } catch(e) {
-    console.error("ERROR pingPoringWorld: " + e);
-  }
 };
 
 commands.handlePriceCheck = async function(message) {

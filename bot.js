@@ -150,7 +150,7 @@ bot.on('message', message => {
   } else if(cmd === 'force' ||
             cmd === 'search' ||
             cmd === 'query') {
-    return commands.handleSearch(bot, message.contentObj.body);
+    return commands.handleSearch(bot, message);
 
   } else if(cmd === 'permit' ||
             cmd === 'nwordpass') {
