@@ -160,6 +160,7 @@ commands.handleSearch = async function(bot, querystring) {
     console.log(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
 
     for(let sr of snapsNew) {
+        let fullname = parsefuncs.buildItemFullName(sr);
         let foundreqs = dbfuncs.findRequirements(sr);
         if(foundreqs.length === 0) // if nobody cares about this, go next
             continue;
@@ -176,7 +177,7 @@ commands.handleSearch = async function(bot, querystring) {
         // send bot message to each channel
         for(let [chid, pings] of Object.entries(channels)) {
             bot.channels.fetch(chid).then((chan) => {
-                chan.send(parsefuncs.buildItemFullName(sr)+' '+pings, itemembed);
+                chan.send(fullname+' '+pings, itemembed);
             });
         }
     }

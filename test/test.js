@@ -70,6 +70,17 @@ var items = [
 			enchantlevel: 1,
 			slots: 1
 		}
+	},
+	{
+		input: "+5 Southern Lute[2] <Morale 4> (broken)",
+		output: {
+			name: "Southern Lute",
+			refine: 5,
+			broken: true,
+			enchant: "Morale",
+			enchantlevel: 4,
+			slots: 2
+		}
 	}
 ];
 
@@ -194,15 +205,15 @@ var contents = [
 describe('parsefuncs', function() {
 
 	describe('#parseItem()', function() {
-		var callback = function() {
-			var parsed = parsefuncs.parseItem(item.input);
-			for(let prop in parsed) {
-				if(parsed.hasOwnProperty(prop))
-					assert.equal(parsed[prop], item.output[prop]);
-			} 			
-		};
-		for(var item of items) {
-			it(item.input, callback);
+		for(let item of items) {
+			it(item.input, function() {
+				let parsed = parsefuncs.parseItem(item.input);
+				assert.equal(parsed.name, item.output.name);
+				assert.equal(parsed.refine, item.output.refine);
+				assert.equal(parsed.broken, item.output.broken);
+				assert.equal(parsed.enchant, item.output.enchant);
+				assert.equal(parsed.enchantlevel, item.output.enchantlevel);	
+			});
 		}
 	});
 
