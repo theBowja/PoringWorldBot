@@ -1,6 +1,7 @@
 /extra/
 /auth.json
 /zzz.js
+/ohsnap.db
 
 # Logs
 logs
