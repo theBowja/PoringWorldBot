@@ -52,12 +52,13 @@ parsefuncs.buildSnappingInfoEmbed = async function(snaprecord) {
         .setDescription(`Price: **${snaprecord.price.toLocaleString()}** z\n\
                          Stock: **${snaprecord.stock}**\n\n\
                          Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes\n`);
-    if(snaprecord.broken) {
-        embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
-    } else {
-        const myimg = await canvas.loadImage(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
-    }
-    return embed;
+    // if(snaprecord.broken) {
+    //     embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+    // } else {
+    //     const myimg = await canvas.loadImage(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+
+    // }
+    return embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
 };
 
 // @returns string discord id or integer -1 if not valid

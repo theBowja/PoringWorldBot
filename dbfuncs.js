@@ -5,29 +5,19 @@ var config = require('./config.js');
 
 // delete tables. tables is an array of strings. will be deleted in order
 function deleteTables(tables) {
-  for(let t of tables)
-  	db.exec('DROP TABLE IF EXISTS ' + t);
+    console.log('Dropping database tables');
+    for(let t of tables)
+        db.exec('DROP TABLE IF EXISTS ' + t);
 }
 
 if(config.dropdbonstart)
-	deleteTables(['requirements', 'channels', 'discokids', 'currentsnap']);
+    deleteTables(['requirements', 'channels', 'discokids', 'currentsnap']);
 
-// init is called at the bottom of this file
-function init() {
-	// create all tables that don't exist
-	for (var key in schema.defs) {
-		if (!schema.defs.hasOwnProperty(key)) continue;
-		var sqlxd = 'CREATE TABLE IF NOT EXISTS ' + schema.defs[key];
-		db.exec(sqlxd);
-	}
-	// TODO: add the following code to bot.onready
-	// add the owner if he doesn't exist
-	// let res = dbfuncs.getDiscokid(config.owner);
-	// if(res === undefined) {
-	// 	if(dbfuncs.addDiscokid(config.owner, config.ownerperm) === -1)
-	// 		console.log("ERROR: FAILED TO ADD OWNER");
-	// } else if(res.permission !== config.ownerperm && !dbfuncs.updateDiscokid(config.owner, config.ownerperm))
-	// 	console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
+// create all tables that don't exist
+for (var key in schema.defs) {
+    if (!schema.defs.hasOwnProperty(key)) continue;
+    var sqlxd = 'CREATE TABLE IF NOT EXISTS ' + schema.defs[key];
+    db.exec(sqlxd);
 }
 
 var dbfuncs = {};
@@ -40,10 +30,10 @@ var dbfuncs = {};
  * @returns the number of rows deleted
  */
 dbfuncs.clearExpiredSnaps = function() {
-	var current = Math.floor(new Date()/1000);
-	var query = db.prepare('DELETE FROM currentsnap WHERE snapend < ?');
-	var info = query.run(current);
- 	return info.changes;
+    var current = Math.floor(new Date()/1000);
+    var query = db.prepare('DELETE FROM currentsnap WHERE snapend < ?');
+    var info = query.run(current);
+    return info.changes;
 };
 
 /**
@@ -53,37 +43,37 @@ dbfuncs.clearExpiredSnaps = function() {
  * @throws gives warning if number of snaps in database exceeds 100
  */
 dbfuncs.addSnap = function(snap) {
-	var item = parsefuncs.parseItem(snap.name);
-	var s = {
-		snapid: snap.id,
-		icon: snap.icon,
-		name: item.name,
-		slots: item.slots,
-		refine: item.refine,
-		broken: item.broken ? 1 : 0,
-		price: snap.lastRecord.price,
-		buyers: snap.lastRecord.snapBuyers,
-		enchant: item.enchant,
-		enchantlevel: item.enchantlevel,
-		category: snap.category,
-		stock: snap.lastRecord.stock,
-		snapend: snap.lastRecord.snapEnd
-	};
+    var item = parsefuncs.parseItem(snap.name);
+    var s = {
+        snapid: snap.id,
+        icon: snap.icon,
+        name: item.name,
+        slots: item.slots,
+        refine: item.refine,
+        broken: item.broken ? 1 : 0,
+        price: snap.lastRecord.price,
+        buyers: snap.lastRecord.snapBuyers,
+        enchant: item.enchant,
+        enchantlevel: item.enchantlevel,
+        category: snap.category,
+        stock: snap.lastRecord.stock,
+        snapend: snap.lastRecord.snapEnd
+    };
     var queryget = db.prepare('SELECT stock FROM currentsnap WHERE snapid=@snapid');
     var resget = queryget.get(s);
     if(resget === undefined) { // new item
- 		var queryins = db.prepare('INSERT INTO currentsnap (snapid, name, slots, refine, broken, price, buyers, enchant, enchantlevel, category, snapend, stock) VALUES (@snapid, @name, @slots, @refine, @broken, @price, @buyers, @enchant, @enchantlevel, @category, @snapend, @stock)');
-		queryins.run(s);
-		return s;
+        var queryins = db.prepare('INSERT INTO currentsnap (snapid, name, slots, refine, broken, price, buyers, enchant, enchantlevel, category, snapend, stock) VALUES (@snapid, @name, @slots, @refine, @broken, @price, @buyers, @enchant, @enchantlevel, @category, @snapend, @stock)');
+        queryins.run(s);
+        return s;
     } else { // existing item
-  	    if(resget.stock !== s.stock) { // change in stock
-  			var queryupd = db.prepare('UPDATE currentsnap SET stock=@stock WHERE snapid=@snapid');
-  			queryupd.run(s);
-  			return s;
-	  	} else { // no change in stock
-  			return false;
-	  	}
-	}
+        if(resget.stock !== s.stock) { // change in stock
+            var queryupd = db.prepare('UPDATE currentsnap SET stock=@stock WHERE snapid=@snapid');
+            queryupd.run(s);
+            return s;
+        } else { // no change in stock
+            return false;
+        }
+    }
 };
 
 /**
@@ -93,12 +83,12 @@ dbfuncs.addSnap = function(snap) {
  * @throws this function does not throw anything yet.
  */
 dbfuncs.addSnaps = function(snaps) {
-	var snapReturn = [];
-	for(let s of snaps) {
-		let res = dbfuncs.addSnap(s);
-		if(res) snapReturn.push(res);
-	}
-	return snapReturn;
+    var snapReturn = [];
+    for(let s of snaps) {
+        let res = dbfuncs.addSnap(s);
+        if(res) snapReturn.push(res);
+    }
+    return snapReturn;
 };
 
 /**
@@ -106,10 +96,8 @@ dbfuncs.addSnaps = function(snaps) {
  * @returns array of snap objects
  */
 dbfuncs.getSnaps = function() {
-	var query = db.prepare('SELECT * FROM currentsnap');
- 	var info = query.run();
-	return info;
-	// TODO ???
+    var query = db.prepare('SELECT * FROM currentsnap');
+    return query.all();
 };
 
 /**
@@ -117,9 +105,9 @@ dbfuncs.getSnaps = function() {
  * @returns the number of rows deleted
  */
 dbfuncs.deleteAllCurrentSnaps = function() {
-	var query = db.prepare('DELETE FROM currentsnap');
-	var info = query.run();
-	return info.changes;
+    var query = db.prepare('DELETE FROM currentsnap');
+    var info = query.run();
+    return info.changes;
 };
 
 /**
@@ -127,11 +115,11 @@ dbfuncs.deleteAllCurrentSnaps = function() {
  * @returns the id of the inserted row, or -1 if failed
  */
 dbfuncs.addDiscokid = function(discordid, guildid, permission=0) {
-	try {
-		let zzz = db.prepare('INSERT INTO discokids (discordid, guildid, permission) VALUES (?, ?, ?)');
-		var info = zzz.run(discordid, guildid, permission);
-		return info.lastInsertRowid;
-	} catch(e) { return -1; }
+    try {
+        let zzz = db.prepare('INSERT INTO discokids (discordid, guildid, permission) VALUES (?, ?, ?)');
+        var info = zzz.run(discordid, guildid, permission);
+        return info.lastInsertRowid;
+    } catch(e) { return -1; }
 };
 
 /**
@@ -139,15 +127,16 @@ dbfuncs.addDiscokid = function(discordid, guildid, permission=0) {
  * @returns the object or undefined
  */
 dbfuncs.getDiscokid = function(discordid, guildid) {
-	let query = db.prepare('SELECT * FROM discokids WHERE discordid=? AND guildid=?');
-	return query.get(discordid, guildid);
+    let query = db.prepare('SELECT * FROM discokids WHERE discordid=? AND guildid=?');
+    return query.get(discordid, guildid);
 };
 
-// TODO
+/**
+ * @returns array with every discokid in the database
+ */
 dbfuncs.listDiscokids = function() {
-	var zzz = db.prepare('SELECT *  FROM discokids');
-	console.log(zzz.all());
-	return;
+    var zzz = db.prepare('SELECT *  FROM discokids');
+    return zzz.all();
 };
 
 /**
@@ -155,9 +144,9 @@ dbfuncs.listDiscokids = function() {
  * @returns true/false if there was a change or not
  */
 dbfuncs.updateDiscokid = function(dkidID, permission) {
-	let query = db.prepare('UPDATE discokids SET permission=? WHERE dkidID=?');
-	let res = query.run(permission, dkidID);
-	return res.changes !== 0;
+    let query = db.prepare('UPDATE discokids SET permission=? WHERE dkidID=?');
+    let res = query.run(permission, dkidID);
+    return res.changes !== 0;
 };
 
 /**
@@ -166,9 +155,9 @@ dbfuncs.updateDiscokid = function(dkidID, permission) {
  * @param type - enum('channel', 'user')
  */
 dbfuncs.deleteDiscokid = function(dkidID) {
- 	let query = db.prepare('DELETE FROM discokids WHERE dkidID=?');
-	var info = query.run(dkidID);
-	return info.changes === 0 ? false : true;
+    let query = db.prepare('DELETE FROM discokids WHERE dkidID=?');
+    var info = query.run(dkidID);
+    return info.changes === 0 ? false : true;
 };
 
 /**
@@ -176,9 +165,9 @@ dbfuncs.deleteDiscokid = function(dkidID) {
  * @returns number of rows removed
  */
 dbfuncs.deleteMember = function(discordid, guildid) {
- 	let query = db.prepare('DELETE FROM discokids WHERE discordid=? AND guildid=?');
-	var info = query.run(discordid, guildid);
-	return info.changes;
+    let query = db.prepare('DELETE FROM discokids WHERE discordid=? AND guildid=?');
+    var info = query.run(discordid, guildid);
+    return info.changes;
 };
 
 /**
@@ -186,8 +175,8 @@ dbfuncs.deleteMember = function(discordid, guildid) {
  * @returns number of rows removed
  */
 dbfuncs.deleteGuild = function(guildid) {
-	let query = db.prepare('DELETE FROM discokids WHERE guildid=?');
-	return query.run(guildid).changes;
+    let query = db.prepare('DELETE FROM discokids WHERE guildid=?');
+    return query.run(guildid).changes;
 };
 
 /**
@@ -195,8 +184,8 @@ dbfuncs.deleteGuild = function(guildid) {
  * @returns the object or undefined
  */
 dbfuncs.getChannel = function(channelid) {
-	let query = db.prepare('SELECT * FROM channels WHERE discordchid=?');
-	return query.get(channelid);
+    let query = db.prepare('SELECT * FROM channels WHERE discordchid=?');
+    return query.get(channelid);
 };
 
 /**
@@ -204,11 +193,11 @@ dbfuncs.getChannel = function(channelid) {
  * @returns the id of the inserted row. otherwise -1 for no row
  */
  dbfuncs.addChannel = function(channelid, limitedto) {
- 	try {
-	 	let zzz = db.prepare('INSERT INTO channels (discordchid, limitedto) VALUES (?, ?)');
-		var info = zzz.run(channelid, limitedto);
-		return info.changes === 0 ? -1 : info.lastInsertRowid;
-	} catch(e) { return -1; }
+    try {
+        let zzz = db.prepare('INSERT INTO channels (discordchid, limitedto) VALUES (?, ?)');
+        var info = zzz.run(channelid, limitedto);
+        return info.changes === 0 ? -1 : info.lastInsertRowid;
+    } catch(e) { return -1; }
 };
 
 /**
@@ -216,9 +205,9 @@ dbfuncs.getChannel = function(channelid) {
  * @returns true/false if deleted or not
  */
  dbfuncs.deleteChannel = function(channelid) {
- 	let query = db.prepare('DELETE FROM channels WHERE discordchid=?');
-	var info = query.run(channelid);
-	return info.changes === 0 ? false : true;
+    let query = db.prepare('DELETE FROM channels WHERE discordchid=?');
+    var info = query.run(channelid);
+    return info.changes === 0 ? false : true;
 };
 
 /**
@@ -226,7 +215,7 @@ dbfuncs.getChannel = function(channelid) {
  * @returns number of channels deleted
  */
 dbfuncs.deleteMultipleChannels = function(chanids) {
-	return chanids.reduce((acc, cid) => { return dbfuncs.deleteChannel(cid) + acc; });
+    return chanids.reduce((acc, cid) => { return dbfuncs.deleteChannel(cid) + acc; });
 };
 
 /**
@@ -236,12 +225,12 @@ dbfuncs.deleteMultipleChannels = function(chanids) {
  * @return true/false if success
  */
 dbfuncs.addRequirement = function(reqs) {
-	if(!reqs.hasOwnProperty('channelID') || !reqs.hasOwnProperty('discordkidID')) return false;
+    if(!reqs.hasOwnProperty('channelID') || !reqs.hasOwnProperty('discordkidID')) return false;
 
-	let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
-							VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
-	let info = query.run(reqs);
-	return info.changes === 1;
+    let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
+                            VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
+    let info = query.run(reqs);
+    return info.changes === 1;
 };
 
 /**
@@ -249,9 +238,9 @@ dbfuncs.addRequirement = function(reqs) {
  * @return {bool} for if row is deleted
  */
 dbfuncs.deleteRequirement = function(reqid) {
-	let query = db.prepare('DELETE FROM requirements WHERE reqID=?');
-	let res = query.run(reqid);
-	return res.changes > 0;
+    let query = db.prepare('DELETE FROM requirements WHERE reqID=?');
+    let res = query.run(reqid);
+    return res.changes > 0;
 };
 
 /**
@@ -259,12 +248,12 @@ dbfuncs.deleteRequirement = function(reqid) {
  * @return {object} or undefined
  */
 dbfuncs.getRequirement = function(reqid) {
-	let query = db.prepare(`SELECT * FROM requirements R 
-							INNER JOIN channels C ON R.channelID=C.chID
-							INNER JOIN discokids U ON R.discordkidID=U.dkidID
-							WHERE R.reqID=?`);
-	let res = query.get(reqid);
-	return res;
+    let query = db.prepare(`SELECT * FROM requirements R 
+                            INNER JOIN channels C ON R.channelID=C.chID
+                            INNER JOIN discokids U ON R.discordkidID=U.dkidID
+                            WHERE R.reqID=?`);
+    let res = query.get(reqid);
+    return res;
 };
 
 /**
@@ -272,20 +261,20 @@ dbfuncs.getRequirement = function(reqid) {
  * @return array of requirement objects of given type
  */
 dbfuncs.listUserRequirements = function(userid, guildid, channelid) {
-	var query = db.prepare(`SELECT * FROM requirements R
-							INNER JOIN discokids U ON R.discordkidID=U.dkidID
-							INNER JOIN channels C ON R.channelID=C.chID
-							WHERE U.discordid=? AND
-								  U.guildid=? AND
-								  C.discordchid=?`);
-	var res = query.all(userid, guildid, channelid);
-	return res;
+    var query = db.prepare(`SELECT * FROM requirements R
+                            INNER JOIN discokids U ON R.discordkidID=U.dkidID
+                            INNER JOIN channels C ON R.channelID=C.chID
+                            WHERE U.discordid=? AND
+                                  U.guildid=? AND
+                                  C.discordchid=?`);
+    var res = query.all(userid, guildid, channelid);
+    return res;
 };
 
 dbfuncs.listAllRequirements = function() {
-	var query = db.prepare(`SELECT * FROM requirements R`);
-	var res = query.all();
-	return res;
+    var query = db.prepare(`SELECT * FROM requirements R`);
+    var res = query.all();
+    return res;
 };
 
 /**
@@ -293,34 +282,32 @@ dbfuncs.listAllRequirements = function() {
  * @param snap - an object record of currentsnap
  */
 dbfuncs.findRequirements = function(snap) {
-	snap.namespec = snap.name.replace(/\s+/g, ''); // remove whitespace from name
-	snap.enchantspec = snap.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
-	snap.slotted = snap.slots - (snap.category === 'Equipment - Weapon'); // calculated slotted bool
-	snap.refinecode = Math.pow(2, snap.refine);
-	snap.enchantlevelcode = Math.pow(2, snap.enchantlevel);
+    snap.namespec = snap.name.replace(/\s+/g, ''); // remove whitespace from name
+    snap.enchantspec = snap.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
+    snap.slotted = snap.slots - (snap.category === 'Equipment - Weapon'); // calculated slotted bool
+    snap.refinecode = Math.pow(2, snap.refine);
+    snap.enchantlevelcode = Math.pow(2, snap.enchantlevel);
 
-	var query = db.prepare(`
-		SELECT R.reqID, C.discordchid, U.discordid
-		FROM requirements R 
-		INNER JOIN channels C ON R.channelID=C.chID
-		INNER JOIN discokids U ON R.discordkidID=U.dkidID
-		WHERE (R.name IS NULL OR LOWER(R.name)=LOWER(@namespec)) AND
-			  (R.slotted IS NULL OR R.slotted=@slotted) AND
-		      ((R.refine & @refinecode) != 0) AND
-		      (R.broken IS NULL OR R.broken=@broken) AND
-		      (R.pricehigher IS NULL OR R.pricehigher<=@price) AND
-		      (R.pricelower IS NULL OR R.pricelower>=@price) AND
-		      (R.buyers IS NULL OR R.buyers<=@buyers) AND
-		      (R.enchant IS NULL OR LOWER(R.enchant)=LOWER(@enchantspec)) AND
-		      ((R.enchantlevel & @enchantlevelcode) != 0) AND
-		      (R.category IS NULL OR R.category=@category) AND
-		      (R.stock IS NULL OR R.stock>=@stock)
-	`);
+    var query = db.prepare(`
+        SELECT R.reqID, C.discordchid, U.discordid
+        FROM requirements R 
+        INNER JOIN channels C ON R.channelID=C.chID
+        INNER JOIN discokids U ON R.discordkidID=U.dkidID
+        WHERE (R.name IS NULL OR LOWER(R.name)=LOWER(@namespec)) AND
+              (R.slotted IS NULL OR R.slotted=@slotted) AND
+              ((R.refine & @refinecode) != 0) AND
+              (R.broken IS NULL OR R.broken=@broken) AND
+              (R.pricehigher IS NULL OR R.pricehigher<=@price) AND
+              (R.pricelower IS NULL OR R.pricelower>=@price) AND
+              (R.buyers IS NULL OR R.buyers<=@buyers) AND
+              (R.enchant IS NULL OR LOWER(R.enchant)=LOWER(@enchantspec)) AND
+              ((R.enchantlevel & @enchantlevelcode) != 0) AND
+              (R.category IS NULL OR R.category=@category) AND
+              (R.stock IS NULL OR R.stock>=@stock)
+    `);
 
-	var result = query.all(snap);
-	return result;
+    var result = query.all(snap);
+    return result;
 };
-
-init();
 
 module.exports = dbfuncs;

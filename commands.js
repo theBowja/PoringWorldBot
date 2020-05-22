@@ -25,6 +25,8 @@ commands.handleTagMe = function(message) {
 
     let targetObj = message.userObj;
     if(pars.assign !== undefined) { // handle if -assign
+        if(!existsInGuild(message.guild, pars.assign))
+            return message.react('❎'); // cannot be assigned because doesn't exist in guild
         targetObj = dbfuncs.getDiscokid(pars.assign, message.guild.id); // get permission level of -assign target
         if(targetObj === undefined)
             targetObj = { permission: 0, discordid: pars.assign };
@@ -130,9 +132,8 @@ commands.handlePermit = function(message) {
     if(body.length < 2)
         return message.react('❎'); // not enough parameters provided
     let targetID = parsefuncs.parseDiscordID(body[0]);
-    if(targetID === -1)
+    if(targetID === -1 || !existsInGuild(message.guild, targetID))
         return message.react('❎'); // no valid discord id provided
-    // TODO: check if this targetID exists in server
 
     let perm = parseInt(body[1]);
     if(isNaN(perm))
@@ -175,7 +176,7 @@ commands.handleSearch = async function(bot, querystring) {
         // send bot message to each channel
         for(let [chid, pings] of Object.entries(channels)) {
             bot.channels.fetch(chid).then((chan) => {
-                chan.send(sr.fullname+' '+pings, itemembed);
+                chan.send(parsefuncs.buildItemFullName(sr)+' '+pings, itemembed);
             });
         }
     }
@@ -202,6 +203,22 @@ commands.handlePriceCheck = async function(message) {
 };
 
 module.exports = commands;
+
+/**
+ * Takes an idstring (might have & in front for role)
+ *   and checks if there is a user or role in the guild
+ * @returns true/false. false if it's a bot
+ */
+function existsInGuild(guild, idstring) {
+    if(idstring.charAt(0) === '&') { // idstring is a role
+        let tmp = guild.roles.cache.get(idstring.substring(1));
+        if(tmp === undefined || tmp.deleted) return;
+    } else { // idstring is a member
+        let tmp = guild.members.cache.get(targetID);
+        if(tmp === undefined || tmp.deleted || tmp.user.bot) return;
+    }
+    return true;
+}
 
 /**
  * pings poring.world for all snapping information

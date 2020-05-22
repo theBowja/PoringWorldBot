@@ -100,25 +100,6 @@ bot.on('message', message => {
      cmd === 'listenhereyoulittleshi') {
     return commands.handleWatch(message);
   }
-  if(cmd === 'test') {
-    let tempa = parsefuncs.buildSnappingInfoEmbed({
-      snapid: 4305,
-      icon: 'item_44008',
-      name: 'Eye of Dullahan',
-      slots: 0,
-      refine: '4',
-      broken: 1,
-      price: 1184564,
-      buyers: 21,
-      enchant: 'none',
-      enchantlevel: 0,
-      category: 'Equipment - Accessory',
-      stock: 1,
-      snapend: 1590087482
-    });
-    message.channel.send('<@161248916384251904>', tempa);
-
-  }
 
   // retrieve channel info if exists in database
   // attach channelObj to message
@@ -182,13 +163,11 @@ bot.on('message', message => {
     return message.channel.send(num + ' snap records deleted');
 
   } else if(cmd === 'debug') {
-    return dbfuncs.listDiscokids(); // this is a debug function zzz
+    return console.log(dbfuncs.listDiscokids()); // this is a debug function zzz
 
   } else if(cmd === 'showall') {
-    // TODO: limit this to owner
     let res = dbfuncs.listAllRequirements();
-    console.log(res);
-    return;
+    return console.log(res);
   }
 
 });
