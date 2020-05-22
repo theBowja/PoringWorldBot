@@ -175,4 +175,8 @@ bot.on('message', message => {
 
 });
 
+bot.on("disconnect", function(event){
+    console.log(`${new Date().toLocaleString()}: The WebSocket has closed and will no longer attempt to reconnect`);
+});
+
 bot.login(auth.token);
