@@ -41,7 +41,7 @@ parsefuncs.buildItemFullName = function(item) {
  * Builds an embed for showing snaps
  * @param snaprecord {object} a record from the currentsnaps table
  */
-parsefuncs.buildSnappingInfoEmbed = async function(snaprecord) {
+parsefuncs.buildSnappingInfoEmbed = function(snaprecord) {
     let embed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(parsefuncs.buildItemFullName(snaprecord))

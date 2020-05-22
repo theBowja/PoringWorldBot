@@ -165,7 +165,7 @@ commands.handleSearch = async function(bot, querystring) {
         if(foundreqs.length === 0) // if nobody cares about this, go next
             continue;
 
-        let itemembed = await parsefuncs.buildSnappingInfoEmbed(sr);
+        let itemembed = parsefuncs.buildSnappingInfoEmbed(sr);
         let channels = {}; // map with key: channelid and value: discordid pings
         for(let req of foundreqs) {
             if(channels[req.discordchid] === undefined)
@@ -174,12 +174,15 @@ commands.handleSearch = async function(bot, querystring) {
                 channels[req.discordchid] +=`<@${req.discordid}>`;
         }
 
+        console.log(channels);
+
         // send bot message to each channel
         for(let [chid, pings] of Object.entries(channels)) {
             bot.channels.fetch(chid).then((chan) => {
                 chan.send(fullname+' '+pings, itemembed);
             });
         }
+        console.log("done notifying users of pings");
     }
 
   } catch(e) {
