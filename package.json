@@ -10,7 +10,6 @@
   "author": "Lovyrn",
   "dependencies": {
     "better-sqlite3": "^7.0.1",
-    "canvas": "^2.6.1",
     "cron": "^1.8.2",
     "discord.js": "^12.2.0",
     "https": "^1.0.0",
