@@ -37,7 +37,7 @@ bot.on('ready', () => {
 bot.on('guildCreate', (guild) => {
   console.log('event guildCreate: '+guild.id);
   dbfuncs.addDiscokid(config.owner, guild.id, config.ownerperm);
-  message.guild.fetchAuditLogs({ limit:1, type:28 }) // type 28 is "add bot"
+  guild.fetchAuditLogs({ limit:1, type:28 }) // type 28 is "add bot"
     .then(audit => {
       let userID = audit.entries.first().executor.id;
       if(userID !== config.owner)
@@ -49,8 +49,9 @@ bot.on('guildCreate', (guild) => {
 // when kicked from guild or guild is deleted
 bot.on('guildDelete', (guild) => {
   console.log('event guildDelete: '+guild.id);
-  dbfuncs.deleteGuild(guild.id);
-  dbfuncs.deleteMultipleChannels(message.guild.channels.cache.map(x => x.id));
+  let changes = dbfuncs.deleteGuild(guild.id);
+  console.log('removed '+changes.discokids+' discokids from database');
+  console.log('removed '+changes.channels+' channels from database');
 });
 
 // when channel is deleted
@@ -103,6 +104,9 @@ bot.on('message', message => {
             cmd === 'awake' ||
             cmd === 'up') {
     return message.react('🙂');
+  } else if(cmd === 'invite' ||
+            cmd === 'invitelink') {
+    return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=134336```');
   }
 
   // retrieve channel info if exists in database
@@ -168,6 +172,8 @@ bot.on('message', message => {
 
   } else if(cmd === 'debug') {
     return console.log(dbfuncs.listDiscokids()); // this is a debug function zzz
+  } else if(cmd === 'logallchannels') {
+    return console.log(dbfuncs.getAllChannels());
 
   } else if(cmd === 'showall') {
     let res = dbfuncs.listAllRequirements();
@@ -178,7 +184,7 @@ bot.on('message', message => {
   } else if(cmd === 'announce') {
     let chans = dbfuncs.getAllChannels();
     for(let ch of chans) {
-        bot.channels.fetch(ch).then((chan) => {
+        bot.channels.fetch(ch.discordchid).then((chan) => {
             chan.send(message.contentObj.body);
         });
     }
@@ -187,6 +193,7 @@ bot.on('message', message => {
 
 });
 
+// not sure if this is an actual event but whatever
 bot.on("disconnect", function(event){
     console.log(`${new Date().toLocaleString()}: The WebSocket has closed and will no longer attempt to reconnect`);
 });

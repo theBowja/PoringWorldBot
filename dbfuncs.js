@@ -172,11 +172,14 @@ dbfuncs.deleteMember = function(discordid, guildid) {
 
 /**
  * Removes all users with matching guildid in database
- * @returns number of rows removed
+ * @returns object with info for discokids and channels. check info.changes
  */
 dbfuncs.deleteGuild = function(guildid) {
-    let query = db.prepare('DELETE FROM discokids WHERE guildid=?');
-    return query.run(guildid).changes;
+    let q1 = db.prepare('DELETE FROM discokids WHERE guildid=?');
+    let q2 = db.prepare('DELETE FROM channels WHERE guildid=?');
+    let res1 = q1.run(guildid).changes;
+    let res2 = q2.run(guildid).changes;
+    return { discokids: res1, channels: res2 };
 };
 
 /**
@@ -198,10 +201,10 @@ dbfuncs.getAllChannels = function() {
  * Adds channel to database
  * @returns the id of the inserted row. otherwise -1 for no row
  */
- dbfuncs.addChannel = function(channelid, limitedto) {
+ dbfuncs.addChannel = function(channelid, guildid, limitedto) {
     try {
-        let zzz = db.prepare('INSERT INTO channels (discordchid, limitedto) VALUES (?, ?)');
-        var info = zzz.run(channelid, limitedto);
+        let zzz = db.prepare('INSERT INTO channels (discordchid, guildid, limitedto) VALUES (?, ?, ?)');
+        var info = zzz.run(channelid, guildid, limitedto);
         return info.changes === 0 ? -1 : info.lastInsertRowid;
     } catch(e) { return -1; }
 };
@@ -218,6 +221,7 @@ dbfuncs.getAllChannels = function() {
 
 /**
  * Deletes all channels provided in array
+ * @param chanids - an array of ids that isn't empy
  * @returns number of channels deleted
  */
 dbfuncs.deleteMultipleChannels = function(chanids) {

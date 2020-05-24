@@ -6,7 +6,9 @@ schema.defs.channels = `
 channels (
 	chID INTEGER PRIMARY KEY AUTOINCREMENT,
 	discordchid TEXT UNIQUE NOT NULL,
-	limitedto INTEGER NOT NULL DEFAULT 0
+	guildid TEXT NOT NULL,
+	limitedto INTEGER NOT NULL DEFAULT 0,
+	UNIQUE(discordchid, guildid)
 )`;
 
 // a kid in different guilds may have different permission levels

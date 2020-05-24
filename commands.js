@@ -61,7 +61,7 @@ commands.handleWatch = function(message) {
 
     if(message.userObj.permission < limitedto) // user doesn't have enough permission
         return message.react('🔒');
-    let res = dbfuncs.addChannel(message.channel.id, limitedto);
+    let res = dbfuncs.addChannel(message.channel.id, message.guild.id, limitedto);
     return message.react(res !== -1 ? '✅' : '❎');
 };
 
