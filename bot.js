@@ -100,8 +100,9 @@ bot.on('message', message => {
      cmd === 'listenhereyoulittleshi') {
     return commands.handleWatch(message);
   } else if(cmd === 'alive' ||
-            cmd === 'awake') {
-    return message.react('✅');
+            cmd === 'awake' ||
+            cmd === 'up') {
+    return message.react('🙂');
   }
 
   // retrieve channel info if exists in database
@@ -157,7 +158,7 @@ bot.on('message', message => {
     return commands.handlePermit(message);
   }
 
-  if(message.author.id !== config.owner) return message.react('🔒');
+  if(message.author.id !== config.owner) return;// message.react('🔒');
   // FOLLOWING COMMANDS ARE RESTRICTED TO OWNER OVERLORD
 
   if(cmd === 'clearsnaps') {
@@ -174,6 +175,14 @@ bot.on('message', message => {
   } else if(cmd === 'showcurrent') {
     let res = dbfuncs.getSnaps();
     return console.log(res);
+  } else if(cmd === 'announce') {
+    let chans = dbfuncs.getAllChannels();
+    for(let ch of chans) {
+        bot.channels.fetch(ch).then((chan) => {
+            chan.send(message.contentObj.body);
+        });
+    }
+    message.react('✅');
   }
 
 });

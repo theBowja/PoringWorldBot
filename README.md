@@ -22,7 +22,7 @@ git reset --hard origin/master
 ```
 starting the bot
 ```
-nohup node bot.js > poring.out &
+nohup node bot.js > poring.log 2>&1 &
 tail -f poring.out
 ```
 deleting the process

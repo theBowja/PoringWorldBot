@@ -188,6 +188,12 @@ dbfuncs.getChannel = function(channelid) {
     return query.get(channelid);
 };
 
+// get all channel records
+dbfuncs.getAllChannels = function() {
+    let query = db.prepare('SELECT * FROM channels');
+    return query.all();
+};
+
 /**
  * Adds channel to database
  * @returns the id of the inserted row. otherwise -1 for no row

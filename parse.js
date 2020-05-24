@@ -45,19 +45,18 @@ parsefuncs.buildSnappingInfoEmbed = function(snaprecord) {
     let embed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(parsefuncs.buildItemFullName(snaprecord))
-        // .setDescription(`💰 ${snaprecord.price.toLocaleString()} zeny\n\
-        //                  📊 ${snaprecord.stock} stock\n\n\
-        //                  ⌛ ${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)} minutes left\n`);
-        .setDescription(`Price: **${snaprecord.price.toLocaleString()}** z\n\
-                         Stock: **${snaprecord.stock}**\n\n\
-                         Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes\n`);
-    // if(snaprecord.broken) {
-    //     embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
-    // } else {
-    //     const myimg = await canvas.loadImage(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
-
-    // }
-    return embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+        // .setDescription(`💰 ${snaprecord.price.toLocaleString()} zeny\n` +
+        //                 `📊 ${snaprecord.stock} stock\n\n` +
+        //                 `⌛ ${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)} minutes left`);
+        .setDescription(`Price: **${snaprecord.price.toLocaleString()}** z\n` +
+                        `Stock: **${snaprecord.stock}**\n\n` +
+                        `Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes`);
+    if(snaprecord.broken) {
+        embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+    } else {
+        embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+    }
+    return embed;
 };
 
 // @returns string discord id or integer -1 if not valid
