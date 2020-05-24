@@ -15,7 +15,10 @@ config.dropdbonstart = false;
 config.summonstrings = ["!pwb "];
 
 // the limited amount of reqs that a peasant can make
-config.limitreqs = 6;
+config.peasantlimit = 6;
+// the limited amount of reqs that nonpeasants can make
+// this is because of the character limit for the "showme" command
+config.limitreqs = 30;
 
 // discord id of the owner
 // make sure to change this to your discord id if you wanna do anything with the bot
