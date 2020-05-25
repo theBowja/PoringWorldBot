@@ -26,6 +26,8 @@ bot.on('ready', () => {
         console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
       }
     }
+
+    // TODO: make sure each guild has an admin
   }
 
   new CronJob('0 0,10,20,30,40,50 * * * *', function() {
@@ -94,7 +96,8 @@ bot.on('message', message => {
   if(message.userObj === undefined)
     message.userObj = { permission: 0, discordid: message.author.id };
 
-  console.log(`user ${message.author.id} to channel ${message.channel.id}: ${message.contentObj.command} => ${message.contentObj.body}`);
+  console.log(`From ${message.author.tag} ${message.author.id} to #${message.channel.name} ${message.channel.id} in ${message.guild.name} ${message.guild.id}`);
+  console.log(`>${message.contentObj.command} :: ${message.contentObj.body}`);
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
   if(cmd === 'watch' ||  // allow commands to be read on this channel
@@ -158,6 +161,7 @@ bot.on('message', message => {
     return commands.handleSearch(bot, message);
 
   } else if(cmd === 'permit' ||
+            cmd === 'admin' ||
             cmd === 'nwordpass') {
     return commands.handlePermit(message);
   }
@@ -181,6 +185,9 @@ bot.on('message', message => {
   } else if(cmd === 'showcurrent') {
     let res = dbfuncs.getSnaps();
     return console.log(res);
+  } else if(cmd === 'listguildsjoined') {
+    let tmp = bot.guilds.cache.map(g => g.id+': '+g.name).join('\n');
+    message.channel.send(''+tmp+'', { split: true });
   } else if(cmd === 'announce') {
     let chans = dbfuncs.getAllChannels();
     for(let ch of chans) {

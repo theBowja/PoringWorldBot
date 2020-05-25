@@ -25,6 +25,8 @@ starting the bot
 nohup node bot.js > poring.log 2>&1 &
 tail -f poring.out
 ```
+Use the 'exit' command when exiting out of ssh. If you just close out your command line, it might kill your application.
+
 deleting the process
 ```
 ps -ef | grep "node bot.js"

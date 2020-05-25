@@ -18,6 +18,7 @@ config.summonstrings = ["!pwb "];
 config.peasantlimit = 6;
 // the limited amount of reqs that nonpeasants can make
 // this is because of the character limit for the "showme" command
+// honestly if you have so much reqs, you should just set up another channel
 config.limitreqs = 30;
 
 // discord id of the owner
