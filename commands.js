@@ -251,11 +251,15 @@ function pingPoringWorld(querystring) {
                 data += chunk;
             });
             resp.on('end', () => {
-                data = JSON.parse(data);
-                // remove expired snaps
-                data = data.filter(snap => snap.lastRecord.snapEnd > new Date()/1000);
+                try {
+                    data = JSON.parse(data);
+                    // remove expired snaps
+                    data = data.filter(snap => snap.lastRecord.snapEnd > new Date()/1000);
 
-                resolve(data);
+                    resolve(data);
+                } catch (err) {
+                    reject(err.message);
+                }
             });
 
         }).on("error", (err) => {
