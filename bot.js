@@ -95,9 +95,10 @@ bot.on('message', message => {
   message.userObj = dbfuncs.getDiscokid(message.author.id, message.guild.id);
   if(message.userObj === undefined)
     message.userObj = { permission: 0, discordid: message.author.id };
+  if(message.userObj.permission < 0) return; // this member is banned from using this bot in this guild
 
   console.log(`From ${message.author.tag} ${message.author.id} to #${message.channel.name} ${message.channel.id} in ${message.guild.name} ${message.guild.id}`);
-  console.log(`>${message.contentObj.command} :: ${message.contentObj.body}`);
+  console.log(` ${message.contentObj.command} :: ${message.contentObj.body}`);
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
   if(cmd === 'watch' ||  // allow commands to be read on this channel
@@ -187,7 +188,7 @@ bot.on('message', message => {
     return console.log(res);
   } else if(cmd === 'listguildsjoined') {
     let tmp = bot.guilds.cache.map(g => g.id+': '+g.name).join('\n');
-    message.channel.send(''+tmp+'', { split: true });
+    message.channel.send('```'+tmp+'```', { split: true });
   } else if(cmd === 'announce') {
     let chans = dbfuncs.getAllChannels();
     for(let ch of chans) {
