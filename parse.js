@@ -49,7 +49,8 @@ parsefuncs.buildSnappingInfoEmbed = function(snaprecord) {
         //                 `📊 ${snaprecord.stock} stock\n\n` +
         //                 `⌛ ${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)} minutes left`);
         .setDescription(`Price: **${snaprecord.price.toLocaleString()}** z\n` +
-                        `Stock: **${snaprecord.stock}**\n\n` +
+                        `Stock: **${snaprecord.stock}**\n` +
+                        `Buyers: **${snaprecord.buyers}**\n\n` +
                         `Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes`);
     if(snaprecord.broken) {
         embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);

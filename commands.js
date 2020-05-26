@@ -161,11 +161,11 @@ commands.handlePermit = function(message) {
  */
 commands.handleSearch = async function(bot, message) {
     try {
+        let gon = dbfuncs.clearExpiredSnaps();
+        console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
         let querystring = (message !== undefined) ? message.contentObj.body : '';
         let snapsCurrent = await pingPoringWorld(querystring);
         if(message !== undefined) message.react('✅');
-        let gon = dbfuncs.clearExpiredSnaps();
-        console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
         console.log(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
 

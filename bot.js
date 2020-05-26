@@ -98,11 +98,11 @@ bot.on('message', message => {
   if(message.userObj.permission < 0) return; // this member is banned from using this bot in this guild
 
   console.log(`From ${message.author.tag} ${message.author.id} to #${message.channel.name} ${message.channel.id} in ${message.guild.name} ${message.guild.id}`);
-  console.log(` ${message.contentObj.command} :: ${message.contentObj.body}`);
+  console.log(`  ${message.contentObj.command} :: ${message.contentObj.body}`);
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
   if(cmd === 'watch' ||  // allow commands to be read on this channel
-     cmd === 'listenhereyoulittleshi') {
+     cmd === 'listen') {
     return commands.handleWatch(message);
   } else if(cmd === 'alive' ||
             cmd === 'awake' ||
