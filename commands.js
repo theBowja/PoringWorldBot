@@ -196,6 +196,7 @@ commands.handleSearch = async function(bot, message) {
         }
 
     } catch(e) {
+        if(message !== undefined) message.react('❎');
         console.error("ERROR pingPoringWorld: " + e);
     }
 };

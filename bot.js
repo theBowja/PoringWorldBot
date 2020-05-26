@@ -80,6 +80,8 @@ bot.on('message', message => {
   if(message.channel.type !== 'text') return; // if not from text channel, ignore
   if(message.author.id === bot.user.id) return; // if from self, ignore
   if(message.author.bot) return; // if from bot, ignore
+  if(config.blacklistedguild.includes(message.guild.id)) return; // if from blacklisted guild
+  if(config.blacklisteduser.includes(message.author.id)) return; // if from blacklisted user
 
   // attach contentObj to message
   // contentObj is just message.content parsed into three properties: summon, command, body
@@ -101,16 +103,15 @@ bot.on('message', message => {
   console.log(`  ${message.contentObj.command} :: ${message.contentObj.body}`);
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
-  if(cmd === 'watch' ||  // allow commands to be read on this channel
+  if(cmd === 'help') {
+    return commands.handleHelp(message);
+  } else if(cmd === 'watch' ||  // allow commands to be read on this channel
      cmd === 'listen') {
     return commands.handleWatch(message);
   } else if(cmd === 'alive' ||
             cmd === 'awake' ||
             cmd === 'up') {
     return message.react('🙂');
-  } else if(cmd === 'invite' ||
-            cmd === 'invitelink') {
-    return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=134336```');
   }
 
   // retrieve channel info if exists in database
@@ -120,8 +121,9 @@ bot.on('message', message => {
   // COMMANDS THAT REQUIRE CHANNEL WATCH
 
   // COMMANDS WITH NO PERMISSION LEVEL REQUIRED
-  if(cmd === 'help') {
-    return commands.handleHelp(message);
+  if(cmd === 'invite' ||
+     cmd === 'invitelink') {
+    return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=134336```');
 
   } else if(cmd === 'pingmewhen' ||
             cmd === 'tagmewhen' ||
@@ -143,7 +145,7 @@ bot.on('message', message => {
   } else if (cmd === 'pc' || // quick price check for clean/unmodified equip
              cmd === 'pricecheck') {
     return commands.handlePriceCheck(message);
-  }
+  } 
 
   // no peasants allowed past here
   if(message.userObj.permission === 0) return message.react('🔒');
