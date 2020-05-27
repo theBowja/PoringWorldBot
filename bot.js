@@ -125,9 +125,9 @@ bot.on('message', message => {
      cmd === 'invitelink') {
     return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=134336```');
 
-  } else if(cmd === 'pingmewhen' ||
-            cmd === 'tagmewhen' ||
-            cmd === 'tellmewhen') {
+  } else if(cmd === 'request' ||
+            cmd === 'pingwhen' || cmd === 'pingme' ||
+            cmd === 'tagwhen' || cmd === 'tagme') {
     return commands.handleTagMe(message);
 
   } else if(cmd === 'show' ||

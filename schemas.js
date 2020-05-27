@@ -40,6 +40,7 @@ requirements (
 	enchantlevel BLOB NOT NULL DEFAULT 31,
 	category TEXT,
 	stock INTEGER,
+	alias INTEGER,
 
 	discordkidID INTEGER NOT NULL,
 	channelID INTEGER NOT NULL,

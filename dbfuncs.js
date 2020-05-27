@@ -292,8 +292,8 @@ dbfuncs.listAllRequirements = function() {
  * @param snap - an object record of currentsnap
  */
 dbfuncs.findRequirements = function(snap) {
-    snap.namesearch = snap.name.replace(/\s+/g, '').toLowerCase(); // remove whitespace from name
-    snap.enchantspec = snap.enchant.replace(/[\s-]+/g, '').toLowerCase(); // remove whitespace from enchant
+    snap.namesearch = snap.name.toLowerCase().replace(/[^a-z0-9★]/g, ''); // remove nonletters and nonnumbers from name
+    snap.enchantspec = snap.enchant.toLowerCase().replace(/[^a-z]/g, ''); // remove whitespace from enchant
     snap.slotted = snap.slots - (snap.category === 'Equipment - Weapon'); // calculated slotted bool
     snap.refinecode = Math.pow(2, snap.refine);
     snap.enchantlevelcode = Math.pow(2, snap.enchantlevel);
@@ -313,7 +313,9 @@ dbfuncs.findRequirements = function(snap) {
               (R.enchant IS NULL OR R.enchant=@enchantspec) AND
               ((R.enchantlevel & @enchantlevelcode) != 0) AND
               (R.category IS NULL OR R.category=@category) AND
-              (R.stock IS NULL OR R.stock>=@stock)
+              (R.stock IS NULL OR R.stock>=@stock) AND
+              (R.alias IS NULL OR R.alias=@alias)
+
     `);
 
     var result = query.all(snap);

@@ -169,6 +169,11 @@ commands.handleSearch = async function(bot, message) {
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
         console.log(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
 
+        // TODO: ALIASES BRO
+        for(let sr of snapsNew) {
+            sr.alias = 0;
+        }
+
         for(let sr of snapsNew) {
             let fullname = parsefuncs.buildItemFullName(sr);
             let foundreqs = dbfuncs.findRequirements(sr);

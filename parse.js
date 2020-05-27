@@ -117,7 +117,7 @@ parsefuncs.parseReqs = function(reqsstr) {
         switch(constraint) {
             case "name":
             case "na":
-                value = value.replace(/\s+/g, ''); // remove whitespace
+                value = value.replace(/[^a-z0-9★]/g, ''); // use only letters and numbers
                 myreqs.name = value;
                 myreqs.message += `-${constraint} ${value} `;
                 break;
@@ -244,6 +244,14 @@ parsefuncs.parseReqs = function(reqsstr) {
                 value = parsefuncs.parseDiscordID(value);
                 if(value !== -1)
                     myreqs.assign = value;
+                break;
+
+            case "alias":
+            case "al":
+                ref = lists.bool.indexOf(value); // affirmative?
+                if(ref === -1) break;
+                myreqs.alias = (ref+1)%2;
+                myreqs.message += `-${constraint} ${value} `;
                 break;
         }
 
