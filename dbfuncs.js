@@ -231,7 +231,7 @@ dbfuncs.deleteMultipleChannels = function(chanids) {
 /**
  * Adds requirement to database
  *   checks if channel or user already exists.
- * @param reqs {object} - all properties should match the schema. no extra properties. too lazy to do checking
+ * @param reqs {object} - all properties should match the schema. no extra properties. everything lowercase too lazy to do checking
  * @return true/false if success
  */
 dbfuncs.addRequirement = function(reqs) {
@@ -292,8 +292,8 @@ dbfuncs.listAllRequirements = function() {
  * @param snap - an object record of currentsnap
  */
 dbfuncs.findRequirements = function(snap) {
-    snap.namespec = snap.name.replace(/\s+/g, ''); // remove whitespace from name
-    snap.enchantspec = snap.enchant.replace(/[\s-]+/g, ''); // remove whitespace from enchant
+    snap.namesearch = snap.name.replace(/\s+/g, '').toLowerCase(); // remove whitespace from name
+    snap.enchantspec = snap.enchant.replace(/[\s-]+/g, '').toLowerCase(); // remove whitespace from enchant
     snap.slotted = snap.slots - (snap.category === 'Equipment - Weapon'); // calculated slotted bool
     snap.refinecode = Math.pow(2, snap.refine);
     snap.enchantlevelcode = Math.pow(2, snap.enchantlevel);
@@ -303,14 +303,14 @@ dbfuncs.findRequirements = function(snap) {
         FROM requirements R 
         INNER JOIN channels C ON R.channelID=C.chID
         INNER JOIN discokids U ON R.discordkidID=U.dkidID
-        WHERE (R.name IS NULL OR LOWER(R.name)=LOWER(@namespec)) AND
+        WHERE (R.name IS NULL OR R.name=@namesearch) AND
               (R.slotted IS NULL OR R.slotted=@slotted) AND
               ((R.refine & @refinecode) != 0) AND
               (R.broken IS NULL OR R.broken=@broken) AND
               (R.pricehigher IS NULL OR R.pricehigher<=@price) AND
               (R.pricelower IS NULL OR R.pricelower>=@price) AND
               (R.buyers IS NULL OR R.buyers<=@buyers) AND
-              (R.enchant IS NULL OR LOWER(R.enchant)=LOWER(@enchantspec)) AND
+              (R.enchant IS NULL OR R.enchant=@enchantspec) AND
               ((R.enchantlevel & @enchantlevelcode) != 0) AND
               (R.category IS NULL OR R.category=@category) AND
               (R.stock IS NULL OR R.stock>=@stock)
