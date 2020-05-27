@@ -28,7 +28,7 @@ config.owner = "161248916384251904";
 config.ownerperm = 6969;
 
 // blacklist :/
-config.blacklistguild = ["265757905435885568"];
-config.blacklistuser = ["264104948072054785"];
+config.blacklistedguild = ["265757905435885568"];
+config.blacklisteduser = ["264104948072054785"];
 
 module.exports = config;
