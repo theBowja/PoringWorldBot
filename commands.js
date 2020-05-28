@@ -1,6 +1,7 @@
 var parsefuncs = require('./parse.js');
 const config = require('./config.js'); // consistency right?
 var dbfuncs = require("./dbfuncs.js");
+var aliases = require("./aliases.js");
 var https = require('https');
 
 const commands = {};
@@ -169,10 +170,20 @@ commands.handleSearch = async function(bot, message) {
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
         console.log(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
 
-        // TODO: ALIASES BRO
+        // add all aliases for this to snapsNew so we can search against requirements
+        let snapsAliases = [];
         for(let sr of snapsNew) {
             sr.alias = 0;
+            if(!sr.name.startsWith('Equipment')) continue;
+            let res = aliases[sr.name.toLowerCase().replace(/[^a-z0-9★]/g, '')];
+            if(res === undefined) continue;
+            snapsAliases = snapsAliases.concat(res.map(aliasname => ({
+                ...sr,
+                aliasname: aliasname,
+                alias: 1
+            })));
         }
+        snapsNew = snapsNew.concat(snapsAliases);
 
         for(let sr of snapsNew) {
             let fullname = parsefuncs.buildItemFullName(sr);

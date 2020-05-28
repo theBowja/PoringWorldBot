@@ -292,7 +292,8 @@ dbfuncs.listAllRequirements = function() {
  * @param snap - an object record of currentsnap
  */
 dbfuncs.findRequirements = function(snap) {
-    snap.namesearch = snap.name.toLowerCase().replace(/[^a-z0-9★]/g, ''); // remove nonletters and nonnumbers from name
+    let usename = snap.alias ? snap.aliasname : snap.name;
+    snap.namesearch = usename.toLowerCase().replace(/[^a-z0-9★]/g, ''); // remove nonletters and nonnumbers from name
     snap.enchantspec = snap.enchant.toLowerCase().replace(/[^a-z]/g, ''); // remove whitespace from enchant
     snap.slotted = snap.slots - (snap.category === 'Equipment - Weapon'); // calculated slotted bool
     snap.refinecode = Math.pow(2, snap.refine);
