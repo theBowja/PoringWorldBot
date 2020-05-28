@@ -120,7 +120,6 @@ module.exports = dictionary(
   ["Staunch Ring", "Ring of Loyalty"],
   ["Pocket Watch", "Time Manipulator"],
   ["Orleans's Gloves", "Tibbers' Hand"],
-  ["Orleans's Gloves", "Tibbers' Hand"],
   ["Brooch", "AGI Pin", "Seventh Sense"],
   ["Rosary", "LUK Necklace", "Lucky Star"],
   ["Glove", "Dogtooth Gloves", "Dog Servant"],
