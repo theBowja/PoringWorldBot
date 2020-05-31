@@ -209,8 +209,8 @@ commands.handleSearch = async function(bot, message) {
                     chan.send(fullname+' '+pings, itemembed);
                 });
             }
-            console.log("done notifying users of pings");
         }
+        console.log(`${new Date().toLocaleString()} done notifying users of pings`);
 
     } catch(e) {
         if(message !== undefined) message.react('❎');
