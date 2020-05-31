@@ -117,6 +117,7 @@ parsefuncs.parseReqs = function(reqsstr) {
         switch(constraint) {
             case "name":
             case "na":
+                value = value.replace(/\*/g, '★'); // replace asterick with star
                 value = value.replace(/[^a-z0-9★]/g, ''); // use only letters and numbers
                 myreqs.name = value;
                 myreqs.message += `-${constraint} ${value} `;
