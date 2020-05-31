@@ -175,7 +175,7 @@ commands.handleSearch = async function(bot, message) {
         let snapsAliases = [];
         for(let sr of snapsNew) {
             sr.alias = 0;
-            if(!sr.name.startsWith('Equipment')) continue;
+            if(!sr.category.startsWith('Equipment')) continue;
             let res = aliases[sr.name.toLowerCase().replace(/[^a-z0-9★]/g, '')];
             if(res === undefined) continue;
             snapsAliases = snapsAliases.concat(res.map(aliasname => ({
