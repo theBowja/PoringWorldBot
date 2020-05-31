@@ -126,7 +126,7 @@ bot.on('message', message => {
     return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=134336```');
 
   } else if(cmd === 'pingmewhen' || cmd === 'tagmewhen' || cmd === 'tellmewhen') {
-    return message.channel.send("use request, pingwhen, pingme, tagwhen, or tagme instead");
+    return message.channel.send("use `request`, `pingwhen`, `pingme`, `tagwhen`, or `tagme` instead");
 
   } else if(cmd === 'request' ||
             cmd === 'pingwhen' || cmd === 'pingme' ||
@@ -138,6 +138,7 @@ bot.on('message', message => {
     return commands.handleShowUser(message);
 
   } else if(cmd === 'delete' ||
+            cmd === 'del' ||
             cmd === 'remove') {
     return commands.handleDelete(message);
 
