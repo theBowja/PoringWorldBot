@@ -4,6 +4,8 @@
   "description": "Poring World Bot",
   "scripts": {
     "start": "node bot.js",
+    "reset-win": "del ohsnap.db && node bot.js",
+    "reset-lin": "rm ohsnap.db && node bot.js",
     "test": "mocha"
   },
   "main": "bot.js",
