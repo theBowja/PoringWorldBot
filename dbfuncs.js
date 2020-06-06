@@ -315,7 +315,7 @@ dbfuncs.findRequirements = function(snap) {
               ((R.enchantlevel & @enchantlevelcode) != 0) AND
               (R.category IS NULL OR R.category=@category) AND
               (R.stock IS NULL OR R.stock>=@stock) AND
-              (R.alias=@alias)
+              (R.alias=1 OR @alias=0)
 
     `);
 
