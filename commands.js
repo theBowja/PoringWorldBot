@@ -166,23 +166,31 @@ commands.handleSearch = async function(bot, message) {
         console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
         let querystring = (message !== undefined) ? message.contentObj.body : '';
         let snapsCurrent = await pingPoringWorld(querystring);
-        console.log(`${new Date().toLocaleString()} got response from poring.world`);
+        console.log(`${new Date().toLocaleString()}  got response from poring.world`);
         if(message !== undefined) message.react('✅');
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
-        console.log(`${new Date().toLocaleString()} added ${snapsNew.length} new snaps to database`);
+        console.log(`${new Date().toLocaleString()}   added ${snapsNew.length} new snaps to database`);
 
         // add all aliases for this to snapsNew so we can search against requirements
         let snapsAliases = [];
         for(let sr of snapsNew) {
             sr.alias = 0;
-            if(!sr.category.startsWith('Equipment')) continue;
-            let res = aliases[sr.name.toLowerCase().replace(/[^a-z0-9★]/g, '')];
-            if(res === undefined) continue;
-            snapsAliases = snapsAliases.concat(res.map(aliasname => ({
-                ...sr,
-                aliasname: aliasname,
-                alias: 1
-            })));
+            if(sr.category.startsWith('Equipment')) { // all equipment aliases
+                let res = aliases.equips[parsefuncs.prepName(sr)];
+                if(res === undefined) continue;
+                snapsAliases = snapsAliases.concat(res.map(aliasname => ({
+                    ...sr,
+                    aliasname: aliasname,
+                    alias: 1
+                })));
+            } else if(sr.category.startsWith('Card')) { // all aliases for mvp cards
+                let res = aliases.bosscards[parsefuncs.prepName(sr)];
+                if(res === undefined) continue;
+                snapsAliases = snapsAliases.concat(res.map(aliasname => ({
+                    ...sr,
+                    aliasname: aliasname,
+                })));
+            }
         }
         snapsNew = snapsNew.concat(snapsAliases);
 
@@ -210,7 +218,7 @@ commands.handleSearch = async function(bot, message) {
                 });
             }
         }
-        console.log(`${new Date().toLocaleString()} done notifying users of pings`);
+        console.log(`${new Date().toLocaleString()}    done notifying users of pings`);
 
     } catch(e) {
         if(message !== undefined) message.react('❎');

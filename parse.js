@@ -99,6 +99,11 @@ parsefuncs.parseContent = function(content) {
     return contentObj;
 };
 
+// strips all unnecessary characters from an item name
+parsefuncs.prepName = function(name) {
+    return name.toLowerCase().replace(/[^a-z0-9★]/g, '');
+};
+
 /**
  * @param reqsstr {string} - straight from inside 
  *   example: "-na eye of dullahan -re 12"

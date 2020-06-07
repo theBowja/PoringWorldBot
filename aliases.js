@@ -1,8 +1,12 @@
+const prepName = require('./parse.js').prepName;
+
 // Explain file here
+
+const aliases = {};
 
 const alias = (list = []) => list.reduce((group, alias, index, aliases) => ({
    ...group,
-   [alias.toLowerCase().replace(/[^a-z0-9★]/g, '')]: aliases.filter(word => word !== alias),
+   [prepName(alias)]: aliases.filter(word => word !== alias),
 }), {});
 
 const dictionary = (...lists) => lists.reduce((dictionary, list) => ({
@@ -14,7 +18,7 @@ const dictionary = (...lists) => lists.reduce((dictionary, list) => ({
 // For example: aliases["avalanche"] is ["Buster", "Doom Axe"]
 //              aliases["eldershammer"] is ["Acid Touch"]
 
-module.exports = dictionary(
+aliases.equips = dictionary(
   // WEAPON
   ["Bass", "Lira"],
   ["Lute", "Southern Lute"],
@@ -108,6 +112,7 @@ module.exports = dictionary(
   ["Shoes", "Bunny Slipper"],
   ["Safety Boots", "Greaves"],
   ["Rune Shoes", "Rune Boots"],
+  ["Dance Shoes", "Dancing Shoes"],
   ["High Heels", "High Fashion Sandals"],
   ["Sack Teddy Shoes", "Advanced Sack Teddy Shoes"],
 
@@ -131,3 +136,40 @@ module.exports = dictionary(
   ["Tuna Talisman", "Fresh Tuna Talisman", "Original Will Talisman"],
   ["VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality"]
 );
+
+const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling",
+  "Strouf", "Goblin Leader", "Mistress", "Maya", "Phreeoni", "Eddga",
+  "Osiris", "Moonlight Flower", "Orc Hero", "Kobold Leader", "Doppelganger",
+  "Atroce", "Orc Lord", "Detarderous", "Owl Baron", "Bloody Knight",
+  "Baphomet", "Dark Lord", "Dracula", "Randgris", "Chimera", "Time Holder",
+  "Spashire", "Stormy Knight", "Garm", "Kaho", "Arc Angeling", "Grandma Wolf",
+  "Lord Of Death", "Bloody Murderer", "Katerina", "Deeven", "Eremes",
+  "Gloom Under Night", "Ktullanux", "Hill Wind"];
+
+const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring",
+  "Toad", "Rotar Zairo", "Dragon Fly", "Vagabond Wolf", "Wood Goblin",
+  "Gryphon", "Anubis", "Hyegun", "Orc Baby", "Jakk", "Mutant Dragon",
+  "Rafflesia", "Owl Duke", "Alice", "Zherlthsh", "Mysteltainn", "Dark Illusion",
+  "Clock", "Clock Tower Manager", "Chepet", "Fire Witch", "Flute Player",
+  "Cenia", "Deje", "Loli Ruri", "Gazeti", "Galion", "Fallen Bishop"];
+
+const dead = ["Dead Deviling", "Dead Drake", "Dead Strouf", "Mistress the Revenant",
+  "Dead Maya", "Phreeoni the Revenant", "Dead Eddga", "Revenant Osiris",
+  "Dead Moonlight Flower", "Dead Soul", "Dead Atroce", "Detarderous the Dead",
+  "Dead Owl Baron", "Dead Time Holder", "Spashire the Dead", "Dead Chimera"];
+
+const makecarddict = (cards, append, aliases) => cards.reduce((dict, curr) => ({
+  ...dict,
+  [prepName(curr+append)]: aliases,
+}), {});
+
+
+aliases.bosscards = {
+  ...makecarddict(mvp, " Card", ["MVP Card", "MVP/Mini Card", "Boss Card"]),
+  ...makecarddict(mvp, "★ Card", ["MVP★ Card", "MVP/Mini★ Card", "Boss Card"]),
+  ...makecarddict(mini, " Card", ["Mini Card", "MVP/Mini Card", "Boss Card"]),
+  ...makecarddict(mini, "★ Card", ["Mini★ Card", "MVP/Mini★ Card", "Boss Card"]),
+  ...makecarddict(dead, " Card", ["Undead Card", "Dead Card", "Revenant Card", "Boss Card"]),
+};
+
+module.exports = aliases;
