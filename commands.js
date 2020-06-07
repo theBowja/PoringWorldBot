@@ -176,7 +176,7 @@ commands.handleSearch = async function(bot, message) {
         for(let sr of snapsNew) {
             sr.alias = 0;
             if(sr.category.startsWith('Equipment')) { // all equipment aliases
-                let res = aliases.equips[parsefuncs.prepName(sr)];
+                let res = aliases.equips[parsefuncs.prepName(sr.name)];
                 if(res === undefined) continue;
                 snapsAliases = snapsAliases.concat(res.map(aliasname => ({
                     ...sr,
@@ -184,7 +184,7 @@ commands.handleSearch = async function(bot, message) {
                     alias: 1
                 })));
             } else if(sr.category.startsWith('Card')) { // all aliases for mvp cards
-                let res = aliases.bosscards[parsefuncs.prepName(sr)];
+                let res = aliases.bosscards[parsefuncs.prepName(sr.name)];
                 if(res === undefined) continue;
                 snapsAliases = snapsAliases.concat(res.map(aliasname => ({
                     ...sr,
