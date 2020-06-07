@@ -4,7 +4,7 @@ lists.enchant = ['none', 'sharp', 'sharpblade', 'arch', 'zeal', 'morale',
                  'blasphemy', 'tenacity', 'divineblessing', 'armorbreaking',
                  'antimage', 'arcane', 'armor', 'magic', 'insight'];
 
-lists.bool = ['yes', 'no', 'y', 'n', 'true', 'false', 't', 'f', '1', '0'];
+lists.bool = ['yes', 'no', 'y', 'n', 'true', 'false', 't', 'f', '1', '0', 'on', 'off'];
 
 // my favorite way of programming
 lists.category = {

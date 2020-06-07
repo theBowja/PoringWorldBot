@@ -175,22 +175,18 @@ commands.handleSearch = async function(bot, message) {
         let snapsAliases = [];
         for(let sr of snapsNew) {
             sr.alias = 0;
-            if(sr.category.startsWith('Equipment')) { // all equipment aliases
-                let res = aliases.equips[parsefuncs.prepName(sr.name)];
-                if(res === undefined) continue;
-                snapsAliases = snapsAliases.concat(res.map(aliasname => ({
-                    ...sr,
-                    aliasname: aliasname,
-                    alias: 1
-                })));
-            } else if(sr.category.startsWith('Card')) { // all aliases for mvp cards
-                let res = aliases.bosscards[parsefuncs.prepName(sr.name)];
-                if(res === undefined) continue;
-                snapsAliases = snapsAliases.concat(res.map(aliasname => ({
-                    ...sr,
-                    aliasname: aliasname,
-                })));
-            }
+            let res;
+            if(sr.category.startsWith('Equipment')) // all equipment aliases
+                res = aliases.equips[parsefuncs.prepName(sr.name)];
+            else if(sr.category.startsWith('Card')) // all aliases for mvp cards
+                res = aliases.bosscards[parsefuncs.prepName(sr.name)];
+
+            if(res === undefined) continue;
+            snapsAliases = snapsAliases.concat(res.map(aliasname => ({
+                ...sr,
+                aliasname: aliasname,
+                alias: 1
+            })));
         }
         snapsNew = snapsNew.concat(snapsAliases);
 
