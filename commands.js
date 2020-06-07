@@ -178,10 +178,8 @@ commands.handleSearch = async function(bot, message) {
             let res;
             if(sr.category.startsWith('Equipment')) // all equipment aliases
                 res = aliases.equips[parsefuncs.prepName(sr.name)];
-            else if(sr.category.startsWith('Card')) // all aliases for mvp cards
-                res = aliases.bosscards[parsefuncs.prepName(sr.name)];
-
             if(res === undefined) continue;
+
             snapsAliases = snapsAliases.concat(res.map(aliasname => ({
                 ...sr,
                 aliasname: aliasname,
@@ -193,6 +191,17 @@ commands.handleSearch = async function(bot, message) {
         for(let sr of snapsNew) {
             let fullname = parsefuncs.buildItemFullName(sr);
             let foundreqs = dbfuncs.findRequirements(sr);
+            // if boss card, then do more db querys for aliases and combine with foundreqs
+            if(sr.category.startsWith('Card')) { // all aliases for mvp cards
+                let res = aliases.bosscards[parsefuncs.prepName(sr.name)];
+                if(res !== undefined) {
+                    foundreqs = res.reduce((acc, curr) => [
+                        ...acc,
+                        ...dbfuncs.findRequirements({ ...sr, aliasname: curr, alias: 1 })
+                    ], foundreqs);
+                }
+            }
+
             if(foundreqs.length === 0) // if nobody cares about this, go next
                 continue;
 

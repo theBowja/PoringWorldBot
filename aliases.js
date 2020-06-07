@@ -142,7 +142,7 @@ const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling",
   "Osiris", "Moonlight Flower", "Orc Hero", "Kobold Leader", "Doppelganger",
   "Atroce", "Orc Lord", "Detarderous", "Owl Baron", "Bloody Knight",
   "Baphomet", "Dark Lord", "Dracula", "Randgris", "Chimera", "Time Holder",
-  "Spashire", "Stormy Knight", "Garm", "Kaho", "Arc Angeling", "Grandma Wolf",
+  "Spashire", "Stormy Knight", "Garm", "Firelord Kaho", "Arc Angeling", "Grandma Wolf",
   "Lord Of Death", "Bloody Murderer", "Katerina", "Deeven", "Eremes",
   "Gloom Under Night", "Ktullanux", "Hill Wind"];
 
