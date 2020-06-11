@@ -30,8 +30,14 @@ bot.on('ready', () => {
     // TODO: make sure each guild has an admin
   }
 
+  // ping poring.world every 10 minutes
   new CronJob('0 0,10,20,30,40,50 * * * *', function() {
     commands.handleSearch(bot);
+  }, null, true);
+
+  // makes backup at 06:06:06 AM
+  new CronJob('6 6 6 * * *', function() {
+    dbfuncs.backup(['sun','mon','tue','wed','thu','fri','sat'][new Date().getDay()]);
   }, null, true);
 });
 
@@ -203,6 +209,9 @@ bot.on('message', message => {
         });
     }
     message.react('✅');
+  } else if(cmd === 'backup') {
+    if(message.contentObj.body === '') return message.react('❎');
+    dbfuncs.backup(message.contentObj.body);
   }
 
 });
