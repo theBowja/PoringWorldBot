@@ -25,7 +25,7 @@ var dbfuncs = {};
 // make backup depending on day of week
 dbfuncs.backup = function(name) {
     if(name === undefined || name === '') return false;
-    db.backup(`${name}.sqlite3`)
+    db.backup(`backupdbs/${name}.sqlite3`)
     .then(() => {
         console.log('BACKUP complete!');
     })
