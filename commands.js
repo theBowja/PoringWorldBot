@@ -49,8 +49,13 @@ commands.handleTagMe = function(message) {
     pars.discordkidID = targetObj.dkidID;
     pars.channelID = message.channelObj.chID;
 
-    let res = dbfuncs.addRequirement(pars);
-    return message.react(res ? '✅' : '❎');
+    let info = dbfuncs.addRequirement(pars);
+    if(info.changes === 1) {
+        message.react('✅');
+        message.channel.send('```id: '+info.lastInsertRowid+' | '+pars.message+'```');
+    } else {
+        message.react('❎');
+    }
 };
 
 commands.handleWatch = function(message) {

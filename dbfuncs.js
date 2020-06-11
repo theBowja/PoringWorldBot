@@ -27,7 +27,7 @@ dbfuncs.backup = function(name) {
     if(name === undefined || name === '') return false;
     db.backup(`backupdbs/${name}.sqlite3`)
     .then(() => {
-        console.log('BACKUP complete!');
+        console.log(`BACKUP complete: ${name}.sqlite3`);
     })
     .catch((err) => {
         console.log('BACKUP failed:', err);
@@ -244,14 +244,14 @@ dbfuncs.deleteMultipleChannels = function(chanids) {
  * Adds requirement to database
  *   checks if channel or user already exists.
  * @param reqs {object} - all properties should match the schema. no extra properties. everything lowercase too lazy to do checking
- * @return true/false if success
+ * @return the info object: info.changes, info.lastInsertRowid
  */
 dbfuncs.addRequirement = function(reqs) {
     if(!reqs.hasOwnProperty('channelID') || !reqs.hasOwnProperty('discordkidID')) return false;
 
     let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
                             VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
-    let info = query.run(reqs);
+    return query.run(reqs);
     return info.changes === 1;
 };
 
