@@ -11,14 +11,15 @@ You can use [this invite link](https://discordapp.com/oauth2/authorize?client_id
 - **Mention @everyone, @here, and All Roles**: This is not required. If you give this permission to the bot, then moderators can assign requests to roles so the bot can ping roles.
 - **Add Reactions**: I dunno if this is required lol.
 
-## Quick setup
-1. Use the link provided above to add the bot to your server. Be sure to include all the required permissions.
+## Quick and easy instructions
+<img align="right" width="44%" height="44%" src="images/showcase.png">
+
+1. Use the invite link provided previously to add the bot to your server. Be sure to check the boxes for all the required permissions.
 2. Create a new channel. A few requests can create a lot of spam throughout the day that you probably don't want in your main channels.
 3. Say `!pwb watch` in that channel and the bot will start listening to requests in that channel.
 4. Consult [this wiki page](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request) for help on constructing a request.
 5. Consult [this wiki page](https://github.com/theBowja/PoringWorldBot/wiki/Command-reference) for detailed commands and usage.
 
-![Image showing quick setup](images/showcase.png)
 
 ==============================================================
 
