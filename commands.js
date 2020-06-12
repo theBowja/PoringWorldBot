@@ -52,7 +52,7 @@ commands.handleTagMe = function(message) {
     let info = dbfuncs.addRequirement(pars);
     if(info.changes === 1) {
         message.react('✅');
-        message.channel.send('```id: '+info.lastInsertRowid+' | '+pars.message+'```');
+        message.channel.send('use "!pwb show" to show all your current requests\n```id: '+info.lastInsertRowid+' | '+pars.message+'```');
     } else {
         message.react('❎');
     }
@@ -90,7 +90,7 @@ commands.handleShowUser = function(message) {
 
     let res = dbfuncs.listUserRequirements(targetID, message.guild.id, message.channel.id);
     let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
-    return message.channel.send(msg === '' ? '0 reqs' : 'use "delete [id]" (without square brackets) to delete\n```'+msg+'```');
+    return message.channel.send(msg === '' ? '0 reqs' : 'use "!pwb delete [id]" (without square brackets) to delete\n```'+msg+'```');
 };
 
 commands.handleShowChannel = function(message) {
