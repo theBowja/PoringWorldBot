@@ -51,8 +51,8 @@ commands.handleTagMe = function(message) {
 
     let info = dbfuncs.addRequirement(pars);
     if(info.changes === 1) {
-        message.react('✅');
-        message.channel.send('use "!pwb show" to show all your current requests\n```id: '+info.lastInsertRowid+' | '+pars.message+'```');
+        //message.react('✅');
+        message.channel.send('```id: '+info.lastInsertRowid+' | '+pars.message+'```use "!pwb show" to show all your current requests');
     } else {
         message.react('❎');
     }
@@ -111,6 +111,8 @@ commands.handleDelete = function(message) {
         let reqObj = dbfuncs.getRequirement(reqID);
         if(reqObj === undefined)
             return message.react('❎'); // not valid reqID
+        if(reqObj.discordchid !== message.channel.id)
+            return message.react('❎'); // can only delete from same channel
         if(message.userObj.permission === 0 && message.userObj.discordid !== reqObj.discordid)
             return message.react('🔒'); // peasants not allowed to delete someone else's
         if(message.userObj.permission < reqObj.permission)

@@ -11,10 +11,12 @@ var parsefuncs = {};
  * @param itemstring {string} - the "full name" part of the snap taken from poring.world
  * @returns object with properties: name, refine, broken, enchant, enchantlevel, slots
  */
-parsefuncs.parseItem = function(itemstring) {
-    var props = {};
-    var abomination = /^(\+(\d*)\s)?(((?!\s?(\(broken\)|\[\d]|<.*>)).)*)(\s?\[(\d)])?(\s<(.*)\s(\d)>)?(\s\(broken\))?/.exec(itemstring);
-    props.name = abomination[3];
+parsefuncs.parseItem = function(itemstring, category) {
+    let props = {};
+    let abomination = [];
+    if(category.startsWith('Equipment') || category.startsWith('Headwear'))
+        abomination = /^(\+(\d*)\s)?(((?!\s?(\(broken\)|\[\d]|<.*>)).)*)(\s?\[(\d)])?(\s<(.*)\s(\d)>)?(\s\(broken\))?/.exec(itemstring);
+    props.name = abomination[3] || itemstring;
     props.refine = abomination[2] === undefined ? 0 : parseInt(abomination[2]);
     props.broken = abomination[11] === undefined ? false : true;
     props.enchant = abomination[9] === undefined ? 'none' : abomination[9];

@@ -5,10 +5,10 @@ This is a snappening bot that queries the first 40 popular snaps from poring.wor
 You can use [this invite link](https://discordapp.com/oauth2/authorize?client_id=597932863597576204&scope=bot&permissions=134336) to add the bot I host to your server. My bot is hosted from my Raspberry Pi in my apartment so I make no guarantees on its uptime because my Spectrum internet likes to crap out.
 
 ## Permissions
-- **View Audit Log**: This is a *required* permission. The bot runs on an internal permission level system. The bot uses the audit log to find the user who added this bot and give them an internal admin permission level in order to tell the bot to listen in a channel. 
+- **View Audit Log**: This is a *required* permission. The bot runs on an internal permission level system. The bot uses the audit log to find the user who added this bot and makes them moderator so they can tell the bot to listen in a channel. 
 - **Read Messages**: This is a *required* permission.
 - **Send Messages**: This is a *required* permission.
-- **Mention @everyone, @here, and All Roles**: This is not required. If you give this permission to the bot, then internal admins can assign requests to roles so the bot can ping roles.
+- **Mention @everyone, @here, and All Roles**: This is not required. If you give this permission to the bot, then moderators can assign requests to roles so the bot can ping roles.
 - **Add Reactions**: I dunno if this is required lol.
 
 ## Quick setup

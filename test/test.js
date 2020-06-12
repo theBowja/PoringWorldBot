@@ -7,6 +7,7 @@ var config = require('../config.js');
 var items = [
 	{
 		input: "Staunch Cape <Arcane 4>",
+		category: "Equipment - Garment",
 		output: {
 			name: "Staunch Cape",
 			refine: 0,
@@ -18,6 +19,7 @@ var items = [
 	},
 	{
 		input: "+4 Eye of Dullahan (broken)",
+		category: "Equipment - Accessory",
 		output: {
 			name: "Eye of Dullahan",
 			refine: 4,
@@ -29,6 +31,7 @@ var items = [
 	},
 	{
 		input: "Cross Bow [1]",
+		category: "Equipment - Weapon",
 		output: {
 			name: "Cross Bow",
 			refine: 0,
@@ -40,6 +43,7 @@ var items = [
 	},
 	{
 		input: "Transformation Scroll (Garm)",
+		category: "Item - Scroll/Album",
 		output: {
 			name: "Transformation Scroll (Garm)",
 			refine: 0,
@@ -51,6 +55,7 @@ var items = [
 	},
 	{
 		input: "+3 Angry Snarl <Armor 2> (broken)",
+		category: "Headwear - Mouth",
 		output: {
 			name: "Angry Snarl",
 			refine: 3,
@@ -62,6 +67,7 @@ var items = [
 	},
 	{
 		input: "+13 Sniping Suit [1] <Arch 1> (broken)",
+		category: "Equipment - Armor",
 		output: {
 			name: "Sniping Suit",
 			refine: 13,
@@ -73,6 +79,7 @@ var items = [
 	},
 	{
 		input: "+5 Southern Lute[2] <Morale 4> (broken)",
+		category: "Equipment - Weapon",
 		output: {
 			name: "Southern Lute",
 			refine: 5,
@@ -80,6 +87,18 @@ var items = [
 			enchant: "Morale",
 			enchantlevel: 4,
 			slots: 2
+		}
+	},
+	{
+		input: "Aries Diadem [1] Blueprint",
+		category: "Blueprint",
+		output: {
+			name: "Aries Diadem [1] Blueprint",
+			refine: 0,
+			broken: false,
+			enchant: "none",
+			enchantlevel: 0,
+			slots: 0
 		}
 	}
 ];
@@ -207,7 +226,7 @@ describe('parsefuncs', function() {
 	describe('#parseItem()', function() {
 		for(let item of items) {
 			it(item.input, function() {
-				let parsed = parsefuncs.parseItem(item.input);
+				let parsed = parsefuncs.parseItem(item.input, item.category);
 				assert.equal(parsed.name, item.output.name);
 				assert.equal(parsed.refine, item.output.refine);
 				assert.equal(parsed.broken, item.output.broken);

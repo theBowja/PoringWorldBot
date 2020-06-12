@@ -134,7 +134,7 @@ bot.on('message', message => {
   } else if(cmd === 'pingmewhen' || cmd === 'tagmewhen' || cmd === 'tellmewhen') {
     return message.channel.send("use `request`, `pingwhen`, `pingme`, `tagwhen`, or `tagme` instead");
 
-  } else if(cmd === 'request' ||
+  } else if(cmd === 'subscribe' || cmd === 'request' ||
             cmd === 'pingwhen' || cmd === 'pingme' ||
             cmd === 'tagwhen' || cmd === 'tagme') {
     return commands.handleTagMe(message);
