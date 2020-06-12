@@ -18,7 +18,7 @@ You can use [this invite link](https://discordapp.com/oauth2/authorize?client_id
 4. Consult [this wiki page](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request) for help on constructing a request.
 5. Consult [this wiki page](https://github.com/theBowja/PoringWorldBot/wiki/Command-reference) for detailed commands and usage.
 
-Add image here lmao
+![Image showing quick setup](images/showcase.png)
 
 ==============================================================
 
