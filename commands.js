@@ -175,13 +175,14 @@ commands.handlePermit = function(message) {
  * @param message - optional. used only for responding to "force"/"search"/"query"
  *                  message.contentObj.body must contain the querystring
  */
-commands.handleSearch = async function(bot, message) {
+commands.handleSearch = async function(bot, message, querystring='') {
     try {
         let gon = dbfuncs.clearExpiredSnaps();
         console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
-        let querystring = (message !== undefined) ? message.contentObj.body : '';
+        if(message !== undefined)
+            querystring = message.contentObj.body;
         let snapsCurrent = await pingPoringWorld(querystring);
-        console.log(`${new Date().toLocaleString()}  got response from poring.world${message !== undefined ? ` '${message}'`: ''}`);
+        console.log(`${new Date().toLocaleString()}  got response from poring.world q='${querystring}'`);
         if(message !== undefined) message.react('✅');
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
         console.log(`${new Date().toLocaleString()}   added ${snapsNew.length} new snaps to database`);
