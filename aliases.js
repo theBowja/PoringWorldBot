@@ -115,6 +115,7 @@ aliases.equips = dictionary(
   ["Dance Shoes", "Dancing Shoes"],
   ["High Heels", "High Fashion Sandals"],
   ["Sack Teddy Shoes", "Advanced Sack Teddy Shoes"],
+  ["Wolf Grandmother’s Slippers", "Wolf Grandma’s Slippers"],
 
   // ACCESSORY
   ["Matyr's Leash", "Fox Teeth"],
