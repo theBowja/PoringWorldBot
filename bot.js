@@ -38,7 +38,7 @@ bot.on('ready', () => {
 
   // makes additional pings every odd minute
   new CronJob('0 1-59/2 * * * *', function() {
-    let qs = lists[new Date().getMinutes()];
+    let qs = lists.schedule[new Date().getMinutes()];
     if(config.schedulesearch && qs !== undefined)
       commands.handleSearch(bot, qs);
   }, null, true);

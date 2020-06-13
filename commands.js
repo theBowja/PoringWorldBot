@@ -181,7 +181,7 @@ commands.handleSearch = async function(bot, message) {
         console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
         let querystring = (message !== undefined) ? message.contentObj.body : '';
         let snapsCurrent = await pingPoringWorld(querystring);
-        console.log(`${new Date().toLocaleString()}  got response from poring.world`);
+        console.log(`${new Date().toLocaleString()}  got response from poring.world${message !== undefined ? ` '${message}'`: ''}`);
         if(message !== undefined) message.react('✅');
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
         console.log(`${new Date().toLocaleString()}   added ${snapsNew.length} new snaps to database`);
