@@ -41,9 +41,11 @@ commands.handleTagMe = function(message) {
         targetObj.dkidID = dbfuncs.addDiscokid(targetObj.discordid, message.guild.id);
     else {
         let count = dbfuncs.listUserRequirements(targetObj.discordid, message.guild.id, message.channel.id).length;
-        if(targetObj.permission === 0 && count >= config.peasantlimit || // peasants can only have config.peasantlimit amount of reqs in a channel
-           count >= config.limitreqs) // nonpeasants can only have config.limitreqs amount of reqs in a channel
-            return message.react('❎'); // target has reached the limit for reqs to make
+        let mylimit = targetObj.permission === 0 ? config.peasantlimit : config.limitreqs; // peasant limit vs mod limit
+        if(count >= mylimit) {
+            message.react('❎'); // target has reached the limit for reqs to make
+            message.reply(`you have reached your limit of ${mylimit} reqs`);
+        }
     }
 
     pars.discordkidID = targetObj.dkidID;

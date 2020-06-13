@@ -15,7 +15,7 @@ config.dropdbonstart = false;
 config.summonstrings = ["!pwb "];
 
 // the limited amount of reqs that a peasant can make
-config.peasantlimit = 8;
+config.peasantlimit = 10;
 // the limited amount of reqs that nonpeasants can make
 // this is because of the character limit for the "showme" command
 // honestly if you have so much reqs, you should just set up another channel
