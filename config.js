@@ -4,6 +4,11 @@ const config = {};
 // whether or not to drop database when app starts up
 config.dropdbonstart = false;
 
+// if this is true, then for every odd minute, the bot will go call
+//   the relevant query string in lists.schedule
+// otherwise do nothing
+config.schedulesearch = true;
+
 /**
  * Strings that will summon the bot so it'll listen to your commands
  * default is pinging the bot @PoringWorldBot (added in bot.js in on-ready function)
@@ -22,12 +27,12 @@ config.peasantlimit = 10;
 config.limitreqs = 30;
 
 // discord id of the owner
-// make sure to change this to your discord id if you wanna do anything with the bot
+// make sure to change this to your discord id if you're hosting this bot yourself
 config.owner = "161248916384251904";
 // base permission level that owner gets
 config.ownerperm = 6969;
 
-// blacklist :/
+// blacklist :(
 config.blacklistedguild = ["265757905435885568"];
 config.blacklisteduser = ["264104948072054785"];
 

@@ -7,6 +7,7 @@ var config = require('./config.js');
 var commands = require('./commands.js');
 var CronJob = require('cron').CronJob;
 var dbfuncs = require("./dbfuncs.js");
+var lists = require('./lists.js');
 
 bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
@@ -33,6 +34,13 @@ bot.on('ready', () => {
   // ping poring.world every 10 minutes
   new CronJob('0 0,10,20,30,40,50 * * * *', function() {
     commands.handleSearch(bot);
+  }, null, true);
+
+  // makes additional pings every odd minute
+  new CronJob('0 1-59/2 * * * *', function() {
+    let qs = lists[new Date().getMinutes()];
+    if(config.schedulesearch && qs !== undefined)
+      commands.handleSearch(bot, qs);
   }, null, true);
 
   // makes backup at 06:06:06 AM
@@ -132,7 +140,7 @@ bot.on('message', message => {
     return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=134336```');
 
   } else if(cmd === 'pingmewhen' || cmd === 'tagmewhen' || cmd === 'tellmewhen') {
-    return message.channel.send("use `request`, `pingwhen`, `pingme`, `tagwhen`, or `tagme` instead");
+    return message.channel.send("use `request`, `subscribe`, `pingwhen`, `pingme`, `tagwhen`, or `tagme` instead");
 
   } else if(cmd === 'subscribe' || cmd === 'request' ||
             cmd === 'pingwhen' || cmd === 'pingme' ||

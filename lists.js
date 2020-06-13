@@ -71,5 +71,41 @@ lists.category = {
 	'premium': 'Premium',
 };
 
+lists.schedule = {
+	//'1' : '',
+	'11': ' 1',
+	'21': ' 2',
+	'31': ' 3',
+	'41': ' 4',
+	//'51': '',
+
+	'3' : '+8',
+	'13': '+10',
+	'23': '+12',
+	'33': '+14',
+	'43': '+15',
+	//'53': '',
+
+	'5' : 'arcane',
+	'15': 'morale',
+	'25': 'arch',
+	'35': 'zeal',
+	'45': 'magic',
+	'55': 'tenacity',
+
+	'7' : 'sharp blade',
+	'17': 'insight',
+	'27': 'blasphemy',
+	'37': 'armor breaking',
+	'47': 'anti-mage',
+	'57': 'divine blessing',
+
+	'9' : 'armor',
+	//'19': 'sharp 4',
+	//'29': 'sharp 4',
+	//'39': 'sharp 4',
+	'49': 'sharp 3',
+	'59': 'sharp 4',
+};
 
 module.exports = lists;

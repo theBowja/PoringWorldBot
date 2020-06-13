@@ -54,7 +54,7 @@ commands.handleTagMe = function(message) {
     let info = dbfuncs.addRequirement(pars);
     if(info.changes === 1) {
         //message.react('✅');
-        message.channel.send('```id: '+info.lastInsertRowid+' | '+pars.message+'```use "!pwb show" to show all your current requests');
+        message.channel.send('```id: '+info.lastInsertRowid+' | '+pars.message+'```');
     } else {
         message.react('❎');
     }
@@ -82,7 +82,10 @@ commands.handleShowUser = function(message) {
     let targetID = message.author.id;
     if(message.contentObj.body !== '') { // if there is a person targeted
         targetID = parsefuncs.parseDiscordID(message.contentObj.body);
-        if(targetID === -1) return message.react('❎'); // not valid id provided
+        if(targetID === -1)
+            return message.react('❎'); // not valid id provided
+        if(message.author.id === targetID)
+            return message.channel.send('don\'t tag yourself'); // don't tag yourself
         if(message.userObj.permission === 0)
             return message.react('🔒'); // no peasants allowed past here
         let targetObj = dbfuncs.getDiscokid(targetID, message.guild.id);
