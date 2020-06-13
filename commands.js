@@ -125,9 +125,12 @@ commands.handleDelete = function(message) {
 };
 
 commands.handleThanks = function(message) {
-    if(message.contentObj.command === 'thank' &&
-       message.contentObj.body !== 'you')
+    if(message.contentObj.command === 'thank') {
+        if(message.contentObj.body === '')
+            message.channel.send('you');
         return;
+    } else if(message.contentObj.command === 'ty')
+        return message.channel.send('np');
     return message.channel.send('no problem');
 };
 

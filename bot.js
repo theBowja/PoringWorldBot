@@ -149,7 +149,8 @@ bot.on('message', message => {
     return commands.handleDelete(message);
 
   } else if(cmd === 'thanks' ||
-            cmd === 'thank') {
+            cmd === 'thank' ||
+            cmd === 'ty') {
     return commands.handleThanks(message);
 
   } else if (cmd === 'pc' || // quick price check for clean/unmodified equip
