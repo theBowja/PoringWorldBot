@@ -105,6 +105,7 @@ aliases.equips = dictionary(
   // GARMENT
   ["Cotton Shirt", "Undershirt"],
   ["Staunch Cape", "Magic Staunch Manteau"],
+  ["Natto Kig’s Manteau", "Natto Kig's Cloak"],
   ["Survivor's Manteau", "Advanced Survivor's Manteau"],
 
   // SHOE
