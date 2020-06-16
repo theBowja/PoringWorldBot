@@ -44,7 +44,7 @@ commands.handleTagMe = function(message) {
         let mylimit = targetObj.permission === 0 ? config.peasantlimit : config.limitreqs; // peasant limit vs mod limit
         if(count >= mylimit) {
             message.react('❎'); // target has reached the limit for reqs to make
-            message.reply(`you have reached your limit of ${mylimit} reqs`);
+            return message.reply(`you have reached your limit of ${mylimit} reqs`);
         }
     }
 

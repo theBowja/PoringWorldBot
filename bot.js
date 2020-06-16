@@ -31,8 +31,8 @@ bot.on('ready', () => {
     // TODO: make sure each guild has an admin
   }
 
-  // ping poring.world every 10 minutes
-  new CronJob('0 0,10,20,30,40,50 * * * *', function() {
+  // ping poring.world every 6 minutes
+  new CronJob('0 0-59/6 * * * *', function() {
     commands.handleSearch(bot);
   }, null, true);
 
@@ -148,7 +148,7 @@ bot.on('message', message => {
             cmd === 'tagwhen' || cmd === 'tagme') {
     return commands.handleTagMe(message);
 
-  } else if(cmd === 'show' ||
+  } else if(cmd === 'show' || cmd === 'list' ||
             cmd === 'showme') {
     return commands.handleShowUser(message);
 
