@@ -85,7 +85,7 @@ bot.on('guildMemberRemove', (member) => {
 
 // when role is deleted, remove any requests assigned to the role
 bot.on('roleDelete', (role) => {
-  if(dbfuncs.deleteMember(role.id, role.guild.id))
+  if(dbfuncs.deleteMember('&'+role.id, role.guild.id))
     console.log('event roleDelete: '+role.id+' in '+role.guild.id);
 });
 
