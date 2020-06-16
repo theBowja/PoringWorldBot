@@ -58,7 +58,7 @@ dbfuncs.addSnap = function(snap) {
     var item = parsefuncs.parseItem(snap.name, snap.category);
     var s = {
         snapid: snap.id,
-        icon: snap.icon,
+        icon: snap.cardPicture || snap.icon,
         name: item.name,
         slots: item.slots,
         refine: item.refine,

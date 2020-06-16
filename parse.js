@@ -54,8 +54,8 @@ parsefuncs.buildSnappingInfoEmbed = function(snaprecord) {
                         `Stock: **${snaprecord.stock}**\n` +
                         `Buyers: **${snaprecord.buyers}**\n\n` +
                         `Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes`);
-    if(snaprecord.broken) {
-        embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
+    if(snaprecord.icon.startsWith("card")) {
+        embed.setThumbnail(`https://www.romcodex.com/pic/cards/${snaprecord.icon}.jpg`);
     } else {
         embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
     }
