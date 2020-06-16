@@ -188,35 +188,48 @@ commands.handleSearch = async function(bot, message, querystring='') {
         console.log(`${new Date().toLocaleString()}   added ${snapsNew.length} new snaps to database`);
 
         // add all aliases for this to snapsNew so we can search against requirements
-        let snapsAliases = [];
+        // let snapsAliases = [];
+        // for(let sr of snapsNew) {
+        //     sr.alias = 0;
+        //     let res;
+        //     if(sr.category.startsWith('Equipment')) // all equipment aliases
+        //         res = aliases.equips[parsefuncs.prepName(sr.name)];
+        //     if(res === undefined) continue;
+
+        //     snapsAliases = snapsAliases.concat(res.map(aliasname => ({
+        //         ...sr,
+        //         aliasname: aliasname,
+        //         alias: 1
+        //     })));
+        // }
+        // snapsNew = snapsNew.concat(snapsAliases);
+
         for(let sr of snapsNew) {
             sr.alias = 0;
-            let res;
-            if(sr.category.startsWith('Equipment')) // all equipment aliases
-                res = aliases.equips[parsefuncs.prepName(sr.name)];
-            if(res === undefined) continue;
-
-            snapsAliases = snapsAliases.concat(res.map(aliasname => ({
-                ...sr,
-                aliasname: aliasname,
-                alias: 1
-            })));
-        }
-        snapsNew = snapsNew.concat(snapsAliases);
-
-        for(let sr of snapsNew) {
             let fullname = parsefuncs.buildItemFullName(sr);
             let foundreqs = dbfuncs.findRequirements(sr);
-            // if boss card, then do more db querys for aliases and combine with foundreqs
-            if(sr.category.startsWith('Card')) { // all aliases for mvp cards
-                let res = aliases.bosscards[parsefuncs.prepName(sr.name)];
-                if(res !== undefined) {
-                    foundreqs = res.reduce((acc, curr) => [
-                        ...acc,
-                        ...dbfuncs.findRequirements({ ...sr, aliasname: curr, alias: 1 })
-                    ], foundreqs);
-                }
+            let res; // add all aliases for this to snapsNew so we can search against requirements
+            if(sr.category.startsWith('Equipment')) // all equipment aliases
+                res = aliases.equips[parsefuncs.prepName(sr.name)];
+            else if(sr.category.startsWith('Card')) // all aliases for mvp cards
+                res = aliases.bosscards[parsefuncs.prepName(sr.name)];
+
+            if(res !== undefined) {
+                foundreqs = res.reduce((acc, curr) => [
+                    ...acc,
+                    ...dbfuncs.findRequirements({ ...sr, aliasname: curr, alias: 1 })
+                ], foundreqs);
             }
+            // if boss card, then do more db querys for aliases and combine with foundreqs
+            // if(sr.category.startsWith('Card')) { // all aliases for mvp cards
+            //     let res = aliases.bosscards[parsefuncs.prepName(sr.name)];
+            //     if(res !== undefined) {
+            //         foundreqs = res.reduce((acc, curr) => [
+            //             ...acc,
+            //             ...dbfuncs.findRequirements({ ...sr, aliasname: curr, alias: 1 })
+            //         ], foundreqs);
+            //     }
+            // }
 
             if(foundreqs.length === 0) // if nobody cares about this, go next
                 continue;
