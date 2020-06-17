@@ -138,7 +138,7 @@ bot.on('message', message => {
   // COMMANDS WITH NO PERMISSION LEVEL REQUIRED
   if(cmd === 'invite' ||
      cmd === 'invitelink') {
-    return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=134336```');
+    return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=150720```');
 
   } else if(cmd === 'pingmewhen' || cmd === 'tagmewhen' || cmd === 'tellmewhen') {
     return message.channel.send("use `request`, `subscribe`, `pingwhen`, `pingme`, `tagwhen`, or `tagme` instead");

@@ -10,7 +10,7 @@ const commands = {};
 // lol
 
 commands.handleHelp = function(message) {
-    message.channel.send('https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request');
+    message.channel.send(parsefuncs.buildHelpCommandsEmbed(message.userObj.permission !== 0));
 };
 
 commands.handleTagMe = function(message) {

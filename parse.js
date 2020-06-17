@@ -62,6 +62,27 @@ parsefuncs.buildSnappingInfoEmbed = function(snaprecord) {
     return embed;
 };
 
+// dunno if this belongs here but here it is
+parsefuncs.buildHelpCommandsEmbed = function(isAdmin) {
+    let embed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('All commands must be prefixed with `!pwb `');
+    if(isAdmin)
+        embed.addField('Admin Command List', '• `watch` - yeah\n' +
+                                             '• `pingme` - [please read the wiki here on forming a proper request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
+                                             '• `show` - what\n' +
+                                             '• `delete` - too lazy\n' +
+                                             '• `unwatch` - todo\n' +
+                                             '• `search` - lol\n' +
+                                             '• `permit` - uhh\n');
+    else
+        embed.addField('Command List', '• `pingme` - [please read the wiki here on forming a proper request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
+                                       '• `show` - uhh\n' +
+                                       '• `delete` - lol');
+
+    return embed;
+};
+
 // @returns string discord id or integer -1 if not valid
 parsefuncs.parseDiscordID = function(discordtag) {
     let id = /<[@q]!?(&?\d+)>/.exec(discordtag);
