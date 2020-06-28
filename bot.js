@@ -13,6 +13,7 @@ bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
   config.summonstrings.push(`<@${bot.user.id}> `);
   config.summonstrings.push(`<@!${bot.user.id}> `);
+  if(config.devenable) config.summonstrings.push('!pwbdev ');
 
   // pretend owner has is in each guild
   for(let [guildid, guild] of bot.guilds.cache) {

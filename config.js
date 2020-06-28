@@ -9,6 +9,9 @@ config.dropdbonstart = false;
 // otherwise do nothing
 config.schedulesearch = true;
 
+// if true then add "!pwbdev " to summonstrings
+config.devenable = false;
+
 /**
  * Strings that will summon the bot so it'll listen to your commands
  * default is pinging the bot @PoringWorldBot (added in bot.js in on-ready function)
