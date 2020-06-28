@@ -200,8 +200,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "pricehigher":
             case "ph":
-                value = value.replace(/[\s,]+/g, ''); // remove all spaces or commas
-                value = parseInt(value, 10);
+                value = parsefuncs.parseVerboseNumber(value);
                 if(value > 0) {
                     if(myreqs.pricelower !== undefined && value > myreqs.pricelower) break;
                     myreqs.pricehigher = value;
@@ -211,8 +210,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "pricelower":
             case "pl":
-                value = value.replace(/[\s,]+/g, ''); // remove all spaces or commas
-                value = parseInt(value, 10);
+                value = parsefuncs.parseVerboseNumber(value);
                 if(value > 0) {
                     if(myreqs.pricehigher !== undefined && value < myreqs.pricehigher) break;
                     myreqs.pricelower = value;
@@ -287,6 +285,43 @@ parsefuncs.parseReqs = function(reqsstr) {
     }
     myreqs.message = myreqs.message.trim();
     return myreqs;
+};
+
+/**
+ * Parses numbers with thousand, million, or billion
+ *   maximum number returned is 10billion-1
+ *   returns 0 if not valid
+ */
+parsefuncs.parseVerboseNumber = function(strnum) {
+    let max = 9999999999; // maximum number allowed is 10 billion - 1
+    strnum = strnum.toLowerCase().replace(/[^0-9a-z]+/g, ''); // strip all except number and letters
+    let temp = /^([0-9]+)([a-z]*)/.exec(strnum);
+    if(temp === null) return 0;
+    let [,num,multiplier] = temp
+    num = parseInt(num, 10);
+    switch(multiplier) {
+        case "t":
+        case "thousand":
+        case "thousands":
+            num = num * 1000;
+            break;
+
+        case "m":
+        case "mil":
+        case "million":
+        case "millions":
+            num = num * 1000000;
+            break;
+
+        case "b":
+        case "bil":
+        case "billion":
+        case "billions":
+            num = num * 1000000000;
+            break;
+    }
+    if(num > max) num = max;
+    return num;
 };
 
 module.exports = parsefuncs;
