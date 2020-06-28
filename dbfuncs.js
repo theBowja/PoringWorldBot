@@ -55,7 +55,7 @@ dbfuncs.clearExpiredSnaps = function() {
  * @throws gives warning if number of snaps in database exceeds 100
  */
 dbfuncs.addSnap = function(snap) {
-    var item = parsefuncs.parseItem(snap.name, snap.category);
+    var item = parsefuncs.parseItem(snap.name);
     var s = {
         snapid: snap.id,
         icon: snap.cardPicture || snap.icon,

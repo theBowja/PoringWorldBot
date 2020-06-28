@@ -226,7 +226,7 @@ describe('parsefuncs', function() {
 	describe('#parseItem()', function() {
 		for(let item of items) {
 			it(item.input, function() {
-				let parsed = parsefuncs.parseItem(item.input, item.category);
+				let parsed = parsefuncs.parseItem(item.input);
 				assert.equal(parsed.name, item.output.name);
 				assert.equal(parsed.refine, item.output.refine);
 				assert.equal(parsed.broken, item.output.broken);

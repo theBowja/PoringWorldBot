@@ -31,12 +31,14 @@ aliases.equips = dictionary(
   ["Sword Mace", "Noble Cross"],
   ["Sura Rampage", "Sky Smash"],
   ["Waghnak", "Claw", "Tacaro"],
+  ["Forest Staff", "Lost Staff"],
   ["Meteor Whip", "Wishing Star"],
   ["Flamberge", "Furious Soldier"],
   ["Elder's Hammer", "Acid Touch"],
   ["Luna Bow", "Moonlight Goddess"],
   ["Sage Diary", "Sage’s Handbook"],
   ["Wing Staff", "Release Of Wish"],
+  ["Spearfish Pike", "Ocean Dread"],
   ["Spell Book Of Ice", "Frost Book"],
   ["Buster", "Doom Axe", "Avalanche"],
   ["Pole Axe", "Halberd", "Soul Spear"],
@@ -47,6 +49,7 @@ aliases.equips = dictionary(
   ["Lance Of Dragon Tamer", "Dragon Howl"],
   ["Roguemaster's Bow", "Robin Hood’s Bow"],
   ["Bill Guisarme", "Punishing Guillotine"],
+  ["Blood Axe", "Bloody Axe", "Blood Hound"],
   ["Spiritual Rod", "Starforged Magic Wand"],
   ["Mace Of Judgment", "Hammer Of Judgement"],
   ["Holy Stick", "Nemesis", "O’Neill’s Staff"],
@@ -63,24 +66,36 @@ aliases.equips = dictionary(
   ["Gakkung Bow", "Malang Snow Crab", "Overlord Crab Bow"],
   ["Wonderful Fox Grass", "Fine Fox Grass", "Fine Pink Fox Grass"],
   ["Survivor's Rod", "Advanced Survival Staff", "Stardust Dragon Staff"],
+  ["Advanced Fox Grass", "Magical Fox Grass", "Magical Yellow Fox Grass"],
 
   // OFFHAND
-  ["Telekinetic Orb"],
-  ["Nile's Bracelet"],
-  ["Chemical Protection Gloves"],
-  ["Skull Bracer", "Evil Bracer"],
-  ["Fox Wrist Guard", "Noble Bracer"],
-  ["Floral Bracelet", "Rosa Bracelet"],
+  ["Exorcism Bible", "Divine Eye"],
+  ["Life Magic Book", "Arcane Codex"],
+  ["Mirror Shield", "Nirvana Shield"],
+  ["Orleans's Server", "Peak Platter"],
+  ["Stone Buckler", "Meteorite Buckler"],
   ["Magic Bible Vol1", "Sacrifice Book"],
-  ["Statue Of Judgement", "Statue Of Mother Mary"],
+  ["Sacrifice Book", "Creeper Agreement"],
+  ["Nile's Bracelet", "Heilion Bracelet"],
+  ["Sacred Mission", "Giant Wing Shield"],
+  ["Static Shield", "Giant Armor Shield"],
+  ["Telekinetic Orb", "Contract Jewelery"],
+  ["Shield of Naga", "Dragon Flame Shield"],
+  ["Vinkt's Bracelet", "Vinkt Magic Bracelet"],
+  ["Skull Bracer", "Evil Bracer", "Skeleton Bracer"],
+  ["Floral Bracelet", "Rosa Bracelet", "Rosa Chain"],
+  ["Chemical Protection Gloves", "Venom Fang Gloves"],
+  ["Fox Wrist Guard", "Noble Bracer", "Golden Wrist"],
   ["Statue Of Guardian Angel", "Statue Of Archangel"],
+  ["Statue Of Judgement", "Statue Of Mother Mary", "Holy Mother's Radiance"],
+
 
   // ARMOR
   ["Elegant Uniform", "Moon Gown"],
   ["Bohemian Coat", "Madman's Jacket"],
   ["Chain Mail", "Garman Plate Armor"],
-  ["Goibne's Armor", "Gods’ Blessings"],
   ["Robe Of Judgment", "Dawn Clothes"],
+  ["Goibne's Armor", "Gods’ Blessings"],
   ["Surging Magic Robe", "Magic Abyss"],
   ["Staunch Armor", "The Chosen’s Armor"],
   ["Staunch Clothes", "The Chosen’s Gown"],
@@ -99,7 +114,6 @@ aliases.equips = dictionary(
   ["Rogue Clothes", "Thief Clothes", "Breath Holder’s Armor"],
   ["Mithril Metal Armor", "Legion Plate Armor", "Watcher's Armor"],
   ["Elegant Doram Manteau", "Elegant Doram Suit", "Lazy Meow Coat"],
-  ["Advanced Fox Grass", "Magical Fox Grass", "Magical Yellow Fox Grass"],
   ["Ninja Suit Sakura", "Ninja Suit Moonlight", "Ninja Clothes·Cold Night Song"],
 
   // GARMENT
@@ -126,6 +140,7 @@ aliases.equips = dictionary(
   ["Eye of Dullahan", "Kraken's Eye"],
   ["Staunch Ring", "Ring of Loyalty"],
   ["Pocket Watch", "Time Manipulator"],
+  ["Black Cat Brooch", "Cat Paw Stamp"],
   ["Orleans's Gloves", "Tibbers' Hand"],
   ["Brooch", "AGI Pin", "Seventh Sense"],
   ["Rosary", "LUK Necklace", "Lucky Star"],
@@ -142,23 +157,27 @@ aliases.equips = dictionary(
 const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling",
   "Strouf", "Goblin Leader", "Mistress", "Maya", "Phreeoni", "Eddga",
   "Osiris", "Moonlight Flower", "Orc Hero", "Kobold Leader", "Doppelganger",
-  "Atroce", "Orc Lord", "Detarderous", "Owl Baron", "Bloody Knight",
+  "Atroce", "Orc Lord Helm", "Detarderous", "Owl Baron", "Bloody Knight",
   "Baphomet", "Dark Lord", "Dracula", "Randgris", "Chimera", "Time Holder",
   "Spashire", "Stormy Knight", "Garm", "Firelord Kaho", "Arc Angeling", "Grandma Wolf",
   "Lord Of Death", "Bloody Murderer", "Katerina", "Deeven", "Eremes",
-  "Gloom Under Night", "Ktullanux", "Hill Wind"];
+  "Gloom Under Night", "Ktullanux", "Hill Wind", "Snake Demon Gorgons",
+  "Wasteland Lord", "Poi Tata"];
 
 const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring",
   "Toad", "Rotar Zairo", "Dragon Fly", "Vagabond Wolf", "Wood Goblin",
   "Gryphon", "Anubis", "Hyegun", "Orc Baby", "Jakk", "Mutant Dragon",
   "Rafflesia", "Owl Duke", "Alice", "Zherlthsh", "Mysteltainn", "Dark Illusion",
   "Clock", "Clock Tower Manager", "Chepet", "Fire Witch", "Flute Player",
-  "Cenia", "Deje", "Loli Ruri", "Gazeti", "Galion", "Fallen Bishop"];
+  "Cenia", "Deje", "Loli Ruri", "Gazeti", "Galion", "Fallen Bishop",
+  "Mao Guai Calvin", "Maple Fairy Yzma", "Whitebait Lake Lord"];
 
 const dead = ["Dead Deviling", "Dead Drake", "Dead Strouf", "Mistress the Revenant",
   "Dead Maya", "Phreeoni the Revenant", "Dead Eddga", "Revenant Osiris",
   "Dead Moonlight Flower", "Dead Soul", "Dead Atroce", "Detarderous the Dead",
   "Dead Owl Baron", "Dead Time Holder", "Spashire the Dead", "Dead Chimera"];
+
+const tt = ["Valkyrie Rathgricy", "Tesseract", "Mentalist", "Magic Swordsman Thanatos"];
 
 const makecarddict = (cards, append, aliases) => cards.reduce((dict, curr) => ({
   ...dict,
@@ -172,6 +191,7 @@ aliases.bosscards = {
   ...makecarddict(mini, " Card", ["Mini Card", "MVP/Mini Card", "Boss Card"]),
   ...makecarddict(mini, "★ Card", ["Mini★ Card", "MVP/Mini★ Card", "Boss Card"]),
   ...makecarddict(dead, " Card", ["Undead Card", "Dead Card", "Revenant Card", "Boss Card"]),
+  ...makecarddict(tt, " Card", ["TT Card", "MVP Card", "MVP/Mini Card", "Boss Card"]),
 };
 
 module.exports = aliases;
