@@ -172,10 +172,10 @@ const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring"
   "Cenia", "Deje", "Loli Ruri", "Gazeti", "Galion", "Fallen Bishop",
   "Mao Guai Calvin", "Maple Fairy Yzma", "Whitebait Lake Lord"];
 
-const dead = ["Dead Deviling", "Dead Drake", "Dead Strouf", "Mistress the Revenant",
-  "Dead Maya", "Phreeoni the Revenant", "Dead Eddga", "Revenant Osiris",
+const dead = ["Dead Deviling", "Dead Drake", "Dead Strouf", "Goblin Leader Revenant",
+  "Mistress the Revenant", "Dead Maya", "Phreeoni the Revenant", "Dead Eddga", "Revenant Osiris",
   "Dead Moonlight Flower", "Dead Soul", "Dead Atroce", "Detarderous the Dead",
-  "Dead Owl Baron", "Dead Time Holder", "Spashire the Dead", "Dead Chimera"];
+  "Dead Owl Baron", "Bloody Knight Undead", "Dead Time Holder", "Spashire the Dead", "Dead Chimera"];
 
 const tt = ["Valkyrie Rathgricy", "Tesseract", "Mentalist", "Magic Swordsman Thanatos"];
 

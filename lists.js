@@ -101,7 +101,7 @@ lists.schedule = {
 	'57': 'divine blessing',
 
 	'9' : 'armor',
-	//'19': 'sharp 4',
+	'19': 'rev',
 	'29': 'Angel Snow Feather',
 	'39': 'sharp 2',
 	'49': 'sharp 3',

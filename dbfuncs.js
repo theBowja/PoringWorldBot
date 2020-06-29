@@ -305,6 +305,9 @@ dbfuncs.listAllRequirements = function() {
  */
 dbfuncs.findRequirements = function(snap) {
     snap.namesearch = parsefuncs.prepName(snap.alias ? snap.aliasname : snap.name); // remove nonletters and nonnumbers from name
+    // hardcode aliases
+    if(snap.namesearch === "floralbracelet" && snap.alias === 1) snap.refine = snap.refine - 2;
+
     snap.enchantspec = snap.enchant.toLowerCase().replace(/[^a-z]/g, ''); // remove whitespace from enchant
     snap.slotted = snap.slots - (snap.category === 'Equipment - Weapon'); // calculated slotted bool
     snap.refinecode = Math.pow(2, snap.refine); // for bitwise anding
