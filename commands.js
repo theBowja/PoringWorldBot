@@ -177,15 +177,15 @@ commands.handlePermit = function(message) {
  */
 commands.handleSearch = async function(bot, message, querystring='') {
     try {
-        let gon = dbfuncs.clearExpiredSnaps();
-        console.log(`${new Date().toLocaleString()} cleared ${gon} expired snaps from database`);
         if(message !== undefined)
             querystring = message.contentObj.body;
         let snapsCurrent = await pingPoringWorld(querystring);
-        console.log(`${new Date().toLocaleString()}  got response from poring.world q='${querystring}'`);
+        console.log(`${new Date().toLocaleString()} got response from poring.world q='${querystring}'`);
         if(message !== undefined) message.react('✅');
+
+        let gon = dbfuncs.clearExpiredSnaps();
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
-        console.log(`${new Date().toLocaleString()}   added ${snapsNew.length} new snaps to database`);
+        console.log(`${new Date().toLocaleString()}  cleared ${gon} expired snaps to db; added ${snapsNew.length} new snaps to db`);
 
         for(let sr of snapsNew) {
             sr.alias = 0;
@@ -225,7 +225,7 @@ commands.handleSearch = async function(bot, message, querystring='') {
                 });
             }
         }
-        console.log(`${new Date().toLocaleString()}    done notifying users of pings`);
+        console.log(`${new Date().toLocaleString()}   done notifying users of pings`);
 
     } catch(e) {
         if(message !== undefined) message.react('❎');
