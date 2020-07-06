@@ -50,8 +50,7 @@ commands.handleTagMe = function(message) {
 
     pars.discordkidID = targetObj.dkidID;
     pars.channelID = message.channelObj.chID;
-
-    let info = dbfuncs.addRequirement(pars);
+    let info = dbfuncs.addRequirement(targetObj.dkidID, message.channelObj.chID, pars);
     if(info.changes === 1) {
         //message.react('✅');
         message.channel.send('```id: '+info.lastInsertRowid+' | '+pars.message+'```');

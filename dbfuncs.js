@@ -113,6 +113,64 @@ dbfuncs.getSnaps = function() {
 };
 
 /**
+ * Parameters: dkidID and chID are primary ids for the discordkid and channels table
+ * Returns true if there was a change.
+ */
+dbfuncs.setBudget = function(dkidID, chID, budget) {
+    if(budget < 0) budget = null;
+    let mreqID = dbfuncs.getOrCreateMetareqID(dkidID, chID);
+    let query = db.prepare(`UPDATE metareqs SET budget=? WHERE mreqID=?`)
+    return query.run(budget, mreqID).changes !== 0
+};
+
+/**
+ * Gets the budget value from the metareqs table
+ * Parameters: dkidID and chID are primary ids for the discordkid and channels table
+ * Returns the budget value, or -1 if no budget found
+ */
+dbfuncs.getBudget = function(dkidID, chID) {
+    var query = db.prepare(`SELECT budget FROM metareqs
+                            WHERE discordkidID=? AND
+                                  channelID=?`);
+    return query.get(dkidID, chID) || -1;
+}
+
+/**
+ * Creates a new row into metareqs table
+ * Parameters: dkidID and chID are primary ids for the discordkid and channels table
+ * Returns the primary ID for the newly created row, undefined if failed (maybe because not unique?)
+ */
+dbfuncs.addMetareq = function(dkidID, chID) {
+    try {
+        let query = db.prepare(`INSERT INTO metareqs (discordkidID, channelID) VALUES (?, ?)`);
+        return query.run(dkidID, chID).lastInsertRowid;
+    } catch(e) {
+        return undefined;
+    }
+}
+
+// parameters are the table primary IDs
+dbfuncs.getMetareq = function(dkidID, chID) {
+    var query = db.prepare(`SELECT * FROM metareqs
+                            WHERE discordkidID=? AND
+                                  channelID=?`);
+    return query.get(dkidID, chID);
+};
+
+/**
+ * returns the metareq primary id. if it doesn't exist, then create one and return that id
+ */
+dbfuncs.getOrCreateMetareqID = function(dkidID, chID) {
+    let mreq = dbfuncs.getMetareq(dkidID, chID);
+    return mreq === undefined ? dbfuncs.addMetareq(dkidID, chID) : mreq.mreqID;
+}
+
+dbfuncs.getAllMetareqs = function() {
+    var query = db.prepare('SELECT * FROM metareqs');
+    return query.all();
+};
+
+/**
  * Delete everything inside the table currentsnap
  * @returns the number of rows deleted
  */
@@ -244,11 +302,10 @@ dbfuncs.deleteMultipleChannels = function(chanids) {
  * Adds requirement to database
  *   checks if channel or user already exists.
  * @param reqs {object} - all properties should match the schema. no extra properties. everything lowercase too lazy to do checking
- * @return the info object: info.changes, info.lastInsertRowid
+ * @return the info object: { info.changes, info.lastInsertRowid }
  */
-dbfuncs.addRequirement = function(reqs) {
-    if(!reqs.hasOwnProperty('channelID') || !reqs.hasOwnProperty('discordkidID')) return false;
-
+dbfuncs.addRequirement = function(dkidID, chID, reqs) {
+    reqs.mreqID = dbfuncs.getOrCreateMetareqID(dkidID, chID);
     let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
                             VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
     return query.run(reqs);
@@ -316,21 +373,22 @@ dbfuncs.findRequirements = function(snap) {
     var query = db.prepare(`
         SELECT R.reqID, C.discordchid, U.discordid
         FROM requirements R 
-        INNER JOIN channels C ON R.channelID=C.chID
-        INNER JOIN discokids U ON R.discordkidID=U.dkidID
+        INNER JOIN metareqs MR ON R.metareqID=MR.mreqID
+        INNER JOIN channels C ON MR.channelID=C.chID
+        INNER JOIN discokids U ON MR.discordkidID=U.dkidID        
         WHERE (R.name IS NULL OR R.name=@namesearch) AND
               (R.slotted IS NULL OR R.slotted=@slotted) AND
               ((R.refine & @refinecode) != 0) AND
               (R.broken IS NULL OR R.broken=@broken) AND
               (R.pricehigher IS NULL OR R.pricehigher<=@price) AND
               (R.pricelower IS NULL OR R.pricelower>=@price) AND
+              (MR.budget IS NULL OR @price<=MR.budget) AND
               (R.buyers IS NULL OR R.buyers<=@buyers) AND
               (R.enchant IS NULL OR R.enchant=@enchantspec) AND
               ((R.enchantlevel & @enchantlevelcode) != 0) AND
               (R.category IS NULL OR R.category=@category) AND
               (R.stock IS NULL OR R.stock>=@stock) AND
               (R.alias=1 OR @alias=0)
-
     `);
 
     var result = query.all(snap);

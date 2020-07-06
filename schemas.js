@@ -21,6 +21,21 @@ discokids (
 	UNIQUE(discordid, guildid)
 )`;
 
+// checking for metareqs existence should only be taken care of in dbfuncs.js
+schema.defs.metareqs = `
+metareqs (
+	mreqID INTEGER PRIMARY KEY AUTOINCREMENT,
+	budget INTEGER,
+	silentstart INTEGER,
+	silentend INTEGER,
+
+	discordkidID INTEGER NOT NULL,
+	channelID INTEGER NOT NULL,
+	FOREIGN KEY (discordkidID) REFERENCES discokids(dkidID) ON DELETE CASCADE,
+	FOREIGN KEY (channelID) REFERENCES channels(chID) ON DELETE CASCADE,
+	UNIQUE(discordkidID, channelID)
+)`;
+
 // store as lowercase
 // discordkidID and channelID are schema internal ID, not discord IDs
 schema.defs.requirements = `
@@ -48,6 +63,8 @@ requirements (
 	FOREIGN KEY (discordkidID) REFERENCES discokids(dkidID) ON DELETE CASCADE,
 	FOREIGN KEY (channelID) REFERENCES channels(chID) ON DELETE CASCADE
 )`;
+//  metareqID INTEGER
+//  FOREIGN KEY (metareqID) REFERENCE metareqs(mreqID) ON DELETE CASCADE
 
 // icon is for image purposes
 // make sure everything lowercase
