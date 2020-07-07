@@ -328,8 +328,9 @@ dbfuncs.deleteRequirement = function(reqid) {
  */
 dbfuncs.getRequirement = function(reqid) {
     let query = db.prepare(`SELECT * FROM requirements R 
-                            INNER JOIN channels C ON R.channelID=C.chID
-                            INNER JOIN discokids U ON R.discordkidID=U.dkidID
+                            INNER JOIN metareqs MR ON R.metareqID=MR.mreqID
+                            INNER JOIN channels C ON MR.channelID=C.chID
+                            INNER JOIN discokids U ON MR.discordkidID=U.dkidID  
                             WHERE R.reqID=?`);
     let res = query.get(reqid);
     return res;
@@ -341,8 +342,9 @@ dbfuncs.getRequirement = function(reqid) {
  */
 dbfuncs.listUserRequirements = function(userid, guildid, channelid) {
     var query = db.prepare(`SELECT * FROM requirements R
-                            INNER JOIN discokids U ON R.discordkidID=U.dkidID
-                            INNER JOIN channels C ON R.channelID=C.chID
+                            INNER JOIN metareqs MR ON R.metareqID=MR.mreqID
+                            INNER JOIN channels C ON MR.channelID=C.chID
+                            INNER JOIN discokids U ON MR.discordkidID=U.dkidID      
                             WHERE U.discordid=? AND
                                   U.guildid=? AND
                                   C.discordchid=?`);
