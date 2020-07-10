@@ -288,17 +288,18 @@ parsefuncs.parseReqs = function(reqsstr) {
 };
 
 /**
- * Parses numbers with thousand, million, or billion
+ * Parses whole numbers with thousand, million, or billion
  *   maximum number returned is 10billion-1
- *   returns 0 if not valid
+ * @returns the floored number. else -1 if not valid
  */
 parsefuncs.parseVerboseNumber = function(strnum) {
     let max = 9999999999; // maximum number allowed is 10 billion - 1
-    strnum = strnum.toLowerCase().replace(/[^0-9a-z]+/g, ''); // strip all except number and letters
-    let temp = /^([0-9]+)([a-z]*)/.exec(strnum);
-    if(temp === null) return 0;
+    strnum = strnum.toLowerCase().replace(/[^0-9a-z.]+/g, ''); // strip all except number and letters
+    let temp = /^(\d*\.?\d+)\.?([a-z]*)/.exec(strnum);
+    if(temp === null) return -1;
     let [,num,multiplier] = temp
-    num = parseInt(num, 10);
+    num = parseFloat(num, 10);
+    if(isNaN(num)) return -1;
     switch(multiplier) {
         case "t":
         case "thousand":
@@ -321,7 +322,7 @@ parsefuncs.parseVerboseNumber = function(strnum) {
             break;
     }
     if(num > max) num = max;
-    return num;
+    return Math.floor(num);
 };
 
 module.exports = parsefuncs;
