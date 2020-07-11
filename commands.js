@@ -48,8 +48,6 @@ commands.handleTagMe = function(message) {
         }
     }
 
-    pars.discordkidID = targetObj.dkidID;
-    pars.channelID = message.channelObj.chID;
     let info = dbfuncs.addRequirement(targetObj.dkidID, message.channelObj.chID, pars);
     if(info.changes === 1) {
         //message.react('✅');
@@ -126,6 +124,32 @@ commands.handleDelete = function(message) {
     }
 };
 
+// !pwb budget - deletes the budget for the current user
+// !pwb budget [number] - sets the budget for the current user
+// !pwb budget [tag] - deletes the budget for targeted user
+// !pwb budget [number] [tag] - sets the budget for targeted user
+// currently, only deleting and setting yourself is implemented
+commands.handleBudget = function(message) {
+    // let tmp = message.contentObj.body.split(' ');
+    // let number, tagID;
+    if(message.contentObj.body === '')
+        return message.channel.send(dbfuncs.setBudget(message.userObj.dkidID, message.channelObj.chID));
+
+    let budget = parsefuncs.parseVerboseNumber(message.contentObj.body);
+    if(isNaN(budget))
+        return message.channel.send("not a valid number");
+
+    //     if (parsefuncs.parseDiscordID(str) === -1)
+    // message.contentObj.body
+    // parse number
+    // parse target if exists
+    let res = dbfuncs.setBudget(message.userObj.dkidID, message.channelObj.chID, budget);
+    if(res) message.channel.send("<username> has budget " + budget);
+    // TODO: message for budget deleted
+    else message.channel.send("There was an error in the database");
+
+};
+
 commands.handleThanks = function(message) {
     if(message.contentObj.command === 'thank') {
         if(message.contentObj.body === '')
@@ -144,6 +168,7 @@ commands.handlePing = function(message) {
 
 };
 
+// !pwb permit 
 commands.handlePermit = function(message) {
     let body = message.contentObj.body.split(' ');
 

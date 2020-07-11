@@ -103,7 +103,7 @@ lists.schedule = {
 	'9' : 'armor',
 	'19': 'rev',
 	'29': 'Angel Snow Feather',
-	'39': 'sharp 2',
+	'39': 'blueprint',
 	'49': 'sharp 3',
 	'59': 'sharp 4',
 };

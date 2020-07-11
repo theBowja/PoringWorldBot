@@ -116,7 +116,7 @@ dbfuncs.getSnaps = function() {
  * Parameters: dkidID and chID are primary ids for the discordkid and channels table
  * Returns true if there was a change.
  */
-dbfuncs.setBudget = function(dkidID, chID, budget) {
+dbfuncs.setBudget = function(dkidID, chID, budget=null) {
     if(budget < 0) budget = null;
     let mreqID = dbfuncs.getOrCreateMetareqID(dkidID, chID);
     let query = db.prepare(`UPDATE metareqs SET budget=? WHERE mreqID=?`)
@@ -137,19 +137,16 @@ dbfuncs.getBudget = function(dkidID, chID) {
 
 /**
  * Creates a new row into metareqs table
- * Parameters: dkidID and chID are primary ids for the discordkid and channels table
- * Returns the primary ID for the newly created row, undefined if failed (maybe because not unique?)
+ * @[arams: dkidID and chID are primary ids for the discordkid and channels table (and must be unique combined)
+ * @returns the primary ID for the newly created rows
  */
 dbfuncs.addMetareq = function(dkidID, chID) {
-    try {
-        let query = db.prepare(`INSERT INTO metareqs (discordkidID, channelID) VALUES (?, ?)`);
-        return query.run(dkidID, chID).lastInsertRowid;
-    } catch(e) {
-        return undefined;
-    }
+    let query = db.prepare(`INSERT INTO metareqs (discordkidID, channelID) VALUES (?, ?)`);
+    return query.run(dkidID, chID).lastInsertRowid;
 }
 
 // parameters are the table primary IDs
+// undefined if not found
 dbfuncs.getMetareq = function(dkidID, chID) {
     var query = db.prepare(`SELECT * FROM metareqs
                             WHERE discordkidID=? AND
@@ -162,7 +159,8 @@ dbfuncs.getMetareq = function(dkidID, chID) {
  */
 dbfuncs.getOrCreateMetareqID = function(dkidID, chID) {
     let mreq = dbfuncs.getMetareq(dkidID, chID);
-    return mreq === undefined ? dbfuncs.addMetareq(dkidID, chID) : mreq.mreqID;
+    if(mreq === undefined) return dbfuncs.addMetareq(dkidID, chID);
+    else return mreq.mreqID;
 }
 
 dbfuncs.getAllMetareqs = function() {
@@ -305,7 +303,7 @@ dbfuncs.deleteMultipleChannels = function(chanids) {
  * @return the info object: { info.changes, info.lastInsertRowid }
  */
 dbfuncs.addRequirement = function(dkidID, chID, reqs) {
-    reqs.mreqID = dbfuncs.getOrCreateMetareqID(dkidID, chID);
+    reqs.metareqID = dbfuncs.getOrCreateMetareqID(dkidID, chID);
     let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
                             VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
     return query.run(reqs);

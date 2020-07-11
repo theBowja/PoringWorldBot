@@ -13,7 +13,10 @@ bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
   config.summonstrings.push(`<@${bot.user.id}> `);
   config.summonstrings.push(`<@!${bot.user.id}> `);
-  if(config.devenable) config.summonstrings.push('!pwbdev ');
+  if(config.devenable) {
+    config.summonstrings.push('!dev ');
+    console.log("devenable: added !dev  as summonstring");
+  }
 
   // pretend owner has is in each guild
   for(let [guildid, guild] of bot.guilds.cache) {
@@ -157,6 +160,9 @@ bot.on('message', message => {
             cmd === 'del' ||
             cmd === 'remove') {
     return commands.handleDelete(message);
+    
+  } else if(cmd === 'budget') {
+    return commands.handleBudget(message);
 
   } else if(cmd === 'thanks' ||
             cmd === 'thank' ||
@@ -220,6 +226,9 @@ bot.on('message', message => {
         });
     }
     message.react('✅');
+  } else if(cmd === 'patch') {
+    let patchdb = require('./patchdb.js');
+    patchdb.doPatches();
   } else if(cmd === 'backup') {
     if(message.contentObj.body === '') return message.react('❎');
     dbfuncs.backup(message.contentObj.body);
