@@ -2,6 +2,13 @@ var schema = {};
 
 schema.defs = {};
 
+// this table should only have one value in it
+schema.defs.version = `
+version (
+	vID INTEGER PRIMARY KEY AUTOINCREMENT,
+	version TEXT NOT NULL
+)`;
+
 schema.defs.channels = `
 channels (
 	chID INTEGER PRIMARY KEY AUTOINCREMENT,
