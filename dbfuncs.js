@@ -20,6 +20,22 @@ for (var key in schema.defs) {
     db.exec(sqlxd);
 }
 
+// update version in the database
+function checkVersion() {
+    const { version } = require('./package.json');
+    let query = db.prepare('SELECT version FROM version');
+    let current = query.get();
+    if(current === undefined) {
+        let insert = db.prepare('INSERT INTO version (version) VALUES (?)');
+        insert.run(version);
+    } else if(version !== current) {
+        // TODO: do whatever idk
+        let update = db.prepare('UPDATE version SET version=?');
+        update.run(version);
+    }
+}
+checkVersion();
+
 var dbfuncs = {};
 
 // make backup depending on day of week
