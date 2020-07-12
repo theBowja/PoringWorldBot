@@ -64,14 +64,9 @@ requirements (
 	stock INTEGER,
 	alias INTEGER NOT NULL DEFAULT 0,
 
-	discordkidID INTEGER NOT NULL,
-	channelID INTEGER NOT NULL,
-
-	FOREIGN KEY (discordkidID) REFERENCES discokids(dkidID) ON DELETE CASCADE,
-	FOREIGN KEY (channelID) REFERENCES channels(chID) ON DELETE CASCADE
+    metareqID INTEGER NOT NULL,
+    FOREIGN KEY (metareqID) REFERENCES metareqs(mreqID) ON DELETE CASCADE
 )`;
-//  metareqID INTEGER
-//  FOREIGN KEY (metareqID) REFERENCE metareqs(mreqID) ON DELETE CASCADE
 
 // icon is for image purposes
 // make sure everything lowercase
