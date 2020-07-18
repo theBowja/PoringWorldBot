@@ -13,9 +13,9 @@ bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
   config.summonstrings.push(`<@${bot.user.id}> `);
   config.summonstrings.push(`<@!${bot.user.id}> `);
-  if(config.devenable) {
-    config.summonstrings.push('!dev ');
-    console.log("devenable: added !dev  as summonstring");
+  if(config.devonly) {
+    config.summonstrings = ['!dev '];
+    console.log("devonly: !dev  is the only command that can summon this bot instance");
   }
 
   // pretend owner has is in each guild
@@ -58,11 +58,11 @@ bot.on('ready', () => {
 bot.on('guildCreate', (guild) => {
   console.log('event guildCreate: '+guild.id);
   dbfuncs.addDiscokid(config.owner, guild.id, config.ownerperm);
-  guild.fetchAuditLogs({ limit:1, type:28 }) // type 28 is "add bot"
+  guild.fetchAuditLogs({ limit: 1, type: 28 }) // type 28 is "add bot"
     .then(audit => {
       let userID = audit.entries.first().executor.id;
       if(userID !== config.owner)
-        dbfuncs.addDiscokid(userID, guild.id, 1);
+        dbfuncs.addDiscokid(userID, guild.id, config.startperm);
     })
     .catch(console.error);
 });

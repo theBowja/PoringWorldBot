@@ -9,8 +9,8 @@ config.dropdbonstart = false;
 // otherwise do nothing
 config.schedulesearch = true;
 
-// if true then add "!pwbdev " to summonstrings
-config.devenable = false;
+// if true, then clears config.summonstrings and adds only "!dev "
+config.devonly = false;
 
 /**
  * Strings that will summon the bot so it'll listen to your commands
@@ -23,7 +23,7 @@ config.devenable = false;
 config.summonstrings = ["!pwb "];
 
 // the limited amount of reqs that a peasant can make
-config.peasantlimit = 10;
+config.peasantlimit = 12;
 // the limited amount of reqs that nonpeasants can make
 // this is because of the character limit for the "showme" command
 // honestly if you have so much reqs, you should just set up another channel
@@ -34,6 +34,8 @@ config.limitreqs = 30;
 config.owner = "161248916384251904";
 // base permission level that owner gets
 config.ownerperm = 6969;
+// base permission level that someone who added the bot will get
+config.startperm = 9;
 
 // blacklist :(
 config.blacklistedguild = ["265757905435885568"];

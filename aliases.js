@@ -17,7 +17,6 @@ const dictionary = (...lists) => lists.reduce((dictionary, list) => ({
 // The key for each is the name with lowercase and all punctuation stripped.
 // For example: aliases["avalanche"] is ["Buster", "Doom Axe"]
 //              aliases["eldershammer"] is ["Acid Touch"]
-
 aliases.equips = dictionary(
   // WEAPON
   ["Bass", "Lira"],
@@ -103,7 +102,6 @@ aliases.equips = dictionary(
   ["Alloy Mail", "Alloy Armor", "Bright Armor"],
   ["Scapulare", "Holy Robe", "Glorious Praise"],
   ["Dragon Vest", "Sniping Suit", "Tyre's Armor"],
-  ["Elaborate Costume", "Floating Cloud Clothes"],
   ["Mink Coat", "Beast Heart", "Tyrannical Armor"],
   ["Summoner Coat", "Stardust Robe", "Blanking Coat"],
   ["Wooden Mail", "Iron Armor", "Perseverance Armor"],
@@ -114,6 +112,7 @@ aliases.equips = dictionary(
   ["Rogue Clothes", "Thief Clothes", "Breath Holder’s Armor"],
   ["Mithril Metal Armor", "Legion Plate Armor", "Watcher's Armor"],
   ["Elegant Doram Manteau", "Elegant Doram Suit", "Lazy Meow Coat"],
+  ["Elaborate Costume", "Elegant Dancing Dress","Floating Cloud Clothes"],
   ["Ninja Suit Sakura", "Ninja Suit Moonlight", "Ninja Clothes·Cold Night Song"],
 
   // GARMENT

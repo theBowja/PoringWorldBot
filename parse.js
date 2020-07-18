@@ -85,10 +85,19 @@ parsefuncs.buildHelpCommandsEmbed = function(isAdmin) {
 
 // @returns string discord id or integer -1 if not valid
 parsefuncs.parseDiscordID = function(discordtag) {
-    let id = /<[@q]!?(&?\d+)>/.exec(discordtag);
+    let id = /<[@q?]!?(&?\d+)>/.exec(discordtag);
     if(id === null) return -1;
     if(id[1] === undefined) return -1;
     return id[1];
+};
+
+// @returns boolean true if discordtag/role exists in guild
+parsefuncs.validateDiscordID = function(discordtag, guildid) {
+  // TODO
+};
+
+parsefuncs.parseValidateDiscordID = function(discordtag) {
+    return parsefuncs.parseDiscordID(discordtag);
 };
 
 /**
@@ -120,6 +129,30 @@ parsefuncs.parseContent = function(content) {
         contentObj.body = content.substring(spaceIndex+1);
     }
     return contentObj;
+};
+
+/**
+ * Parses the target discord id from the bodystring. First checks if a tag is at beginning of string,
+ *   otherwise check the end of the string. Also validates if it actually exists
+ *
+ *
+ */
+parsefuncs.parseValidateTargetID = function(bodystring) {
+    // TODO
+    
+    // see if there is a target
+    // let tmp = contentObj.body.split(' ');
+    // if(tmp.length <= 1) return contentObj; // no target
+    // let targetID = parsefuncs.parseDiscordID(tmp[0]);
+    // if(targetID === -1) { 
+    //     targetID = parsefuncs.parseDiscordID(tmp[tmp.length-1]);
+    //     if(targetID === -1) return contentObj; // no valid target
+    // }
+    // contentObj.target = dbfuncs.getDiscokid(message.author.id, message.guild.id);
+    // if(contentObj.target === undefined)
+    //     contentObj.target = { permission: 0, discordid: targetID };
+
+    // return contentObj;
 };
 
 // strips all unnecessary characters from an item name
