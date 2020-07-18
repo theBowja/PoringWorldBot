@@ -129,26 +129,34 @@ commands.handleDelete = function(message, { pwbContent, pwbUser, pwbChannel }) {
 // !pwb budget [number] - sets the budget for the current user
 // !pwb budget [tag] - deletes the budget for targeted user
 // !pwb budget [number] [tag] - sets the budget for targeted user
-// currently, only deleting and setting yourself is implemented
+// !pwb budget [tag] [number] - sets the budget for targeted user
 commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
-    // let tmp = pwbContent.body.split(' ');
-    // let number, tagID;
-    if(pwbContent.body === '')
-        return message.channel.send(dbfuncs.setBudget(pwbUser.dkidID, pwbChannel.chID));
+    let pwbTarget = pwbUser; // default targets the user
+    let { body, targetID } = parsefuncs.parseTargetID(pwbContent.body);
+    if(targetID !== undefined) {
+        pwbTarget = dbfuncs.getDiscokid(message.author.id, message.guild.id);
+        pwbContent.body = body;
+    }
+    if(pwbTarget === undefined) // if target doesn't exist in our database, set defaults
+        pwbTarget = { permission: 0, discordid: targetID };
+    if(pwbTarget.dkidID === undefined) // if target doesn't exist in our database, create it
+        pwbTarget.dkidID = dbfuncs.addDiscokid(pwbTarget.discordid, message.guild.id);
+
+    if(pwbUser.permission < pwbTarget.permission)
+        return message.react('🔒'); // user's permission level is lower than target's permission level
+
+    if(pwbContent.body === '') { // delete the budget for the target
+        let result = dbfuncs.setBudget(pwbTarget.dkidID, pwbChannel.chID);
+        return message.channel.send(result ? "successfully deleted budget" : "failed to delete budget");
+    }
 
     let budget = parsefuncs.parseVerboseNumber(pwbContent.body);
     if(isNaN(budget))
         return message.channel.send("not a valid number");
 
-    //     if (parsefuncs.parseDiscordID(str) === -1)
-    // pwbContent.body
-    // parse number
-    // parse target if exists
-    let res = dbfuncs.setBudget(pwbUser.dkidID, pwbChannel.chID, budget);
-    if(res) message.channel.send("<username> has budget " + budget);
-    // TODO: message for budget deleted
-    else message.channel.send("There was an error in the database");
-
+    let result = dbfuncs.setBudget(pwbTarget.dkidID, pwbChannel.chID, budget);
+    if(result) return message.channel.send("successfully set budget to " + budget);
+    else return message.channel.send("There was an error in the database");
 };
 
 commands.handleThanks = function(message, { pwbContent, pwbUser, pwbChannel }) {

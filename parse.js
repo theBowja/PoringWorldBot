@@ -135,27 +135,21 @@ parsefuncs.parseContent = function(content) {
  * Parses the target discord id from the body. First checks if a tag is at beginning of string,
  *   otherwise check the end of the string.
  *
- * @returns undefined if no target. otherwise returns { body, targetID } where body has the tag stripped from it
+ * @returns object { body, targetID } where body has the tag stripped from it
  * @examples check test.js lmao
  */
 parsefuncs.parseTargetID = function(body) {
-    if(body === '') return;
+    if(body === '') return { body: body }; // readability bro
 
-    body = body.split(' ');
+    let bodyarr = body.split(' ');
     let targetID;
-    targetID = parsefuncs.parseDiscordID(body[0]) // check beginning
-    if(targetID !== -1) return { targetID: targetID, body: body.slice(1).join(' ') };
+    targetID = parsefuncs.parseDiscordID(bodyarr[0]) // check beginning
+    if(targetID !== -1) return { body: bodyarr.slice(1).join(' '), targetID: targetID };
 
-    targetID = parsefuncs.parseDiscordID(body[body.length-1]); // check end
-    if(targetID !== -1) return { targetID: targetID, body: body.slice(0, -1).join(' ') };
+    targetID = parsefuncs.parseDiscordID(bodyarr[bodyarr.length-1]); // check end
+    if(targetID !== -1) return { body: bodyarr.slice(0, -1).join(' '), targetID: targetID };
 
-    return undefined;
-
-    // contentObj.target = dbfuncs.getDiscokid(message.author.id, message.guild.id);
-    // if(contentObj.target === undefined)
-    //     contentObj.target = { permission: 0, discordid: targetID };
-
-    // return contentObj;
+    return { body: body };
 };
 
 // strips all unnecessary characters from an item name
@@ -329,7 +323,7 @@ parsefuncs.parseReqs = function(reqsstr) {
  * @returns the floored number. else NaN if not valid
  */
 parsefuncs.parseVerboseNumber = function(strnum) {
-    let max = 9999999999; // maximum number allowed is 10 billion - 1
+    let max = 19999999999; // maximum number allowed is 20 billion - 1
     strnum = strnum.toLowerCase().replace(/[^0-9a-z.]+/g, ''); // strip all except number and letters
     let temp = /^(\d*\.?\d+)\.?([a-z]*)/.exec(strnum);
     if(temp === null) return NaN;
