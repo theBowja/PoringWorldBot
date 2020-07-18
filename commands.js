@@ -133,7 +133,7 @@ commands.handleDelete = function(message, { pwbContent, pwbUser, pwbChannel }) {
 commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let pwbTarget = pwbUser; // default targets the user
     let { body, targetID } = parsefuncs.parseTargetID(pwbContent.body);
-    if(targetID !== undefined) {
+    if(targetID !== undefined) { // target acquired
         pwbTarget = dbfuncs.getDiscokid(message.author.id, message.guild.id);
         pwbContent.body = body;
     }
@@ -177,30 +177,39 @@ commands.handlePing = function(message) {
 
 };
 
-// !pwb permit 
+// !pwb permit [integer] [tag] - sets the permission level for target
+// !pwb permit [tag] [integer] - sets the permission level for target
 commands.handlePermit = function(message, { pwbContent, pwbUser, pwbChannel }) {
-    let body = pwbContent.body.split(' ');
+    if(pwbContent.body.split(' ').length !== 2) // check if correct number of parameters
+        return message.channel.send('format: !pwb permit [tag] [integer]');
 
-    if(body.length < 2)
-        return message.react('❎'); // not enough parameters provided
-    let targetID = parsefuncs.parseDiscordID(body[0]);
-    if(targetID === -1 || !existsInGuild(message.guild, targetID))
-        return message.react('❎'); // no valid discord id provided
+    let { body, targetID } = parsefuncs.parseTargetID(pwbContent.body);
+    if(pwbUser.discordid === targetID)
+        return message.channel.send('failed: cannot target yourself'); // cannot target self
+    pwbContent.body = body;
+    if(targetID === undefined || !existsInGuild(message.guild, targetID))
+        return message.channel.send('failed: invalid tag'); // no valid discord id provided
 
-    let perm = parseInt(body[1]);
+    let perm = pwbContent.body; // permission level to set target to
     if(isNaN(perm))
-        return message.react('❎'); // no number provided
-    if(pwbUser.permission < perm)
-        return message.react('❎'); // cannot assign higher than your own
-    let targetObj = dbfuncs.getDiscokid(targetID, message.guild.id);
-    let res;
-    if(targetObj === undefined)
-      res = dbfuncs.addDiscokid(targetID, message.guild.id, perm) !== -1;
-    else if(targetObj.permission <= pwbUser.permission)
-      res = dbfuncs.updateDiscokid(targetObj.dkidID, perm);
-    else
-      return message.react('🔒'); // the target's permission level is higher than yours
-    return message.react(res ? '✅' : '❎');
+        return message.channel.send('failed: invalid integer'); // no number provided
+    if(perm > pwbUser.permission)
+        return message.channel.send('failed: provided integer was higher than ' + pwbUser.permission); // cannot set higher than your own level
+
+
+    let pwbTarget = dbfuncs.getDiscokid(targetID, message.guild.id);
+    if(pwbTarget === undefined) { // if target doesn't exist in our database, create it
+        let result = dbfuncs.addDiscokid(targetID, message.guild.id, perm);
+        if(result !== -1) return message.channel.send('success: set permission level to ' + perm);
+        else return message.channel.send('failed: internal server error 1');
+
+    } else if(pwbTarget.permission <= pwbUser.permission) {
+        let result = dbfuncs.updateDiscokid(pwbTarget.dkidID, perm);
+        if(result !== -1) return message.channel.send('success: set permission level to ' + perm);
+        else return message.channel.send('failed: internal server error 2');
+    } else {
+      return message.channel.send('failed: target has a higher permission level than your own'); // the target's permission level is higher than yours
+    }
 };
 
 /**
