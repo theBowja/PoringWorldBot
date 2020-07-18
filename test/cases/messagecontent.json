@@ -1,0 +1,57 @@
+{
+	"summonstrings": ["@poringworldbot ", "!", "!$", "omg ", "omg"],
+	"contents": [
+		{
+			"input": "help",
+			"output": { }
+		},
+		{
+			"input": "@poringworldbot ",
+			"output": {
+				"summon": "@poringworldbot ",
+				"command": "",
+				"body": ""
+			}
+		},
+		{
+			"input": "@poringworldbot help",
+			"output": {
+				"summon": "@poringworldbot ",
+				"command": "help",
+				"body": ""
+			}
+		},
+		{
+			"input": "@poringworldbot help me",
+			"output": {
+				"summon": "@poringworldbot ",
+				"command": "help",
+				"body": "me"
+			}
+		},
+		{
+			"input": "! ping",
+			"output": {
+				"summon": "!",
+				"command": "",
+				"body": "ping"
+			}
+		},
+		{
+			"input": "!$ping you",
+			"output": {
+				"summon": "!",
+				"command": "$ping",
+				"body": "you"
+			}
+		},
+		{
+			"input": "omg look over there guys",
+			"output": {
+				"summon": "omg ",
+				"command": "look",
+				"body": "over there guys"
+			}
+		}
+	]
+}

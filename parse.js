@@ -132,22 +132,25 @@ parsefuncs.parseContent = function(content) {
 };
 
 /**
- * Parses the target discord id from the bodystring. First checks if a tag is at beginning of string,
- *   otherwise check the end of the string. Also validates if it actually exists
+ * Parses the target discord id from the body. First checks if a tag is at beginning of string,
+ *   otherwise check the end of the string.
  *
- *
+ * @returns undefined if no target. otherwise returns { body, targetID } where body has the tag stripped from it
+ * @examples check test.js lmao
  */
-parsefuncs.parseValidateTargetID = function(bodystring) {
-    // TODO
-    
-    // see if there is a target
-    // let tmp = contentObj.body.split(' ');
-    // if(tmp.length <= 1) return contentObj; // no target
-    // let targetID = parsefuncs.parseDiscordID(tmp[0]);
-    // if(targetID === -1) { 
-    //     targetID = parsefuncs.parseDiscordID(tmp[tmp.length-1]);
-    //     if(targetID === -1) return contentObj; // no valid target
-    // }
+parsefuncs.parseTargetID = function(body) {
+    if(body === '') return;
+
+    body = body.split(' ');
+    let targetID;
+    targetID = parsefuncs.parseDiscordID(body[0]) // check beginning
+    if(targetID !== -1) return { targetID: targetID, body: body.slice(1).join(' ') };
+
+    targetID = parsefuncs.parseDiscordID(body[body.length-1]); // check end
+    if(targetID !== -1) return { targetID: targetID, body: body.slice(0, -1).join(' ') };
+
+    return undefined;
+
     // contentObj.target = dbfuncs.getDiscokid(message.author.id, message.guild.id);
     // if(contentObj.target === undefined)
     //     contentObj.target = { permission: 0, discordid: targetID };

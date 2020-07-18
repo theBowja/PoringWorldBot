@@ -1,0 +1,98 @@
+[
+	{
+		"input": "Staunch Cape <Arcane 4>",
+		"category": "Equipment - Garment",
+		"output": {
+			"name": "Staunch Cape",
+			"refine": 0,
+			"broken": false,
+			"enchant": "Arcane",
+			"enchantlevel": 4,
+			"slots": 0
+		}
+	},
+	{
+		"input": "+4 Eye of Dullahan (broken)",
+		"category": "Equipment - Accessory",
+		"output": {
+			"name": "Eye of Dullahan",
+			"refine": 4,
+			"broken": true,
+			"enchant": "none",
+			"enchantlevel": 0,
+			"slots": 0
+		}
+	},
+	{
+		"input": "Cross Bow [1]",
+		"category": "Equipment - Weapon",
+		"output": {
+			"name": "Cross Bow",
+			"refine": 0,
+			"broken": false,
+			"enchant": "none",
+			"enchantlevel": 0,
+			"slots": 1
+		}
+	},
+	{
+		"input": "Transformation Scroll (Garm)",
+		"category": "Item - Scroll/Album",
+		"output": {
+			"name": "Transformation Scroll (Garm)",
+			"refine": 0,
+			"broken": false,
+			"enchant": "none",
+			"enchantlevel": 0,
+			"slots": 0
+		}
+	},
+	{
+		"input": "+3 Angry Snarl <Armor 2> (broken)",
+		"category": "Headwear - Mouth",
+		"output": {
+			"name": "Angry Snarl",
+			"refine": 3,
+			"broken": true,
+			"enchant": "Armor",
+			"enchantlevel": 2,
+			"slots": 0
+		}
+	},
+	{
+		"input": "+13 Sniping Suit [1] <Arch 1> (broken)",
+		"category": "Equipment - Armor",
+		"output": {
+			"name": "Sniping Suit",
+			"refine": 13,
+			"broken": true,
+			"enchant": "Arch",
+			"enchantlevel": 1,
+			"slots": 1
+		}
+	},
+	{
+		"input": "+5 Southern Lute[2] <Morale 4> (broken)",
+		"category": "Equipment - Weapon",
+		"output": {
+			"name": "Southern Lute",
+			"refine": 5,
+			"broken": true,
+			"enchant": "Morale",
+			"enchantlevel": 4,
+			"slots": 2
+		}
+	},
+	{
+		"input": "Aries Diadem [1] Blueprint",
+		"category": "Blueprint",
+		"output": {
+			"name": "Aries Diadem [1] Blueprint",
+			"refine": 0,
+			"broken": false,
+			"enchant": "none",
+			"enchantlevel": 0,
+			"slots": 0
+		}
+	}
+]

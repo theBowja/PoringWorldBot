@@ -1,0 +1,30 @@
+[
+	{
+		"input": ""
+	},
+	{
+		"input": "loser"
+	},
+	{
+		"input": "winner winner chicken dinner"
+	},
+	{
+		"input": "<@161248916384251904>",
+		"output": { "body": "", "targetID": "161248916384251904" }
+	},
+	{
+		"input": "<@161248916384251904> how could this happen to me",
+		"output": { "body": "how could this happen to me", "targetID": "161248916384251904" }
+	},
+	{
+		"input": "please tell <@161248916384251904> to go away"
+	},
+	{
+		"input": "where are the <@&585708235625988096>",
+		"output": { "body": "where are the", "targetID": "&585708235625988096" }
+	},
+	{
+		"input": "<q161248916384251904> quiet! they're sleeping",
+		"output": { "body": "quiet! they're sleeping", "targetID": "161248916384251904" }
+	}
+]

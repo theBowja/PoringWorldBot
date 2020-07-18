@@ -1,0 +1,56 @@
+[
+	{
+		"input": "-name eye of dullahan -refine 12",
+		"output": {
+			"message": "-name eyeofdullahan -refine 12",
+			"name": "eyeofdullahan",
+			"refine": 4096
+		}
+	},
+	{
+		"input": "-name sTATIc shield -en tenacity -el 3,4 -asdf",
+		"output": {
+			"message": "-name staticshield -en tenacity -el 3,4",
+			"name": "staticshield",
+			"enchant": "tenacity",
+			"enchantlevel": 24
+		}
+	},
+	{
+		"input": "-ca headwearface -enchant morale -el 2,3,4,5,",
+		"output": {
+			"message": "-ca headwearface -enchant morale -el 2,3,4",
+			"category": "Headwear - Face",
+			"enchant": "morale",
+			"enchantlevel": 28
+		}
+	},
+	{
+		"input": "-category headwear  tail -enchant aRCh -pricehigher 24,041,000 -pl 100 000 000",
+		"output": {
+			"message": "-category headweartail -enchant arch -pricehigher 24041000 -pl 100000000",
+			"category": "Headwear - Tail",
+			"enchant": "arch",
+			"pricehigher": 24041000,
+			"pricelower": 100000000
+		}
+	},
+	{
+		"input": "-name monocle -refine 3, 4,5,^,a -broken yes -enchant none",
+		"output": {
+			"message": "-name monocle -refine 3,4,5 -broken yes -enchant none",
+			"name": "monocle",
+			"refine": 56,
+			"broken": 1,
+			"enchant": "none"
+		}
+	},
+	{
+		"input": "-name rune boots -slots 3 -st 1 -broken yeah -ph 5 -pl 3",
+		"output": {
+			"message": "-name runeboots -ph 5",
+			"name": "runeboots",
+			"pricehigher": 5
+		}
+	}
+]
