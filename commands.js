@@ -159,14 +159,18 @@ commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
     else return message.channel.send("There was an error in the database");
 };
 
+// !pwb thanks
+// !pwb thank you
+// !pwb thank
+// !pwb ty
 commands.handleThanks = function(message, { pwbContent, pwbUser, pwbChannel }) {
-    if(pwbContent.command === 'thank') {
-        if(pwbContent.body === '')
-            message.channel.send('you');
-        return;
-    } else if(pwbContent.command === 'ty')
+    if(pwbContent.command === 'thanks' && pwbContent.body === '' || 
+       pwbContent.command === 'thank' && pwbContent.body === 'you') {
+        return message.channel.send('no problem');
+    } else if(pwbContent.command === 'thank' && pwbContent.body === '') {
+        return message.channel.send('you');
+    } else if(pwbContent.command === 'ty' && pwbContent.body === '')
         return message.channel.send('np');
-    return message.channel.send('no problem');
 };
 
 commands.handleClearCurrentSnaps = function(message) {
