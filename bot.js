@@ -37,14 +37,14 @@ bot.on('ready', () => {
 
   // ping poring.world every 6 minutes
   new CronJob('0 0-59/6 * * * *', function() {
-    commands.handleSearch(bot);
+    commands.handleSearch(undefined, undefined, bot);
   }, null, true);
 
   // makes additional pings every odd minute
   new CronJob('0 1-59/2 * * * *', function() {
     let qs = lists.schedule[new Date().getMinutes()];
     if(config.schedulesearch && qs !== undefined){
-      commands.handleSearch(bot, undefined, qs);
+      commands.handleSearch(undefined, undefined, bot, qs);
     }
   }, null, true);
 
@@ -94,7 +94,10 @@ bot.on('roleDelete', (role) => {
 });
 
 bot.on('message', message => {
-  message.content = message.content.toLowerCase().replace(/\s+/g, ' ');
+  let pwbContent, pwbUser, pwbChannel = {}; // https://github.com/theBowja/PoringWorldBot/wiki/Developer-documentation
+  function callCommandHandler(handler) { // so i don't have to type out the parameters every time
+    return handler(message, { pwbContent: pwbContent, pwbUser: pwbUser, pwbChannel: pwbChannel });
+  };
 
   if(message.channel.type !== 'text') return; // if not from text channel, ignore
   if(message.author.id === bot.user.id) return; // if from self, ignore
@@ -104,136 +107,148 @@ bot.on('message', message => {
 
   // attach contentObj to message
   // contentObj is just message.content parsed into three properties: summon, command, body
-  message.contentObj = parsefuncs.parseContent(message.content);
-  if(message.contentObj.summon === undefined) return; // not summoned with summonstring
-  if(message.contentObj.command === '') return; // no command provided
-
-  const cmd = message.contentObj.command; // save letters xd
+  pwbContent = parsefuncs.parseContent(message.content.toLowerCase().replace(/\s+/g, ' '));
+  if(pwbContent.summon === undefined) return; // not summoned with summonstring
+  if(pwbContent.command === '') return; // no command provided
 
   // retrieve user info of this guild if he exists in database
   // attach userObj to message
   // userObj 
-  message.userObj = dbfuncs.getDiscokid(message.author.id, message.guild.id);
-  if(message.userObj === undefined)
-    message.userObj = { permission: 0, discordid: message.author.id };
-  if(message.userObj.permission < 0) return; // this member is banned from using this bot in this guild
+  pwbUser = dbfuncs.getDiscokid(message.author.id, message.guild.id);
+  if(pwbUser === undefined)
+    pwbUser = { permission: 0, discordid: message.author.id };
+  if(pwbUser.permission < 0) return; // this member is banned from using this bot in this guild
 
   console.log(`From ${message.author.tag} ${message.author.id} to #${message.channel.name} ${message.channel.id} in ${message.guild.name} ${message.guild.id}`);
-  console.log(`  ${message.contentObj.command} :: ${message.contentObj.body}`);
+  console.log(`  ${pwbContent.command} :: ${pwbContent.body}`);
 
   // COMMANDS THAT DONT REQUIRE CHANNEL WATCH
-  if(cmd === 'help') {
-    return commands.handleHelp(message);
-  } else if(cmd === 'watch' ||  // allow commands to be read on this channel
-     cmd === 'listen') {
-    return commands.handleWatch(message);
-  } else if(cmd === 'alive' ||
-            cmd === 'awake' ||
-            cmd === 'up') {
-    return message.react('🙂');
+  switch(pwbContent.command) {
+    case 'help':
+      return callCommandHandler(commands.handleHelp);
+
+    case 'watch': // allow commands to be read on this channel
+    case 'listen':
+      return callCommandHandler(commands.handleWatch);
+
+    case 'alive':
+    case 'awake':
+    case 'up':
+      return message.react('🙂');
   }
 
   // retrieve channel info if exists in database
   // attach channelObj to message
-  message.channelObj = dbfuncs.getChannel(message.channel.id);
-  if(message.channelObj === undefined) return; // channel isn't on watch
+  pwbChannel = dbfuncs.getChannel(message.channel.id);
+  if(pwbChannel === undefined) return; // channel isn't on watch
   // COMMANDS THAT REQUIRE CHANNEL WATCH
 
   // COMMANDS WITH NO PERMISSION LEVEL REQUIRED
-  if(cmd === 'invite' ||
-     cmd === 'invitelink') {
-    return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=150720```');
+  switch(pwbContent.command) {
+    case 'invite':
+    case 'invitelink':
+      return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=150720```');
 
-  } else if(cmd === 'pingmewhen' || cmd === 'tagmewhen' || cmd === 'tellmewhen') {
-    return message.channel.send("use `request`, `subscribe`, `pingwhen`, `pingme`, `tagwhen`, or `tagme` instead");
+    case 'request':
+    case 'subscribe':
+    case 'pingwhen':
+    case 'pingmewhen':
+    case 'pingme':
+    case 'tagwhen':
+    case 'tagmewhen':
+    case 'tagme':
+      return callCommandHandler(commands.handleTagMe);
 
-  } else if(cmd === 'subscribe' || cmd === 'request' ||
-            cmd === 'pingwhen' || cmd === 'pingme' ||
-            cmd === 'tagwhen' || cmd === 'tagme') {
-    return commands.handleTagMe(message);
+    case 'show':
+    case 'list':
+    case 'showme':
+      console.log("I AM HERE");
+      return callCommandHandler(commands.handleShowUser);
 
-  } else if(cmd === 'show' || cmd === 'list' ||
-            cmd === 'showme') {
-    return commands.handleShowUser(message);
+    case 'delete':
+    case 'del':
+    case 'remove':
+      return callCommandHandler(commands.handleDelete);
 
-  } else if(cmd === 'delete' ||
-            cmd === 'del' ||
-            cmd === 'remove') {
-    return commands.handleDelete(message);
-    
-  } else if(cmd === 'budget') {
-    return commands.handleBudget(message);
+    case 'budget':
+      return callCommandHandler(commands.handleBudget);
 
-  } else if(cmd === 'thanks' ||
-            cmd === 'thank' ||
-            cmd === 'ty') {
-    return commands.handleThanks(message);
+    case 'thanks':
+    case 'thank':
+    case 'ty':
+      return callCommandHandler(commands.handleThanks);
 
-  } else if (cmd === 'pc' || // quick price check for clean/unmodified equip
-             cmd === 'pricecheck') {
-    return commands.handlePriceCheck(message);
+    case 'pc': // quick price check for clean/unmodified equip
+    case 'pricecheck':
+      return callCommandHandler(commands.handlePriceCheck); 
   } 
 
   // no peasants allowed past here
-  if(message.userObj.permission === 0) return message.react('🔒');
+  if(pwbUser.permission === 0) return message.react('🔒');
   // COMMANDS THAT REQUIRES HIGHER PERMISSION LEVEL
 
-  if(cmd === 'showhere') {
-    // TODO: showhere for channel
-    // NOT IMPLEMENTED due to worries over message being too long and spammy
+  switch(pwbContent.command) {
+    case 'showhere':
+      // TODO: showhere for channel
+      // NOT IMPLEMENTED due to worries over message being too long and spammy
+      return;
 
-  } else if(cmd === 'unwatch') { // remove this channel from channels table
-    return commands.handleUnwatch(message);
+    case 'unwatch':
+      return callCommandHandler(commands.handleUnwatch); // remove this channel from channels table
 
-  } else if(cmd === 'force' ||
-            cmd === 'search' ||
-            cmd === 'query') {
-    return commands.handleSearch(bot, message);
+    case 'force':
+    case 'search':
+    case 'query':
+      return callCommandHandler(commands.handleSearch);
 
-  } else if(cmd === 'permit' ||
-            cmd === 'admin' ||
-            cmd === 'nwordpass') {
-    return commands.handlePermit(message);
+    case 'permit':
+    case 'admin':
+      return callCommandHandler(commands.handlePermit);
   }
 
   if(message.author.id !== config.owner) return;// message.react('🔒');
   // FOLLOWING COMMANDS ARE RESTRICTED TO OWNER OVERLORD
 
-  if(cmd === 'clearsnaps') {
-    let num = dbfuncs.deleteAllCurrentSnaps();
-    console.log(num + ' snap records deleted');
-    return message.channel.send(num + ' snap records deleted');
+  switch(pwbContent.command) {
+    case 'clearsnaps':
+      let num = dbfuncs.deleteAllCurrentSnaps();
+      console.log(num + ' snap records deleted');
+      return message.channel.send(num + ' snap records deleted');
 
-  } else if(cmd === 'debug') {
-    return console.log(dbfuncs.listDiscokids()); // this is a debug function zzz
-  } else if(cmd === 'logallchannels') {
-    return console.log(dbfuncs.getAllChannels());
+    case 'debug':
+      return console.log(dbfuncs.listDiscokids()); // this is a debug function zzz
 
-  } else if(cmd === 'showall') {
-    let res = dbfuncs.listAllRequirements();
-    return console.log(res);
-  } else if(cmd === 'showcurrent') {
-    let res = dbfuncs.getSnaps();
-    return console.log(res);
-  } else if(cmd === 'listguildsjoined') {
-    let tmp = bot.guilds.cache.map(g => g.id+': '+g.name).join('\n');
-    message.channel.send('```'+tmp+'```', { split: true });
-  } else if(cmd === 'announce') {
-    let chans = dbfuncs.getAllChannels();
-    for(let ch of chans) {
-        bot.channels.fetch(ch.discordchid).then((chan) => {
-            chan.send(message.contentObj.body);
-        });
-    }
-    message.react('✅');
-  } else if(cmd === 'patch') {
-    let patchdb = require('./patchdb.js');
-    patchdb.doPatches();
-  } else if(cmd === 'backup') {
-    if(message.contentObj.body === '') return message.react('❎');
-    dbfuncs.backup(message.contentObj.body);
+    case 'logallchannels':
+      return console.log(dbfuncs.getAllChannels());
+
+    case 'showall':
+      return console.log(dbfuncs.listAllRequirements());
+
+    case 'showcurrent':
+      return console.log(dbfuncs.getSnaps());
+    
+    case 'listguildsjoined':
+      let tmp = bot.guilds.cache.map(g => g.id+': '+g.name).join('\n');
+      return message.channel.send('```'+tmp+'```', { split: true });
+
+    case 'announce':
+      let chans = dbfuncs.getAllChannels();
+      for(let ch of chans) {
+          bot.channels.fetch(ch.discordchid).then((chan) => {
+              chan.send(pwbContent.body);
+          });
+      }
+      return message.react('✅');
+
+    case 'patch':
+      //let patchdb = require('./patchdb.js');
+      //return patchdb.doPatches();
+      return;
+
+    case 'backup':
+      if(pwbContent.body === '') return message.react('❎');
+      return dbfuncs.backup(pwbContent.body);
   }
-
 });
 
 // not sure if this is an actual event but whatever

@@ -9,22 +9,22 @@ const commands = {};
 // i suppose i should say something here
 // lol
 
-commands.handleHelp = function(message) {
-    message.channel.send(parsefuncs.buildHelpCommandsEmbed(message.userObj.permission !== 0));
+commands.handleHelp = function(message, { pwbUser }) {
+    message.channel.send(parsefuncs.buildHelpCommandsEmbed(pwbUser.permission !== 0));
 };
 
-commands.handleTagMe = function(message) {
+commands.handleTagMe = function(message, { pwbContent, pwbUser, pwbChannel }) {
     // restricts user if they have higher or equal permission level to channel permission requirements
-    if(message.userObj.permission < message.channelObj.limitedto)
+    if(pwbUser.permission < pwbChannel.limitedto)
         return message.react('🔒'); 
-    if(message.contentObj.body === '')
+    if(pwbContent.body === '')
         return message.react('❎'); // no reqs found
 
-    let pars = parsefuncs.parseReqs(message.contentObj.body);
+    let pars = parsefuncs.parseReqs(pwbContent.body);
     if(pars.message === '')
         return message.react('❎'); // no coherent parameters given by user
 
-    let targetObj = message.userObj;
+    let targetObj = pwbUser;
     if(pars.assign !== undefined) { // handle if -assign
         if(!existsInGuild(message.guild, pars.assign))
             return message.react('❎'); // cannot be assigned because doesn't exist in guild
@@ -32,7 +32,7 @@ commands.handleTagMe = function(message) {
         if(targetObj === undefined)
             targetObj = { permission: 0, discordid: pars.assign };
         delete pars.assign; // just in case dbfuncs.addRequirement() messes up
-        if(message.userObj.permission <= targetObj.permission)
+        if(pwbUser.permission <= targetObj.permission)
             return message.react('🔒'); // user isn't good enough to assign on the other person
     }
 
@@ -48,7 +48,7 @@ commands.handleTagMe = function(message) {
         }
     }
 
-    let info = dbfuncs.addRequirement(targetObj.dkidID, message.channelObj.chID, pars);
+    let info = dbfuncs.addRequirement(targetObj.dkidID, pwbChannel.chID, pars);
     if(info.changes === 1) {
         //message.react('✅');
         message.channel.send('```id: '+info.lastInsertRowid+' | '+pars.message+'```');
@@ -57,14 +57,15 @@ commands.handleTagMe = function(message) {
     }
 };
 
-commands.handleWatch = function(message) {
-    if(message.userObj.permission === 0) // no peasants allowed
+// pwbChannel should be undefined if this isn't under watch yet
+commands.handleWatch = function(message, { pwbContent, pwbUser }) {
+    if(pwbUser.permission === 0) // no peasants allowed
         return message.react('🔒');
 
-    let limitedto = parseInt(message.contentObj.body); // parse body for extra parameter
+    let limitedto = parseInt(pwbContent.body); // parse body for extra parameter
     if(isNaN(limitedto)) limitedto = 0;
 
-    if(message.userObj.permission < limitedto) // user doesn't have enough permission
+    if(pwbUser.permission < limitedto) // user doesn't have enough permission
         return message.react('🔒');
     let res = dbfuncs.addChannel(message.channel.id, message.guild.id, limitedto);
     return message.react(res !== -1 ? '✅' : '❎');
@@ -75,18 +76,18 @@ commands.handleUnwatch = function(message) {
     return message.react(res ? '✅' : '❎');
 };
 
-commands.handleShowUser = function(message) {
+commands.handleShowUser = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let targetID = message.author.id;
-    if(message.contentObj.body !== '') { // if there is a person targeted
-        targetID = parsefuncs.parseDiscordID(message.contentObj.body);
+    if(pwbContent.body !== '') { // if there is a person targeted
+        targetID = parsefuncs.parseDiscordID(pwbContent.body);
         if(targetID === -1)
             return message.react('❎'); // not valid id provided
         if(message.author.id === targetID)
             return message.channel.send('don\'t tag yourself'); // don't tag yourself
-        if(message.userObj.permission === 0)
+        if(pwbUser.permission === 0)
             return message.react('🔒'); // no peasants allowed past here
         let targetObj = dbfuncs.getDiscokid(targetID, message.guild.id);
-        if(targetObj !== undefined && message.userObj.permission < targetObj.permission)
+        if(targetObj !== undefined && pwbUser.permission < targetObj.permission)
             return message.react('🔒'); // user's permission level isn't high enough
     }
 
@@ -104,10 +105,10 @@ commands.handleForce = function(message) {
 };
 
 // for deleteing reqs
-commands.handleDelete = function(message) {
-    let reqID = parseInt(message.contentObj.body);
+commands.handleDelete = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    let reqID = parseInt(pwbContent.body);
     if(isNaN(reqID)) { // if no reqID provided, then show self
-        message.contentObj.body = '';
+        pwbContent.body = '';
         return commands.handleShowUser(message);
     } else { // process delete
         let reqObj = dbfuncs.getRequirement(reqID);
@@ -115,9 +116,9 @@ commands.handleDelete = function(message) {
             return message.react('❎'); // not valid reqID
         if(reqObj.discordchid !== message.channel.id)
             return message.react('❎'); // can only delete from same channel
-        if(message.userObj.permission === 0 && message.userObj.discordid !== reqObj.discordid)
+        if(pwbUser.permission === 0 && pwbUser.discordid !== reqObj.discordid)
             return message.react('🔒'); // peasants not allowed to delete someone else's
-        if(message.userObj.permission < reqObj.permission)
+        if(pwbUser.permission < reqObj.permission)
             return message.react('🔒'); // permission level is lower than target's permission level
         let res = dbfuncs.deleteRequirement(reqID);
         return message.react(res ? '✅' : '❎');
@@ -129,33 +130,33 @@ commands.handleDelete = function(message) {
 // !pwb budget [tag] - deletes the budget for targeted user
 // !pwb budget [number] [tag] - sets the budget for targeted user
 // currently, only deleting and setting yourself is implemented
-commands.handleBudget = function(message) {
-    // let tmp = message.contentObj.body.split(' ');
+commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    // let tmp = pwbContent.body.split(' ');
     // let number, tagID;
-    if(message.contentObj.body === '')
-        return message.channel.send(dbfuncs.setBudget(message.userObj.dkidID, message.channelObj.chID));
+    if(pwbContent.body === '')
+        return message.channel.send(dbfuncs.setBudget(pwbUser.dkidID, pwbChannel.chID));
 
-    let budget = parsefuncs.parseVerboseNumber(message.contentObj.body);
+    let budget = parsefuncs.parseVerboseNumber(pwbContent.body);
     if(isNaN(budget))
         return message.channel.send("not a valid number");
 
     //     if (parsefuncs.parseDiscordID(str) === -1)
-    // message.contentObj.body
+    // pwbContent.body
     // parse number
     // parse target if exists
-    let res = dbfuncs.setBudget(message.userObj.dkidID, message.channelObj.chID, budget);
+    let res = dbfuncs.setBudget(pwbUser.dkidID, pwbChannel.chID, budget);
     if(res) message.channel.send("<username> has budget " + budget);
     // TODO: message for budget deleted
     else message.channel.send("There was an error in the database");
 
 };
 
-commands.handleThanks = function(message) {
-    if(message.contentObj.command === 'thank') {
-        if(message.contentObj.body === '')
+commands.handleThanks = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    if(pwbContent.command === 'thank') {
+        if(pwbContent.body === '')
             message.channel.send('you');
         return;
-    } else if(message.contentObj.command === 'ty')
+    } else if(pwbContent.command === 'ty')
         return message.channel.send('np');
     return message.channel.send('no problem');
 };
@@ -169,8 +170,8 @@ commands.handlePing = function(message) {
 };
 
 // !pwb permit 
-commands.handlePermit = function(message) {
-    let body = message.contentObj.body.split(' ');
+commands.handlePermit = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    let body = pwbContent.body.split(' ');
 
     if(body.length < 2)
         return message.react('❎'); // not enough parameters provided
@@ -181,13 +182,13 @@ commands.handlePermit = function(message) {
     let perm = parseInt(body[1]);
     if(isNaN(perm))
         return message.react('❎'); // no number provided
-    if(message.userObj.permission < perm)
+    if(pwbUser.permission < perm)
         return message.react('❎'); // cannot assign higher than your own
     let targetObj = dbfuncs.getDiscokid(targetID, message.guild.id);
     let res;
     if(targetObj === undefined)
       res = dbfuncs.addDiscokid(targetID, message.guild.id, perm) !== -1;
-    else if(targetObj.permission <= message.userObj.permission)
+    else if(targetObj.permission <= pwbUser.permission)
       res = dbfuncs.updateDiscokid(targetObj.dkidID, perm);
     else
       return message.react('🔒'); // the target's permission level is higher than yours
@@ -195,21 +196,23 @@ commands.handlePermit = function(message) {
 };
 
 /**
- * @param bot - must be provided
- * @param message - optional. used only for responding to "force"/"search"/"query"
- *                  message.contentObj.body must contain the querystring
+ * @param message - if you pass in this parameter, then { pwbContent } is mandatory.
+                    if message is undefined, then the param bot is mandatory. 
+ * @param { pwbContent } - pass in undefined if you didn't pass in param message
+ * @param bot - mandatory if param message is undefined
+ * @param querystring - optional. overridden by pwbContent.body if param message exists
  */
-commands.handleSearch = async function(bot, message, querystring='') {
+commands.handleSearch = async function(message, { pwbContent }={}, bot=message.client, querystring='') {
     try {
         if(message !== undefined)
-            querystring = message.contentObj.body;
+            querystring = pwbContent.body;
         let snapsCurrent = await pingPoringWorld(querystring);
         console.log(`${new Date().toLocaleString()} got response from poring.world q='${querystring}'`);
         if(message !== undefined) message.react('✅');
 
         let gon = dbfuncs.clearExpiredSnaps();
         let snapsNew = dbfuncs.addSnaps(snapsCurrent);
-        console.log(`${new Date().toLocaleString()}  cleared ${gon} expired snaps to db; added ${snapsNew.length} new snaps to db`);
+        console.log(`${new Date().toLocaleString()}   added ${snapsNew.length} new snaps to db; cleared ${gon} expired snaps to db`);
 
         for(let sr of snapsNew) {
             sr.alias = 0;
@@ -257,11 +260,11 @@ commands.handleSearch = async function(bot, message, querystring='') {
     }
 };
 
-commands.handlePriceCheck = async function(message) {
+commands.handlePriceCheck = async function(message, { pwbContent, pwbUser, pwbChannel }) {
     try {
         console.log("handlepricecheck");
         let words = '';
-        let jsonMessage = await pcPoringWorld(message.contentObj.body);
+        let jsonMessage = await pcPoringWorld(pwbContent.body);
 
         words += 'Item name : ' + jsonMessage[0].name + '\n';
         words += 'Price : ' + jsonMessage[0].lastRecord.price + '\n';
