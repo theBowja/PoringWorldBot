@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
-var lists = require('./lists.js');
-var config = require('./config.js');
+const lists = require('./lists.js');
+const config = require('./config.js');
+const fuzzy = require('./fuzzy.js');
 
 // This module contains most of the functions that handle data processing
 
@@ -259,8 +260,10 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "enchant":
             case "en":
-                value = value.replace(/[\s-]+/g, '');
-                if(lists.enchant.includes(value)) {
+                value = value.replace(/[^\sa-z]-+/g, ''); // keep only whitespace and letters
+                value = fuzzy.enchant(value);
+                if(value !== undefined) {
+                    value = value.replace(/\s+/g, ''); // remove whitespace
                     myreqs.enchant = value;
                     myreqs.message += `-${constraint} ${value} `;                   
                 }
