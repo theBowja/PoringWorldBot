@@ -26,7 +26,7 @@ commands.handleTagMe = function(message, { pwbContent, pwbUser, pwbChannel }) {
 
     let targetObj = pwbUser;
     if(pars.assign !== undefined) { // handle if -assign
-        if(!existsInGuild(message.guild, pars.assign))
+        if(!existsInGuild(message.guild, pars.assign) && !parsefuncs.isSpecialMention(pars.assign))
             return message.react('❎'); // cannot be assigned because doesn't exist in guild
         targetObj = dbfuncs.getDiscokid(pars.assign, message.guild.id); // get permission level of -assign target
         if(targetObj === undefined)
@@ -79,11 +79,14 @@ commands.handleUnwatch = function(message) {
 commands.handleShowUser = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let targetID = message.author.id;
     if(pwbContent.body !== '') { // if there is a person targeted
-        targetID = parsefuncs.parseDiscordID(pwbContent.body);
+        if(parsefuncs.isSpecialMention(pwbContent.body))
+            targetID = pwbContent.body;
+        else
+            targetID = parsefuncs.parseDiscordID(pwbContent.body);
         if(targetID === -1)
             return message.react('❎'); // not valid id provided
         if(message.author.id === targetID)
-            return message.channel.send('don\'t tag yourself'); // don't tag yourself
+            return message.channel.send(`don't tag yourself`); // don't tag yourself
         if(pwbUser.permission === 0)
             return message.react('🔒'); // no peasants allowed past here
         let targetObj = dbfuncs.getDiscokid(targetID, message.guild.id);

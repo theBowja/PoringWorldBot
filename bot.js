@@ -150,6 +150,7 @@ bot.on('message', message => {
       return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=150720```');
 
     case 'request':
+    case 'req':
     case 'subscribe':
     case 'pingwhen':
     case 'pingmewhen':
@@ -162,7 +163,6 @@ bot.on('message', message => {
     case 'show':
     case 'list':
     case 'showme':
-      console.log("I AM HERE");
       return callCommandHandler(commands.handleShowUser);
 
     case 'delete':

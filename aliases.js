@@ -153,7 +153,7 @@ aliases.equips = dictionary(
   ["VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality"]
 );
 
-const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling",
+const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
   "Strouf", "Goblin Leader", "Mistress", "Maya", "Phreeoni", "Eddga",
   "Osiris", "Moonlight Flower", "Orc Hero", "Kobold Leader", "Doppelganger",
   "Atroce", "Orc Lord Helm", "Detarderous", "Owl Baron", "Bloody Knight",

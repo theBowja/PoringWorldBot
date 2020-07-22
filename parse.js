@@ -83,6 +83,15 @@ parsefuncs.buildHelpCommandsEmbed = function(isAdmin) {
     return embed;
 };
 
+parsefuncs.isSpecialMention = function(discordtag) {
+    if(discordtag === 'everyone' || discordtag === 'here') return true;
+    return false;
+    let prefix = discordtag.charAt(0);
+    if(prefix !== '@' && prefix !== 'q' && prefix !== '')
+    if(discordtag === '@everyone' || discordtag === '@here') return true;
+    return false;
+};
+
 // @returns string discord id or integer -1 if not valid
 parsefuncs.parseDiscordID = function(discordtag) {
     let id = /<[@q?]!?(&?\d+)>/.exec(discordtag);
@@ -298,6 +307,10 @@ parsefuncs.parseReqs = function(reqsstr) {
             case "assign":
             case "as":
             case "for":
+                if(parsefuncs.isSpecialMention(value)) {
+                    myreqs.assign = value;
+                    break;
+                }
                 value = parsefuncs.parseDiscordID(value);
                 if(value !== -1)
                     myreqs.assign = value;
