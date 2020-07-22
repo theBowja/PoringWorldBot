@@ -83,6 +83,7 @@ commands.handleShowUser = function(message, { pwbContent, pwbUser, pwbChannel })
             targetID = pwbContent.body;
         else
             targetID = parsefuncs.parseDiscordID(pwbContent.body);
+
         if(targetID === -1)
             return message.react('❎'); // not valid id provided
         if(message.author.id === targetID)
@@ -112,7 +113,7 @@ commands.handleDelete = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let reqID = parseInt(pwbContent.body);
     if(isNaN(reqID)) { // if no reqID provided, then show self
         pwbContent.body = '';
-        return commands.handleShowUser(message);
+        return commands.handleShowUser(message, { pwbContent, pwbUser, pwbChannel });
     } else { // process delete
         let reqObj = dbfuncs.getRequirement(reqID);
         if(reqObj === undefined)
