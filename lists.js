@@ -108,4 +108,42 @@ lists.schedule = {
 	'59': 'sharp 4',
 };
 
+lists.joke = [
+	"The Zeny in your bag has reached its capacity, It's going to be used to pay debts.",
+    "For scheduled maintenance. All servers are shutting down in 5 seconds",
+    "Jellopy in the Mysterious Box, I put them there...",
+    "A good pair of shoes is required for walking about South Gate as there are Poring everywhere",
+    "This isn't a bug, this is exactly my script. We'll have it optimized next time",
+    "Hollgrehenn! Are you and Cat Friend not in love",
+    "They say EXP Babe got killed, can anyone help me level up? I can sing Mr. Gold",
+    "Zherlthsh, do you want to be my dancing partner? Alice, you come too",
+    "They say there's a device in the Prontera Square that steals your Gold Coins as soon as you get close to it",
+    "Hollgrehenn should you refine your skill points? Did you pick Refine level 1 and Weapon Destruction level 10?",
+    "Anyone want to go divination with me? You go left and I go right",
+    "I want to ride a warg as well, as I can shoot arrows too",
+    "Hope you guys like my jokes, because this skill can't do shit",
+    "Hey! Adventurer, can you help me kill 300 Dark Lords",
+    "I hate Marc, and Marc Card",
+    "Next~~~Start your performance",
+    "This world needs a Savior. And I am... The one praising the Savior",
+    "Really want to catch a Vocal for a pet",
+    "Let me see who's there with the money",
+    "One day I will go on a world channel concert tour, I'm counting on you guys to come and cheer for me",
+    "Quiet down~You guys are disturbing me guarding love",
+    "We agreed on you dealing damage and me supporting you, but now you think I suck.",
+    "A dancer who can't tell dad jokes is not a good sage! Right? The Bard over there!",
+    "My Mage and Big Man are not much different anymore because neither of us can instakill the dummy",
+    "Leader towerclimb daily: Lord's Aura, Concentration, One-Hand Quicken, Enchant Blade... Priest get me up thanks",
+    "Huh? That one dancing, she's not a dancer? The one riding Peco Peco?",
+    "How come Sting only has two older brothers? Just cuz...",
+    "I've always had fetishes because I'm a sage",
+    "Hollgrehenn: Your companion watching your back is worth more than the toughest armor! So a little red hammer is nothing to worry about",
+    "I was also a Dancer until I accidentally tapped on the NPC beside the Gashapon",
+    "In the beginning you guys said RO is Free to Play, now I've deleted my family's entire savings",
+    "A Knight who doesn't want to change jobs is not a good Alchemist",
+    "Magnolia! Can you cook a Magnolia for me?",
+    "No matter how strong you are, you can't instaskill 3 dummies and No Hunting",
+    "How can you prove you are (Hunter) Elf if you don't wear the ears?"
+ ]
+
 module.exports = lists;

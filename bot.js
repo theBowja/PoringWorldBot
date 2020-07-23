@@ -135,6 +135,9 @@ bot.on('message', message => {
     case 'awake':
     case 'up':
       return message.react('🙂');
+
+    case 'joke':
+      return message.channel.send(lists.joke[Math.floor(Math.random() * lists.joke.length)]);
   }
 
   // retrieve channel info if exists in database
