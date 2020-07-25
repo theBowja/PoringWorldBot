@@ -108,6 +108,22 @@ lists.schedule = {
 	'59': 'sharp 4',
 };
 
+lists.parameter = [
+	'name', 'na',
+	'enchant', 'en',
+	'enchantlevel', 'el',
+	'refine', 're',
+	'slotted', 'sl',
+	'broken', 'br',
+	'alias', 'al',
+	'category', 'ca',
+	'pricehigher', 'ph',
+	'pricelower', 'pl',
+	'stock', 'st',
+	'buyer', 'buyers', 'bu',
+	'assign', 'as', 'for'
+];
+
 lists.joke = [
 	"The Zeny in your bag has reached its capacity, It's going to be used to pay debts.",
     "For scheduled maintenance. All servers are shutting down in 5 seconds",

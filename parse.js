@@ -138,6 +138,10 @@ parsefuncs.parseContent = function(content) {
         contentObj.command = content.substring(contentObj.summon.length, spaceIndex);
         contentObj.body = content.substring(spaceIndex+1);
     }
+    if(contentObj.command.startsWith('-')) {
+        contentObj.body = contentObj.command + ' ' + contentObj.body;
+        contentObj.command = "request";
+    }
     return contentObj;
 };
 
@@ -177,8 +181,12 @@ parsefuncs.parseReqs = function(reqsstr) {
     let myreqs = { message: '' };
     for(let req of reqsstr) {
         let constraint = req.substring(0, req.indexOf(' '));
+        if(constraint === '') continue;
+        constraint = fuzzy.parameter(constraint);
+        if(constraint === undefined) continue;
         let value = req.substring(req.indexOf(' ')+1).toLowerCase(); // lowercase
-        if(constraint === '' || value === '') continue;
+        if(value === '') continue;
+
 
         let ref = 0; // temporary variable
         let cat = ''; // temporary variable
@@ -340,7 +348,7 @@ parsefuncs.parseReqs = function(reqsstr) {
  */
 parsefuncs.parseVerboseNumber = function(strnum) {
     let max = 19999999999; // maximum number allowed is 20 billion - 1
-    strnum = strnum.toLowerCase().replace(/[^0-9a-z.]+/g, ''); // strip all except number and letters
+    strnum = strnum.toLowerCase().replace(/[^0-9a-z.]+/g, ''); // strip all except number and letters and decimal
     let temp = /^(\d*\.?\d+)\.?([a-z]*)/.exec(strnum);
     if(temp === null) return NaN;
     let [,num,multiplier] = temp

@@ -56,7 +56,7 @@ bot.on('ready', () => {
 
 // on joining the guild, give basic permission to inviter. add owner in as well lol
 bot.on('guildCreate', (guild) => {
-  console.log('event guildCreate: '+guild.id);
+  console.log(`event guildCreate: ${guild.name} ${guild.id}`);
   dbfuncs.addDiscokid(config.owner, guild.id, config.ownerperm);
   guild.fetchAuditLogs({ limit: 1, type: 28 }) // type 28 is "add bot"
     .then(audit => {
@@ -69,7 +69,7 @@ bot.on('guildCreate', (guild) => {
 
 // when kicked from guild or guild is deleted
 bot.on('guildDelete', (guild) => {
-  console.log('event guildDelete: '+guild.id);
+  console.log(`event guildDelete: ${guild.name} ${guild.id}`);
   let changes = dbfuncs.deleteGuild(guild.id);
   console.log('removed '+changes.discokids+' discokids from database');
   console.log('removed '+changes.channels+' channels from database');
@@ -84,13 +84,13 @@ bot.on('channelDelete', (channel) => {
 // when member leaves, remove any requests he has in the channel in this guild
 bot.on('guildMemberRemove', (member) => {
   if(dbfuncs.deleteMember(member.id, member.guild.id))
-    console.log('event guildMemberRemove: '+member.id+' in '+member.guild.id);
+    console.log(`event guildMemberRemove: ${member.tag} ${member.id} in ${member.guild.name} ${member.guild.id}`);
 });
 
 // when role is deleted, remove any requests assigned to the role
 bot.on('roleDelete', (role) => {
   if(dbfuncs.deleteMember('&'+role.id, role.guild.id))
-    console.log('event roleDelete: '+role.id+' in '+role.guild.id);
+    console.log(`event roleDelete: ${role.name} ${role.id} in ${role.guild.name} ${role.guild.id}`);
 });
 
 bot.on('message', message => {
