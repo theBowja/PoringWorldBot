@@ -13,9 +13,9 @@ bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
   config.summonstrings.push(`<@${bot.user.id}> `);
   config.summonstrings.push(`<@!${bot.user.id}> `);
-  if(config.devonly) {
+  if(process.env.NODE_ENV === 'devmode') {
     config.summonstrings = ['!dev '];
-    console.log("devonly: !dev  is the only command that can summon this bot instance");
+    console.log("devmode: !dev  is the only command that can summon this bot instance");
   }
 
   // pretend owner has is in each guild

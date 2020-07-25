@@ -9,9 +9,6 @@ config.dropdbonstart = false;
 // otherwise do nothing
 config.schedulesearch = true;
 
-// if true, then clears config.summonstrings and adds only "!dev "
-config.devonly = false;
-
 /**
  * Strings that will summon the bot so it'll listen to your commands
  * default is pinging the bot @PoringWorldBot (added in bot.js in on-ready function)

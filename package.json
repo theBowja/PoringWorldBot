@@ -4,6 +4,7 @@
   "description": "Poring World Bot",
   "scripts": {
     "start": "node bot.js",
+    "devmode": "cross-env NODE_ENV=devmode node bot.js",
     "reset-win": "del ohsnap.db && node bot.js",
     "reset-lin": "rm ohsnap.db && node bot.js",
     "test": "mocha"
@@ -20,6 +21,7 @@
     "semver": "^7.3.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "mocha": "^7.2.0"
   }
 }
