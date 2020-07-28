@@ -81,7 +81,7 @@ commands.handleUnwatch = function(message) {
 
 commands.handleShowUser = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let targetID = message.author.id;
-    if(pwbContent.body !== '') { // if there is a person targeted
+    if(pwbContent.body !== '' && pwbContent.body !== 'me') { // if there is a person targeted
         if(parsefuncs.isSpecialMention(pwbContent.body))
             targetID = pwbContent.body;
         else
