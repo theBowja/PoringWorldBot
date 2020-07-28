@@ -69,17 +69,25 @@ parsefuncs.buildHelpCommandsEmbed = function(isAdmin) {
         .setColor('#0099ff')
         .setTitle('All commands must be prefixed with `!pwb `');
     if(isAdmin)
-        embed.addField('Admin Command List', '• `watch` - yeah\n' +
-                                             '• `pingme` - [please read the wiki here on forming a proper request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
-                                             '• `show` - what\n' +
-                                             '• `delete` - too lazy\n' +
-                                             '• `unwatch` - todo\n' +
-                                             '• `search` - lol\n' +
-                                             '• `permit` - uhh\n');
+        embed.addField('Admin Command List', '• `watch` - the bot will begin to watch this channel for user-submitted snap requests\n' +
+                                             '• `request` - [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
+                                             'example: !pwb req -na static shield -en tenacity -el 3,4 -assign \@BillyBob\n' +
+                                             '• `show` - shows the information and all snap requests of the targeted user for this channel\n' +
+                                             'example: !pwb show \@BillyBob\n' +
+                                             '• `delete` - deletes the snap request if you have a higher permission level\n' +
+                                             'example: !pwb delete 12\n' +
+                                             '• `unwatch` - remove this channel from bot watch and delete all snap requests in it\n' +
+                                             '• `search` - queries poring.world using the provided string\n' +
+                                             'example: !pwb search natto kig\n' +
+                                             '• `permit` - gives the targeted user a new permission level\n' +
+                                             'example: !pwb permit \@BillyBob 1\n');
     else
-        embed.addField('Command List', '• `pingme` - [please read the wiki here on forming a proper request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
-                                       '• `show` - uhh\n' +
-                                       '• `delete` - lol');
+        embed.addField('Command List', '• `request` - [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
+                                       'example: !pwb req -na static shield -en tenacity -el 3,4\n' +
+                                       '• `show` - shows your information and all snap requests you have in this channel\n' +
+                                       'example: !pwb show\n' + 
+                                       '• `delete` - delete one of your snap requests using its request id\n' +
+                                       'example: !pwb delete 12');
 
     return embed;
 };

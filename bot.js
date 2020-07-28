@@ -17,6 +17,8 @@ bot.on('ready', () => {
     config.summonstrings = ['!dev '];
     console.log("devmode: !dev  is the only command that can summon this bot instance");
   }
+  bot.user.setActivity('!pwb help'); 
+
 
   // pretend owner has is in each guild
   for(let [guildid, guild] of bot.guilds.cache) {

@@ -60,7 +60,7 @@ commands.handleTagMe = function(message, { pwbContent, pwbUser, pwbChannel }) {
 // pwbChannel should be undefined if this isn't under watch yet
 commands.handleWatch = function(message, { pwbContent, pwbUser }) {
     if(pwbUser.permission === 0) // no peasants allowed
-        return message.react('🔒');
+        return; // message.react('🔒');
 
     let limitedto = parseInt(pwbContent.body); // parse body for extra parameter
     if(isNaN(limitedto)) limitedto = 0;
@@ -68,12 +68,15 @@ commands.handleWatch = function(message, { pwbContent, pwbUser }) {
     if(pwbUser.permission < limitedto) // user doesn't have enough permission
         return message.react('🔒');
     let res = dbfuncs.addChannel(message.channel.id, message.guild.id, limitedto);
-    return message.react(res !== -1 ? '✅' : '❎');
+
+    if(res !== -1) return message.channel.send('The bot will now watch this channel for snap requests');
+    else return message.channel.send('Error: this channel is probably already under watch');
 };
 
 commands.handleUnwatch = function(message) {
     let res = dbfuncs.deleteChannel(message.channel.id);
-    return message.react(res ? '✅' : '❎');
+    if(res) return message.channel.send('Removed this channel from bot watch and deleted all snap requests in it');
+    else return message.channel.send('Error: database error');
 };
 
 commands.handleShowUser = function(message, { pwbContent, pwbUser, pwbChannel }) {
@@ -189,34 +192,34 @@ commands.handlePing = function(message) {
 // !pwb permit [tag] [integer] - sets the permission level for target
 commands.handlePermit = function(message, { pwbContent, pwbUser, pwbChannel }) {
     if(pwbContent.body.split(' ').length !== 2) // check if correct number of parameters
-        return message.channel.send('format: !pwb permit [tag] [integer]');
+        return message.channel.send('Format: !pwb permit [tag] [integer]');
 
     let { body, targetID } = parsefuncs.parseTargetID(pwbContent.body);
     if(pwbUser.discordid === targetID)
-        return message.channel.send('failed: cannot target yourself'); // cannot target self
+        return message.channel.send('Failed: cannot target yourself'); // cannot target self
     pwbContent.body = body;
     if(targetID === undefined || !existsInGuild(message.guild, targetID))
-        return message.channel.send('failed: invalid tag'); // no valid discord id provided
+        return message.channel.send('Failed: invalid tag'); // no valid discord id provided
 
     let perm = pwbContent.body; // permission level to set target to
     if(isNaN(perm))
-        return message.channel.send('failed: invalid integer'); // no number provided
+        return message.channel.send('Failed: invalid integer'); // no number provided
     if(perm > pwbUser.permission)
-        return message.channel.send('failed: provided integer was higher than ' + pwbUser.permission); // cannot set higher than your own level
+        return message.channel.send('Failed: provided integer was higher than ' + pwbUser.permission); // cannot set higher than your own level
 
 
     let pwbTarget = dbfuncs.getDiscokid(targetID, message.guild.id);
     if(pwbTarget === undefined) { // if target doesn't exist in our database, create it
         let result = dbfuncs.addDiscokid(targetID, message.guild.id, perm);
-        if(result !== -1) return message.channel.send('success: set permission level to ' + perm);
-        else return message.channel.send('failed: internal server error 1');
+        if(result !== -1) return message.channel.send('Success: set permission level to ' + perm);
+        else return message.channel.send('Failed: internal server error 1');
 
     } else if(pwbTarget.permission <= pwbUser.permission) {
         let result = dbfuncs.updateDiscokid(pwbTarget.dkidID, perm);
-        if(result !== -1) return message.channel.send('success: set permission level to ' + perm);
-        else return message.channel.send('failed: internal server error 2');
+        if(result !== -1) return message.channel.send('Success: set permission level to ' + perm);
+        else return message.channel.send('Failed: internal server error 2');
     } else {
-      return message.channel.send('failed: target has a higher permission level than your own'); // the target's permission level is higher than yours
+      return message.channel.send('Failed: target has a higher permission level than your own'); // the target's permission level is higher than yours
     }
 };
 
