@@ -120,6 +120,7 @@ aliases.equips = dictionary(
   ["Staunch Cape", "Magic Staunch Manteau"],
   ["Natto Kig’s Manteau", "Natto Kig's Cloak"],
   ["Survivor's Manteau", "Advanced Survivor's Manteau"],
+  ["Deathcat Cape", "Hood"],
 
   // SHOE
   ["Crystal Pumps"],
