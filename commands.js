@@ -9,8 +9,9 @@ const commands = {};
 // i suppose i should say something here
 // lol
 
-commands.handleHelp = function(message, { pwbUser }) {
-    message.channel.send(parsefuncs.buildHelpCommandsEmbed(pwbUser.permission !== 0));
+commands.handleHelp = function(message, { pwbContent, pwbUser }) {
+    if(pwbContent.body === 'misc') return message.channel.send(parsefuncs.buildMiscHelpEmbed());
+    else return message.channel.send(parsefuncs.buildHelpCommandsEmbed(pwbUser.permission !== 0));
 };
 
 commands.handleTagMe = function(message, { pwbContent, pwbUser, pwbChannel }) {
@@ -69,7 +70,7 @@ commands.handleWatch = function(message, { pwbContent, pwbUser }) {
         return message.react('🔒');
     let res = dbfuncs.addChannel(message.channel.id, message.guild.id, limitedto);
 
-    if(res !== -1) return message.channel.send('The bot will now watch this channel for snap requests');
+    if(res !== -1) return message.channel.send('The bot is now watching this channel for snap requests');
     else return message.channel.send('Error: this channel is probably already under watch');
 };
 
@@ -152,7 +153,7 @@ commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
     if(pwbUser.permission < pwbTarget.permission)
         return message.react('🔒'); // user's permission level is lower than target's permission level
 
-    if(pwbContent.body === '') { // delete the budget for the target
+    if(pwbContent.body === '' || pwbContent.body === 'delete' || pwbContent.body === 'del') { // delete the budget for the target
         let result = dbfuncs.setBudget(pwbTarget.dkidID, pwbChannel.chID);
         return message.channel.send(result ? "successfully deleted budget" : "failed to delete budget");
     }
