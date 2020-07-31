@@ -109,6 +109,15 @@ parsefuncs.buildMiscHelpEmbed = function() {
                                        '• `joke` - funny joke');
 };
 
+parsefuncs.buildRequestHelpEmbed = function() {
+    return new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('All commands must be prefixed with `!pwb `')
+        .addField('Request Parameter List', '• `name` -\n' +
+                                            '• `enchant` - \n' +
+                                            '• `enchantlevel` - \n');
+}
+
 parsefuncs.isSpecialMention = function(discordtag) {
     if(discordtag === 'everyone' || discordtag === 'here') return true;
     return false;
@@ -210,7 +219,6 @@ parsefuncs.parseReqs = function(reqsstr) {
         constraint = fuzzy.parameter(constraint);
         if(constraint === undefined) continue;
         let value = req.substring(req.indexOf(' ')+1).toLowerCase(); // lowercase
-        if(value === '') continue;
 
 
         let ref = 0; // temporary variable
@@ -218,22 +226,37 @@ parsefuncs.parseReqs = function(reqsstr) {
         switch(constraint) {
             case "name":
             case "na":
+                if(value === '' || myreqs.name !== undefined) break;
                 value = value.replace(/\*/g, '★'); // replace asterick with star
                 value = value.replace(/[^a-z0-9★]/g, ''); // use only letters and numbers
+                if(value === '') break;
                 myreqs.name = value;
                 myreqs.message += `-${constraint} ${value} `;
                 break;
 
             case "slotted":
             case "sl":
+                if(myreqs.slotted !== undefined) break;
+                if(value === '') value = 'yes';
                 ref = lists.bool.indexOf(value); // affirmative?
                 if(ref === -1) break;
                 myreqs.slotted = (ref+1)%2;
                 myreqs.message += `-${constraint} ${value} `;
                 break;
 
+            case "unslotted":
+            case "us":
+                if(myreqs.slotted !== undefined) break;
+                if(value === '') value = 'yes';
+                ref = lists.bool.indexOf(value); // affirmative?
+                if(ref === -1) break;
+                myreqs.slotted = (ref)%2;
+                myreqs.message += `-${constraint} ${value} `;
+                break;
+
             case "refine":
             case "re":
+                if(value === '' || myreqs.refine !== undefined) break;
                 value = value.replace(/\s+/g, '').split(','); // remove whitespace; split by comma
                 if(value.length === 0) break;
                 ref = 0;
@@ -252,6 +275,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "stock":
             case "st":
+                if(value === '' || myreqs.stock !== undefined) break;
                 value = value.replace(/[\s,]+/g, ''); // remove all spaces or commas
                 value = parseInt(value, 10);
                 if(value > 1) {
@@ -263,6 +287,7 @@ parsefuncs.parseReqs = function(reqsstr) {
             case "buyer":
             case "buyers":
             case "bu":
+                if(value === '' || myreqs.buyers !== undefined) break;
                 value = value.replace(/[\s,]+/g, ''); // remove all spaces or commas
                 value = parseInt(value, 10);
                 if(value > 0) {
@@ -273,6 +298,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "pricehigher":
             case "ph":
+                if(value === '' || myreqs.pricehigher !== undefined) break;
                 value = parsefuncs.parseVerboseNumber(value);
                 if(value > 0) {
                     if(myreqs.pricelower !== undefined && value > myreqs.pricelower) break;
@@ -283,6 +309,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "pricelower":
             case "pl":
+                if(value === '' || myreqs.pricelower !== undefined) break;
                 value = parsefuncs.parseVerboseNumber(value);
                 if(value > 0) {
                     if(myreqs.pricehigher !== undefined && value < myreqs.pricehigher) break;
@@ -293,6 +320,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "enchant":
             case "en":
+                if(value === '' || myreqs.enchant !== undefined) break;
                 value = value.replace(/[^\sa-z]-+/g, ''); // keep only whitespace and letters
                 value = fuzzy.enchant(value);
                 if(value !== undefined) {
@@ -305,6 +333,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "enchantlevel":
             case "el":
+                if(value === '' || myreqs.enchantlevel !== undefined) break;
                 value = value.replace(/\s+/g, '').split(','); // remove whitespace; split by comma
                 if(value.length === 0) break;
                 ref = 0;
@@ -323,6 +352,7 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "category":
             case "ca":
+                if(value === '' || myreqs.category !== undefined) break;
                 value = value.replace(/\s+/g, ''); // remove all whitespace
                 cat = lists.category[value];
                 if(cat !== undefined) {
@@ -333,6 +363,8 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "broken":
             case "br":
+                if(myreqs.broken !== undefined) break;
+                if(value === '') value = 'yes';
                 ref = lists.bool.indexOf(value); // affirmative?
                 if(ref === -1) break;
                 myreqs.broken = (ref+1)%2;
@@ -340,9 +372,21 @@ parsefuncs.parseReqs = function(reqsstr) {
 
                 break;
 
+            case "unbroken":
+            case "ub":
+                if(myreqs.broken !== undefined) break;
+                if(value === '') value = 'yes';
+                ref = lists.bool.indexOf(value); // affirmative?
+                if(ref === -1) break;
+                myreqs.broken = (ref)%2;
+                myreqs.message += `-${constraint} ${value} `;
+
+                break;
+
             case "assign":
             case "as":
             case "for":
+                if(value === '' || myreqs.assign !== undefined) break;
                 if(parsefuncs.isSpecialMention(value)) {
                     myreqs.assign = value;
                     break;
@@ -354,10 +398,9 @@ parsefuncs.parseReqs = function(reqsstr) {
 
             case "alias":
             case "al":
-                ref = lists.bool.indexOf(value); // affirmative?
-                if(ref === -1) break;
-                myreqs.alias = (ref+1)%2;
-                myreqs.message += `-${constraint} ${value} `;
+                if(myreqs.alias !== undefined) break;
+                myreqs.alias = 1;
+                myreqs.message += `-${constraint} `;
                 break;
         }
 

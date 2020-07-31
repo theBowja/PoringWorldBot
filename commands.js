@@ -11,6 +11,7 @@ const commands = {};
 
 commands.handleHelp = function(message, { pwbContent, pwbUser }) {
     if(pwbContent.body === 'misc') return message.channel.send(parsefuncs.buildMiscHelpEmbed());
+    else if(pwbContent.body === 'request') return message.channel.send(parsefuncs.buildRequestHelpEmbed());
     else return message.channel.send(parsefuncs.buildHelpCommandsEmbed(pwbUser.permission !== 0));
 };
 

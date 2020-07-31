@@ -133,10 +133,13 @@ bot.on('message', message => {
     case 'listen':
       return callCommandHandler(commands.handleWatch);
 
+    case 'status':
+      return message.channel.send('online');
     case 'alive':
     case 'awake':
-    case 'up':
       return message.react('🙂');
+    case 'up':
+      return message.channel.send('dog');
 
     case 'joke':
       return message.channel.send(lists.joke[Math.floor(Math.random() * lists.joke.length)]);
