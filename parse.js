@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const lists = require('./lists.js');
 const config = require('./config.js');
 const fuzzy = require('./fuzzy.js');
@@ -39,84 +38,6 @@ parsefuncs.buildItemFullName = function(item) {
     if(item.broken!==0) fullname += " (broken)";
     return fullname;
 };
-
-/**
- * Builds an embed for showing snaps
- * @param snaprecord {object} a record from the currentsnaps table
- */
-parsefuncs.buildSnappingInfoEmbed = function(snaprecord) {
-    let embed = new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle(parsefuncs.buildItemFullName(snaprecord))
-        // .setDescription(`💰 ${snaprecord.price.toLocaleString()} zeny\n` +
-        //                 `📊 ${snaprecord.stock} stock\n\n` +
-        //                 `⌛ ${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)} minutes left`);
-        .setDescription(`Price: **${snaprecord.price.toLocaleString()}** z\n` +
-                        `Stock: **${snaprecord.stock}**\n` +
-                        `Buyers: **${snaprecord.buyers}**\n\n` +
-                        `Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes`);
-    if(snaprecord.icon.startsWith("card")) {
-        embed.setThumbnail(`https://www.romcodex.com/pic/cards/${snaprecord.icon}.jpg`);
-    } else {
-        embed.setThumbnail(`https://www.poring.world/sprites/${snaprecord.icon}.png`);
-    }
-    return embed;
-};
-
-// dunno if this belongs here but here it is
-parsefuncs.buildHelpCommandsEmbed = function(isAdmin) {
-    let embed = new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('All commands must be prefixed with `!pwb `')
-        .setFooter('do `!pwb help misc` for more');
-    if(isAdmin)
-        embed.addField('Admin Command List', '• `watch` - the bot will begin to watch this channel for user-submitted snap requests\n' +
-                                             '• `request` - [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
-                                             'example: !pwb req -na static shield -en tenacity -el 3,4 -assign \@BillyBob\n' +
-                                             '• `show` - shows the information and all snap requests of the targeted user for this channel\n' +
-                                             'example: !pwb show \@Billy\n' +
-                                             '• `delete` - deletes the snap request if you have a higher permission level\n' +
-                                             'example: !pwb delete 12\n' +
-                                             '• `budget` - sets the maximum snap price that the targeted user will get pinged for\n' +
-                                             'example: !pwb budget \@Billy 20.7m\n' +
-                                             'example: !pwb budget \@Billy delete\n' +
-                                             '• `unwatch` - remove this channel from bot watch and delete all snap requests in it\n' +
-                                             '• `search` - queries poring.world using the provided string\n' +
-                                             'example: !pwb search natto kig\n' +
-                                             '• `permit` - gives the targeted user a new permission level\n' +
-                                             'example: !pwb permit \@Billy 1\n');
-    else
-        embed.addField('Command List', '• `request` - [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
-                                       'example: !pwb req -na static shield -en tenacity -el 3,4\n' +
-                                       '• `show` - shows your information and all snap requests you have in this channel\n' +
-                                       'example: !pwb show\n' + 
-                                       '• `delete` - delete one of your snap requests using its request id\n' +
-                                       'example: !pwb delete 12\n' +
-                                       '• `budget` - sets the maximum snap price that you will get pinged for\n' +
-                                       'example: !pwb budget 20.7m\m' +
-                                       'example: !pwb budget delete');
-
-    return embed;
-};
-
-parsefuncs.buildMiscHelpEmbed = function() {
-    return new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('All commands must be prefixed with `!pwb `')
-        .addField('Misc Command List', '• `alive` - no response if the bot is offline\n' +
-                                       '• `invite` - gives the invite link for this bot\n' +
-                                       '• `thanks` - no problem\n' +
-                                       '• `joke` - funny joke');
-};
-
-parsefuncs.buildRequestHelpEmbed = function() {
-    return new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('All commands must be prefixed with `!pwb `')
-        .addField('Request Parameter List', '• `name` -\n' +
-                                            '• `enchant` - \n' +
-                                            '• `enchantlevel` - \n');
-}
 
 parsefuncs.isSpecialMention = function(discordtag) {
     if(discordtag === 'everyone' || discordtag === 'here') return true;

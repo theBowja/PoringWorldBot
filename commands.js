@@ -1,4 +1,5 @@
 var parsefuncs = require('./parse.js');
+const embeds = require('./embeds.js');
 const config = require('./config.js'); // consistency right?
 var dbfuncs = require("./dbfuncs.js");
 var aliases = require("./aliases.js");
@@ -10,9 +11,20 @@ const commands = {};
 // lol
 
 commands.handleHelp = function(message, { pwbContent, pwbUser }) {
-    if(pwbContent.body === 'misc') return message.channel.send(parsefuncs.buildMiscHelpEmbed());
-    else if(pwbContent.body === 'request') return message.channel.send(parsefuncs.buildRequestHelpEmbed());
-    else return message.channel.send(parsefuncs.buildHelpCommandsEmbed(pwbUser.permission !== 0));
+    switch(pwbContent.body) {
+        case 'misc':
+            return message.channel.send(embeds.helpMiscCommands);
+        case 'request':
+            return message.channel.send(embeds.helpRequestParameters);
+        case 'example':
+        case 'examples':
+            return message.channel.send(embeds.helpRequestExamples);
+        default:
+            if(pwbUser.permission > 0)
+                return message.channel.send(embeds.helpCommandsAdmin);
+            else if(pwbUser.permission === 0) 
+                return message.channel.send(embeds.helpCommandsBasic);
+    }
 };
 
 commands.handleTagMe = function(message, { pwbContent, pwbUser, pwbChannel }) {
@@ -264,7 +276,7 @@ commands.handleSearch = async function(message, { pwbContent }={}, bot=message.c
             if(foundreqs.length === 0) // if nobody cares about this, go next
                 continue;
 
-            let itemembed = parsefuncs.buildSnappingInfoEmbed(sr);
+            let itemembed = embeds.buildSnappingInfo(sr);
             let channels = {}; // map with key: channelid and value: discordid pings
             for(let req of foundreqs) {
                 if(channels[req.discordchid] === undefined)
