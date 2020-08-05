@@ -135,12 +135,17 @@ parsefuncs.parseReqs = function(reqsstr) {
     reqsstr = reqsstr.substr(1).split(' -');
     let myreqs = { message: '' };
     for(let req of reqsstr) {
-        let constraint = req.substring(0, req.indexOf(' '));
-        if(constraint === '') continue;
+        let spaceIndex = req.indexOf(' ');
+        let constraint, value;
+        if(spaceIndex === -1) {
+            constraint = req;
+            value = '';
+        } else {
+            constraint = req.substring(0, spaceIndex);
+            value = req.substring(spaceIndex+1);
+        }
         constraint = fuzzy.parameter(constraint);
         if(constraint === undefined) continue;
-        let value = req.substring(req.indexOf(' ')+1).toLowerCase(); // lowercase
-
 
         let ref = 0; // temporary variable
         let cat = ''; // temporary variable
@@ -320,6 +325,7 @@ parsefuncs.parseReqs = function(reqsstr) {
             case "alias":
             case "al":
                 if(myreqs.alias !== undefined) break;
+                if(value === '') value = 'yes';
                 myreqs.alias = 1;
                 myreqs.message += `-${constraint} `;
                 break;
