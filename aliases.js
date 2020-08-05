@@ -42,7 +42,7 @@ aliases.equips = dictionary(
   ["Buster", "Doom Axe", "Avalanche"],
   ["Pole Axe", "Halberd", "Soul Spear"],
   ["Lush Fox Grass", "Giant Fox Grass"],
-  ["Cutlus", "Nagan", "Blade Of Frenzy"],
+  ["Cutlus", "Nagan", "Blade of Rage", "Blade Of Frenzy"],
   ["Knuckle Dusters", "Studded Knuckles"],
   ["Staff Of Element Fusion", "Unlimited"],
   ["Lance Of Dragon Tamer", "Dragon Howl"],
