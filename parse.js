@@ -132,7 +132,9 @@ parsefuncs.prepName = function(name) {
  * @returns object with all the properties :3
  */
 parsefuncs.parseReqs = function(reqsstr) {
-    reqsstr = reqsstr.substr(1).split(' -');
+    reqsstr = reqsstr.substring(1).trim().replace(/ - *([a-z])/g, '\u000B$1').split('\u000B');
+
+
     let myreqs = { message: '' };
     for(let req of reqsstr) {
         let spaceIndex = req.indexOf(' ');
@@ -167,7 +169,7 @@ parsefuncs.parseReqs = function(reqsstr) {
                 ref = lists.bool.indexOf(value); // affirmative?
                 if(ref === -1) break;
                 myreqs.slotted = (ref+1)%2;
-                myreqs.message += `-${constraint} ${value} `;
+                myreqs.message += `-${myreqs.slotted ? '' : 'un'}slotted `;
                 break;
 
             case "unslotted":
@@ -177,25 +179,21 @@ parsefuncs.parseReqs = function(reqsstr) {
                 ref = lists.bool.indexOf(value); // affirmative?
                 if(ref === -1) break;
                 myreqs.slotted = (ref)%2;
-                myreqs.message += `-${constraint} ${value} `;
+                myreqs.message += `-${myreqs.slotted ? '' : 'un'}slotted `;
                 break;
 
             case "refine":
             case "re":
                 if(value === '' || myreqs.refine !== undefined) break;
                 value = value.replace(/\s+/g, '').split(','); // remove whitespace; split by comma
-                if(value.length === 0) break;
                 ref = 0;
-                cat = '';
-                for(let i = 0; i <= 15; i++) {
-                    if(value.includes(i.toString())) {
-                        ref += Math.pow(2, i);
-                        cat += (cat !== '' ? ',' : '')+i; // commas :/
-                    }
+                for(let numberOrRange of value) {
+                    for(let tmp of parsefuncs.parseNumberOrRange(numberOrRange, 0, 15))
+                        ref |= Math.pow(2, tmp);
                 }
-                if(req !== 0) { // don't add to reqs if no valid refine values provided
+                if(ref !== 0) { // don't add to reqs if no valid refine values provided
                     myreqs.refine = ref;
-                    myreqs.message += `-${constraint} ${cat} `;
+                    myreqs.message += `-refine ${parsefuncs.binaryToNumberOrRangeList(ref)} `;
                 }
                 break;
 
@@ -258,21 +256,18 @@ parsefuncs.parseReqs = function(reqsstr) {
                 break;
 
             case "enchantlevel":
+            case "elevel":
             case "el":
                 if(value === '' || myreqs.enchantlevel !== undefined) break;
                 value = value.replace(/\s+/g, '').split(','); // remove whitespace; split by comma
-                if(value.length === 0) break;
                 ref = 0;
-                cat = '';
-                for(let i = 0; i <= 4; i++) {
-                    if(value.includes(i.toString())) {
-                        ref += Math.pow(2, i);
-                        cat += (cat !== '' ? ',' : '')+i; // commas :/
-                    }
+                for(let numberOrRange of value) {
+                    for(let tmp of parsefuncs.parseNumberOrRange(numberOrRange, 0, 4))
+                        ref |= Math.pow(2, tmp);
                 }
-                if(req !== 0) { // don't add to reqs if no valid refine values provided
+                if(ref !== 0) { // don't add to reqs if no valid refine values provided
                     myreqs.enchantlevel = ref;
-                    myreqs.message += `-${constraint} ${cat} `;
+                    myreqs.message += `-${constraint} ${parsefuncs.binaryToNumberOrRangeList(ref)} `;
                 }
                 break;
 
@@ -288,25 +283,21 @@ parsefuncs.parseReqs = function(reqsstr) {
                 break;
 
             case "broken":
-            case "br":
                 if(myreqs.broken !== undefined) break;
                 if(value === '') value = 'yes';
                 ref = lists.bool.indexOf(value); // affirmative?
                 if(ref === -1) break;
                 myreqs.broken = (ref+1)%2;
-                myreqs.message += `-${constraint} ${value} `;
-
+                myreqs.message += `-${myreqs.broken ? '' : 'un'}broken `;
                 break;
 
             case "unbroken":
-            case "ub":
                 if(myreqs.broken !== undefined) break;
                 if(value === '') value = 'yes';
                 ref = lists.bool.indexOf(value); // affirmative?
                 if(ref === -1) break;
                 myreqs.broken = (ref)%2;
-                myreqs.message += `-${constraint} ${value} `;
-
+                myreqs.message += `-${myreqs.broken ? '' : 'un'}broken `;
                 break;
 
             case "assign":
@@ -323,17 +314,75 @@ parsefuncs.parseReqs = function(reqsstr) {
                 break;
 
             case "alias":
-            case "al":
                 if(myreqs.alias !== undefined) break;
                 if(value === '') value = 'yes';
                 myreqs.alias = 1;
-                myreqs.message += `-${constraint} `;
+                myreqs.message += `-alias `;
                 break;
         }
 
     }
     myreqs.message = myreqs.message.trim();
     return myreqs;
+};
+
+/**
+ * Parses a number or range and returns an array of those numbers listed out. 
+ * @example
+ * // returns [10,11,12,13,14,15]
+ * parsefuncs.parseNumberOrRange("10-15", 0, 15);
+ * @param strnums {string} - an input string. examples: "4", "10-15"
+ * @param min {integer} - minimum number inclusive for the range
+ * @param max {integer} - maximum number inclusive for the range
+ * @returns an array. empty array if not a number or valid range
+ */
+parsefuncs.parseNumberOrRange = function(strnums, min=0, max=15) {
+    let dashIndex = strnums.indexOf('-');
+    if(dashIndex === -1) {
+        let num = parseInt(strnums, 10);
+        if(isNaN(num)) return [];
+        return [num];
+    } else {
+        let start = parseInt(strnums.substring(0, dashIndex), 10);
+        if(isNaN(start)) return [];
+        let end  = parseInt(strnums.substring(dashIndex+1), 10);
+        if(isNaN(end)) return [];
+        if(start > end) [start, end] = [end, start]; // swap
+        if(start < min) start = min; // lower bound
+        if(end > max) end = max; // upper bound
+        let list = [];
+        for(let i = start; i <= end; i++)
+            list.push(i);
+        return list;
+    }
+};
+
+/**
+ * Builds a list of comma-separated number/ranges from a binary number.
+ * @example
+ * // returns "1-3,5-6"
+ * parsefuncs.buildListOfNumberOrRange(110);
+ */
+parsefuncs.binaryToNumberOrRangeList = function(bin) {
+    let roster = [];
+    let mask = 1;
+  
+    while(bin >= mask) {
+        while((bin & mask) === 0) mask = mask << 1; // skip 0s
+        let start = Math.log2(mask);
+        while((bin & mask) !== 0) mask = mask << 1; // skip 1s
+        let end = Math.log2(mask >>> 1);
+
+        if(start === end) {
+            roster.push(start);
+        } else if(start + 1 === end) {
+            roster.push(start);
+            roster.push(end);
+        } else {
+            roster.push(start+'-'+end);
+        }
+  }
+  return roster.join(',');
 };
 
 /**
