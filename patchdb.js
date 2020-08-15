@@ -1,6 +1,7 @@
 const db = require('better-sqlite3')('ohsnap.db');
 const schemas = require('./schemas.js');
 const dbfuncs = require('./dbfuncs.js');
+const fuzzy = require('./fuzzy.js');
 
 // This file is for updating database schemas between project version
 
@@ -77,6 +78,58 @@ patchdb.cleanup = function() {
 	// remove all users not found in guilds
 	// remove all roles not found in guilds
 	// check if bot has access to all guilds in guilds
+}
+
+patchdb.fixnames = function(bot) {
+	let allreqs = dbfuncs.listAllRequirements();
+
+	for(let req of allreqs) {
+		if(req.name === null) continue;
+
+		let ac = fuzzy.name(req.name)
+		if(ac === undefined) {
+			let lastChar = req.name[req.name.length - 1];
+			// check if last character is a digit
+			if(lastChar >= '0' && lastChar <= '9')
+				ac = fuzzy.name(req.name.slice(0, -1))
+
+			if (ac === undefined) {
+				let contact = dbfuncs.getRequirement(req.reqID);
+				let isDeleted = dbfuncs.deleteRequirement(req.reqID);
+
+				// DO DELETE REQUEST. IF SUCCESS THEN DO MESSAGE. IF FAIL, LOG.
+				if(isDeleted) {
+					let message = `<@${contact.discordid}> your request shown below has been deleted since ${contact.name} could not be validated to an actual item name`;
+					message += '\n```' + `id: ${contact.reqID} | ${contact.message}` + '```';
+					console.log(`successfullly deleted id: ${contact.reqID} | ${contact.message}`);
+					bot.channels.fetch(contact.discordchid).then((chan) => {
+                    	chan.send(message);
+               		});
+				} else {
+					console.log(`there was an error trying to delete id: ${contact.reqID} | ${contact.message}`);
+				}
+				continue;			
+			}
+		}
+		ac = ac.replace(/\s/g, ''); // remove spaces finally
+		if(req.name !== ac) {
+			let contact = dbfuncs.getRequirement(req.reqID);
+			let query = db.prepare(`UPDATE requirements SET message=?, name=? WHERE reqID=?`);
+			req.message = req.message.replace(req.name, ac)
+			let success = query.run(req.message, ac, req.reqID).changes !== 0;
+
+			if(success) {
+				let message = `<@${contact.discordid}> your request shown below has been fixed for you by changing ${contact.name} to ${ac}`;
+				message += '\n```' + `id: ${contact.reqID} | ${req.message}` + '```';
+				console.log(`successfullly changed id: ${contact.reqID} | ${req.message}`);
+				bot.channels.fetch(contact.discordchid).then((chan) => {
+                    chan.send(message);
+                });
+			} else {
+				console.log(`there was an error trying to change id: ${contact.reqID} | ${contact.message}`);
+			}
+		}
+	}
 }
 
 /*

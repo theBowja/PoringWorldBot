@@ -1,5 +1,6 @@
 const fuzzysort = require('fuzzysort');
 const lists = require('./lists.js');
+const itemdict = require('./itemdict.json');
 
 let fuzzy = {};
 
@@ -15,7 +16,10 @@ fuzzy.parameter = function(query) {
 	return result === undefined ? undefined : result.target;
 };
 
-
+fuzzy.name = function(query) {
+	let result = fuzzysort.go(query, itemdict, { limit: 1 })[0];
+	return result === undefined ? undefined : result.target;
+}
 
 
 

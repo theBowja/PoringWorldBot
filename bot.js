@@ -248,6 +248,11 @@ bot.on('message', message => {
       }
       return message.react('✅');
 
+    case 'fixnames':
+      let patchdb = require('./patchdb.js');
+      patchdb.fixnames(bot);
+      return;
+
     case 'patch':
       //let patchdb = require('./patchdb.js');
       //return patchdb.doPatches();
