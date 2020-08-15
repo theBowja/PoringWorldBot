@@ -1,6 +1,6 @@
 const fuzzysort = require('fuzzysort');
 const lists = require('./lists.js');
-const itemdict = require('./itemdict.json');
+let itemdict = require('./itemdict.json');
 let extras = ["mvp card", "mini card", "mvp★ card", "mini★ card", "mvp/mini card", "mvp/mini★ card", "undead card", "dead card", "revenant card", "boss card"];
 itemdict = itemdict.concat(extras);
 
