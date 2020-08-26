@@ -140,6 +140,9 @@ bot.on('message', message => {
       return message.react('🙂');
     case 'up':
       return message.channel.send('dog');
+    case 'dead':
+    case 'ded':
+      return message.channel.send('rip');
 
     case 'joke':
       return message.channel.send(lists.joke[Math.floor(Math.random() * lists.joke.length)]);
