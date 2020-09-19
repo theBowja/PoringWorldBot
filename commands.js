@@ -3,6 +3,7 @@ const embeds = require('./embeds.js');
 const config = require('./config.js'); // consistency right?
 var dbfuncs = require("./dbfuncs.js");
 var aliases = require("./aliases.js");
+const lists = require('./lists.js');
 var https = require('https');
 
 const commands = {};
@@ -300,6 +301,25 @@ commands.handleSearch = async function(message, { pwbContent }={}, bot=message.c
         if(message !== undefined) message.react('❎');
         console.error("ERROR pingPoringWorld: " + e);
     }
+};
+
+commands.handleEstimate = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    let tmp = pwbContent.body.trim().split(' ');
+    let refine, base;
+    let format = 'Format: !pwb estimate +<refine> <base price>';
+    if(tmp.length < 2) return message.channel.send(format);
+    if(tmp[0].startsWith('+')) [refine, base] = tmp;
+    else if(tmp[1].startsWith('+')) [base, refine] = tmp;
+    else return message.channel.send(format);
+
+    refine = parseInt(refine.substring(1));
+    if(isNaN(refine)) return message.channel.send('Error: refine could not be parsed to integer');
+    if(refine < 0 || refine > 15) return message.channel.send('Error: refine is out of range 0-15');
+    base = parsefuncs.parseVerboseNumber(base);
+    if(isNaN(base)) return message.channel.send('Error: base price could not be parsed');
+    if(base < 0 || base > 999999999) return message.channel.send('Error: base price is out of allowed range');
+
+    return message.channel.send(lists.refineprice[refine](base).toLocaleString());
 };
 
 commands.handlePriceCheck = async function(message, { pwbContent, pwbUser, pwbChannel }) {

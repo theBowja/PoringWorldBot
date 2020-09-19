@@ -399,6 +399,7 @@ parsefuncs.parseVerboseNumber = function(strnum) {
     num = parseFloat(num, 10);
     if(isNaN(num)) return NaN;
     switch(multiplier) {
+        case "k":
         case "t":
         case "thousand":
         case "thousands":

@@ -42,9 +42,9 @@ aliases.equips = dictionary(
   ["Buster", "Doom Axe", "Avalanche"],
   ["Pole Axe", "Halberd", "Soul Spear"],
   ["Lush Fox Grass", "Giant Fox Grass"],
-  ["Cutlus", "Nagan", "Blade of Rage", "Blade Of Frenzy"],
   ["Knuckle Dusters", "Studded Knuckles"],
   ["Staff Of Element Fusion", "Unlimited"],
+  ["Wildfire Swords", "Black Flame Sword"],
   ["Lance Of Dragon Tamer", "Dragon Howl"],
   ["Roguemaster's Bow", "Robin Hood’s Bow"],
   ["Bill Guisarme", "Punishing Guillotine"],
@@ -61,6 +61,7 @@ aliases.equips = dictionary(
   ["Piercing Staff", "Wizardry Staff", "Wizard's Power"],
   ["Fullblack Dagger", "Holy Dagger", "Stalker's Knife"],
   ["Cross Bow", "Mystery Bow", "Bow of the Wind Chaser"],
+  ["Cutlus", "Nagan", "Blade of Rage", "Blade Of Frenzy"],
   ["Berdysz", "Battle Berdysz", "War Axe Of Destruction"],
   ["Gakkung Bow", "Malang Snow Crab", "Overlord Crab Bow"],
   ["Wonderful Fox Grass", "Fine Fox Grass", "Fine Pink Fox Grass"],
@@ -162,7 +163,7 @@ const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
   "Spashire", "Stormy Knight", "Garm", "Firelord Kaho", "Arc Angeling", "Grandma Wolf",
   "Lord Of Death", "Bloody Murderer", "Katerina", "Deeven", "Eremes",
   "Gloom Under Night", "Ktullanux", "Hill Wind", "Snake Demon Gorgons",
-  "Wasteland Lord", "Poi Tata"];
+  "Wasteland Lord", "Poi Tata", "Audhumbla"];
 
 const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring",
   "Toad", "Rotar Zairo", "Dragon Fly", "Vagabond Wolf", "Wood Goblin",
@@ -170,7 +171,7 @@ const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring"
   "Rafflesia", "Owl Duke", "Alice", "Zherlthsh", "Mysteltainn", "Dark Illusion",
   "Clock", "Clock Tower Manager", "Chepet", "Fire Witch", "Flute Player",
   "Cenia", "Deje", "Loli Ruri", "Gazeti", "Galion", "Fallen Bishop",
-  "Mao Guai Calvin", "Maple Fairy Yzma", "Whitebait Lake Lord"];
+  "Mao Guai Calvin", "Maple Fairy Yzma", "Whitebait Lake Lord", "Fire Bird Chiri"];
 
 const dead = ["Dead Deviling", "Dead Drake", "Dead Strouf", "Goblin Leader Revenant",
   "Mistress the Revenant", "Dead Maya", "Phreeoni the Revenant", "Dead Eddga", "Revenant Osiris",

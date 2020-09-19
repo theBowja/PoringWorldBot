@@ -160,6 +160,25 @@ lists.joke = [
     "Magnolia! Can you cook a Magnolia for me?",
     "No matter how strong you are, you can't instaskill 3 dummies and No Hunting",
     "How can you prove you are (Hunter) Elf if you don't wear the ears?"
- ]
+]
+
+lists.refineprice = [
+	k => k, // 0
+	k => k+35000, // 1
+	k => k+80000, // 2
+	k => k+135000, // 3
+	k => k+200000, // 4
+	k => 2.02*k+346800, // 5
+	k => 3.08*k+655200, // 6
+	k => 4.18*k+1250800, // 7
+	k => 8.56*k+2559600, // 8
+	k => 14.2*k+4801500, // 9
+	k => 22.28*k+8058400, // 10
+	k => 37.48*k+14569200, // 11
+	k => 64.80*k+25694000, // 12
+	k => 110.325994423*k+45337210, // 13
+	k => 184.889698169*k+82150130, // 14
+	k => 336.5*k+128295200 // 15
+];
 
 module.exports = lists;

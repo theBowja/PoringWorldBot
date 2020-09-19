@@ -109,7 +109,7 @@ bot.on('message', message => {
 
   // attach contentObj to message
   // contentObj is just message.content parsed into three properties: summon, command, body
-  pwbContent = parsefuncs.parseContent(message.content.toLowerCase().replace(/\s+/g, ' '));
+  pwbContent = parsefuncs.parseContent(message.content.toLowerCase().replace(/\s+/g, ' ')); // strip excess whitespaces
   if(pwbContent.summon === undefined) return; // not summoned with summonstring
   if(pwbContent.command === '') return; // no command provided
 
@@ -143,6 +143,12 @@ bot.on('message', message => {
     case 'dead':
     case 'ded':
       return message.channel.send('rip');
+
+    case 'estimate':
+    case 'est':
+    case 'calculate':
+    case 'calc':
+      return callCommandHandler(commands.handleEstimate);
 
     case 'joke':
       return message.channel.send(lists.joke[Math.floor(Math.random() * lists.joke.length)]);
