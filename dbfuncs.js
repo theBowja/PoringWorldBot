@@ -87,6 +87,7 @@ dbfuncs.addSnap = function(snap) {
         stock: snap.lastRecord.stock,
         snapend: snap.lastRecord.snapEnd
     };
+    if(s.price < 0) s.price = s.price + 2147483648*2; // fixes integer overflow
     var queryget = db.prepare('SELECT stock FROM currentsnap WHERE snapid=@snapid');
     var resget = queryget.get(s);
     if(resget === undefined) { // new item
