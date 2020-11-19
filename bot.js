@@ -8,6 +8,8 @@ var commands = require('./commands.js');
 var CronJob = require('cron').CronJob;
 var dbfuncs = require("./dbfuncs.js");
 var lists = require('./lists.js');
+let patchdb = require('./patchdb.js');
+
 
 bot.on('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
@@ -258,7 +260,6 @@ bot.on('message', message => {
       return message.react('✅');
 
     case 'fixnames':
-      let patchdb = require('./patchdb.js');
       patchdb.fixnames(bot);
       return;
 
@@ -270,6 +271,24 @@ bot.on('message', message => {
     case 'backup':
       if(pwbContent.body === '') return message.react('❎');
       return dbfuncs.backup(pwbContent.body);
+
+    case 'cleanup':
+      patchdb.cleanupguilds(message);
+      patchdb.cleanupchannels(message);
+      patchdb.cleanupmembers(message);
+      return;
+    case 'cleanupguild':
+    case 'cleanupguilds':
+      patchdb.cleanupguilds(message);
+      return;
+    case 'cleanupchannel':
+    case 'cleanupchannels':
+      patchdb.cleanupchannels(message);
+      return;
+    case 'cleanupmember':
+    case 'cleanupmembers':
+      patchdb.cleanupmembers(message);
+      return;
   }
 });
 

@@ -2,6 +2,8 @@ const db = require('better-sqlite3')('ohsnap.db');
 const schemas = require('./schemas.js');
 const dbfuncs = require('./dbfuncs.js');
 const fuzzy = require('./fuzzy.js');
+const parsefuncs = require('./parse.js');
+const config = require('./config.js');
 
 // This file is for updating database schemas between project version
 
@@ -131,6 +133,118 @@ patchdb.fixnames = function(bot) {
 		}
 	}
 }
+
+patchdb.cleanupguilds = function(message) {
+	let mypromises = [];
+	let guildids = dbfuncs.listGuilds();
+	let asdf = `going through ${guildids.length} guilds`;
+	console.log(asdf);
+	message.channel.send(asdf);
+	for(let obj of guildids) {
+		let guildid = obj.guildid;
+		mypromises.push(message.client.guilds.fetch(guildid).catch(err => {
+			switch(err.code) {
+				case 500: // Connection error
+					console.log("Connection error");
+					message.channel.send("Connection error");
+					return;
+				case 10004: // Unknown guild
+				case 50001: // Missing access
+				case 50035: // Invalid string
+					let changes = dbfuncs.deleteGuild(guildid);
+					let words = `${guildid}: ${err.message}\n  removed ${changes.discokids} discokids rows\n  removed ${changes.channels} channels rows`;
+					console.log(words);
+					message.channel.send('```'+words+'```');
+					return;
+				default:
+					console.log("Unknown error");
+					console.log(err);
+					message.channel.send("Unknown error. Please check the logs");
+			}
+		}))
+	}
+	Promise.all(mypromises).then(() => { console.log("done"); message.channel.send("done"); })
+}
+
+patchdb.cleanupchannels = function(message) {
+	let mypromises = [];
+	let channels = dbfuncs.getAllChannels();
+	let asdf = `going through ${channels.length} channels`;
+	console.log(asdf);
+	message.channel.send(asdf);
+	for(let ch of channels) {
+		let channelid = ch.discordchid;
+		mypromises.push(message.client.channels.fetch(channelid).catch(err => {
+			switch(err.code) {
+				case 500: // Connection error
+					console.log("Connection error");
+					message.channel.send("Connection error");
+					return;
+				case 10003: // Unknown channel
+				case 50001: // Missing access
+				case 50035: // Invalid string
+					let changes = dbfuncs.deleteChannel(channelid);
+					let words = `deleted (${changes}) channels row ${channelid}: ${err.message}`;
+					console.log(words);
+					message.channel.send(words);
+					return;
+				default:
+					console.log("Unknown error");
+					console.log(err);
+					message.channel.send("Unknown error. Please check the logs");
+			}
+		}))
+	}
+	Promise.all(mypromises).then(() => { console.log("done"); message.channel.send("done"); })
+}
+
+// not the cleanest code but it gets the job done
+patchdb.cleanupmembers = async function(message) {
+	let mypromises = [];
+	let discokids = dbfuncs.listDiscokids();
+	let asdf = `going through ${discokids.length} members`;
+	console.log(asdf);
+	message.channel.send(asdf);
+	for(let dkid of discokids) {
+		if(dkid.discordid === config.owner || parsefuncs.isSpecialMention(dkid.discordid)) continue;
+
+		mypromises.push(message.client.guilds.fetch(dkid.guildid).then(guild => {
+			let mypromise;
+			if(dkid.discordid.charAt(0) === '&')
+				mypromise = guild.roles.fetch(dkid.discordid.slice(1));
+			else
+				mypromise = guild.members.fetch(dkid.discordid);
+			return mypromise.catch(err => {
+				switch(err.code) {
+					case 500: // Connection error
+						console.log("Connection error");
+						message.channel.send("Connection error");
+						return;
+					case 10007: // Unknown member
+					case 10011: // Unknown role
+					//case 50001: // Missing access
+					case 50035: // Invalid string
+						let changes = dbfuncs.deleteMember(dkid.discordid, dkid.guildid)
+						let words = `deleted (${changes}) discokids row ${dkid.discordid} (guild ${dkid.guildid})`;
+						console.log(words);
+						message.channel.send("`"+words+"`");
+						return;
+					default:
+						console.log("Unknown error");
+						console.log(err);
+						message.channel.send("Unknown error. Please check the logs");
+				}
+			});
+		}).catch(err => {
+			console.log(`Could not fetch guild ${dkid.guildid} for discokid ${dkid.discordid}`);
+			console.log(err);
+			message.channel.send(`Could not fetch guild ${dkid.guildid} for discokid ${dkid.discordid}`);
+		}));
+	}
+	Promise.all(mypromises).then(() => { console.log("done"); message.channel.send("done"); })
+}
+
+
 
 /*
 

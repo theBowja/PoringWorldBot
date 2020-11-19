@@ -256,6 +256,15 @@ dbfuncs.deleteMember = function(discordid, guildid) {
 };
 
 /**
+ * Returns an array of all unique guildids from the channels table and discokids table combined
+ * @returns []
+ */
+dbfuncs.listGuilds = function() {
+    let query = db.prepare('SELECT DISTINCT guildid FROM channels UNION SELECT DISTINCT guildid FROM discokids');
+    return query.all();
+};
+
+/**
  * Removes all users with matching guildid in database
  * @returns object with info for discokids and channels. check info.changes
  */
