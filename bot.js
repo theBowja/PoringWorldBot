@@ -297,4 +297,13 @@ bot.on("disconnect", function(event){
     console.log(`${new Date().toLocaleString()}: The WebSocket has closed and will no longer attempt to reconnect`);
 });
 
+bot.on("error", (err) => {
+  console.log(err);
+});
+
+bot.on("rateLimit", (something) => {
+  console.log("ratelimit");
+  console.log(something);
+});
+
 bot.login(auth.token);
