@@ -40,12 +40,14 @@ aliases.equips = dictionary(
   ["Spearfish Pike", "Ocean Dread"],
   ["Spell Book Of Ice", "Frost Book"],
   ["Buster", "Doom Axe", "Avalanche"],
+  ["Curse Gauntlets", "Hand of Chaos"],
   ["Pole Axe", "Halberd", "Soul Spear"],
   ["Lush Fox Grass", "Giant Fox Grass"],
   ["Knuckle Dusters", "Studded Knuckles"],
   ["Staff Of Element Fusion", "Unlimited"],
   ["Wildfire Swords", "Black Flame Sword"],
   ["Lance Of Dragon Tamer", "Dragon Howl"],
+  ["Wind Wheel Dart", "Wind Dart - Venus"],
   ["Roguemaster's Bow", "Robin Hood’s Bow"],
   ["Bill Guisarme", "Punishing Guillotine"],
   ["Blood Axe", "Bloody Axe", "Blood Hound"],
@@ -55,6 +57,7 @@ aliases.equips = dictionary(
   ["Loki's Nail", "Death Slice", "Death Gash"],
   ["Cardo", "Green Steel Pike", "Saintly Glaive"],
   ["Desert Twilight", "Sandstorm", "Desert Storm"],
+  ["Wind Shuriken", "Wind Shuriken - Swift Shadow"],
   ["Double Bound", "Cursed Lyre", "Painful Torture"],
   ["Orcish Axe", "Vecer Axe", "Destroyer’s War Axe"],
   ["Healing Staff", "Croce Staff", "Staff of Vitality"],
@@ -64,12 +67,14 @@ aliases.equips = dictionary(
   ["Cutlus", "Nagan", "Blade of Rage", "Blade Of Frenzy"],
   ["Berdysz", "Battle Berdysz", "War Axe Of Destruction"],
   ["Gakkung Bow", "Malang Snow Crab", "Overlord Crab Bow"],
+  ["Renowned Blade - Muramasa", "Monster Knife - Muramasa"],
   ["Wonderful Fox Grass", "Fine Fox Grass", "Fine Pink Fox Grass"],
   ["Survivor's Rod", "Advanced Survival Staff", "Stardust Dragon Staff"],
   ["Advanced Fox Grass", "Magical Fox Grass", "Magical Yellow Fox Grass"],
 
   // OFFHAND
   ["Exorcism Bible", "Divine Eye"],
+  ["Arm Armor", "Improved Arm Armor"],
   ["Life Magic Book", "Arcane Codex"],
   ["Mirror Shield", "Nirvana Shield"],
   ["Orleans's Server", "Peak Platter"],
@@ -117,21 +122,32 @@ aliases.equips = dictionary(
   ["Ninja Suit Sakura", "Ninja Suit Moonlight", "Ninja Clothes·Cold Night Song"],
 
   // GARMENT
-  ["Cotton Shirt", "Undershirt"],
-  ["Staunch Cape", "Magic Staunch Manteau"],
-  ["Natto Kig’s Manteau", "Natto Kig's Cloak"],
-  ["Survivor's Manteau", "Advanced Survivor's Manteau"],
   ["Deathcat Cape", "Hood"],
+  ["Blueeve Cape", "Golden Manteau"],
+  ["Ancient Cape", "White Duke's Manteau"],
+  ["Illusion Garments", "Earl's Illusion Garments"],
+  ["Cotton Shirt", "Undershirt", "Cloud Undershirt"],
+  ["Staunch Cape", "Magic Staunch Manteau", "Deerskin Manteau"],
+  ["Goibne's Spaulders", "Duff's Cape", "Merlin's Time-Space Robe"],
+  ["Natto Kig’s Manteau", "Natto Kig's Cloak", "Divine Feather Clothes"],
+  ["Survivor's Manteau", "Advanced Survivor's Manteau", "Grey Elf’s Manteau"],
 
   // SHOE
-  ["Crystal Pumps"],
   ["Shoes", "Bunny Slipper"],
   ["Safety Boots", "Greaves"],
-  ["Rune Shoes", "Rune Boots"],
-  ["Dance Shoes", "Dancing Shoes"],
-  ["High Heels", "High Fashion Sandals"],
-  ["Sack Teddy Shoes", "Advanced Sack Teddy Shoes"],
-  ["Wolf Grandmother’s Slippers", "Wolf Grandma’s Slippers"],
+  ["Tidal Shoes", "Mayfly Shoes"],
+  ["Crystal Pumps", "White Gem Boots"],
+  ["Momo Shoes", "The Emperor's Boots"],
+  ["Rescuer Shoes", "Soft Sole Hiking Boots"],
+  ["Boots Of Judgment", "Light Of Truth Shoes"],
+  ["Elegant Doram Shoes", "Kitten's Ankle Bell"],
+  ["Dance Shoes", "Dancing Shoes", "Ballet Shoes"],
+  ["Soldier Boots", "Through-War Shoes", "Steel Boots"],
+  ["Rune Shoes", "Rune Boots", "Saint Mary's Cloth Shoes"],
+  ["High Heels", "High Fashion Sandals", "Green Rattan Shoes"],
+  ["Sack Teddy Shoes", "Advanced Sack Teddy Shoes", "Boar Bristle Shoes"],
+  ["Wolf Grandmother’s Slippers", "Wolf Grandma’s Slippers", "Little Fairy’s Slippers"],
+
 
   // ACCESSORY
   ["Matyr's Leash", "Fox Teeth"],
@@ -151,6 +167,7 @@ aliases.equips = dictionary(
   ["Fire Ninja Shinobi’s Belt", "Hermit's Bundle"],
   ["Strength Ring", "Powerful Ring", "Ring of Contract"],
   ["Talisman Grass Necklace", "Four-Leaf Clover Necklace"],
+  ["Ninja's Introduction Manual", "Ninja's Advanced Guide"],
   ["Tuna Talisman", "Fresh Tuna Talisman", "Original Will Talisman"],
   ["VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality"]
 );
@@ -163,7 +180,8 @@ const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
   "Spashire", "Stormy Knight", "Garm", "Firelord Kaho", "Arc Angeling", "Grandma Wolf",
   "Lord Of Death", "Bloody Murderer", "Katerina", "Deeven", "Eremes",
   "Gloom Under Night", "Ktullanux", "Hill Wind", "Snake Demon Gorgons",
-  "Wasteland Lord", "Poi Tata", "Audhumbla"];
+  "Wasteland Lord", "Poi Tata", "Audhumbla", "Sedd of Yggdrasil", "Soul Player",
+  "Dragon Bone", "Incantation Samurai"];
 
 const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring",
   "Toad", "Rotar Zairo", "Dragon Fly", "Vagabond Wolf", "Wood Goblin",
@@ -171,12 +189,14 @@ const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring"
   "Rafflesia", "Owl Duke", "Alice", "Zherlthsh", "Mysteltainn", "Dark Illusion",
   "Clock", "Clock Tower Manager", "Chepet", "Fire Witch", "Flute Player",
   "Cenia", "Deje", "Loli Ruri", "Gazeti", "Galion", "Fallen Bishop",
-  "Mao Guai Calvin", "Maple Fairy Yzma", "Whitebait Lake Lord", "Fire Bird Chiri"];
+  "Mao Guai Calvin", "Maple Fairy Yzma", "Whitebait Lake Lord", "Fire Bird Chiri",
+  "Limunus", "Gem Spirit"];
 
 const dead = ["Dead Deviling", "Dead Drake", "Dead Strouf", "Goblin Leader Revenant",
   "Mistress the Revenant", "Dead Maya", "Phreeoni the Revenant", "Dead Eddga", "Revenant Osiris",
   "Dead Moonlight Flower", "Dead Soul", "Dead Atroce", "Detarderous the Dead",
-  "Dead Owl Baron", "Bloody Knight Undead", "Dead Time Holder", "Spashire the Dead", "Dead Chimera"];
+  "Dead Owl Baron", "Bloody Knight Undead", "Dead Time Holder", "Spashire the Dead", "Dead Chimera",
+  "Firelord Kaho Dead", "Firelord Dead Kaho", "Dead Stormy Knight"];
 
 const tt = ["Valkyrie Rathgricy", "Tesseract", "Mentalist", "Magic Swordsman Thanatos"];
 
