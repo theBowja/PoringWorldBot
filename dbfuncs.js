@@ -221,10 +221,13 @@ dbfuncs.getDiscokid = function(discordid, guildid) {
             if channelid is provided, then only discokids in that channel
  */
 dbfuncs.listDiscokids = function(guildid) {
-    let zzz;
-    if(guildid === undefined) zzz = db.prepare('SELECT *  FROM discokids');
-    else zzz = db.prepare('SELECT * FROM discokids WHERE guildid=?');
-    return zzz.all();
+    if(guildid === undefined) {
+        let zzz = db.prepare('SELECT *  FROM discokids');
+        return zzz.all();
+    } else {
+        zzz = db.prepare('SELECT * FROM discokids WHERE guildid=?');
+        return zzz.all(guildid);
+    }
 };
 
 /**
