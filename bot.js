@@ -223,6 +223,11 @@ bot.on('message', message => {
     case 'permit':
     case 'admin':
       return callCommandHandler(commands.handlePermit);
+
+    case 'cleanupmember':
+    case 'cleanupmembers':
+      return callCommandHandler(commands.handleCleanupMembers);
+      return;
   }
 
   if(message.author.id !== config.owner) return;// message.react('🔒');
@@ -285,8 +290,8 @@ bot.on('message', message => {
     case 'cleanupchannels':
       patchdb.cleanupchannels(message);
       return;
-    case 'cleanupmember':
-    case 'cleanupmembers':
+    case 'cleanupallmember':
+    case 'cleanupallmembers':
       patchdb.cleanupmembers(message);
       return;
   }

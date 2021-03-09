@@ -303,6 +303,55 @@ commands.handleSearch = async function(message, { pwbContent }={}, bot=message.c
     }
 };
 
+commands.handleCleanupMembers = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    if(isSpamming('cleanupmembers', message.author.id + message.guild.id, 10)) {
+        return message.channel.send('You must wait at least 10 minutes before using this command again.');
+    }
+    let mypromises = [];
+    let discokids = dbfuncs.listDiscokids(message.guild.id);
+    let asdf = `going through ${discokids.length} members. DO NOT SPAM.`;
+    //console.log(asdf);
+    message.channel.send(asdf);
+    for(let dkid of discokids) {
+        if(dkid.discordid === config.owner || parsefuncs.isSpecialMention(dkid.discordid)) continue;
+
+        mypromises.push(message.client.guilds.fetch(dkid.guildid).then(guild => {
+            let mypromise;
+            if(dkid.discordid.charAt(0) === '&')
+                mypromise = guild.roles.fetch(dkid.discordid.slice(1));
+            else
+                mypromise = guild.members.fetch(dkid.discordid);
+            return mypromise.catch(err => {
+                switch(err.code) {
+                    case 500: // Connection error
+                        //console.log("Connection error");
+                        message.channel.send("Connection error");
+                        return;
+                    case 10007: // Unknown member
+                    case 10011: // Unknown role
+                    //case 50001: // Missing access
+                    case 50035: // Invalid string
+                        let changes = dbfuncs.deleteMember(dkid.discordid, dkid.guildid)
+                        let words = `removed requests for member ${dkid.discordid} in guild ${dkid.guildid}`;
+                        //console.log(words);
+                        message.channel.send("`"+words+"`");
+                        return;
+                    default:
+                        console.log("Unknown error");
+                        console.log(dkid);
+                        console.log(err);
+                        message.channel.send("Unknown error. Please check the logs. Id: "+(+new Date()));
+                }
+            });
+        }).catch(err => {
+            //console.log(`Could not fetch guild ${dkid.guildid} for discokid ${dkid.discordid}`);
+            //console.log(err);
+            message.channel.send(`Could not fetch guild ${dkid.guildid} for discokid ${dkid.discordid}`);
+        }));
+    }
+    Promise.all(mypromises).then(() => { console.log("done"); message.channel.send("done"); })
+}
+
 commands.handleEstimate = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let tmp = pwbContent.body.trim().split(' ');
     let refine, base;
@@ -339,6 +388,30 @@ commands.handlePriceCheck = async function(message, { pwbContent, pwbUser, pwbCh
 };
 
 module.exports = commands;
+
+
+
+let spamTracker = {};
+/**
+ * @param interval - minutes
+ * @returns true if 
+ */
+function isSpamming(commandid, identifier, interval) {
+    if(spamTracker[commandid] === undefined) {
+        spamTracker[commandid] = { identifier: new Date() };
+        return false;
+    }
+    let lastUsage = spamTracker[commandid][identifier];
+    if(lastUsage === undefined) {
+        spamTracker[commandid][identifier] = new Date();
+        return false;
+    } else if(((new Date() - lastUsage) / 60000) < interval) {
+        return true;
+    } else {
+        spamTracker[commandid][identifier] = new Date();
+        return false;
+    }
+}
 
 /**
  * Takes an idstring (might have & in front for role)
