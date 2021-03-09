@@ -161,6 +161,11 @@ commands.handleDeleteAll = function(message, { pwbContent, pwbUser, pwbChannel }
 
 // for deleteing reqs
 commands.handleDelete = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    if(pwbContent.body === 'all') {
+        pwbContent.body = '';
+        return commands.handleDeleteAll(message, { pwbContent, pwbUser, pwbChannel });
+    }
+    
     let reqID = parseInt(pwbContent.body);
     if(isNaN(reqID)) { // if no reqID provided, then show self
         pwbContent.body = '';
