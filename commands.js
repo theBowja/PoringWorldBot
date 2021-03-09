@@ -148,7 +148,7 @@ commands.handleDeleteAll = function(message, { pwbContent, pwbUser, pwbChannel }
 
     let res = dbfuncs.listUserRequirements(targetID, message.guild.id, message.channel.id);
     let msg = res.reduce((accum, r) => {
-        let success = dbfuncs.deleteRequirement(reqID);
+        let success = dbfuncs.deleteRequirement(r.reqID);
         if(success) {
             if(accum !== '') accum += '\n';
             accum += `id: ${r.reqID} | ${r.message}`;
@@ -165,7 +165,7 @@ commands.handleDelete = function(message, { pwbContent, pwbUser, pwbChannel }) {
         pwbContent.body = '';
         return commands.handleDeleteAll(message, { pwbContent, pwbUser, pwbChannel });
     }
-    
+
     let reqID = parseInt(pwbContent.body);
     if(isNaN(reqID)) { // if no reqID provided, then show self
         pwbContent.body = '';
