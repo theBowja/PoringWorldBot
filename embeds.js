@@ -40,16 +40,17 @@ embeds.helpCommandsBasic = new Discord.MessageEmbed()
 
 embeds.helpCommandsAdmin = new Discord.MessageEmbed()
     .setColor('#0099ff')
+    // LIMIT 1024 characters
 	.addField('Admin Command List',
 				'`!pwb watch [<limitedto>]`\n- the bot will begin to watch this channel for user-submitted snap requests\n' +
-                '`!pwb request [-<parameter> <value>]...`\n- [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
+                '`!pwb request [-<parameter> <value>]...`\n- [read this wiki for help on forming a proper snap request](https://git.io/JqLSd)\n' +
 	            '`!pwb show {<@user>|<@role>|everyone|here}`\n- shows the information and all snap requests of the targeted user for this channel\n' +
-                '`!pwb delete <reqid>`\n- deletes the snap request if you have a higher permission level\n' +
+                '`!pwb delete <reqid>`\n- deletes the snap request\n' +
                 '`!pwb deleteall {<@user>|<@role>|everyone|here}`\n- deletes all the snap requests of the target\n' +
-                '`!pwb budget {<@user>|<@role>|everyone|here>} {<number>|delete} `\n- sets the maximum snap price that the targeted user will get pinged for\n' +
+                '`!pwb budget {<@user>|<@role>|everyone|here>} {<number>|delete} `\n- sets the maximum snap price that the target will get pinged for\n' +
                 '`!pwb unwatch`\n- remove this channel from bot watch and delete all snap requests in it\n' +
                 '`!pwb search <querystring>`\n- queries poring.world using the provided string\n' +
-                '`!pwb permit {<@user>|<@role>} <permissionlevel>`\n- gives the targeted user a new permission level (number)\n' +
+                '`!pwb permit {<@user>|<@role>} <permissionlevel>`\n- gives the target user a new permission level (number)\n' +
                 '`!pwb cleanupmembers`\n- removes the requests of any member that has left this guild')
 	.setFooter('do `!pwb help misc` for more')
 
