@@ -126,6 +126,39 @@ commands.handleForce = function(message) {
 
 };
 
+// for deleting all requests of a user
+commands.handleDeleteAll = function(message, { pwbContent, pwbUser, pwbChannel }) {
+    let targetID = message.author.id;
+    if(pwbContent.body !== '' && pwbContent.body !== 'me') { // if there is a person targeted
+        if(parsefuncs.isSpecialMention(pwbContent.body))
+            targetID = pwbContent.body;
+        else
+            targetID = parsefuncs.parseDiscordID(pwbContent.body);
+
+        if(targetID === -1)
+            return message.react('❎'); // not valid id provided
+        if(message.author.id === targetID)
+            return message.channel.send(`don't tag yourself`); // don't tag yourself
+        if(pwbUser.permission === 0)
+            return message.react('🔒'); // no peasants allowed past here
+        let targetObj = dbfuncs.getDiscokid(targetID, message.guild.id);
+        if(targetObj !== undefined && pwbUser.permission < targetObj.permission)
+            return message.react('🔒'); // user's permission level isn't high enough
+    }
+
+    let res = dbfuncs.listUserRequirements(targetID, message.guild.id, message.channel.id);
+    let msg = res.reduce((accum, r) => {
+        let success = dbfuncs.deleteRequirement(reqID);
+        if(success) {
+            if(accum !== '') accum += '\n';
+            accum += `id: ${r.reqID} | ${r.message}`;
+        }
+        return accum;
+    }, '')
+    if(msg === '') message.channel.send('no requests to delete');
+    else message.channel.send('deleted the following requests:\n```'+msg+'```');
+}
+
 // for deleteing reqs
 commands.handleDelete = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let reqID = parseInt(pwbContent.body);
@@ -304,11 +337,14 @@ commands.handleSearch = async function(message, { pwbContent }={}, bot=message.c
 };
 
 commands.handleCleanupMembers = function(message, { pwbContent, pwbUser, pwbChannel }) {
-    if(isSpamming('cleanupmembers', message.author.id + message.guild.id, 10)) {
-        return message.channel.send('You must wait at least 10 minutes before using this command again.');
-    }
-    let mypromises = [];
     let discokids = dbfuncs.listDiscokids(message.guild.id);
+    let waitTime = Math.min(Math.max(discokids.length, 10), 1440);
+
+    if(isSpamming('cleanupmembers', message.guild.id, waitTime)) {
+        return message.channel.send(`You must wait at least ${waitTime} minutes before using this command again.`);
+    }
+
+    let mypromises = [];
     let asdf = `going through ${discokids.length} members. DO NOT SPAM.`;
     //console.log(asdf);
     message.channel.send(asdf);

@@ -189,6 +189,11 @@ bot.on('message', message => {
     case 'remove':
       return callCommandHandler(commands.handleDelete);
 
+    case 'deleteall':
+    case 'delall':
+    case 'removeall':
+      return callCommandHandler(commands.handleDeleteAll);
+
     case 'budget':
       return callCommandHandler(commands.handleBudget);
 

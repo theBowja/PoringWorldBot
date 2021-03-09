@@ -34,6 +34,7 @@ embeds.helpCommandsBasic = new Discord.MessageEmbed()
     		  	'`!pwb request [-<parameter> <value>] ...`\n- [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
              	'`!pwb show`\n- shows your information and all snap requests you have in this channel\n' +
        	       	'`!pwb delete <reqid>`\n- delete one of your snap requests using its request id\n' +
+                '`!pwb deleteall`\n- deletes all of your snap requests\n' +
               	'`!pwb budget {<number>|delete}`\n- sets the maximum snap price that you will get pinged for')
     .setFooter('do `!pwb help misc` for more');
 
@@ -44,10 +45,12 @@ embeds.helpCommandsAdmin = new Discord.MessageEmbed()
                 '`!pwb request [-<parameter> <value>]...`\n- [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
 	            '`!pwb show {<@user>|<@role>|everyone|here}`\n- shows the information and all snap requests of the targeted user for this channel\n' +
                 '`!pwb delete <reqid>`\n- deletes the snap request if you have a higher permission level\n' +
+                '`!pwb deleteall {<@user>|<@role>|everyone|here}`\n- deletes all the snap requests of the target\n' +
                 '`!pwb budget {<@user>|<@role>|everyone|here>} {<number>|delete} `\n- sets the maximum snap price that the targeted user will get pinged for\n' +
                 '`!pwb unwatch`\n- remove this channel from bot watch and delete all snap requests in it\n' +
                 '`!pwb search <querystring>`\n- queries poring.world using the provided string\n' +
-                '`!pwb permit {<@user>|<@role>} <permissionlevel>`\n- gives the targeted user a new permission level')
+                '`!pwb permit {<@user>|<@role>} <permissionlevel>`\n- gives the targeted user a new permission level (number)\n' +
+                '`!pwb cleanupmembers`\n- removes the requests of any member that has left this guild')
 	.setFooter('do `!pwb help misc` for more')
 
 embeds.helpMiscCommands = new Discord.MessageEmbed()
