@@ -18,7 +18,7 @@ embeds.buildSnappingInfo = function(snaprecord) {
         .setDescription(`Price: **${snaprecord.price.toLocaleString()}** z\n` +
                         `Stock: **${snaprecord.stock}**\n` +
                         `Buyers: **${snaprecord.buyers}**\n\n` +
-                        `Time end: **<t:${snaprecord.snapend}:R>** at **<t:${snaprecord.snapend}:t>**`);
+                        `Time end: <t:${snaprecord.snapend}:R> at <t:${snaprecord.snapend}:t>`);
                         // `Time left: **${Math.floor((new Date(snaprecord.snapend*1000) - new Date())/60000)}** minutes`);
     if(snaprecord.icon.startsWith("card")) {
         embed.setThumbnail(`https://www.romcodex.com/pic/cards/${snaprecord.icon}.jpg`);
