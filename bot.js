@@ -166,7 +166,7 @@ bot.on('message', message => {
   switch(pwbContent.command) {
     case 'invite':
     case 'invitelink':
-      return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=150720```');
+      return message.channel.send('```https://discordapp.com/oauth2/authorize?client_id='+bot.user.id+'&scope=bot&permissions=2147634368```');
 
     case 'request':
     case 'req':

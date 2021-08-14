@@ -1,0 +1,2 @@
+// for registering discord commands
+
