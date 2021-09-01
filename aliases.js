@@ -19,6 +19,7 @@ const dictionary = (...lists) => lists.reduce((dictionary, list) => ({
 //              aliases["eldershammer"] is ["Acid Touch"]
 aliases.equips = dictionary(
   // WEAPON
+  ["Bass", "Lira"],
   ["Gold Lux Pistol", "Gold Law Enforcer"],
   ["Assault Terminator", "Terminator Sniper Rifle"],
   ["Red Wing Revolver", "Inferno Pistol"],
