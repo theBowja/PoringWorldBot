@@ -19,7 +19,9 @@ const dictionary = (...lists) => lists.reduce((dictionary, list) => ({
 //              aliases["eldershammer"] is ["Acid Touch"]
 aliases.equips = dictionary(
   // WEAPON
-  ["Bass", "Lira"],
+  ["Gold Lux Pistol", "Gold Law Enforcer"],
+  ["Assault Terminator", "Terminator Sniper Rifle"],
+  ["Red Wing Revolver", "Inferno Pistol"],
   ["Lute", "Southern Lute"],
   ["Giant Gloves", "Titan"],
   ["Scalpel", "Tooth Blade"],
@@ -73,9 +75,10 @@ aliases.equips = dictionary(
   ["Advanced Fox Grass", "Magical Fox Grass", "Magical Yellow Fox Grass"],
 
   // OFFHAND
+  ["Round Buckleer", "Royal Silver Shield"],
   ["Exorcism Bible", "Divine Eye"],
   ["Arm Armor", "Improved Arm Armor"],
-  ["Life Magic Book", "Arcane Codex"],
+  ["Memory Book", "Life Magic Book", "Arcane Codex"],
   ["Mirror Shield", "Nirvana Shield"],
   ["Orleans's Server", "Peak Platter"],
   ["Stone Buckler", "Meteorite Buckler"],
@@ -86,7 +89,7 @@ aliases.equips = dictionary(
   ["Static Shield", "Giant Armor Shield"],
   ["Telekinetic Orb", "Contract Jewelery"],
   ["Shield of Naga", "Dragon Flame Shield"],
-  ["Vinkt's Bracelet", "Vinkt Magic Bracelet"],
+  ["Golden Ornament", "Vinkt's Bracelet", "Vinkt Magic Bracelet"],
   ["Skull Bracer", "Evil Bracer", "Skeleton Bracer"],
   ["Floral Bracelet", "Rosa Bracelet", "Rosa Chain"],
   ["Chemical Protection Gloves", "Venom Fang Gloves"],
@@ -96,6 +99,8 @@ aliases.equips = dictionary(
 
 
   // ARMOR
+  ["Sniper Coat", "Jaeger Combat Uniform"],
+  ["Silk Robe", "Magic Light Cocoon"],
   ["Elegant Uniform", "Moon Gown"],
   ["Bohemian Coat", "Madman's Jacket"],
   ["Chain Mail", "Garman Plate Armor"],
@@ -122,6 +127,7 @@ aliases.equips = dictionary(
   ["Ninja Suit Sakura", "Ninja Suit Moonlight", "Ninja Clothes·Cold Night Song"],
 
   // GARMENT
+  ["Manteau", "Pauldron"],
   ["Deathcat Cape", "Hood"],
   ["Blueeve Cape", "Golden Manteau"],
   ["Ancient Cape", "White Duke's Manteau"],
@@ -133,6 +139,8 @@ aliases.equips = dictionary(
   ["Survivor's Manteau", "Advanced Survivor's Manteau", "Grey Elf’s Manteau"],
 
   // SHOE
+  ["Deathcat Shoes", "Deathcat Boots"],
+  ["Sniper Boots", "Ranger Boots"],
   ["Shoes", "Bunny Slipper"],
   ["Safety Boots", "Greaves"],
   ["Tidal Shoes", "Mayfly Shoes"],
@@ -150,6 +158,7 @@ aliases.equips = dictionary(
 
 
   // ACCESSORY
+  ["Sniper Medal", "Hunting Certificate"],
   ["Matyr's Leash", "Fox Teeth"],
   ["Luna Brooch", "Bright Moon"],
   ["Critical Ring", "Fissure Beam"],
@@ -169,7 +178,10 @@ aliases.equips = dictionary(
   ["Talisman Grass Necklace", "Four-Leaf Clover Necklace"],
   ["Ninja's Introduction Manual", "Ninja's Advanced Guide"],
   ["Tuna Talisman", "Fresh Tuna Talisman", "Original Will Talisman"],
-  ["VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality"]
+  ["VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality"],
+   
+   // POTION - EFFECT
+  ["Military Exploit Chest", "Military Exploit Chest Offhand", "Military Exploit Armor"],
 );
 
 const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
