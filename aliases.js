@@ -185,6 +185,28 @@ aliases.equips = dictionary(
   ["Military Exploit Chest", "Military Exploit Chest Offhand", "Military Exploit Armor"],
 );
 
+// Gears that can be exchanged for Ancient Gear Refine Vouchers
+const ancientTier1 = ["Heilion Bracelet", "Vinkt Magic Bracelet", "Ninja Clothes·Cold Night Song",
+  "Shinewhole’s Robe", "Watcher's Armor", "Gods’ Blessings"]
+const ancientTier2 = ["Creeper Agreement", "Arcane Codex", "Holy Mother’s Radiance", "Golden Wrist", 
+  "Skeleton Bracer", "Venom Fang Gloves", "Dark Star Stealth Clothes", "Tyre's Armor", "Bright Armor", 
+  "Dawn Clothes", "Lazy Meow Coat"]
+const ancientTier3 = ["Giant Armor Shield", "Peak Platter", "Improved Arm Armor", "Greed Shirt"]
+const ancientTier4 = ["Giant Wing Shield", "Meteorite Buckler", "Nirvana Shield", "Divine Eye",
+  "Dragon Flame Shield", "Rosa Chain", "Perseverance Armor", "Glorious Praise", "The Chosen’s Armor",
+  "The Chosen’s Gown", "Star Shatter’s Gown", "Tyrannical Armor", "Blanking Coat", "Breath Holder’s Armor", 
+  "Floating Cloud Clothes", "Moon Gown", "Comet Warfare Armor", "Madman's Jacket"]
+const ancientTier5 = ["Contract Jewelery", "Magic Abyss", "Magic Light Cocoon"]
+
+const appendancienttags = (ancients, tags) => 
+  ancients.forEach(equip => aliases.equips[prepName(equip)].push(...tags));
+
+appendancienttags(ancientTier1, ["Ancient Tier 1","Ancient Voucher"]);
+appendancienttags(ancientTier2, ["Ancient Tier 2","Ancient Voucher"]);
+appendancienttags(ancientTier3, ["Ancient Tier 3","Ancient Voucher"]);
+appendancienttags(ancientTier4, ["Ancient Tier 4","Ancient Voucher"]);
+appendancienttags(ancientTier5, ["Ancient Tier 5","Ancient Voucher"]);
+
 const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
   "Strouf", "Goblin Leader", "Mistress", "Maya", "Phreeoni", "Eddga",
   "Osiris", "Moonlight Flower", "Orc Hero", "Kobold Leader", "Doppelganger",
