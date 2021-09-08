@@ -8,7 +8,15 @@ refinecalc.refinemap = [
 	["Cross Bow", "Mystery Bow"],
 	["Cross Bow", "Bow of the Wind Chaser"],
 
+	["Holy Stick", "Nemesis"],
+	["Holy Stick", "O’Neill’s Staff"],
+	["Cardo", "Green Steel Pike"],
+	["Cardo", "Saintly Glaive"],
+	["Desert Twilight", "Sandstorm"],
+	["Desert Twilight", "Desert Storm"],
 
+	["Orcish Axe", "Vecer Axe"],
+	["Orcish Axe", "Destroyer’s War Axe"],
 
 	// OFFHAND
 	["Memory Book", "Life Magic Book"],
