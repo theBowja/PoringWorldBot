@@ -50,6 +50,7 @@ refinecalc.calc = function(original, aliased) {
 	let indexOriginal = refinecalc.refinemap.indexOf(prepName(original));
 	let indexAliased = refinecalc.refinemap.indexOf(prepName(aliased));
 	if(indexOriginal === -1 || indexAliased === -1) return 0;
+	console.log(original + ", "+aliased+" "+(indexOriginal%2 - indexAliased%2)*2)
 	return (indexOriginal%2 - indexAliased%2)*2;
 }
 
