@@ -20,9 +20,6 @@ const dictionary = (...lists) => lists.reduce((dictionary, list) => ({
 aliases.equips = dictionary(
   // WEAPON
   ["Bass", "Lira"],
-  ["Gold Lux Pistol", "Gold Law Enforcer"],
-  ["Assault Terminator", "Terminator Sniper Rifle"],
-  ["Red Wing Revolver", "Inferno Pistol"],
   ["Lute", "Southern Lute"],
   ["Giant Gloves", "Titan"],
   ["Scalpel", "Tooth Blade"],
@@ -46,7 +43,9 @@ aliases.equips = dictionary(
   ["Curse Gauntlets", "Hand of Chaos"],
   ["Pole Axe", "Halberd", "Soul Spear"],
   ["Lush Fox Grass", "Giant Fox Grass"],
+  ["Red Wing Revolver", "Inferno Pistol"],
   ["Knuckle Dusters", "Studded Knuckles"],
+  ["Gold Lux Pistol", "Gold Law Enforcer"],
   ["Staff Of Element Fusion", "Unlimited"],
   ["Wildfire Swords", "Black Flame Sword"],
   ["Lance Of Dragon Tamer", "Dragon Howl"],
@@ -60,6 +59,7 @@ aliases.equips = dictionary(
   ["Loki's Nail", "Death Slice", "Death Gash"],
   ["Cardo", "Green Steel Pike", "Saintly Glaive"],
   ["Desert Twilight", "Sandstorm", "Desert Storm"],
+  ["Assault Terminator", "Terminator Sniper Rifle"],
   ["Wind Shuriken", "Wind Shuriken - Swift Shadow"],
   ["Double Bound", "Cursed Lyre", "Painful Torture"],
   ["Orcish Axe", "Vecer Axe", "Destroyer’s War Axe"],
@@ -76,10 +76,8 @@ aliases.equips = dictionary(
   ["Advanced Fox Grass", "Magical Fox Grass", "Magical Yellow Fox Grass"],
 
   // OFFHAND
-  ["Round Buckleer", "Royal Silver Shield"],
   ["Exorcism Bible", "Divine Eye"],
   ["Arm Armor", "Improved Arm Armor"],
-  ["Memory Book", "Life Magic Book", "Arcane Codex"],
   ["Mirror Shield", "Nirvana Shield"],
   ["Orleans's Server", "Peak Platter"],
   ["Stone Buckler", "Meteorite Buckler"],
@@ -89,26 +87,28 @@ aliases.equips = dictionary(
   ["Sacred Mission", "Giant Wing Shield"],
   ["Static Shield", "Giant Armor Shield"],
   ["Telekinetic Orb", "Contract Jewelery"],
+  ["Round Buckleer", "Royal Silver Shield"],
   ["Shield of Naga", "Dragon Flame Shield"],
-  ["Golden Ornament", "Vinkt's Bracelet", "Vinkt Magic Bracelet"],
+  ["Memory Book", "Life Magic Book", "Arcane Codex"],
   ["Skull Bracer", "Evil Bracer", "Skeleton Bracer"],
   ["Floral Bracelet", "Rosa Bracelet", "Rosa Chain"],
   ["Chemical Protection Gloves", "Venom Fang Gloves"],
   ["Fox Wrist Guard", "Noble Bracer", "Golden Wrist"],
   ["Statue Of Guardian Angel", "Statue Of Archangel"],
+  ["Golden Ornament", "Vinkt's Bracelet", "Vinkt Magic Bracelet"],
   ["Statue Of Judgement", "Statue Of Mother Mary", "Holy Mother's Radiance"],
 
 
   // ARMOR
-  ["Sniper Coat", "Jaeger Combat Uniform"],
-  ["Silk Robe", "Magic Light Cocoon"],
   ["Elegant Uniform", "Moon Gown"],
+  ["Silk Robe", "Magic Light Cocoon"],
   ["Bohemian Coat", "Madman's Jacket"],
   ["Chain Mail", "Garman Plate Armor"],
   ["Robe Of Judgment", "Dawn Clothes"],
   ["Goibne's Armor", "Gods’ Blessings"],
   ["Surging Magic Robe", "Magic Abyss"],
   ["Staunch Armor", "The Chosen’s Armor"],
+  ["Sniper Coat", "Jaeger Combat Uniform"],
   ["Staunch Clothes", "The Chosen’s Gown"],
   ["Meteorite Armor", "Comet Warfare Armor"],
   ["Alloy Mail", "Alloy Armor", "Bright Armor"],
@@ -140,12 +140,12 @@ aliases.equips = dictionary(
   ["Survivor's Manteau", "Advanced Survivor's Manteau", "Grey Elf’s Manteau"],
 
   // SHOE
-  ["Deathcat Shoes", "Deathcat Boots"],
-  ["Sniper Boots", "Ranger Boots"],
   ["Shoes", "Bunny Slipper"],
   ["Safety Boots", "Greaves"],
   ["Tidal Shoes", "Mayfly Shoes"],
+  ["Sniper Boots", "Ranger Boots"],
   ["Crystal Pumps", "White Gem Boots"],
+  ["Deathcat Shoes", "Deathcat Boots"],
   ["Momo Shoes", "The Emperor's Boots"],
   ["Rescuer Shoes", "Soft Sole Hiking Boots"],
   ["Boots Of Judgment", "Light Of Truth Shoes"],
@@ -159,7 +159,6 @@ aliases.equips = dictionary(
 
 
   // ACCESSORY
-  ["Sniper Medal", "Hunting Certificate"],
   ["Matyr's Leash", "Fox Teeth"],
   ["Luna Brooch", "Bright Moon"],
   ["Critical Ring", "Fissure Beam"],
@@ -170,6 +169,7 @@ aliases.equips = dictionary(
   ["Black Cat Brooch", "Cat Paw Stamp"],
   ["Orleans's Gloves", "Tibbers' Hand"],
   ["Brooch", "AGI Pin", "Seventh Sense"],
+  ["Sniper Medal", "Hunting Certificate"],
   ["Rosary", "LUK Necklace", "Lucky Star"],
   ["Glove", "Dogtooth Gloves", "Dog Servant"],
   ["Orleans Necklace", "Tibbers's Redemption"],
@@ -179,10 +179,12 @@ aliases.equips = dictionary(
   ["Talisman Grass Necklace", "Four-Leaf Clover Necklace"],
   ["Ninja's Introduction Manual", "Ninja's Advanced Guide"],
   ["Tuna Talisman", "Fresh Tuna Talisman", "Original Will Talisman"],
-  ["VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality"],
-   
-   // POTION - EFFECT
-  ["Military Exploit Chest", "Military Exploit Chest Offhand", "Military Exploit Armor"],
+  ["VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality"]
+);
+
+aliases.potioneffect = dictionary(
+  // POTION - EFFECT
+  ["Military Exploit", "Military Exploit Chest", "Military Exploit Chest - Off-hand", "Military Exploit Chest - Armor"]
 );
 
 // Gears that can be exchanged for Ancient Gear Refine Vouchers
@@ -198,15 +200,15 @@ const ancientTier4 = ["Giant Wing Shield", "Meteorite Buckler", "Nirvana Shield"
                       "Floating Cloud Clothes", "Moon Gown", "Comet Warfare Armor", "Madman's Jacket"]
 const ancientTier5 = ["Contract Jewelery", "Magic Abyss", "Magic Light Cocoon"]
 
-const appendancienttags = (ancients, tags) => {
-  ancients.forEach(equip => aliases.equips[prepName(equip)].push(...tags));
+const appendtags = (equips, tags) => {
+  equips.forEach(equip => aliases.equips[prepName(equip)].push(...tags));
 }
 
-appendancienttags(ancientTier1, ["Ancient Tier 1", "Ancient Voucher"]);
-appendancienttags(ancientTier2, ["Ancient Tier 2", "Ancient Voucher"]);
-appendancienttags(ancientTier3, ["Ancient Tier 3", "Ancient Voucher"]);
-appendancienttags(ancientTier4, ["Ancient Tier 4", "Ancient Voucher"]);
-appendancienttags(ancientTier5, ["Ancient Tier 5", "Ancient Voucher"]);
+appendtags(ancientTier1, ["Ancient Tier 1", "Ancient Voucher"]);
+appendtags(ancientTier2, ["Ancient Tier 2", "Ancient Voucher"]);
+appendtags(ancientTier3, ["Ancient Tier 3", "Ancient Voucher"]);
+appendtags(ancientTier4, ["Ancient Tier 4", "Ancient Voucher"]);
+appendtags(ancientTier5, ["Ancient Tier 5", "Ancient Voucher"]);
 
 const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
   "Strouf", "Goblin Leader", "Mistress", "Maya", "Phreeoni", "Eddga",
@@ -251,4 +253,4 @@ aliases.bosscards = {
   ...makecarddict(tt, " Card", ["TT Card", "MVP Card", "MVP/Mini Card", "Boss Card"]),
 };
 
-module.exports = aliases;
+module.exports = aliases; // properties: equips, bosscards

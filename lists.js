@@ -181,4 +181,16 @@ lists.refineprice = [
 	k => 336.5*k+128295200 // 15
 ];
 
+// if query string matches one of the following, then add the -alias parameter automatically
+lists.aliasforce = ["mvpcard", "mvp★card", "mvpminicard", "mvpmini★card", "bosscard",
+                    "minicard", "mini★card", "undeadcard", "deadcard", "revenantcard",
+                    "ttcard", "ancienttier1", "ancienttier2", "ancienttier3", "ancienttier4",
+                    "ancienttier5", "ancientvoucher", "militaryexploit", "militaryexploitchest"]
+/*
+['MVP Card', 'MVP★ Card', 'MVP/Mini Card', 'MVP/Mini★ Card', 'Boss Card',
+                 'Mini Card', 'Mini★ Card', 'Undead Card', 'Dead Card', 'Revenant Card',
+                 'TT Card', 'Ancient Tier 1', 'Ancient Tier 2', 'Ancient Tier 3', 'Ancient Tier 4',
+                 'Ancient Tier 5', 'Ancient Voucher', 'Military Exploit', 'Military Exploit Chest'].map(e => prepName(e));
+*/
+
 module.exports = lists;

@@ -132,7 +132,7 @@ parsefuncs.prepName = function(name) {
  * @returns object with all the properties :3
  */
 parsefuncs.parseReqs = function(reqsstr) {
-    reqsstr = reqsstr.substring(1).trim().replace(/ - *([a-z])/g, '\u000B$1').split('\u000B');
+    reqsstr = reqsstr.toLowerCase().substring(1).trim().replace(/ - *([a-z])/g, '\u000B$1').split('\u000B');
 
 
     let myreqs = { message: '' };
@@ -158,6 +158,7 @@ parsefuncs.parseReqs = function(reqsstr) {
                 value = value.replace(/\*/g, '★'); // replace asterick with star
                 value = value.replace(/[^a-z0-9★]/g, ''); // use only letters and numbers
                 if(value === '') break;
+                if(lists.aliasforce.includes(parsefuncs.prepName(value))) reqsstr.push('alias');
                 myreqs.name = value;
                 myreqs.message += `-${constraint} ${value} `;
                 break;

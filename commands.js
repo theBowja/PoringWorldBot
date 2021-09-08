@@ -5,6 +5,7 @@ var dbfuncs = require("./dbfuncs.js");
 var aliases = require("./aliases.js");
 const lists = require('./lists.js');
 var https = require('https');
+const refinecalc = require('./refinecalc.js');
 
 const commands = {};
 
@@ -302,13 +303,15 @@ commands.handleSearch = async function(message, { pwbContent }={}, bot=message.c
             let res; // add all aliases for this to snapsNew so we can search against requirements
             if(sr.category.startsWith('Equipment')) // all equipment aliases
                 res = aliases.equips[parsefuncs.prepName(sr.name)];
+            else if(sr.category.includes('Potion/Effect'))
+                res = aliases.potioneffect[parsefuncs.prepName(sr.name)];
             else if(sr.category.startsWith('Card')) // all aliases for mvp cards
                 res = aliases.bosscards[parsefuncs.prepName(sr.name)];
 
             if(res !== undefined) {
                 foundreqs = res.reduce((acc, curr) => [
                     ...acc,
-                    ...dbfuncs.findRequirements({ ...sr, aliasname: curr, alias: 1 })
+                    ...dbfuncs.findRequirements({ ...sr, aliasname: curr, alias: 1, refine: sr.refine + refinecalc.calc(sr.name, curr) })
                 ], foundreqs);
             }
 

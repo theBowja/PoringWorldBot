@@ -21,15 +21,16 @@ describe('parsefuncs', function() {
 
 	describe('#parseReqs()', function() {
 		let reqs = require('./cases/reqbody.json'); // load test cases
-		var callback = function() {
-			var parsed = parsefuncs.parseReqs(req.input);
-			for(let prop in parsed) {
-				if(parsed.hasOwnProperty(prop))
-					assert.equal(parsed[prop], req.output[prop]);
-			} 			
-		};
-		for(var req of reqs) {
-			it(req.input, callback);
+		for(let req of reqs) {
+			it(req.input, () => {
+				let parsed = parsefuncs.parseReqs(req.input);
+				console.log(req.input)
+				if(req.input === "-nam boss carD") console.log(parsed);
+				for(let prop in parsed) {
+					if(parsed.hasOwnProperty(prop))
+						assert.equal(parsed[prop], req.output[prop]);
+				} 	
+			})
 		}
 	});
 

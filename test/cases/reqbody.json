@@ -8,6 +8,14 @@
 		}
 	},
 	{
+		"input": "-nam boss carD",
+		"output": {
+			"message": "-name bosscard -alias",
+			"name": "bosscard",
+			"alias": 1
+		}
+	},
+	{
 		"input": "-name sTATIc shield -en tenacity -el 3,4 -asdf",
 		"output": {
 			"message": "-name staticshield -en tenacity -el 3,4",
@@ -19,10 +27,10 @@
 	{
 		"input": "-ca headwearface -enchant morale -el 2,3,4,5,",
 		"output": {
-			"message": "-ca headwearface -enchant morale -el 2,3,4",
+			"message": "-ca headwearface -enchant morale -el 2-5",
 			"category": "Headwear - Face",
 			"enchant": "morale",
-			"enchantlevel": 28
+			"enchantlevel": 60
 		}
 	},
 	{
@@ -38,7 +46,7 @@
 	{
 		"input": "-name monocle -refine 3, 4,5,^,a -broken yes -enchant none",
 		"output": {
-			"message": "-name monocle -refine 3,4,5 -broken yes -enchant none",
+			"message": "-name monocle -refine 3-5 -broken -enchant none",
 			"name": "monocle",
 			"refine": 56,
 			"broken": 1,
