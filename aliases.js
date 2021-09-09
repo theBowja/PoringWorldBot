@@ -189,16 +189,22 @@ aliases.potioneffect = dictionary(
 
 // Gears that can be exchanged for Ancient Gear Refine Vouchers
 const ancientTier1 = ["Heilion Bracelet", "Vinkt Magic Bracelet", "Ninja Clothes·Cold Night Song",
-                      "Shinewhole’s Robe", "Watcher's Armor", "Gods’ Blessings"]
+                      "Shinewhole’s Robe", "Watcher's Armor", "Gods’ Blessings", "Nile's Bracelet", "Vinkt's Bracelet",
+                     "Ninja Suit Moonlight", "Saint's Cape", "Legion Plate Armor", "Goibne's Armor"]
 const ancientTier2 = ["Creeper Agreement", "Arcane Codex", "Holy Mother’s Radiance", "Golden Wrist", 
                       "Skeleton Bracer", "Venom Fang Gloves", "Dark Star Stealth Clothes", "Tyre's Armor", "Bright Armor", 
-                      "Dawn Clothes", "Lazy Meow Coat"]
-const ancientTier3 = ["Giant Armor Shield", "Peak Platter", "Improved Arm Armor", "Greed Shirt"]
+                      "Dawn Clothes", "Lazy Meow Coat", "Sacrifice Book", "Life Magic Book", "Statue Of Mother Mary", "Noble Bracer", 
+                     "Evil Bracer", "Chemical Protection Gloves", "Ranger Clothes", "Sniping Suit", "Alloy Armor", "Robe Of Judgment", "Elegant Doram Suit"]
+const ancientTier3 = ["Giant Armor Shield", "Peak Platter", "Improved Arm Armor", "Greed Shirt",
+                     "Static Shield", "Orleans's Server", "Arm Armor", "Glittering Jacket"]
 const ancientTier4 = ["Giant Wing Shield", "Meteorite Buckler", "Nirvana Shield", "Divine Eye",
                       "Dragon Flame Shield", "Rosa Chain", "Perseverance Armor", "Glorious Praise", "The Chosen’s Armor",
-                      "The Chosen’s Gown", "Star Shatter’s Gown", "Tyrannical Armor", "Blanking Coat", "Breath Holder’s Armor", 
-                      "Floating Cloud Clothes", "Moon Gown", "Comet Warfare Armor", "Madman's Jacket"]
-const ancientTier5 = ["Contract Jewelery", "Magic Abyss", "Magic Light Cocoon"]
+                      "The Chosen’s Gown", "Star Shatter’s Gown", "Tyrannical Armor", "Blanking Coat", "Breath Holder’s Armor",
+                      "Floating Cloud Clothes", "Moon Gown", "Comet Warfare Armor", "Madman's Jacket", "Sacred Mission",
+                      "Stone Buckler", "Nirvana Shield", "Exorcism Bible", "Shield Of Naga", "Rosa Bracelet", "Iron Armor",
+                      "Holy Robe", "Staunch Armor", "Staunch Clothes", "Robe Of Cast", "Beast Heart", "Stardust Robe", "Thief Clothes",
+                      "Elaborate Costume", "Elegant Uniform", "Meteorite Armor", "Bohemian Coat"]
+const ancientTier5 = ["Contract Jewelery", "Magic Abyss", "Magic Light Cocoon", "Telekinetic Orb", "Surging Magic Robe", "Silk Robe"]
 
 const appendtags = (equips, tags) => {
   equips.forEach(equip => aliases.equips[prepName(equip)].push(...tags));
