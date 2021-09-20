@@ -224,7 +224,7 @@ const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
   "Spashire", "Stormy Knight", "Garm", "Firelord Kaho", "Arc Angeling", "Grandma Wolf",
   "Lord Of Death", "Bloody Murderer", "Katerina", "Deeven", "Eremes",
   "Gloom Under Night", "Ktullanux", "Hill Wind", "Snake Demon Gorgons",
-  "Wasteland Lord", "Poi Tata", "Audhumbla", "Sedd of Yggdrasil", "Soul Player",
+  "Wasteland Lord", "Poi Tata", "Audhumbla", "Seed of Yggdrasil", "Soul Player",
   "Dragon Bone", "Incantation Samurai"];
 
 const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring",
