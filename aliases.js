@@ -225,7 +225,7 @@ const mvp = ["Angeling", "Golden Thief Bug", "Miss Tahnee", "Deviling", "Drake",
   "Lord Of Death", "Bloody Murderer", "Katerina", "Deeven", "Eremes",
   "Gloom Under Night", "Ktullanux", "Hill Wind", "Snake Demon Gorgons",
   "Wasteland Lord", "Poi Tata", "Audhumbla", "Seed of Yggdrasil", "Soul Player",
-  "Dragon Bone", "Incantation Samurai"];
+  "Dragon Bone", "Incantation Samurai", "Devil Squid", "Tao Gunka"];
 
 const mini = ["Smokie", "Eclipse", "Mastering", "Vocal", "Basilisk", "Ghostring",
   "Toad", "Rotar Zairo", "Dragon Fly", "Vagabond Wolf", "Wood Goblin",
@@ -246,7 +246,7 @@ const tt = ["Valkyrie Rathgricy", "Tesseract", "Mentalist", "Magic Swordsman Tha
 
 const makecarddict = (cards, append, aliases) => cards.reduce((dict, curr) => ({
   ...dict,
-  [prepName(curr+append)]: aliases,
+  [prepName(curr+append)]: [...aliases],
 }), {});
 
 
@@ -258,5 +258,15 @@ aliases.bosscards = {
   ...makecarddict(dead, " Card", ["Undead Card", "Dead Card", "Revenant Card", "Boss Card"]),
   ...makecarddict(tt, " Card", ["TT Card", "MVP Card", "MVP/Mini Card", "Boss Card"]),
 };
+
+for(let bossname of mvp) {
+  aliases.bosscards[prepName(bossname + " Card")].push(bossname + "★ Card");
+  aliases.bosscards[prepName(bossname + "★ Card")].push(bossname + " Card");
+}
+
+for(let bossname of mini) {
+  aliases.bosscards[prepName(bossname + " Card")].push(bossname + "★ Card");
+  aliases.bosscards[prepName(bossname + "★ Card")].push(bossname + " Card");
+}
 
 module.exports = aliases; // properties: equips, bosscards
