@@ -104,6 +104,7 @@ bot.on('message', message => {
   };
 
   if(message.channel.type !== 'text') return; // if not from text channel, ignore
+  if(!message.guild) return; // only guild messages
   if(message.author.id === bot.user.id) return; // if from self, ignore
   if(message.author.bot) return; // if from bot, ignore
   if(config.blacklistedguild.includes(message.guild.id)) return; // if from blacklisted guild
@@ -122,6 +123,8 @@ bot.on('message', message => {
   if(pwbUser === undefined)
     pwbUser = { permission: 0, discordid: message.author.id };
   if(pwbUser.permission < 0) return; // this member is banned from using this bot in this guild
+  if(message.author.id === message.guild.ownerID) pwbUser.permission = config.ownerperm;
+  if(message.member.hasPermission('ADMINISTRATOR')) pwbUser.permission = config.startperm;
 
   console.log(`From ${message.author.tag} ${message.author.id} to #${message.channel.name} ${message.channel.id} in ${message.guild.name} ${message.guild.id}`);
   console.log(`  ${pwbContent.command} :: ${pwbContent.body}`);

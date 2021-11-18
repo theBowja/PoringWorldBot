@@ -26,7 +26,7 @@ config.peasantlimit = 12;
 // honestly if you have so much reqs, you should just set up another channel
 config.limitreqs = 30;
 
-// discord id of the owner
+// discord id of the bot owner
 // make sure to change this to your discord id if you're hosting this bot yourself
 config.owner = "161248916384251904";
 // base permission level that owner gets
