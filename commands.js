@@ -216,7 +216,7 @@ commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
         return message.channel.send("not a valid number");
 
     let result = dbfuncs.setBudget(pwbTarget.dkidID, pwbChannel.chID, budget);
-    if(result) return message.channel.send(`successfully set budget ${targetID !== undefined ? 'of target ' : ''} to ${budget}`);
+    if(result) return message.channel.send(`successfully set budget ${targetID !== undefined ? 'of target ' : ''}to ${budget}`);
     else return message.channel.send("There was an error in the database");
 };
 
