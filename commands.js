@@ -208,7 +208,7 @@ commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
 
     if(pwbContent.body === '' || pwbContent.body === 'delete' || pwbContent.body === 'del') { // delete the budget for the target
         let result = dbfuncs.setBudget(pwbTarget.dkidID, pwbChannel.chID);
-        return message.channel.send(result ? "successfully deleted budget" : "failed to delete budget");
+        return message.channel.send(`${result ? 'successfully deleted budget' : "failed to delete budget" + targetID !== undefined ? ' of target' : ''}`);
     }
 
     let budget = parsefuncs.parseVerboseNumber(pwbContent.body);
@@ -216,7 +216,7 @@ commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
         return message.channel.send("not a valid number");
 
     let result = dbfuncs.setBudget(pwbTarget.dkidID, pwbChannel.chID, budget);
-    if(result) return message.channel.send("successfully set budget to " + budget);
+    if(result) return message.channel.send(`successfully set budget ${targetID !== undefined ? 'of target ' : ''} to ${budget}`);
     else return message.channel.send("There was an error in the database");
 };
 
