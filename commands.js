@@ -195,7 +195,7 @@ commands.handleBudget = function(message, { pwbContent, pwbUser, pwbChannel }) {
     let pwbTarget = pwbUser; // default targets the user
     let { body, targetID } = parsefuncs.parseTargetID(pwbContent.body);
     if(targetID !== undefined) { // target acquired
-        pwbTarget = dbfuncs.getDiscokid(message.author.id, message.guild.id);
+        pwbTarget = dbfuncs.getDiscokid(targetID, message.guild.id);
         pwbContent.body = body;
     }
     if(pwbTarget === undefined) // if target doesn't exist in our database, set defaults
