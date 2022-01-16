@@ -188,23 +188,24 @@ aliases.potioneffect = dictionary(
 );
 
 // Gears that can be exchanged for Ancient Gear Refine Vouchers
-const ancientTier1 = ["Heilion Bracelet", "Vinkt Magic Bracelet", "Ninja Clothes·Cold Night Song",
-                      "Shinewhole’s Robe", "Watcher's Armor", "Gods’ Blessings", "Nile's Bracelet", "Vinkt's Bracelet",
-                     "Ninja Suit Moonlight", "Saint's Cape", "Legion Plate Armor", "Goibne's Armor"]
-const ancientTier2 = ["Creeper Agreement", "Arcane Codex", "Holy Mother’s Radiance", "Golden Wrist", 
-                      "Skeleton Bracer", "Venom Fang Gloves", "Dark Star Stealth Clothes", "Tyre's Armor", "Bright Armor", 
-                      "Dawn Clothes", "Lazy Meow Coat", "Sacrifice Book", "Life Magic Book", "Statue Of Mother Mary", "Noble Bracer", 
-                     "Evil Bracer", "Chemical Protection Gloves", "Ranger Clothes", "Sniping Suit", "Alloy Armor", "Robe Of Judgment", "Elegant Doram Suit"]
-const ancientTier3 = ["Giant Armor Shield", "Peak Platter", "Improved Arm Armor", "Greed Shirt",
-                     "Static Shield", "Orleans's Server", "Arm Armor", "Glittering Jacket"]
-const ancientTier4 = ["Giant Wing Shield", "Meteorite Buckler", "Nirvana Shield", "Divine Eye",
-                      "Dragon Flame Shield", "Rosa Chain", "Perseverance Armor", "Glorious Praise", "The Chosen’s Armor",
-                      "The Chosen’s Gown", "Star Shatter’s Gown", "Tyrannical Armor", "Blanking Coat", "Breath Holder’s Armor",
-                      "Floating Cloud Clothes", "Moon Gown", "Comet Warfare Armor", "Madman's Jacket", "Sacred Mission",
-                      "Stone Buckler", "Nirvana Shield", "Exorcism Bible", "Shield Of Naga", "Rosa Bracelet", "Iron Armor",
-                      "Holy Robe", "Staunch Armor", "Staunch Clothes", "Robe Of Cast", "Beast Heart", "Stardust Robe", "Thief Clothes",
-                      "Elaborate Costume", "Elegant Uniform", "Meteorite Armor", "Bohemian Coat"]
-const ancientTier5 = ["Contract Jewelery", "Magic Abyss", "Magic Light Cocoon", "Telekinetic Orb", "Surging Magic Robe", "Silk Robe"]
+const ancientTier1 = ["Cotton Shirt", "Undershirt", "Cloud Undershirt", "Ancient Cape", "White Duke's Manteau", "Blueeve Cape", "Golden Manteau",
+                      "Survivor's Manteau", "Advanced Survivor's Manteau", "Grey Elf’s Manteau","Staunch Cape", "Magic Staunch Manteau", "Deerskin Manteau",
+                      "Natto Kig’s Manteau", "Natto Kig's Cloak", "Divine Feather Clothes", "Elegant Doram Shoes", "Kitten's Ankle Bell", "Dance Shoes", 
+                      "Dancing Shoes", "Ballet Shoes", "Rescuer Shoes", "Soft Sole Hiking Boots", "Boots Of Judgment", "Light Of Truth Shoes",
+                      "Wolf Grandmother’s Slippers", "Wolf Grandma’s Slippers", "Little Fairy’s Slippers", "Rune Shoes", "Rune Boots", "Saint Mary's Cloth Shoes",
+                      "Staunch Ring", "Ring of Loyalty", "Orleans Necklace", "Tibbers's Redemption", "Orleans's Gloves", "Tibbers' Hand", "Luna Brooch", "Bright Moon",
+                      "Eye of Dullahan", "Kraken's Eye", "Glove", "Dogtooth Gloves", "Dog Servant"]
+const ancientTier2 = ["Goibne's Spaulders", "Duff's Cape", "Merlin's Time-Space Robe","Illusion Garments", "Earl's Illusion Garments",
+                      "Crystal Pumps", "White Gem Boots", "Sack Teddy Shoes", "Advanced Sack Teddy Shoes", "Boar Bristle Shoes",
+                      "Soldier Boots", "Through-War Shoes", "Steel Boots", "Momo Shoes", "The Emperor's Boots",
+                      "High Heels", "High Fashion Sandals", "Green Rattan Shoes", "Tidal Shoes", "Mayfly Shoes", "Matyr's Leash", "Fox Teeth",
+                      "Brooch", "AGI Pin", "Seventh Sense", "INT Earring", "Flame Ring", "Flame Feather", "Strength Ring", "Powerful Ring", "Ring of Contract",
+                      "VIT Necklace", "Endurance Necklace", "STR Necklace", "Ring Of Immortality", "Rosary", "LUK Necklace", "Lucky Star"]
+const ancientTier3 = ["Sniper Boots", "Ranger Boots", "Fairy in Bottle", "Fading Tear", "Black Cat Brooch", "Cat Paw Stamp", "Pocket Watch", "Time Manipulator",
+                      "Fire Ninja Shinobi’s Belt", "Hermit's Bundle", "Critical Ring", "Fissure Beam", "Talisman Grass Necklace", "Four-Leaf Clover Necklace"]
+const ancientTier4 = ["Tuna Talisman", "Fresh Tuna Talisman", "Original Will Talisman", "Ninja's Introduction Manual", "Ninja's Advanced Guide", 
+                      "Sniper Medal", "Hunting Certificate"]
+const ancientTier5 = []
 
 const appendtags = (equips, tags) => {
   equips.forEach(equip => aliases.equips[prepName(equip)].push(...tags));
