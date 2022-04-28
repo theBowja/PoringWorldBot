@@ -187,6 +187,10 @@ aliases.potioneffect = dictionary(
   ["Military Exploit", "Military Exploit Chest", "Military Exploit Chest - Off-hand", "Military Exploit Chest - Armor"]
 );
 
+aliases.mastela = dictionary(
+  ["Mastela", "Seed of Mastela", "Mastela Fruit"]
+);
+
 // Gears that can be exchanged for Ancient Gear Refine Vouchers
 const ancientTier1 = ["Cotton Shirt", "Undershirt", "Cloud Undershirt", "Ancient Cape", "White Duke's Manteau", "Blueeve Cape", "Golden Manteau",
                       "Survivor's Manteau", "Advanced Survivor's Manteau", "Grey Elf’s Manteau","Staunch Cape", "Magic Staunch Manteau", "Deerskin Manteau",

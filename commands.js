@@ -303,6 +303,8 @@ commands.handleSearch = async function(message, { pwbContent }={}, bot=message.c
             let res; // add all aliases for this to snapsNew so we can search against requirements
             if(sr.category.startsWith('Equipment')) // all equipment aliases
                 res = aliases.equips[parsefuncs.prepName(sr.name)];
+            else if(fullname.includes('Mastela'))
+                res = aliases.mastela[parsefuncs.prepName(sr.name)];
             else if(sr.category.includes('Potion/Effect'))
                 res = aliases.potioneffect[parsefuncs.prepName(sr.name)];
             else if(sr.category.startsWith('Card')) // all aliases for mvp cards
