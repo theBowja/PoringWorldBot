@@ -36,12 +36,12 @@ git reset --hard origin/master
 ```
 starting the bot
 ```
-nohup node bot.js > poring.log 2>&1 &
-tail -f poring.out
+sudo npm install -g forever
+forever start bot.js
 ```
 Use the 'exit' command when exiting out of ssh. If you just close out your command line, it might kill your application.
 
-deleting the process
+deleting the process (out of date)
 ```
 ps -ef | grep "node bot.js"
 kill -9 [pid]
