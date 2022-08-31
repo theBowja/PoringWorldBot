@@ -23,6 +23,10 @@ fuzzy.name = function(query) {
 	return result === undefined ? undefined : result.target;
 }
 
+fuzzy.autocomplete = function(query, list) {
+	let result = fuzzysort.go(query, list, { limit: 25 });
+	return result;
+}
 
 
 

@@ -42,10 +42,6 @@ parsefuncs.buildItemFullName = function(item) {
 parsefuncs.isSpecialMention = function(discordtag) {
     if(discordtag === 'everyone' || discordtag === 'here') return true;
     return false;
-    let prefix = discordtag.charAt(0);
-    if(prefix !== '@' && prefix !== 'q' && prefix !== '')
-    if(discordtag === '@everyone' || discordtag === '@here') return true;
-    return false;
 };
 
 // @returns string discord id or integer -1 if not valid
@@ -152,6 +148,7 @@ parsefuncs.parseReqs = function(reqsstr) {
         let ref = 0; // temporary variable
         let cat = ''; // temporary variable
         switch(constraint) {
+            case "itemname":
             case "name":
             case "na":
                 if(value === '' || myreqs.name !== undefined) break;

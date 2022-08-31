@@ -9,7 +9,7 @@ let embeds = {};
  * @param snaprecord {object} a record from the currentsnaps table
  */
 embeds.buildSnappingInfo = function(snaprecord) {
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setColor('#0099ff')
         .setTitle(parsefuncs.buildItemFullName(snaprecord))
         // .setDescription(`💰 ${snaprecord.price.toLocaleString()} zeny\n` +
@@ -29,20 +29,20 @@ embeds.buildSnappingInfo = function(snaprecord) {
 };
 
 // dunno if this belongs here but here it is
-embeds.helpCommandsBasic = new Discord.MessageEmbed()
+embeds.helpCommandsBasic = new Discord.EmbedBuilder()
     .setColor('#0099ff')
-    .addField('User Command List',
+    .addFields([{ name: 'User Command List', value:
     		  	'`!pwb request [-<parameter> <value>] ...`\n- [read this wiki for help on forming a proper snap request](https://github.com/theBowja/PoringWorldBot/wiki/Parameters-for-adding-a-request)\n' +
              	'`!pwb show`\n- shows your information and all snap requests you have in this channel\n' +
        	       	'`!pwb delete <reqid>`\n- delete one of your snap requests using its request id\n' +
                 '`!pwb deleteall`\n- deletes all of your snap requests\n' +
-              	'`!pwb budget {<number>|delete}`\n- sets the maximum snap price that you will get pinged for')
-    .setFooter('do `!pwb help misc` for more');
+              	'`!pwb budget {<number>|delete}`\n- sets the maximum snap price that you will get pinged for' }])
+    .setFooter({ text: 'do `!pwb help misc` for more' });
 
-embeds.helpCommandsAdmin = new Discord.MessageEmbed()
+embeds.helpCommandsAdmin = new Discord.EmbedBuilder()
     .setColor('#0099ff')
     // LIMIT 1024 characters
-	.addField('Admin Command List',
+	.addFields([{ name: 'Admin Command List', value:
 				'`!pwb watch [<limitedto>]`\n- the bot will begin to watch this channel for user-submitted snap requests\n' +
                 '`!pwb request [-<parameter> <value>]...`\n- [read this wiki for help on forming a proper snap request](https://git.io/JqLSd)\n' +
 	            '`!pwb show {<@user>|<@role>|everyone|here}`\n- shows the information and all snap requests of the targeted user for this channel\n' +
@@ -52,10 +52,10 @@ embeds.helpCommandsAdmin = new Discord.MessageEmbed()
                 '`!pwb unwatch`\n- remove this channel from bot watch and delete all snap requests in it\n' +
                 '`!pwb search <querystring>`\n- queries poring.world using the provided string\n' +
                 '`!pwb permit {<@user>|<@role>} <permissionlevel>`\n- gives the target user a new permission level (number)\n' +
-                '`!pwb cleanupmembers`\n- removes the requests of any member that has left this guild')
-	.setFooter('do `!pwb help misc` for more')
+                '`!pwb cleanupmembers`\n- removes the requests of any member that has left this guild' }])
+	.setFooter({ text: 'do `!pwb help misc` for more' })
 
-embeds.helpMiscCommands = new Discord.MessageEmbed()
+embeds.helpMiscCommands = new Discord.EmbedBuilder()
     .setColor('#0099ff')
     // .setTitle('Misc Command List')
     // .addField('• alive - `!pwb alive`', 'no response if the bot is offline')
@@ -63,18 +63,18 @@ embeds.helpMiscCommands = new Discord.MessageEmbed()
     // .addField('• thanks - `!pwb thanks`', 'no problem')
     // .addField('• joke - `!pwb joke`', 'funny joke')
     // .addField('• stats - `!pwb stats {channel|bot}`', 'shows stats for the channel or bot');
-    .addField('Misc Command List',
+    .addFields([{ name: 'Misc Command List', value:
     			'• `!pwb alive` - no response if the bot is offline\n' +
                 '• `!pwb invite` - gives the invite link for this bot\n' +
                 '• `!pwb thanks` - no problem\n' +
                 '• `!pwb joke` - funny joke\n' +
-                '• `!pwb stats {channel|bot}` - shows stats for the channel or bot');
+                '• `!pwb stats {channel|bot}` - shows stats for the channel or bot' }]);
 
 
-embeds.helpRequestParameters = new Discord.MessageEmbed()
+embeds.helpRequestParameters = new Discord.EmbedBuilder()
     .setColor('#0099ff')
     .setTitle('Request Parameter List')
-    .addField('All commands must be prefixed with `!pwb `',
+    .addFields([{ name: 'All commands must be prefixed with `!pwb `', value:
     			'• `-name` -\n' +
                 '• `-enchant` - \n' +
                 '• `-enchantlevel` - \n' +
@@ -87,16 +87,16 @@ embeds.helpRequestParameters = new Discord.MessageEmbed()
                 '• `-pricelower` - \n' +
                 '• `-stock` - \n' +
                 '• `-buyers` - don\'t use doesn\'t work yet\n' +
-                '• `-assign` - ')
-    .setFooter('do `!pwb help examples` for examples');
+                '• `-assign` - ' }])
+    .setFooter({ text: 'do `!pwb help examples` for examples' });
 
-embeds.helpRequestExamples = new Discord.MessageEmbed()
+embeds.helpRequestExamples = new Discord.EmbedBuilder()
     .setColor('#0099ff')
     .setTitle('Request Example List')
-    .addField('All commands must be prefixed with `!pwb `',
+    .addFields([{ name: 'All commands must be prefixed with `!pwb `', value:
     			'\n' +
     			'zzz\n' +
-   				'zzz');
+   				'zzz' }]);
 
 
 

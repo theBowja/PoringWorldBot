@@ -1,17 +1,29 @@
-//var Discord = require('discord.io');
-const Discord = require('discord.js');
-const bot = new Discord.Client();
-var auth = require('./auth.json');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
+const { token } = require('./auth.json');
+
 var parsefuncs = require('./parse.js');
 var config = require('./config.js');
-var commands = require('./commands.js');
+var commands = require('./handlers.js');
 var CronJob = require('cron').CronJob;
 var dbfuncs = require("./dbfuncs.js");
 var lists = require('./lists.js');
 let patchdb = require('./patchdb.js');
+const fuzzysort = require('fuzzysort');
 
+// setup access to commands
+const fs = require('node:fs');
+const path = require('node:path');
+bot.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
+  bot.commands.set(command.data.name, command);
+}
 
-bot.on('ready', () => {
+bot.once('ready', () => {
   console.log(`Logged in with id ${bot.user.id} as ${bot.user.tag}!`);
   config.summonstrings.push(`<@${bot.user.id}> `);
   config.summonstrings.push(`<@!${bot.user.id}> `);
@@ -39,23 +51,26 @@ bot.on('ready', () => {
     // TODO: make sure each guild has an admin
   }
 
-  // ping poring.world every 6 minutes
-  new CronJob('0 0-59/6 * * * *', function() {
-    commands.handleSearch(undefined, undefined, bot);
-  }, null, true);
+  // setup cronjobs
+  if(process.env.NODE_ENV !== 'devmode') {
+    // ping poring.world every 6 minutes
+    new CronJob('0 0-59/6 * * * *', function() {
+      commands.handleSearch(undefined, undefined, bot);
+    }, null, true);
 
-  // makes additional pings every odd minute
-  new CronJob('0 1-59/2 * * * *', function() {
-    let qs = lists.schedule[new Date().getMinutes()];
-    if(config.schedulesearch && qs !== undefined){
-      commands.handleSearch(undefined, undefined, bot, qs);
-    }
-  }, null, true);
+    // makes additional pings every odd minute
+    new CronJob('0 1-59/2 * * * *', function() {
+      let qs = lists.schedule[new Date().getMinutes()];
+      if(config.schedulesearch && qs !== undefined){
+        commands.handleSearch(undefined, undefined, bot, qs);
+      }
+    }, null, true);
 
-  // makes backup at 06:06:06 AM
-  new CronJob('6 6 6 * * *', function() {
-    dbfuncs.backup(['sun','mon','tue','wed','thu','fri','sat'][new Date().getDay()]);
-  }, null, true);
+    // makes backup at 06:06:06 AM
+    new CronJob('6 6 6 * * *', function() {
+      dbfuncs.backup(['sun','mon','tue','wed','thu','fri','sat'][new Date().getDay()]);
+    }, null, true);
+  }
 });
 
 // on joining the guild, give basic permission to inviter. add owner in as well lol
@@ -95,6 +110,42 @@ bot.on('guildMemberRemove', (member) => {
 bot.on('roleDelete', (role) => {
   if(dbfuncs.deleteMember('&'+role.id, role.guild.id))
     console.log(`event roleDelete: ${role.name} ${role.id} in ${role.guild.name} ${role.guild.id}`);
+});
+
+bot.on('interactionCreate', async interaction => {
+  if(interaction.user.id === bot.user.id) return; // if from self, ignore
+  if(interaction.user.bot) return; // if from bot, ignore
+
+  if (interaction.isChatInputCommand()) {
+    const command = bot.commands.get(interaction.commandName);
+    if (!command) return;
+
+    console.log(`From ${interaction.user.tag} ${interaction.user.id} to #${interaction.channel.name} ${interaction.channel.id} in ${interaction.guild.name} ${interaction.guild.id}`);
+    console.log(`  ${interaction.toString()}`);
+
+    try {
+      let pwbChannel = {}; // https://github.com/theBowja/PoringWorldBot/wiki/Developer-documentation
+      pwbChannel = dbfuncs.getChannel(interaction.channel.id); // may be undefined
+
+      await command.execute(interaction, { pwbChannel: pwbChannel });
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({ content: 'There was an error while executing this command! Please contact the bot developer.', ephemeral: true });
+    }
+
+  } else if(interaction.isAutocomplete()) {
+    const command = bot.commands.get(interaction.commandName);
+    if (!command) return;
+
+    const option = interaction.options.getFocused(true);
+    if (!command.autocomplete || !command.autocomplete[option.name]) return;
+    let result;
+    if(option.value === "")
+      result = command.autocomplete[option.name].initial || command.autocomplete[option.name].all.slice(0, 25);
+    else 
+      result = fuzzysort.go(option.value, command.autocomplete[option.name].all, { limit: 25 }).map(e => e.target);
+    await interaction.respond(result.map(e => ({ name: e, value: e })));
+  }
 });
 
 bot.on('message', message => {
@@ -319,4 +370,4 @@ bot.on("rateLimit", (something) => {
   console.log(something);
 });
 
-bot.login(auth.token);
+bot.login(token);

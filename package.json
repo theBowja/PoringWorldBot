@@ -12,12 +12,12 @@
   "main": "bot.js",
   "author": "Lovyrn",
   "dependencies": {
+    "@discordjs/rest": "^1.1.0",
     "better-sqlite3": "^7.1.1",
     "cron": "^1.8.2",
-    "discord.js": "^12.4.1",
-    "fuzzysort": "^1.1.4",
+    "discord.js": "^14.3.0",
+    "fuzzysort": "^2.0.1",
     "https": "^1.0.0",
-    "npm": "^6.14.8",
     "pg": "^8.5.1",
     "semver": "^7.3.2"
   },

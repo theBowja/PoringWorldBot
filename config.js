@@ -20,11 +20,11 @@ config.schedulesearch = true;
 config.summonstrings = ["!pwb "];
 
 // the limited amount of reqs that a peasant can make
-config.peasantlimit = 12;
+// config.peasantlimit = 12;
 // the limited amount of reqs that nonpeasants can make
 // this is because of the character limit for the "showme" command
 // honestly if you have so much reqs, you should just set up another channel
-config.limitreqs = 30;
+config.limitreqs = 18;
 
 // discord id of the bot owner
 // make sure to change this to your discord id if you're hosting this bot yourself
@@ -37,5 +37,10 @@ config.startperm = 9;
 // blacklist :(
 config.blacklistedguild = ["265757905435885568"];
 config.blacklisteduser = ["264104948072054785"];
+
+// the application id of the bot
+config.clientId = "597932863597576204";
+// the id of the guild for testing guild commands
+config.guildId = "171259045557043202";
 
 module.exports = config;

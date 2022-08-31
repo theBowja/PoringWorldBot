@@ -4,6 +4,10 @@ lists.enchant = ['none', 'sharp', 'sharp blade', 'arch', 'zeal', 'morale',
                  'blasphemy', 'tenacity', 'divine blessing', 'armor breaking',
                  'anti mage', 'arcane', 'armor', 'magic', 'insight'];
 
+lists.enchantV2 = ['None', 'Anti-Mage', 'Arcane', 'Arch', 'Armor', 'Armor Breaking', 'Blasphemy',
+					'Divine Blessing', 'Insight', 'Magic', 'Morale', 'Sharp', 'Sharp Blade',
+					'Tenacity', 'Zeal'];
+
 lists.bool = ['yes', 'no', 'y', 'n', 'true', 'false', 't', 'f', '1', '0', 'on', 'off'];
 
 // my favorite way of programming
@@ -70,6 +74,23 @@ lists.category = {
 	'costume': 'Costume',
 	'premium': 'Premium',
 };
+
+lists.categoryV2 = ['Blueprint', 'Item - Potion/Effect', 'Item - Refine', 'Item - Scroll/Album', 'Item - Material',
+					'Item - Holiday Material', 'Item - Pet Material', 'Card', 'Card - Weapon', 'Card - Off-Hand',
+					'Card - Armor', 'Card - Garment', 'Card - Shoe', 'Card - Accessory', 'Card - Headwear', 'Mount',
+					'Equipment - Weapon', 'Equipment - Off-Hand', 'Equipment - Armor', 'Equipment - Garment',
+					'Equipment - Footgear', 'Equipment - Accessory', 'Headwear - Head', 'Headwear - Face',
+					'Headwear - Back', 'Headwear - Mouth', 'Headwear - Tail', 'Costume', 'Premium'];
+lists.categoryShort = ['Blueprint', 'Item', 'Card', 'Mount', 'Equipment', 'Headwear', 'Costume', 'Premium'];
+
+lists.categoryWeighted = lists.categoryV2.concat(lists.categoryShort).map(category => (
+	{ 
+		searchName: category,
+		originalName: category,
+		addWeight: category.startsWith('Equipment - ') ? 10 : 0
+	}
+));
+lists.categoryWeighted.push({ searchName: 'Head', originalName: 'Headwear - Head', addWeight: 0 });
 
 lists.schedule = {
 	'1' : 'dead',

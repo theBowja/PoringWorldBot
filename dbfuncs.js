@@ -299,9 +299,10 @@ dbfuncs.getAllChannels = function() {
 
 /**
  * Adds channel to database
+ * @params limitedto - unused parameter
  * @returns the id of the inserted row. otherwise -1 for no row
  */
- dbfuncs.addChannel = function(channelid, guildid, limitedto) {
+ dbfuncs.addChannel = function(channelid, guildid, limitedto = 0) {
     try {
         let zzz = db.prepare('INSERT INTO channels (discordchid, guildid, limitedto) VALUES (?, ?, ?)');
         var info = zzz.run(channelid, guildid, limitedto);
@@ -336,6 +337,11 @@ dbfuncs.deleteMultipleChannels = function(chanids) {
  */
 dbfuncs.addRequirement = function(dkidID, chID, reqs) {
     reqs.metareqID = dbfuncs.getOrCreateMetareqID(dkidID, chID);
+    if (reqs.itemname) {
+        reqs.name = reqs.itemname;
+        delete reqs.itemname;
+    }
+
     let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
                             VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
     return query.run(reqs);
