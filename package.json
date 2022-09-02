@@ -13,7 +13,7 @@
   "author": "Lovyrn",
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
-    "better-sqlite3": "^7.1.1",
+    "better-sqlite3": "^7.6.2",
     "cron": "^1.8.2",
     "discord.js": "^14.3.0",
     "fuzzysort": "^2.0.1",
