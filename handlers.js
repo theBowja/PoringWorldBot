@@ -334,8 +334,8 @@ commands.handleSearch = async function(message, { pwbContent }={}, bot=message.c
             // send bot message to each channel
             for(let [chid, pings] of Object.entries(channels)) {
                 bot.channels.fetch(chid).then((chan) => {
-                    chan.send(fullname+' '+pings, itemembed);
-                });
+                    chan.send({ content: fullname+' '+pings, embeds: [itemembed] });
+                }).catch(console.error);
             }
         }
         console.log(`${new Date().toLocaleString()}   done notifying users of pings`);
