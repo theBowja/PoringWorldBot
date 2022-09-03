@@ -20,7 +20,7 @@ module.exports = {
 		const option = interaction.options.get('target');
 		if (option && option.value) {
 			targetID = (option.role ? '&' : '')+option.value;
-			if (option.role && value === option.role.guild.id) targetID = 'everyone';
+			if (option.role && option.value === option.role.guild.id) targetID = 'everyone';
 		}
 
 		let pwbTarget = dbfuncs.getDiscokid(targetID, interaction.guild.id);
