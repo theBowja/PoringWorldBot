@@ -69,6 +69,7 @@ module.exports = {
     	let targetObj = dbfuncs.getDiscokid(interaction.user.id, interaction.guild.id) ||  { discordid: interaction.user.id };
 
 		if(valuesObj.assign !== undefined) { // handle if -assign
+			if (!dbfuncs.hasPermission(interaction)) return interaction.reply({ content: 'Error: you do not have the relevant permission to use this command', ephemeral: true })
 			if(!existsInGuild(interaction.guild, valuesObj.assign) && !parsefuncs.isSpecialMention(valuesObj.assign))
 				return interaction.reply('Error: user or role doesn\'t exist');
 			targetObj = dbfuncs.getDiscokid(valuesObj.assign, interaction.guild.id); // grab target user from database

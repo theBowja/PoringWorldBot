@@ -1,3 +1,4 @@
+const { PermissionsBitField } = require('discord.js');
 
 const config = {};
 
@@ -25,6 +26,11 @@ config.summonstrings = ["!pwb "];
 // this is because of the character limit for the "showme" command
 // honestly if you have so much reqs, you should just set up another channel
 config.limitreqs = 18;
+
+// permissions required for using admin commands like: budgetfor, deleteallfor, snaprequestfor, unwatch, watch
+config.advancedcmdperm = [PermissionsBitField.Administrator, PermissionsBitField.ManageChannels,
+                         PermissionsBitField.ManageGuild, PermissionsBitField.ManageRoles,
+                         PermissionsBitField.ManageMessages];
 
 // discord id of the bot owner
 // make sure to change this to your discord id if you're hosting this bot yourself

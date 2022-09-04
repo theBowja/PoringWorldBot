@@ -261,6 +261,11 @@ dbfuncs.deleteMember = function(discordid, guildid) {
     return info.changes;
 };
 
+dbfuncs.hasPermission = function(interaction) {
+    if (!interaction || !interaction.memberPermissions) return false
+    return interaction.memberPermissions.any(config.advancedcmdperm);
+}
+
 /**
  * Returns an array of all unique guildids from the channels table and discokids table combined
  * @returns []

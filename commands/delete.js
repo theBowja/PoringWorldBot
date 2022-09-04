@@ -10,13 +10,6 @@ module.exports = {
 									.setRequired(true))
 		.setDMPermission(false),
 
-	hasPermissions(interaction) {
-		if (!interaction.memberPermissions) return false
-		return interaction.memberPermissions.any([PermissionsBitField.Administrator, PermissionsBitField.ManageChannels,
-												  PermissionsBitField.ManageGuild, PermissionsBitField.ManageRoles,
-												  PermissionsBitField.ManageMessages]);
-	},
-
 	async execute(interaction, { pwbChannel }) {
 		if (pwbChannel === undefined) return interaction.reply({ content: 'Error: this command can only be used in a channel that is `/watch` activated', ephemeral: true })
 
@@ -25,7 +18,7 @@ module.exports = {
 		let reqObj = dbfuncs.getRequirement(reqID);
 		if (reqObj === undefined || reqObj.discordchid !== interaction.channel.id)
 			return interaction.reply('Error: not a valid snap request to delete');
-		if (interaction.user.id !== reqObj.discordid && !hasPermissions(interaction))
+		if (interaction.user.id !== reqObj.discordid && !dbfuncs.hasPermissions(interaction))
 			return interaction.reply('Error: you do not have permission to delete someone else\'s snap request');
 
 		let res = dbfuncs.deleteRequirement(reqID);

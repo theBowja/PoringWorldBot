@@ -11,6 +11,7 @@ module.exports = {
 
 	async execute(interaction, { pwbChannel }) {
 		if (pwbChannel === undefined) return interaction.reply({ content: 'Error: this command can only be used in a channel that is `/watch` activated', ephemeral: true })
+		if (!dbfuncs.hasPermission(interaction)) return interaction.reply({ content: 'Error: you do not have the relevant permission to use this command', ephemeral: true })
 
 		let discokids = dbfuncs.listDiscokids(interaction.guild.id);
 		let waitTime = Math.min(Math.max(discokids.length, 10), 1440);

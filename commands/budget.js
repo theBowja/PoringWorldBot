@@ -19,6 +19,7 @@ module.exports = {
 	    // check if a user/role is targeted
 		const option = interaction.options.get('target');
 		if (option && option.value) {
+			if (!dbfuncs.hasPermission(interaction)) return interaction.reply({ content: 'Error: you do not have the relevant permission to use this command', ephemeral: true })
 			targetID = (option.role ? '&' : '')+option.value;
 			if (option.role && option.value === option.role.guild.id) targetID = 'everyone';
 		}
