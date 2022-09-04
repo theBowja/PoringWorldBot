@@ -341,7 +341,8 @@ dbfuncs.addRequirement = function(dkidID, chID, reqs) {
         reqs.name = reqs.itemname.toLowerCase();
         delete reqs.itemname;
     }
-    reqs.enchant = reqs.enchant.toLowerCase().replace(/[^a-z]/g, ''); // remove whitespace from enchant
+    if (reqs.enchant)
+        reqs.enchant = reqs.enchant.toLowerCase().replace(/[^a-z]/g, ''); // remove whitespace from enchant
 
 
     let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
