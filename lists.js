@@ -87,7 +87,7 @@ lists.categoryWeighted = lists.categoryV2.concat(lists.categoryShort).map(catego
 	{ 
 		searchName: category,
 		originalName: category,
-		addWeight: category.startsWith('Equipment - ') ? 10 : 0
+		addWeight: category.startsWith('Equipment') ? 10 : 0
 	}
 ));
 lists.categoryWeighted.push({ searchName: 'Head', originalName: 'Headwear - Head', addWeight: 0 });
