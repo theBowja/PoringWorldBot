@@ -31,25 +31,7 @@ bot.once('ready', () => {
     config.summonstrings = ['!dev '];
     console.log("devmode: !dev  is the only command that can summon this bot instance");
   }
-  bot.user.setActivity('!pwb help', { type: 'WATCHING'}); 
-
-
-  // pretend owner has is in each guild
-  for(let [guildid, guild] of bot.guilds.cache) {
-    if(config.dropdbonstart) // if db was dropped, re-add owner to each guild this bot is in
-      dbfuncs.addDiscokid(config.owner, guildid, config.ownerperm);
-    else { // check if owner is properly lurking in the guild
-      let res = dbfuncs.getDiscokid(config.owner, guildid);
-      if(res === undefined) {
-        if(dbfuncs.addDiscokid(config.owner, guildid, config.ownerperm) === -1)
-          console.log("ERROR: FAILED TO ADD OWNER");
-      } else if(res.permission !== config.ownerperm && !dbfuncs.updateDiscokid(config.owner, config.ownerperm)) {
-        console.log("ERROR: FAILED TO UPDATE OWNER PERMS");
-      }
-    }
-
-    // TODO: make sure each guild has an admin
-  }
+  //bot.user.setActivity('', { type: 'WATCHING'}); 
 
   // setup cronjobs
   if(process.env.NODE_ENV !== 'devmode') {
@@ -71,19 +53,6 @@ bot.once('ready', () => {
       dbfuncs.backup(['sun','mon','tue','wed','thu','fri','sat'][new Date().getDay()]);
     }, null, true);
   }
-});
-
-// on joining the guild, give basic permission to inviter. add owner in as well lol
-bot.on('guildCreate', (guild) => {
-  console.log(`event guildCreate: ${guild.name} ${guild.id}`);
-  dbfuncs.addDiscokid(config.owner, guild.id, config.ownerperm);
-  guild.fetchAuditLogs({ limit: 1, type: 28 }) // type 28 is "add bot"
-    .then(audit => {
-      let userID = audit.entries.first().executor.id;
-      if(userID !== config.owner)
-        dbfuncs.addDiscokid(userID, guild.id, config.startperm);
-    })
-    .catch(console.error);
 });
 
 // when kicked from guild or guild is deleted
@@ -148,6 +117,7 @@ bot.on('interactionCreate', async interaction => {
   }
 });
 
+// NO LONGER USED
 bot.on('message', message => {
   let pwbContent, pwbUser, pwbChannel = {}; // https://github.com/theBowja/PoringWorldBot/wiki/Developer-documentation
   function callCommandHandler(handler) { // so i don't have to type out the parameters every time

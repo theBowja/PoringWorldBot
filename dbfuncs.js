@@ -338,9 +338,11 @@ dbfuncs.deleteMultipleChannels = function(chanids) {
 dbfuncs.addRequirement = function(dkidID, chID, reqs) {
     reqs.metareqID = dbfuncs.getOrCreateMetareqID(dkidID, chID);
     if (reqs.itemname) {
-        reqs.name = reqs.itemname;
+        reqs.name = reqs.itemname.toLowerCase();
         delete reqs.itemname;
     }
+    reqs.enchant = reqs.enchant.toLowerCase().replace(/[^a-z]/g, ''); // remove whitespace from enchant
+
 
     let query = db.prepare(`INSERT INTO requirements (${Object.keys(reqs).join(',')}) 
                             VALUES (${Object.keys(reqs).map(i => '@'+i).join(',')})`);
@@ -412,7 +414,7 @@ dbfuncs.findRequirements = function(snap) {
         INNER JOIN metareqs MR ON R.metareqID=MR.mreqID
         INNER JOIN channels C ON MR.channelID=C.chID
         INNER JOIN discokids U ON MR.discordkidID=U.dkidID        
-        WHERE (R.name IS NULL OR R.name=@namesearch) AND
+        WHERE (R.name IS NULL OR lower(R.name)=@namesearch) AND
               (R.slotted IS NULL OR R.slotted=@slotted) AND
               ((R.refine & @refinecode) != 0) AND
               (R.broken IS NULL OR R.broken=@broken) AND
@@ -420,7 +422,7 @@ dbfuncs.findRequirements = function(snap) {
               (R.pricelower IS NULL OR R.pricelower>=@price) AND
               (MR.budget IS NULL OR @price<=MR.budget) AND
               (R.buyers IS NULL OR R.buyers<=@buyers) AND
-              (R.enchant IS NULL OR R.enchant=@enchantspec) AND
+              (R.enchant IS NULL OR lower(replace(R.enchant,' ',''))=@enchantspec) AND
               ((R.enchantlevel & @enchantlevelcode) != 0) AND
               (R.category IS NULL OR R.category=@category) AND
               (R.stock IS NULL OR R.stock>=@stock) AND
