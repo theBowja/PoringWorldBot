@@ -46,7 +46,7 @@ module.exports = {
 
 	autocomplete: {
 		category: {
-			all: lists.categoryV2,
+			all: [...new Set(lists.categoryV2.concat(lists.categoryShort))],
 			initial: lists.categoryShort
 		}
 	},
