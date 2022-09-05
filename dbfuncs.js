@@ -150,7 +150,7 @@ dbfuncs.getBudgetSimple = function(discordid, channelid) {
                             INNER JOIN channels C ON MR.channelID=C.chID
                             INNER JOIN discokids D ON MR.discordkidID=D.dkidID
                             WHERE D.discordid=? AND C.discordchid=?`);
-    return query.get(discordid, channelid) || -1;
+    return query.get(discordid, channelid).budget || -1;
 }
 
 /**
