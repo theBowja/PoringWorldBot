@@ -28,9 +28,9 @@ config.summonstrings = ["!pwb "];
 config.limitreqs = 18;
 
 // permissions required for using admin commands like: budgetfor, deleteallfor, snaprequestfor, unwatch, watch
-config.advancedcmdperm = PermissionsBitField.Administrator | PermissionsBitField.ManageChannels |
-                         PermissionsBitField.ManageGuild | PermissionsBitField.ManageRoles |
-                         PermissionsBitField.ManageMessages;
+config.advancedcmdperm = [PermissionsBitField.Flags.Administrator, PermissionsBitField.Flags.ManageChannels,
+                         PermissionsBitField.Flags.ManageGuild, PermissionsBitField.Flags.ManageRoles,
+                         PermissionsBitField.Flags.ManageMessages];
 
 // discord id of the bot owner
 // make sure to change this to your discord id if you're hosting this bot yourself
