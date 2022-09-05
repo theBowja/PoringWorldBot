@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const budget = require('./budget.js');
 
 module.exports = {
@@ -25,8 +25,8 @@ module.exports = {
 						.setName('maxprice')
 						.setDescription('The maximum snap price that the targeted role will get pinged for. Put \'delete\' to remove the budget')
 						.setRequired(true)))
-		.setDefaultMemberPermissions(PermissionsBitField.Administrator | PermissionsBitField.ManageChannels | PermissionsBitField.ManageGuild |
-									 PermissionsBitField.ManageRoles | PermissionsBitField.ManageMessages)
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator | PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild |
+									 PermissionFlagsBits.ManageRoles | PermissionFlagsBits.ManageMessages)
 		.setDMPermission(false),
 
 	execute: budget.execute,

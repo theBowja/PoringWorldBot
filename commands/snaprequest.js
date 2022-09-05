@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 const dbfuncs = require('../dbfuncs.js');
 const lists = require('../lists.js');
 const parsefuncs = require('../parse.js');

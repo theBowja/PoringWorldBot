@@ -1,12 +1,12 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const dbfuncs = require('../dbfuncs.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('cleanupmembers')
 		.setDescription('Removes the snap requests of any member that has left this guild')
-		.setDefaultMemberPermissions(PermissionsBitField.Administrator | PermissionsBitField.ManageChannels | PermissionsBitField.ManageGuild |
-									 PermissionsBitField.ManageRoles | PermissionsBitField.ManageMessages)
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator | PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild |
+									 PermissionFlagsBits.ManageRoles | PermissionFlagsBits.ManageMessages)
 		.setDMPermission(false),
 
 	async execute(interaction, { pwbChannel }) {

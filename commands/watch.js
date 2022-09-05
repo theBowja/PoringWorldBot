@@ -1,11 +1,11 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const dbfuncs = require('../dbfuncs.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('watch')
 		.setDescription('Allow\'s the bot to start handling snapping requests on this channel')
-		.setDefaultMemberPermissions(PermissionsBitField.Administrator | PermissionsBitField.ManageChannels | PermissionsBitField.ManageGuild)
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator | PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild)
 		.setDMPermission(false),
 
 	async execute(interaction) {

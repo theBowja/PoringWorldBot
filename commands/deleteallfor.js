@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const deleteall = require('./deleteall.js');
 
 module.exports = {
@@ -15,8 +15,8 @@ module.exports = {
 				.setName('role')
 				.setDescription('Deletes all snap requests of the target role in this channel')
 				.addRoleOption(option => option.setName('target').setDescription('The role to delete all the snap requests of').setRequired(true)))
-		.setDefaultMemberPermissions(PermissionsBitField.Administrator | PermissionsBitField.ManageChannels | PermissionsBitField.ManageGuild |
-									 PermissionsBitField.ManageRoles | PermissionsBitField.ManageMessages)
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator | PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild |
+									 PermissionFlagsBits.ManageRoles | PermissionFlagsBits.ManageMessages)
 		.setDMPermission(false),
 
 

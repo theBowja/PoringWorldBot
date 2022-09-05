@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const snaprequest = require('./snaprequest.js');
 
 module.exports = {
@@ -15,8 +15,8 @@ module.exports = {
 				.setName('role')
 				.setDescription('Creates a snap request for a role')
 				.addRoleOption(option => option.setName('assign').setDescription('The role for this snap request').setRequired(true))))
-		.setDefaultMemberPermissions(PermissionsBitField.Administrator | PermissionsBitField.ManageChannels | PermissionsBitField.ManageGuild |
-									 PermissionsBitField.ManageRoles | PermissionsBitField.ManageMessages)
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator | PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild |
+									 PermissionFlagsBits.ManageRoles | PermissionFlagsBits.ManageMessages)
 		.setDMPermission(false),
 
 	autocomplete: snaprequest.autocomplete,

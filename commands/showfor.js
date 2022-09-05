@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 const show = require('./show.js');
 
 module.exports = {

@@ -1,12 +1,12 @@
-const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const dbfuncs = require('../dbfuncs.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('unwatch')
 		.setDescription('Remove\'s this channel from bot watch and delete all snap requests in it')
-		.setDefaultMemberPermissions(PermissionsBitField.Administrator | PermissionsBitField.ManageChannels | PermissionsBitField.ManageGuild |
-									 PermissionsBitField.ManageRoles | PermissionsBitField.ManageMessages)
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator | PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild |
+									 PermissionFlagsBits.ManageRoles | PermissionFlagsBits.ManageMessages)
 		.setDMPermission(false),
 
 	async execute(interaction, { pwbChannel }) {
