@@ -19,8 +19,16 @@ module.exports = {
 			if (option.role && option.value === option.role.guild.id) targetID = 'everyone';
 		}
 
+		// get budget
+		const budget = dbfuncs.getBudgetSimple(targetID, interaction.channel.id);
+
 	    let res = dbfuncs.listUserRequirements(targetID, interaction.guild.id, interaction.channel.id);
 	    let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
-	    return interaction.reply(msg === '' ? '0 reqs' : 'use "/delete" to delete snap requests\n```'+msg+'```');
+
+	    let finalmsg = '';
+	    if (msg !== -1) finalmsg += `budget is set to: ${budget.toLocaleString()}\n`;
+	    finalmsg += msg === '' ? '0 reqs' : 'use "/delete" to delete snap requests\n```'+msg+'```';
+
+	    return interaction.reply(finalmsg);
 	},
 };

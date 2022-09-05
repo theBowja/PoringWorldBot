@@ -142,6 +142,19 @@ dbfuncs.setBudget = function(dkidID, chID, budget=null) {
 
 /**
  * Gets the budget value from the metareqs table
+ * Parameters: discordid and channelid are ids from discord
+ * Returns the budget value, or -1 if no budget found
+ */
+dbfuncs.getBudgetSimple = function(discordid, channelid) {
+    var query = db.prepare(`SELECT MR.budget FROM metareqs MR
+                            INNER JOIN channels C ON MR.channelID=C.chID
+                            INNER JOIN discokids D ON MR.discordkidID=D.dkidID
+                            WHERE D.discordid=? AND C.discordchid=?`);
+    return query.get(discordid, channelid) || -1;
+}
+
+/**
+ * Gets the budget value from the metareqs table
  * Parameters: dkidID and chID are primary ids for the discordkid and channels table
  * Returns the budget value, or -1 if no budget found
  */
