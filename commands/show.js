@@ -26,7 +26,7 @@ module.exports = {
 	    let msg = res.map((r) => { return `id: ${r.reqID} | ${r.message}`; }).join('\n');
 
 	    let finalmsg = '';
-	    if (msg !== -1) finalmsg += `budget is set to: ${budget.toLocaleString()}\n`;
+	    if (msg !== -1) finalmsg += `budget is set to: ${budget.budget.toLocaleString()}\n`;
 	    finalmsg += msg === '' ? '0 reqs' : 'use "/delete" to delete snap requests\n```'+msg+'```';
 
 	    return interaction.reply(finalmsg);
