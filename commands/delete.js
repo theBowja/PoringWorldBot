@@ -18,7 +18,7 @@ module.exports = {
 		let reqObj = dbfuncs.getRequirement(reqID);
 		if (reqObj === undefined || reqObj.discordchid !== interaction.channel.id)
 			return interaction.reply('Error: not a valid snap request to delete');
-		if (interaction.user.id !== reqObj.discordid && !dbfuncs.hasPermissions(interaction))
+		if (interaction.user.id !== reqObj.discordid && !dbfuncs.hasPermission(interaction))
 			return interaction.reply('Error: you do not have permission to delete someone else\'s snap request');
 
 		let res = dbfuncs.deleteRequirement(reqID);
