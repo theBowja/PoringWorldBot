@@ -1,7 +1,7 @@
 # PoringWorldBot
 This is a snappening bot that queries the first 60 popular snaps from poring.world every six minutes and notifies an item to any subscribed request a user makes.
 
-Disclaimer: **I am not the developer of poring.world**.
+Disclaimer: **I am not the developer of poring.world**.\
 Disclaimer: **This bot works only for the Global server**.
 
 You can contact me on discord for help by [joining my server here](https://discord.gg/Rsq8Vpn).
