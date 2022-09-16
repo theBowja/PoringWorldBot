@@ -30,7 +30,7 @@ You can use [this invite link](https://discord.com/api/oauth2/authorize?client_i
 
 Try https://discord.com/developers/docs/interactions/application-commands#syncing-and-unsyncing-permissions check if the defaults are being overriden.
 
-==============================================================
+---
 
 The following instructions are for myself and should not be relevant to you because they're TODOs zzz.
 
