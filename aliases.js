@@ -245,7 +245,7 @@ const dead = ["Dead Deviling", "Dead Drake", "Dead Strouf", "Goblin Leader Reven
   "Mistress the Revenant", "Dead Maya", "Phreeoni the Revenant", "Dead Eddga", "Revenant Osiris",
   "Dead Moonlight Flower", "Dead Soul", "Dead Atroce", "Detarderous the Dead",
   "Dead Owl Baron", "Bloody Knight Undead", "Dead Time Holder", "Spashire the Dead", "Dead Chimera",
-  "Firelord Kaho Dead", "Firelord Dead Kaho", "Dead Stormy Knight"];
+  "Firelord Kaho Dead", "Firelord Dead Kaho", "Dead Stormy Knight", "Revenant Miss Tahnee"];
 
 const tt = ["Valkyrie Rathgricy", "Tesseract", "Mentalist", "Magic Swordsman Thanatos"];
 
