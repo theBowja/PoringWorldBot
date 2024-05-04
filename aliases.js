@@ -72,6 +72,7 @@ aliases.equips = dictionary(
   ["Gakkung Bow", "Malang Snow Crab", "Overlord Crab Bow"],
   ["Renowned Blade - Muramasa", "Monster Knife - Muramasa"],
   ["Wonderful Fox Grass", "Fine Fox Grass", "Fine Pink Fox Grass"],
+  ["Advanced Fox Grass", "Magical Fox Grass", "Magical Yellow Fox Grass"],
   ["Survivor's Rod", "Advanced Survival Staff", "Stardust Dragon Staff"],
   ["The bow of the wilderness", "The Arrow of Frost Moon"],
   ["Cursed Sword", "Sword of Hogne"],
