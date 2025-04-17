@@ -1,4 +1,9 @@
 # PoringWorldBot
+
+poring.world was shut down so this bot doesn't work anymore
+
+---
+
 This is a snappening bot that queries the first 60 popular snaps from poring.world every six minutes and notifies an item to any subscribed request a user makes.
 
 Disclaimer: **I am not the developer of poring.world**.\
